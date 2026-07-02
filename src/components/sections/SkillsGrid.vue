@@ -244,6 +244,12 @@ const { target, inView } = useInView({ threshold: 0.1 });
 	}
 }
 
+@media (max-width: 600px) {
+	.skills {
+		padding: 6rem 1rem 7rem;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.skill-card,
 	.chip {

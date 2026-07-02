@@ -339,6 +339,12 @@ watch(inView, (visible) => {
 	}
 }
 
+@media (max-width: 600px) {
+	.about {
+		padding: 6rem 1rem;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.about-copy,
 	.editor {

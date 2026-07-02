@@ -118,7 +118,7 @@ onUnmounted(() => {
 .navbar-inner {
 	max-width: 1280px;
 	margin: 0 auto;
-	padding: 0.75rem 2rem;
+	padding: 0.75rem 0.75rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

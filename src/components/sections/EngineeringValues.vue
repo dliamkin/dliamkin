@@ -191,6 +191,12 @@ const { target, inView } = useInView({ threshold: 0.2 });
 	}
 }
 
+@media (max-width: 600px) {
+	.culture {
+		padding: 6rem 1rem;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.pull-quote,
 	.value {

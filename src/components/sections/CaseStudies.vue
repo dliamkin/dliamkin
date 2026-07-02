@@ -631,6 +631,12 @@ const { target, inView } = useInView({ threshold: 0.05 });
 	}
 }
 
+@media (max-width: 600px) {
+	.cases {
+		padding: 6rem 1rem;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.case {
 		opacity: 1;

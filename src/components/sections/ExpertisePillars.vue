@@ -223,6 +223,12 @@ const { target, inView } = useInView({ threshold: 0.15 });
 	}
 }
 
+@media (max-width: 600px) {
+	.expertise {
+		padding: 6rem 1rem;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.pillar {
 		transition:

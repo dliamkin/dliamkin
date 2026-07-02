@@ -754,6 +754,20 @@ textarea.field-input {
 	}
 }
 
+@media (max-width: 600px) {
+	.site-footer {
+		padding: 5rem 1rem 2rem;
+	}
+
+	.footer-form {
+		background: none;
+		border: none;
+		border-radius: 0;
+		backdrop-filter: none;
+		padding: 0;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.spinner {
 		animation-duration: 1.6s;

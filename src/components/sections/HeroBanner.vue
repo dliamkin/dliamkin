@@ -163,7 +163,7 @@ const bgTris = (() => {
 
 		<div class="hero-copy">
 			<h1 class="headline">
-				<span class="cap">A</span><span class="cap-rest">pp</span>
+				<span class="app-word"><span class="cap">A</span><span class="cap-rest">pp</span></span>
 				<span
 					class="word-wrapper"
 					:style="{ width: wordWidth !== null ? `${wordWidth}px` : 'auto' }"
@@ -523,31 +523,43 @@ const bgTris = (() => {
 	}
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
 	.hero {
-		padding-top: 9rem;
+		padding-top: 20rem;
 	}
 
 	.portfolio-wall {
-		top: 20%;
-		right: -12%;
-		width: 740px;
-		max-width: 90vw;
-		perspective: 2800px;
+		top: 28%;
+		right: -15%;
+		width: 1100px;
+		perspective: 4000px;
 	}
 }
 
 @media (max-width: 600px) {
 	.hero {
-		padding-top: 7rem;
+		padding-top: 10rem;
+	}
+
+	.headline {
+		line-height: 0.9;
+		margin-bottom: 2.5rem;
+	}
+
+	.app-word {
+		display: block;
+	}
+
+	.word-wrapper {
+		width: auto !important;
+		margin-left: 0;
 	}
 
 	.portfolio-wall {
-		top: 25%;
-		right: -18%;
-		width: 520px;
-		max-width: 105vw;
-		perspective: 2000px;
+		top: 5%;
+		right: -85%;
+		width: 960px;
+		perspective: 3500px;
 	}
 }
 </style>
