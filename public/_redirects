@@ -1,0 +1,3 @@
+# SPA fallback: serve index.html for client-side (history mode) routes.
+# Cloudflare Pages serves any real file first, then falls back to this.
+/*    /index.html    200
