@@ -1,0 +1,12 @@
+{
+  // Static-assets-only Worker (no server code) for the built Vue SPA.
+  // Cloudflare Workers Builds runs `npm run build`, then `wrangler deploy`
+  // uploads ./dist and serves it. `single-page-application` makes any
+  // unknown path fall back to index.html so vue-router history mode works.
+  "name": "dliamkin",
+  "compatibility_date": "2026-07-02",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
