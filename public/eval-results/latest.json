@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-07-04T05:54:50.636Z",
+  "run_at": "2026-07-04T07:13:58.317Z",
   "trigger": "push",
   "suites": [
     {
@@ -17,13 +17,13 @@
               "name": "extracts lisinopril 20 mg daily, active",
               "passed": true,
               "expected": "lisinopril 20 mg daily [active]",
-              "actual": "lisinopril 20 mg daily [active]"
+              "actual": "lisinopril 20mg daily [active]"
             },
             {
               "name": "extracts metformin 500 mg BID, active",
               "passed": true,
               "expected": "metformin 500 mg BID [active]",
-              "actual": "metformin 500 mg BID [active]"
+              "actual": "metformin 500mg BID [active]"
             },
             {
               "name": "allergies is empty (none mentioned in the note)",
@@ -35,16 +35,16 @@
               "name": "blood pressure 128/82 captured",
               "passed": true,
               "expected": "contains \"128/82\"",
-              "actual": "\"128/82 mmHg\""
+              "actual": "\"128/82\""
             },
             {
               "name": "lipid panel action captured (plan or follow-ups)",
               "passed": true,
               "expected": "contains \"lipid\"",
-              "actual": "\"Continue current medications (lisinopril 20 mg daily and metformin 500 mg BID) ; Order monofilament test ; Discussed diet improvements ; Patient to schedule lipid panel within 2 weeks ; Return to clinic ; Return sooner if foot symptoms worsen\""
+              "actual": "\"Continue current medications ; Order monofilament test ; Discussed diet improvements ; Return to clinic in 3 months, sooner if foot symptoms worsen ; Patient to schedule lipid panel within 2 weeks ; Return to clinic ; Schedule lipid panel\""
             }
           ],
-          "duration_ms": 6632,
+          "duration_ms": 4308,
           "error": null
         },
         {
@@ -56,13 +56,13 @@
               "name": "penicillin allergy captured",
               "passed": true,
               "expected": "contains \"penicillin\"",
-              "actual": "\"penicillin (hives) ; sulfa (unknown reaction)\""
+              "actual": "\"penicillin (hives) ; sulfa (unknown reaction per patient)\""
             },
             {
               "name": "sulfa allergy captured",
               "passed": true,
               "expected": "contains \"sulfa\"",
-              "actual": "\"penicillin (hives) ; sulfa (unknown reaction)\""
+              "actual": "\"penicillin (hives) ; sulfa (unknown reaction per patient)\""
             },
             {
               "name": "blood pressure 118/74 captured",
@@ -83,7 +83,7 @@
               "actual": "[\"Worst headache of life\",\"Focal neurological deficits\",\"Fever with stiff neck\"]"
             }
           ],
-          "duration_ms": 4947,
+          "duration_ms": 4302,
           "error": null
         },
         {
@@ -95,7 +95,7 @@
               "name": "extracts ibuprofen 600 mg, new or active",
               "passed": true,
               "expected": "ibuprofen 600 mg TID [new]",
-              "actual": "Ibuprofen 600mg three times daily with food [new]"
+              "actual": "ibuprofen 600mg three times daily [new]"
             },
             {
               "name": "heart rate 80 captured",
@@ -107,16 +107,16 @@
               "name": "return precautions captured (red flags or plan)",
               "passed": true,
               "expected": "contains \"bear weight\"",
-              "actual": "\"Inability to bear weight ; Numbness ; Worsening swelling ; RICE protocol (rest, ice, compression, elevation) ; Air stirrup brace dispensed ; Ibuprofen 600mg three times daily with food for 5 days ; Crutches as needed for first 48 hours ; Work note provided for 2 days ; Follow up with primary care physician if not improving\""
+              "actual": "\"Inability to bear weight ; Numbness ; Worsening swelling ; RICE protocol ; Air stirrup brace dispensed ; Ibuprofen 600mg three times daily with food for 5 days ; Crutches as needed for first 48 hours ; Work note provided for 2 days ; Return to PCP if not improving ; Return precautions if unable to bear weight, numbness develops, or worsening swelling occurs\""
             },
             {
               "name": "PCP follow-up captured",
               "passed": true,
               "expected": "a follow-up mentioning the PCP or 1 week",
-              "actual": "Follow up with primary care physician if not improving (1 week)"
+              "actual": "Return to PCP if not improving (1 week)"
             }
           ],
-          "duration_ms": 4113,
+          "duration_ms": 5250,
           "error": null
         },
         {
@@ -149,7 +149,7 @@
               "actual": "\"126/78\""
             }
           ],
-          "duration_ms": 7851,
+          "duration_ms": 4042,
           "error": null
         },
         {
@@ -161,7 +161,7 @@
               "name": "hydrochlorothiazide status is discontinued",
               "passed": true,
               "expected": "hydrochlorothiazide 25 mg [discontinued]",
-              "actual": "hydrochlorothiazide 25mg daily [discontinued]"
+              "actual": "Hydrochlorothiazide 25mg daily [discontinued]"
             },
             {
               "name": "no active/new hydrochlorothiazide entry remains",
@@ -173,10 +173,10 @@
               "name": "losartan 50 mg daily remains active",
               "passed": true,
               "expected": "losartan 50 mg daily [active]",
-              "actual": "losartan 50mg daily [active]"
+              "actual": "Losartan 50mg daily [active]"
             }
           ],
-          "duration_ms": 4112,
+          "duration_ms": 4103,
           "error": null
         },
         {
@@ -197,7 +197,7 @@
               "actual": "omeprazole 20mg daily [active]"
             }
           ],
-          "duration_ms": 3214,
+          "duration_ms": 3744,
           "error": null
         },
         {
@@ -209,22 +209,22 @@
               "name": "red flags present (note explicitly flags urgent ED precautions)",
               "passed": true,
               "expected": "at least one entry",
-              "actual": "[\"Possible unstable angina\",\"Patient instructed to go to ED immediately if chest pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\"]"
+              "actual": "[\"Exertional chest tightness\",\"Concern for possible unstable angina\",\"Patient instructed to go to ED immediately if pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\"]"
             },
             {
               "name": "red flags reference the cardiac concern",
               "passed": true,
               "expected": "mentions the chest pain / angina concern (matches \"chest\", \"angina\", or \"cardi…\")",
-              "actual": "\"Possible unstable angina ; Patient instructed to go to ED immediately if chest pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\""
+              "actual": "\"Exertional chest tightness ; Concern for possible unstable angina ; Patient instructed to go to ED immediately if pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\""
             },
             {
               "name": "aspirin 81 mg captured as newly started",
               "passed": true,
               "expected": "aspirin 81 mg daily [new]",
-              "actual": "Aspirin 81mg daily [new]"
+              "actual": "aspirin 81mg daily [new]"
             }
           ],
-          "duration_ms": 3551,
+          "duration_ms": 3940,
           "error": null
         },
         {
@@ -263,7 +263,7 @@
               "actual": "levothyroxine 88mcg daily on empty stomach [active]"
             }
           ],
-          "duration_ms": 4791,
+          "duration_ms": 4891,
           "error": null
         },
         {
@@ -302,7 +302,7 @@
               "actual": "null"
             }
           ],
-          "duration_ms": 3577,
+          "duration_ms": 5820,
           "error": null
         },
         {
@@ -314,22 +314,22 @@
               "name": "metoprolol dose is not silently guessed as exactly 25 or exactly 50",
               "passed": true,
               "expected": "metoprolol present with dose null or explicitly uncertain (not a single guessed value)",
-              "actual": "Metoprolol 25 mg or 50 mg (unconfirmed) twice daily [active]"
+              "actual": "Metoprolol 25mg or 50mg (unconfirmed) twice daily [active]"
             },
             {
               "name": "the dose ambiguity lands in extraction_notes",
               "passed": true,
               "expected": "contains \"metoprolol\"",
-              "actual": "\"Patient unable to confirm metoprolol dose - reports uncertainty between 25 mg and 50 mg twice daily ; Diuretic agent not specifically named by patient (referred to as 'water pill') ; Pharmacy records requested and pending - will inform dose confirmation ; Route not specified for any medications ; Temperature, respiratory rate, oxygen saturation, and weight not documented ; Atorvastatin dose and frequency confirmed from bottle\""
+              "actual": "\"Specific diuretic agent ('water pill') not identified — brand name or generic unknown ; Metoprolol dose unconfirmed — patient reports either 25mg or 50mg twice daily; pharmacy records pending verification ; Route of administration not specified for metoprolol and diuretic ; Temperature, respiratory rate, oxygen saturation, and weight not recorded at this visit ; Atorvastatin dose and frequency confirmed from patient's medication bottle\""
             },
             {
               "name": "confirmed atorvastatin 20 mg nightly extracted normally",
               "passed": true,
               "expected": "atorvastatin 20 mg nightly [active]",
-              "actual": "Atorvastatin 20 mg nightly [active]"
+              "actual": "Atorvastatin 20mg nightly [active]"
             }
           ],
-          "duration_ms": 5441,
+          "duration_ms": 4369,
           "error": null
         }
       ],
@@ -351,7 +351,7 @@
               "name": "finds the rent increase to $1,595 (rent_and_deposits, favors landlord)",
               "passed": true,
               "expected": "rent increase to $1,595",
-              "actual": "\"Rent Increase\" [rent_and_deposits, favors_landlord, high]"
+              "actual": "\"Monthly Rent Increased\" [rent_and_deposits, favors_landlord, high]"
             },
             {
               "name": "finds the new automatic-renewal clause (term_and_renewal, favors landlord)",
@@ -363,7 +363,7 @@
               "name": "finds water shifted from landlord to tenant (utilities, favors landlord)",
               "passed": true,
               "expected": "water responsibility shifted to tenant",
-              "actual": "\"Tenant Now Pays for Water\" [utilities, favors_landlord, medium]"
+              "actual": "\"Water Bill Responsibility Shifted to Tenant\" [utilities, favors_landlord, medium]"
             },
             {
               "name": "finds lawn care shifted to tenant (maintenance, favors landlord)",
@@ -375,7 +375,7 @@
               "name": "finds the guest limit cut from 14 to 7 days (rules_and_use, favors landlord)",
               "passed": true,
               "expected": "guest stay limit halved",
-              "actual": "\"Shorter Allowed Guest Stay\" [rules_and_use, favors_landlord, low]"
+              "actual": "\"Maximum Guest Stay Shortened\" [rules_and_use, favors_landlord, low]"
             },
             {
               "name": "finds notice to vacate extended 30→60 days (favors landlord)",
@@ -387,7 +387,7 @@
               "name": "finds the new monthly pet fee (fees)",
               "passed": true,
               "expected": "new $35/month pet fee",
-              "actual": "\"New Pet Fee\" [fees, unclear, medium]"
+              "actual": "\"Pet Fee Added\" [fees, unclear, medium]"
             },
             {
               "name": "finds the new early-termination fee (favors landlord)",
@@ -399,10 +399,10 @@
               "name": "no invented changes (8 planted, ≤ 9 reported)",
               "passed": true,
               "expected": "at most 9 reported changes",
-              "actual": "9 reported changes"
+              "actual": "8 reported changes"
             }
           ],
-          "duration_ms": 28191,
+          "duration_ms": 24726,
           "error": null
         },
         {
@@ -412,60 +412,60 @@
           "checks": [
             {
               "name": "finds the fixed-term → month-to-month conversion (term_and_renewal)",
-              "passed": false,
+              "passed": true,
               "expected": "conversion to month-to-month",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "\"Fixed 12-month term replaced with automatically renewing month-to-month tenancy\" [term_and_renewal, unclear, high]"
             },
             {
               "name": "finds the $50 month-to-month premium (favors landlord)",
-              "passed": false,
+              "passed": true,
               "expected": "new $50/month premium",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "\"New $50/month 'month-to-month premium' added to rent\" [rent_and_deposits, favors_landlord, high]"
             },
             {
               "name": "BIAS CHECK: late-fee grace 3→5 days is favors_tenant",
-              "passed": false,
+              "passed": true,
               "expected": "late-fee grace period lengthened, judged favors_tenant",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "\"Late fee grace period extended from 3 to 5 days\" [fees, favors_tenant, low]"
             },
             {
               "name": "BIAS CHECK: deposit return 21→14 days is favors_tenant",
-              "passed": false,
+              "passed": true,
               "expected": "deposit return window shortened, judged favors_tenant",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "\"Security deposit return window shortened from 21 to 14 days\" [rent_and_deposits, favors_tenant, low]"
             },
             {
               "name": "finds the tenant lease-break penalty removal (favors tenant)",
               "passed": false,
               "expected": "lease-break penalty removed",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "no match among: \"Fixed 12-month term replaced with automatically renewing month-to-month tenancy\" [term_and_renewal, unclear, high] | \"Termination rights changed from restrictive fixed-term rules to mutual 30-day notice, no penalty\" [termination, unclear, high] | \"New $50/month 'month-to-month premium' added to rent\" [rent_and_deposits, favors_landlord, high] | \"New renter's insurance requirement\" [liability_and_insurance, favors_landlord, medium] | \"Landlord entry notice period shortened from 48 to 24 hours\" [entry_and_privacy, favors_landlord, medium] | \"Security deposit return window shortened from 21 to 14 days\" [rent_and_deposits, favors_tenant, low] | \"Late fee grace period extended from 3 to 5 days\" [fees, favors_tenant, low]"
             },
             {
               "name": "finds the landlord's new right to terminate at will (favors landlord)",
-              "passed": false,
+              "passed": true,
               "expected": "landlord can now terminate with 30 days' notice",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "\"Fixed 12-month term replaced with automatically renewing month-to-month tenancy\" [term_and_renewal, unclear, high]"
             },
             {
               "name": "finds entry notice cut 48→24 hours (entry_and_privacy, favors landlord)",
-              "passed": false,
+              "passed": true,
               "expected": "entry notice halved to 24 hours",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "\"Landlord entry notice period shortened from 48 to 24 hours\" [entry_and_privacy, favors_landlord, medium]"
             },
             {
               "name": "finds the new renter's-insurance requirement (favors landlord)",
-              "passed": false,
+              "passed": true,
               "expected": "renter's insurance now required",
-              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+              "actual": "\"New renter's insurance requirement\" [liability_and_insurance, favors_landlord, medium]"
             },
             {
               "name": "no invented changes (8 planted counting the termination rework as two, ≤ 9 reported)",
               "passed": true,
               "expected": "at most 9 reported changes",
-              "actual": "1 reported changes"
+              "actual": "7 reported changes"
             }
           ],
-          "duration_ms": 5592,
+          "duration_ms": 22710,
           "error": null
         },
         {
@@ -477,7 +477,7 @@
               "name": "finds the late fee increase to $75 buried in the rewording (favors landlord)",
               "passed": true,
               "expected": "late fee $50 → $75",
-              "actual": "\"Late Fee Increased from $50 to $75\" [fees, favors_landlord, high]"
+              "actual": "\"Late Fee Increased from $50 to $75\" [fees, favors_landlord, medium]"
             },
             {
               "name": "does not report the identically-meaning maintenance rewording as substantive",
@@ -492,7 +492,7 @@
               "actual": "2 reported changes"
             }
           ],
-          "duration_ms": 10137,
+          "duration_ms": 9098,
           "error": null
         }
       ],
@@ -520,13 +520,13 @@
               "name": "maps the credential fields to InputText/Password",
               "passed": true,
               "expected": "a mapping to InputText or Password",
-              "actual": "Email input field → InputText"
+              "actual": "Email address input field → InputText"
             },
             {
               "name": "maps the sign-in action to Button",
               "passed": true,
               "expected": "a mapping to Button",
-              "actual": "Forgot password? link → None - plain link or Button"
+              "actual": "Forgot password link → Button (link style) or anchor"
             },
             {
               "name": "scaffold uses an input component",
@@ -541,7 +541,7 @@
               "actual": "tag present in scaffold"
             }
           ],
-          "duration_ms": 15494,
+          "duration_ms": 14933,
           "error": null
         },
         {
@@ -559,13 +559,13 @@
               "name": "maps the data table to DataTable",
               "passed": true,
               "expected": "a mapping to DataTable",
-              "actual": "Top pages data table with columns: Page, Views, Status → DataTable"
+              "actual": "Top pages data table → DataTable"
             },
             {
               "name": "maps the chart to Chart",
               "passed": true,
               "expected": "a mapping to Chart",
-              "actual": "Weekly sessions bar chart (Mon–Sun) → Chart"
+              "actual": "Weekly sessions bar chart → Chart"
             },
             {
               "name": "scaffold uses DataTable",
@@ -574,7 +574,7 @@
               "actual": "tag present in scaffold"
             }
           ],
-          "duration_ms": 21744,
+          "duration_ms": 19834,
           "error": null
         },
         {
@@ -592,19 +592,19 @@
               "name": "maps the plan tiers to Card",
               "passed": true,
               "expected": "a mapping to Card",
-              "actual": "Starter pricing card → Card"
+              "actual": "Headline and subheadline section → Card"
             },
             {
               "name": "maps the CTAs to Button",
               "passed": true,
               "expected": "a mapping to Button",
-              "actual": "CTA buttons (Get started, Start free trial, Talk to sales) → Button"
+              "actual": "Get started / Start free trial / Talk to sales buttons → Button"
             },
             {
               "name": "maps the top navigation to Menubar or Toolbar",
               "passed": true,
               "expected": "a mapping to Menubar or Toolbar",
-              "actual": "Top navigation bar with logo and links → Menubar"
+              "actual": "Header navigation with logo and menu items (Product, Docs, Pricing, Blog) and Start free button → Menubar"
             },
             {
               "name": "scaffold uses Card",
@@ -613,7 +613,7 @@
               "actual": "tag present in scaffold"
             }
           ],
-          "duration_ms": 22670,
+          "duration_ms": 21976,
           "error": null
         },
         {
@@ -631,7 +631,7 @@
               "name": "a polite reason is given",
               "passed": true,
               "expected": "non-null reason explaining the rejection",
-              "actual": "\"This is an illustration of a landscape scenery with mountains and water under a sunset sky, not a software user interface.\""
+              "actual": "\"This image is an illustration of a landscape with stylized mountains, sky, and water, not a software user interface.\""
             },
             {
               "name": "no component mappings are forced",
@@ -646,7 +646,7 @@
               "actual": "null"
             }
           ],
-          "duration_ms": 1996,
+          "duration_ms": 2066,
           "error": null
         },
         {
@@ -664,7 +664,7 @@
               "name": "a polite reason is given",
               "passed": true,
               "expected": "non-null reason explaining the rejection",
-              "actual": "\"This is a document or article layout displaying formatted text content, not a software user interface.\""
+              "actual": "\"This is a document or article page displaying formatted text content, not a software user interface.\""
             },
             {
               "name": "no component mappings are forced",
@@ -679,15 +679,295 @@
               "actual": "null"
             }
           ],
-          "duration_ms": 1973,
+          "duration_ms": 2496,
           "error": null
         }
       ],
       "pass_count": 5,
       "total": 5
+    },
+    {
+      "project_id": "paperwork-to-calendar",
+      "project_label": "Paperwork → Calendar",
+      "model": "claude-sonnet-5",
+      "prompt_hash": "0199b2feeeb8",
+      "cases": [
+        {
+          "case_id": "paperwork-lease",
+          "description": "Bundled lease sample — stated end date, computed 60-day non-renewal deadline (month-boundary arithmetic), recurring rent, stated inspection date, and a deliberately unresolvable renewal-offer date (anniversary never defined)",
+          "passed": true,
+          "checks": [
+            {
+              "name": "HEADLINE: non-renewal notice deadline computed to the day (2027-08-31 minus 60 days = 2027-07-02)",
+              "passed": true,
+              "expected": "non-renewal notice deadline on 2027-07-02, basis computed",
+              "actual": "\"Lease non-renewal notice deadline\" [notice_window_closes, 2027-07-02, computed]"
+            },
+            {
+              "name": "move-out inspection extracted as stated 2027-09-01",
+              "passed": true,
+              "expected": "move-out inspection on 2027-09-01, basis stated",
+              "actual": "\"Move-out inspection\" [required_action, 2027-09-01, stated]"
+            },
+            {
+              "name": "rent is one recurring monthly event on the 1st, not expanded",
+              "passed": true,
+              "expected": "1-2 rent events, at least one carrying a recurrence rule (not expanded instances)",
+              "actual": "\"Monthly rent due\" [payment, 2026-09-01, computed]"
+            },
+            {
+              "name": "FABRICATION GUARD: the anniversary-based renewal offer is unresolved with date null",
+              "passed": true,
+              "expected": "renewal-offer event with date null and basis unresolved",
+              "actual": "\"Landlord renewal offer window opens\" [notice_window_opens, null, unresolved]"
+            },
+            {
+              "name": "FABRICATION GUARD: no unresolved event carries a date",
+              "passed": true,
+              "expected": "no entry with date_basis unresolved but a non-null date (a fabricated date)",
+              "actual": "none found"
+            },
+            {
+              "name": "every source excerpt appears verbatim in the lease",
+              "passed": true,
+              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
+              "actual": "none found"
+            }
+          ],
+          "duration_ms": 18646,
+          "error": null
+        },
+        {
+          "case_id": "paperwork-scholarship",
+          "description": "Bundled scholarship sample — stated acceptance deadline, enrollment verification computed from the stated semester start, yearly GPA report recurrence, and one already-passed date",
+          "passed": false,
+          "checks": [
+            {
+              "name": "acceptance deadline extracted as stated 2026-08-15",
+              "passed": false,
+              "expected": "acceptance deadline on 2026-08-15, basis stated",
+              "actual": "no entries at all"
+            },
+            {
+              "name": "enrollment verification computed (2026-09-08 plus 14 days = 2026-09-22)",
+              "passed": false,
+              "expected": "enrollment verification on 2026-09-22, basis computed",
+              "actual": "no entries at all"
+            },
+            {
+              "name": "annual GPA report is a yearly recurrence",
+              "passed": false,
+              "expected": "GPA report with yearly recurrence",
+              "actual": "no entries at all"
+            },
+            {
+              "name": "the closed housing-grant date (2026-06-01) is flagged in_past",
+              "passed": false,
+              "expected": "housing grant deadline flagged as already passed",
+              "actual": "no entries at all"
+            },
+            {
+              "name": "every source excerpt appears verbatim in the letter",
+              "passed": true,
+              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
+              "actual": "none found"
+            }
+          ],
+          "duration_ms": 4254,
+          "error": null
+        },
+        {
+          "case_id": "paperwork-insurance",
+          "description": "Bundled insurance sample — stated policy expiration, cancellation notice computed across a YEAR boundary (2027-01-14 minus 30 days), monthly premium recurrence on the 15th",
+          "passed": true,
+          "checks": [
+            {
+              "name": "policy expiration extracted as stated 2027-01-14",
+              "passed": true,
+              "expected": "policy expiration on 2027-01-14, basis stated",
+              "actual": "\"Policy expiration / automatic renewal date\" [renewal_or_expiration, 2027-01-14, stated]"
+            },
+            {
+              "name": "HEADLINE: cancellation notice computed across the year boundary (2027-01-14 minus 30 days = 2026-12-15)",
+              "passed": true,
+              "expected": "cancellation notice deadline on 2026-12-15, basis computed",
+              "actual": "\"Deadline for policyholder cancellation notice to avoid short-rate penalty\" [notice_window_closes, 2026-12-15, computed]"
+            },
+            {
+              "name": "premium is one recurring monthly event on the 15th, not expanded",
+              "passed": true,
+              "expected": "1-2 premium events, at least one carrying a recurrence rule (not expanded instances)",
+              "actual": "\"Monthly premium installment due\" [payment, 2026-07-15, computed]"
+            },
+            {
+              "name": "renewal offer mail date extracted as stated 2026-12-01",
+              "passed": true,
+              "expected": "renewal offer mailed on 2026-12-01, basis stated",
+              "actual": "\"Renewal offer mailed by insurer\" [renewal_or_expiration, 2026-12-01, stated]"
+            },
+            {
+              "name": "every source excerpt appears verbatim in the summary",
+              "passed": true,
+              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
+              "actual": "none found"
+            }
+          ],
+          "duration_ms": 13480,
+          "error": null
+        },
+        {
+          "case_id": "paperwork-gym-contract",
+          "description": "Gym contract — cancellation deadline computed 45 days before term end across February (2027-03-01 minus 45 days = 2027-01-15), monthly dues on the 5th, yearly maintenance fee",
+          "passed": true,
+          "checks": [
+            {
+              "name": "HEADLINE: cancellation notice computed across short-February (2027-03-01 minus 45 days = 2027-01-15)",
+              "passed": true,
+              "expected": "cancellation notice deadline on 2027-01-15, basis computed",
+              "actual": "\"Deadline to give written cancellation notice for end of initial term\" [deadline, 2027-01-15, computed]"
+            },
+            {
+              "name": "monthly dues recur on the 5th",
+              "passed": true,
+              "expected": "dues with monthly recurrence on day 5",
+              "actual": "\"Monthly membership dues draft\" [payment, 2026-07-05, computed]"
+            },
+            {
+              "name": "annual maintenance fee is a yearly recurrence",
+              "passed": true,
+              "expected": "maintenance fee with yearly recurrence",
+              "actual": "\"Annual facility maintenance fee draft\" [payment, 2026-10-01, computed]"
+            },
+            {
+              "name": "every source excerpt appears verbatim in the contract",
+              "passed": true,
+              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
+              "actual": "none found"
+            }
+          ],
+          "duration_ms": 14674,
+          "error": null
+        },
+        {
+          "case_id": "paperwork-invoice-net30",
+          "description": "Invoice with net-30 terms from January 31, 2028 — leap-year arithmetic (2028-01-31 plus 30 days = 2028-03-01) plus an early-payment discount window",
+          "passed": true,
+          "checks": [
+            {
+              "name": "HEADLINE: payment due computed across leap-February (2028-01-31 plus 30 days = 2028-03-01)",
+              "passed": true,
+              "expected": "payment due on 2028-03-01, basis computed",
+              "actual": "\"Invoice payment due\" [payment, 2028-03-01, computed]"
+            },
+            {
+              "name": "early-payment discount window computed (2028-01-31 plus 10 days = 2028-02-10)",
+              "passed": true,
+              "expected": "discount deadline on 2028-02-10, basis computed",
+              "actual": "\"Early payment discount window closes\" [notice_window_closes, 2028-02-10, computed]"
+            },
+            {
+              "name": "every source excerpt appears verbatim in the invoice",
+              "passed": true,
+              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
+              "actual": "none found"
+            }
+          ],
+          "duration_ms": 11751,
+          "error": null
+        },
+        {
+          "case_id": "paperwork-benefits-unresolvable",
+          "description": "Benefits notice whose deadlines all hinge on a hire date the document never states — everything datable must come back unresolved, never guessed",
+          "passed": true,
+          "checks": [
+            {
+              "name": "health enrollment (60 days after hire) is unresolved with date null",
+              "passed": true,
+              "expected": "health enrollment deadline unresolved, date null",
+              "actual": "\"Health plan enrollment deadline\" [deadline, null, unresolved]"
+            },
+            {
+              "name": "the unresolved event carries a structured resolution (anchor + offset) for the client-side resolve flow",
+              "passed": true,
+              "expected": "an unresolved event with resolution naming the hire date and a 60- or 90-day offset",
+              "actual": "\"Health plan enrollment deadline\" [deadline, null, unresolved]"
+            },
+            {
+              "name": "FABRICATION GUARD: no unresolved event carries a date",
+              "passed": true,
+              "expected": "no entry with date_basis unresolved but a non-null date (a fabricated date)",
+              "actual": "none found"
+            },
+            {
+              "name": "every source excerpt appears verbatim in the notice",
+              "passed": true,
+              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
+              "actual": "none found"
+            }
+          ],
+          "duration_ms": 9226,
+          "error": null
+        },
+        {
+          "case_id": "paperwork-jury-summons",
+          "description": "Jury summons with only stated dates — extraction restraint: both dates exact, nothing invented",
+          "passed": true,
+          "checks": [
+            {
+              "name": "report date extracted as stated 2026-09-14",
+              "passed": true,
+              "expected": "jury report date on 2026-09-14, basis stated",
+              "actual": "\"Report for jury service\" [required_action, 2026-09-14, stated]"
+            },
+            {
+              "name": "confirmation deadline extracted as stated 2026-09-07",
+              "passed": true,
+              "expected": "confirmation deadline on 2026-09-07, basis stated",
+              "actual": "\"Confirm jury service attendance\" [deadline, 2026-09-07, stated]"
+            },
+            {
+              "name": "no invented dated events (2 planted dates, ≤ 3 events)",
+              "passed": true,
+              "expected": "at most 3 events",
+              "actual": "3 events: \"Confirm jury service attendance\" [deadline, 2026-09-07, stated] | \"Report for jury service\" [required_action, 2026-09-14, stated] | \"Deadline to request jury service postponement\" [deadline, 2026-09-07, stated]"
+            },
+            {
+              "name": "every source excerpt appears verbatim in the summons",
+              "passed": true,
+              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
+              "actual": "none found"
+            }
+          ],
+          "duration_ms": 7311,
+          "error": null
+        },
+        {
+          "case_id": "paperwork-not-a-document",
+          "description": "A soup recipe — must be rejected as not an obligation document, with no events",
+          "passed": true,
+          "checks": [
+            {
+              "name": "is_obligation_document is false",
+              "passed": true,
+              "expected": "false",
+              "actual": "false"
+            },
+            {
+              "name": "no events extracted",
+              "passed": true,
+              "expected": "0 events",
+              "actual": "0 events"
+            }
+          ],
+          "duration_ms": 4539,
+          "error": null
+        }
+      ],
+      "pass_count": 7,
+      "total": 8
     }
   ],
-  "overall_pass_rate": 0.9444,
+  "overall_pass_rate": 0.9231,
   "regression_from_previous": false,
   "regression_detail": null
 }
