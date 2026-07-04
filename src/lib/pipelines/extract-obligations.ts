@@ -63,13 +63,26 @@ export async function extractObligations(
 					},
 				];
 
-	const response = await client.messages.create({
-		model,
-		max_tokens: PAPERWORK_MAX_TOKENS,
-		system: EXTRACT_OBLIGATIONS_SYSTEM_PROMPT.replace("{TODAY}", todayIso),
-		tools: [EXTRACT_OBLIGATIONS_TOOL],
-		tool_choice: { type: "tool", name: EXTRACT_OBLIGATIONS_TOOL.name },
-		messages: [{ role: "user", content }],
-	});
-	return extractToolInput<ObligationExtraction>(response, EXTRACT_OBLIGATIONS_TOOL.name);
+	const callOnce = async (): Promise<ObligationExtraction> => {
+		const response = await client.messages.create({
+			model,
+			max_tokens: PAPERWORK_MAX_TOKENS,
+			system: EXTRACT_OBLIGATIONS_SYSTEM_PROMPT.replace("{TODAY}", todayIso),
+			tools: [EXTRACT_OBLIGATIONS_TOOL],
+			tool_choice: { type: "tool", name: EXTRACT_OBLIGATIONS_TOOL.name },
+			messages: [{ role: "user", content }],
+		});
+		return extractToolInput<ObligationExtraction>(response, EXTRACT_OBLIGATIONS_TOOL.name);
+	};
+
+	const result = await callOnce();
+	// "This is an obligation document" + zero events is self-contradictory —
+	// observed (2026-07-04, CI) as a transient degenerate response: schema-
+	// valid, near-instant, contentless. One bounded retry; if the second
+	// attempt agrees, the document may genuinely have no datable events and
+	// the UI says so rather than erroring.
+	if (result.is_obligation_document && result.events.length === 0) {
+		return callOnce();
+	}
+	return result;
 }

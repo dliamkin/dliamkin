@@ -510,6 +510,14 @@ async function callApi(body: Record<string, unknown>) {
 							"That doesn't look like a document with obligations or deadlines, so there's nothing to put on a calendar."
 						}}
 					</Message>
+					<Message
+						v-else-if="result.events.length === 0"
+						severity="info"
+						:closable="false"
+					>
+						This looks like a document with obligations, but none of them carry a date
+						a calendar event could be made from. Nothing was extracted.
+					</Message>
 					<template v-else>
 						<p v-if="resultSource === 'sample'" class="source-note">
 							<i class="fa-solid fa-bolt" aria-hidden="true"></i>
