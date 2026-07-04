@@ -1,4 +1,4 @@
-import type { DateResolution } from "./paperwork";
+import type { DateResolution, ObligationExtraction } from "./paperwork";
 
 // Pure ISO-date (YYYY-MM-DD) arithmetic for the Paperwork → Calendar demo.
 // This is the deterministic half of the date-integrity design: the model only
@@ -70,9 +70,7 @@ export function todayUtcIso(now: Date = new Date()): string {
 	return now.toISOString().slice(0, 10);
 }
 
-// Human-readable rendering for the review UI, e.g. "2026-03-01 plus 6 months
-// = 2026-09-01". Kept here so the arithmetic and its explanation can't drift.
-export function describeResolution(anchorIso: string, resolution: DateResolution): string {
+function formatOffset(resolution: DateResolution): string {
 	const parts: string[] = [];
 	if (resolution.offset_months > 0) {
 		parts.push(`${resolution.offset_months} month${resolution.offset_months === 1 ? "" : "s"}`);
@@ -80,7 +78,48 @@ export function describeResolution(anchorIso: string, resolution: DateResolution
 	if (resolution.offset_days > 0) {
 		parts.push(`${resolution.offset_days} day${resolution.offset_days === 1 ? "" : "s"}`);
 	}
-	const offset = parts.length > 0 ? parts.join(" and ") : "0 days";
+	return parts.length > 0 ? parts.join(" and ") : "0 days";
+}
+
+// Human-readable rendering for the review UI, e.g. "2026-03-01 plus 6 months
+// = 2026-09-01". Kept here so the arithmetic and its explanation can't drift.
+export function describeResolution(anchorIso: string, resolution: DateResolution): string {
 	const op = resolution.direction === "before" ? "minus" : "plus";
-	return `${anchorIso} ${op} ${offset} = ${resolveDate(anchorIso, resolution)}`;
+	return `${anchorIso} ${op} ${formatOffset(resolution)} = ${resolveDate(anchorIso, resolution)}`;
+}
+
+// The date-integrity backstop for computed dates: the model reports the
+// anchor date and offset it found (its language strength), and the actual
+// arithmetic runs here, overriding the model's own — LLM day-counting is
+// unreliable around month lengths and leap years (observed: Sonnet computed
+// "2028-01-31 plus 30 days" as 2028-03-02 in CI). Only events the model
+// already marked computed with a stated anchor are touched: unresolved dates
+// are never filled in, and stated dates are transcription, not arithmetic.
+export function reconcileComputedDates(
+	extraction: ObligationExtraction,
+	todayIso: string,
+): ObligationExtraction {
+	return {
+		...extraction,
+		events: extraction.events.map((event) => {
+			const res = event.resolution;
+			if (
+				event.date_basis !== "computed" ||
+				res === null ||
+				res.anchor_date === null ||
+				!isIsoDate(res.anchor_date)
+			) {
+				return event;
+			}
+			const correct = resolveDate(res.anchor_date, res);
+			if (event.date === correct) return event;
+			const op = res.direction === "before" ? "minus" : "plus";
+			return {
+				...event,
+				date: correct,
+				in_past: isPast(correct, todayIso),
+				computation: `${res.anchor_date} (${res.anchor_label}) ${op} ${formatOffset(res)} = ${correct}`,
+			};
+		}),
+	};
 }

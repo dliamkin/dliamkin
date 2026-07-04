@@ -5,6 +5,7 @@ import {
 	PAPERWORK_MAX_TOKENS,
 	type ObligationExtraction,
 } from "../paperwork";
+import { reconcileComputedDates } from "../paperwork-dates";
 import type { AllowedMediaType } from "../ui-analysis";
 import { extractToolInput } from "./shared";
 
@@ -72,7 +73,13 @@ export async function extractObligations(
 			tool_choice: { type: "tool", name: EXTRACT_OBLIGATIONS_TOOL.name },
 			messages: [{ role: "user", content }],
 		});
-		return extractToolInput<ObligationExtraction>(response, EXTRACT_OBLIGATIONS_TOOL.name);
+		// The model identifies anchors and offsets; the arithmetic for
+		// computed dates is re-run (and corrected) in code — see
+		// reconcileComputedDates for why the model's math can't be trusted.
+		return reconcileComputedDates(
+			extractToolInput<ObligationExtraction>(response, EXTRACT_OBLIGATIONS_TOOL.name),
+			todayIso,
+		);
 	};
 
 	const result = await callOnce();

@@ -570,9 +570,13 @@ async function callApi(body: Record<string, unknown>) {
 								carries a basis: <em>stated</em> in the document, <em>computed</em>
 								from an anchor with the arithmetic shown ("lease end minus 60 days
 								= July 2"), or <em>unresolved</em> — surfaced to you to fill in,
-								never guessed. When you supply a missing anchor, the resolution
-								arithmetic runs in tested client-side code, not in the model: the
-								model only identifies what math is needed. The eval suite hard-fails
+								never guessed. The model only identifies what math is needed — the
+								arithmetic itself always runs in tested code. For computed dates the
+								model reports the anchor and offset it found and the server re-runs
+								the calculation, overriding any slip (LLM day-counting is genuinely
+								unreliable around month lengths and leap years); when you supply a
+								missing anchor, the same date module runs client-side. The eval
+								suite hard-fails
 								if an unresolvable date ever comes back filled in, and verifies
 								computed dates to the day across month boundaries.
 							</p>

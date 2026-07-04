@@ -5,10 +5,11 @@ import {
 	describeResolution,
 	isIsoDate,
 	isPast,
+	reconcileComputedDates,
 	resolveDate,
 	todayUtcIso,
 } from "../paperwork-dates";
-import type { DateResolution } from "../paperwork";
+import type { DateResolution, ObligationEvent, ObligationExtraction } from "../paperwork";
 
 // The resolve-flow's arithmetic runs here, not in the model — so these tests
 // are the actual guarantee behind "computed (from your input)" dates. Month
@@ -79,6 +80,7 @@ describe("addMonths", () => {
 describe("resolveDate", () => {
 	const need = (partial: Partial<DateResolution>): DateResolution => ({
 		anchor_label: "anchor",
+		anchor_date: null,
 		offset_days: 0,
 		offset_months: 0,
 		direction: "after",
@@ -128,11 +130,148 @@ describe("todayUtcIso", () => {
 	});
 });
 
+describe("reconcileComputedDates", () => {
+	const TODAY = "2026-07-01";
+
+	function makeEvent(partial: Partial<ObligationEvent>): ObligationEvent {
+		return {
+			id: "test-event",
+			title: "Test event",
+			category: "deadline",
+			date: null,
+			date_basis: "unresolved",
+			computation: null,
+			resolution: null,
+			recurrence: null,
+			in_past: false,
+			source_excerpt: "excerpt",
+			details: "details",
+			suggested_reminder_days: 7,
+			stakes: "medium",
+			...partial,
+		};
+	}
+
+	function makeExtraction(events: ObligationEvent[]): ObligationExtraction {
+		return {
+			is_obligation_document: true,
+			reason: null,
+			document_label: "Test document",
+			anchor_dates: [],
+			events,
+			ambiguities: [],
+		};
+	}
+
+	it("overrides a model arithmetic slip (the leap-year miss seen in CI)", () => {
+		const result = reconcileComputedDates(
+			makeExtraction([
+				makeEvent({
+					date: "2028-03-02", // model treated Feb 2028 as 28 days
+					date_basis: "computed",
+					computation: "2028-01-31 plus 30 days = 2028-03-02",
+					resolution: {
+						anchor_label: "invoice date",
+						anchor_date: "2028-01-31",
+						offset_days: 30,
+						offset_months: 0,
+						direction: "after",
+					},
+				}),
+			]),
+			TODAY,
+		);
+		expect(result.events[0]?.date).toBe("2028-03-01");
+		expect(result.events[0]?.computation).toBe(
+			"2028-01-31 (invoice date) plus 30 days = 2028-03-01",
+		);
+	});
+
+	it("recomputes in_past when the corrected date crosses today", () => {
+		const result = reconcileComputedDates(
+			makeExtraction([
+				makeEvent({
+					date: "2026-07-05", // wrong: correct date is in the past
+					date_basis: "computed",
+					in_past: false,
+					resolution: {
+						anchor_label: "notice date",
+						anchor_date: "2026-06-01",
+						offset_days: 20,
+						offset_months: 0,
+						direction: "after",
+					},
+				}),
+			]),
+			TODAY,
+		);
+		expect(result.events[0]?.date).toBe("2026-06-21");
+		expect(result.events[0]?.in_past).toBe(true);
+	});
+
+	it("leaves correct computed dates untouched, including their computation text", () => {
+		const event = makeEvent({
+			date: "2027-07-02",
+			date_basis: "computed",
+			computation: "2027-08-31 minus 60 days = 2027-07-02",
+			resolution: {
+				anchor_label: "lease end date",
+				anchor_date: "2027-08-31",
+				offset_days: 60,
+				offset_months: 0,
+				direction: "before",
+			},
+		});
+		const result = reconcileComputedDates(makeExtraction([event]), TODAY);
+		expect(result.events[0]).toBe(event);
+	});
+
+	it("never fills in unresolved dates", () => {
+		const result = reconcileComputedDates(
+			makeExtraction([
+				makeEvent({
+					date: null,
+					date_basis: "unresolved",
+					resolution: {
+						anchor_label: "hire date",
+						anchor_date: null,
+						offset_days: 60,
+						offset_months: 0,
+						direction: "after",
+					},
+				}),
+			]),
+			TODAY,
+		);
+		expect(result.events[0]?.date).toBeNull();
+		expect(result.events[0]?.date_basis).toBe("unresolved");
+	});
+
+	it("skips computed dates without a usable anchor (pattern-derived or malformed)", () => {
+		const noResolution = makeEvent({ date: "2026-08-01", date_basis: "computed" });
+		const badAnchor = makeEvent({
+			date: "2026-08-01",
+			date_basis: "computed",
+			resolution: {
+				anchor_label: "start",
+				anchor_date: "not-a-date",
+				offset_days: 5,
+				offset_months: 0,
+				direction: "after",
+			},
+		});
+		const result = reconcileComputedDates(makeExtraction([noResolution, badAnchor]), TODAY);
+		expect(result.events[0]?.date).toBe("2026-08-01");
+		expect(result.events[1]?.date).toBe("2026-08-01");
+	});
+});
+
 describe("describeResolution", () => {
 	it("shows the arithmetic it performed", () => {
 		expect(
 			describeResolution("2026-08-31", {
 				anchor_label: "lease end date",
+				anchor_date: null,
 				offset_days: 60,
 				offset_months: 0,
 				direction: "before",
@@ -141,6 +280,7 @@ describe("describeResolution", () => {
 		expect(
 			describeResolution("2026-03-01", {
 				anchor_label: "policy start date",
+				anchor_date: null,
 				offset_days: 0,
 				offset_months: 6,
 				direction: "after",
