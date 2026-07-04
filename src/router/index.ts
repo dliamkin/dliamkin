@@ -38,6 +38,11 @@ const router = createRouter({
 			component: () => import("../views/LeaseDiffView.vue"),
 		},
 		{
+			path: "/projects/paperwork-to-calendar",
+			name: "paperwork-to-calendar",
+			component: () => import("../views/PaperworkToCalendarView.vue"),
+		},
+		{
 			path: "/evals",
 			name: "evals",
 			component: () => import("../views/EvalsView.vue"),

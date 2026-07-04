@@ -8,6 +8,7 @@ export const EVAL_PROJECT_IDS = [
 	"note-structurer",
 	"lease-diff",
 	"screenshot-to-primevue",
+	"paperwork-to-calendar",
 ] as const;
 
 export type EvalProjectId = (typeof EVAL_PROJECT_IDS)[number];
@@ -16,6 +17,7 @@ export const EVAL_PROJECT_LABELS: Record<EvalProjectId, string> = {
 	"note-structurer": "Clinical Note Structurer",
 	"lease-diff": "Lease Diff Explainer",
 	"screenshot-to-primevue": "Screenshot → PrimeVue",
+	"paperwork-to-calendar": "Paperwork → Calendar",
 };
 
 // Where the runner writes and the dashboard reads.

@@ -37,6 +37,14 @@ const projects: ProjectEntry[] = [
 		description:
 			"Compare two versions of a lease and get a plain-English breakdown of every change — who it favors, how much it matters, and what to ask before signing. Synthetic documents only.",
 	},
+	{
+		to: "/projects/paperwork-to-calendar",
+		icon: "fa-solid fa-calendar-check",
+		title: "Paperwork → Calendar",
+		tags: ["Vision", "Date integrity", ".ics export"],
+		description:
+			"Paste, upload, or photograph any document with deadlines buried in it and get back a downloadable .ics — every deadline, notice window, and renewal as calendar events with reminders set before the date, not on it.",
+	},
 ];
 </script>
 

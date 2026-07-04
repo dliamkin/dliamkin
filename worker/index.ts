@@ -7,8 +7,19 @@ import {
 	type AllowedMediaType,
 	type UiAnalysis,
 } from "../src/lib/ui-analysis";
+import {
+	MAX_PAPERWORK_CHARS,
+	MAX_PAPERWORK_IMAGES,
+	type ObligationExtraction,
+} from "../src/lib/paperwork";
+import { todayUtcIso } from "../src/lib/paperwork-dates";
 import { analyzeScreenshot } from "../src/lib/pipelines/analyze-screenshot";
 import { compareLeases } from "../src/lib/pipelines/compare-leases";
+import {
+	extractObligations,
+	type PaperworkImage,
+	type PaperworkInput,
+} from "../src/lib/pipelines/extract-obligations";
 import { PipelineOutputError } from "../src/lib/pipelines/shared";
 import { structureNote } from "../src/lib/pipelines/structure-note";
 
@@ -24,6 +35,11 @@ interface Env {
 	ANTHROPIC_API_KEY: string;
 	// Optional model override for the lease comparison endpoint only.
 	LEASE_DIFF_MODEL?: string;
+	// Optional model override for the paperwork extraction endpoint. The
+	// pipeline defaults to Sonnet because Haiku missed month-boundary date
+	// arithmetic (see extract-obligations.ts) — don't downgrade without the
+	// eval suite's computed-date cases passing.
+	PAPERWORK_MODEL?: string;
 }
 
 // Simple in-memory limiters. Workers isolates are ephemeral and per-PoP, so
@@ -52,6 +68,10 @@ const screenshotDailyLimiter = createRateLimiter(40, 86_400_000); // 40/day/IP
 // endpoint — tighter caps than the other demos bound the worst-case spend.
 const leaseLimiter = createRateLimiter(6, 60_000); // 6/min/IP
 const leaseDailyLimiter = createRateLimiter(20, 86_400_000); // 20/day/IP
+// Paperwork extraction accepts text or up to 3 vision images per request —
+// vision-call pricing sets the daily cap, like the screenshot endpoint.
+const paperworkLimiter = createRateLimiter(6, 60_000); // 6/min/IP
+const paperworkDailyLimiter = createRateLimiter(30, 86_400_000); // 30/day/IP
 
 function json(body: unknown, status: number): Response {
 	return new Response(JSON.stringify(body), {
@@ -275,6 +295,122 @@ async function handleCompareLeases(request: Request, env: Env): Promise<Response
 	}
 }
 
+// Validates one image entry of the paperwork request body. Reuses the
+// screenshot endpoint's limits — the client sends the same canvas-re-encoded
+// JPEGs through the same prep pipeline.
+function validatePaperworkImage(value: unknown): PaperworkImage | string {
+	if (value === null || typeof value !== "object") {
+		return "Each image must be an object with imageData and mediaType.";
+	}
+	const { imageData, mediaType } = value as Record<string, unknown>;
+	if (typeof imageData !== "string" || imageData.length === 0) {
+		return "imageData must be a non-empty base64 string.";
+	}
+	if (
+		typeof mediaType !== "string" ||
+		!ALLOWED_MEDIA_TYPES.includes(mediaType as AllowedMediaType)
+	) {
+		return `mediaType must be one of: ${ALLOWED_MEDIA_TYPES.join(", ")}.`;
+	}
+	if (!/^[A-Za-z0-9+/]+=*$/.test(imageData)) {
+		return "imageData is not valid base64.";
+	}
+	if (Math.floor((imageData.length * 3) / 4) > MAX_IMAGE_BYTES) {
+		return "An image is too large. Please retake or crop the photo.";
+	}
+	return { imageData, mediaType: mediaType as AllowedMediaType };
+}
+
+async function handleExtractObligations(request: Request, env: Env): Promise<Response> {
+	const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+	if (paperworkLimiter(ip)) {
+		return json(
+			{ error: "Please wait a minute between documents and try again." },
+			429,
+		);
+	}
+	if (paperworkDailyLimiter(ip)) {
+		return json(
+			{ error: "You've hit today's extraction limit for this demo. Come back tomorrow!" },
+			429,
+		);
+	}
+
+	let documentText: unknown;
+	let images: unknown;
+	try {
+		const body = (await request.json()) as Record<string, unknown>;
+		documentText = body.documentText;
+		images = body.images;
+	} catch {
+		return json({ error: "Request body must be JSON." }, 400);
+	}
+
+	// Exactly one input mode: pasted/extracted text, or photographed pages.
+	if ((documentText === undefined) === (images === undefined)) {
+		return json({ error: "Provide either documentText or images, not both." }, 400);
+	}
+
+	let input: PaperworkInput;
+	let sizeLabel: string;
+	if (documentText !== undefined) {
+		if (typeof documentText !== "string" || documentText.trim().length === 0) {
+			return json({ error: "documentText must be a non-empty string." }, 400);
+		}
+		if (documentText.length > MAX_PAPERWORK_CHARS) {
+			return json(
+				{ error: `documentText must be at most ${MAX_PAPERWORK_CHARS} characters.` },
+				400,
+			);
+		}
+		input = { documentText };
+		sizeLabel = `chars=${documentText.length}`;
+	} else {
+		if (!Array.isArray(images) || images.length === 0 || images.length > MAX_PAPERWORK_IMAGES) {
+			return json(
+				{ error: `images must contain 1 to ${MAX_PAPERWORK_IMAGES} entries.` },
+				400,
+			);
+		}
+		const validated: PaperworkImage[] = [];
+		for (const entry of images) {
+			const result = validatePaperworkImage(entry);
+			if (typeof result === "string") return json({ error: result }, 400);
+			validated.push(result);
+		}
+		input = { images: validated };
+		sizeLabel = `images=${validated.length}`;
+	}
+
+	// Privacy: the document (text or photos) is held in memory for this
+	// request only — never written to storage and never logged (metadata
+	// only, below).
+	const startedAt = Date.now();
+	const anthropic = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+
+	try {
+		const result: ObligationExtraction = await extractObligations(
+			anthropic,
+			input,
+			todayUtcIso(),
+			env.PAPERWORK_MODEL,
+		);
+		console.log(
+			`extract-obligations outcome=ok ${sizeLabel} duration_ms=${Date.now() - startedAt}`,
+		);
+		return json(result, 200);
+	} catch (error) {
+		const outcome = error instanceof PipelineOutputError ? "malformed" : "error";
+		console.log(
+			`extract-obligations outcome=${outcome} ${sizeLabel} duration_ms=${Date.now() - startedAt}`,
+		);
+		return friendlyApiError(
+			error,
+			"The model did not return a complete extraction. Please try again.",
+		);
+	}
+}
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url);
@@ -297,6 +433,12 @@ export default {
 				return json({ error: "Method not allowed." }, 405);
 			}
 			return handleCompareLeases(request, env);
+		}
+		if (url.pathname === "/api/extract-obligations") {
+			if (request.method !== "POST") {
+				return json({ error: "Method not allowed." }, 405);
+			}
+			return handleExtractObligations(request, env);
 		}
 		return json({ error: "Not found." }, 404);
 	},

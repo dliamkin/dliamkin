@@ -29,9 +29,15 @@ import {
 } from "./persist";
 import { leaseDiffSuite } from "./suites/lease-diff";
 import { noteStructurerSuite } from "./suites/note-structurer";
+import { paperworkSuite } from "./suites/paperwork-to-calendar";
 import { screenshotSuite } from "./suites/screenshot-to-primevue";
 
-const ALL_SUITES: RunnableSuite[] = [noteStructurerSuite, leaseDiffSuite, screenshotSuite];
+const ALL_SUITES: RunnableSuite[] = [
+	noteStructurerSuite,
+	leaseDiffSuite,
+	screenshotSuite,
+	paperworkSuite,
+];
 
 function parseArgs(argv: string[]): { project: EvalProjectId | null; json: boolean; noCommit: boolean } {
 	let project: EvalProjectId | null = null;

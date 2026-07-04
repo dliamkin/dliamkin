@@ -1,0 +1,378 @@
+{
+	"maple-vine-lease": {
+		"is_obligation_document": true,
+		"reason": null,
+		"document_label": "Residential lease agreement",
+		"anchor_dates": [
+			{
+				"label": "Lease start date",
+				"date": "2026-09-01"
+			},
+			{
+				"label": "Lease end date",
+				"date": "2027-08-31"
+			}
+		],
+		"events": [
+			{
+				"id": "monthly-rent-due",
+				"title": "Monthly rent due",
+				"category": "payment",
+				"date": "2026-09-01",
+				"date_basis": "computed",
+				"computation": "Lease begins 2026-09-01; rent due on the first day of each month starting with the first month of the term.",
+				"resolution": null,
+				"recurrence": {
+					"frequency": "monthly",
+					"day_of_month": 1,
+					"description": "Monthly on the 1st"
+				},
+				"in_past": false,
+				"source_excerpt": "Tenant agrees to pay rent of $1,595.00 per month, due on the first day of each month.",
+				"details": "Rent of $1,595.00 is due on the first day of each month for the lease term.",
+				"suggested_reminder_days": 5,
+				"stakes": "medium"
+			},
+			{
+				"id": "late-fee-trigger",
+				"title": "Late fee applies if rent unpaid 5 days after due date",
+				"category": "deadline",
+				"date": null,
+				"date_basis": "unresolved",
+				"computation": "needs: specific month's rent due date; then add 5 days to determine late fee trigger for that month's payment",
+				"resolution": {
+					"anchor_label": "monthly rent due date",
+					"offset_days": 5,
+					"offset_months": 0,
+					"direction": "after"
+				},
+				"recurrence": {
+					"frequency": "monthly",
+					"day_of_month": 6,
+					"description": "Monthly, 5 days after the 1st (i.e., the 6th), if rent remains unpaid"
+				},
+				"in_past": false,
+				"source_excerpt": "If rent is not received within five (5) days after the due date, Tenant shall pay a late fee of $50.00.",
+				"details": "A $50.00 late fee applies if rent is not received within 5 days after the monthly due date; a $35.00 fee applies for returned payments.",
+				"suggested_reminder_days": 3,
+				"stakes": "medium"
+			},
+			{
+				"id": "non-renewal-notice-deadline",
+				"title": "Lease non-renewal notice deadline",
+				"category": "notice_window_closes",
+				"date": "2027-07-02",
+				"date_basis": "computed",
+				"computation": "Lease end date 2027-08-31 minus 60 days = 2027-07-02",
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "Tenant must deliver written notice of non-renewal to Landlord at least sixty (60) days before the end of the lease term.",
+				"details": "Tenant must deliver written notice of non-renewal to Landlord by this date, or a $200.00 holdover administration fee applies.",
+				"suggested_reminder_days": 14,
+				"stakes": "high"
+			},
+			{
+				"id": "lease-term-end",
+				"title": "Lease term ends",
+				"category": "renewal_or_expiration",
+				"date": "2027-08-31",
+				"date_basis": "stated",
+				"computation": null,
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "beginning on September 1, 2026 and ending on August 31, 2027",
+				"details": "The 12-month lease term ends on this date; the lease terminates unless both parties sign a new agreement.",
+				"suggested_reminder_days": 14,
+				"stakes": "high"
+			},
+			{
+				"id": "renewal-offer-window",
+				"title": "Landlord renewal offer due window",
+				"category": "notice_window_closes",
+				"date": null,
+				"date_basis": "unresolved",
+				"computation": "needs: Anniversary Date (as defined in Landlord's Master Property Schedule, not provided in this document); then add 30 days",
+				"resolution": {
+					"anchor_label": "Anniversary Date (defined in Master Property Schedule)",
+					"offset_days": 30,
+					"offset_months": 0,
+					"direction": "after"
+				},
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "Landlord will deliver a written renewal offer to Tenant within thirty (30) days after the Anniversary Date, as that term is defined in the Master Property Schedule maintained by Landlord.",
+				"details": "Landlord must deliver a written renewal offer within 30 days after the Anniversary Date, a term defined in a document not included here.",
+				"suggested_reminder_days": 7,
+				"stakes": "medium"
+			},
+			{
+				"id": "move-out-inspection",
+				"title": "Move-out inspection scheduled",
+				"category": "required_action",
+				"date": "2027-09-01",
+				"date_basis": "stated",
+				"computation": null,
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "A move-out inspection is scheduled for September 1, 2027 at the Premises.",
+				"details": "A move-out inspection will occur at the Premises on this date; Tenant may be present.",
+				"suggested_reminder_days": 7,
+				"stakes": "medium"
+			},
+			{
+				"id": "security-deposit-return",
+				"title": "Security deposit return deadline",
+				"category": "deadline",
+				"date": "2027-10-01",
+				"date_basis": "computed",
+				"computation": "Move-out inspection date 2027-09-01 plus 30 days = 2027-10-01",
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "The deposit will be returned within thirty (30) days after the move-out inspection, less any lawful deductions for damage beyond normal wear and tear, unpaid rent, or required cleaning.",
+				"details": "Landlord must return the security deposit of $1,595.00, less lawful deductions, within 30 days after the move-out inspection.",
+				"suggested_reminder_days": 7,
+				"stakes": "medium"
+			}
+		],
+		"ambiguities": [
+			"The exact date of the Anniversary Date is not stated in this document; it is defined in a separate Master Property Schedule not provided, so the renewal-offer window cannot be resolved to a specific date.",
+			"The late-fee trigger date recurs monthly but the exact calendar date depends on each month's rent due date; a generic monthly pattern is given rather than a single resolved date."
+		]
+	},
+	"scholarship-award": {
+		"is_obligation_document": true,
+		"reason": null,
+		"document_label": "Harborview Merit Scholarship award letter",
+		"anchor_dates": [
+			{
+				"label": "Fall semester start date",
+				"date": "2026-09-08"
+			},
+			{
+				"label": "Acceptance deadline",
+				"date": "2026-08-15"
+			},
+			{
+				"label": "Priority housing grant application closed",
+				"date": "2026-06-01"
+			}
+		],
+		"events": [
+			{
+				"id": "acceptance-deadline",
+				"title": "Scholarship acceptance form due",
+				"category": "deadline",
+				"date": "2026-08-15",
+				"date_basis": "stated",
+				"computation": null,
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "You must sign and return the enclosed acceptance form no later than August 15, 2026.",
+				"details": "Signed acceptance form must be returned by this date or the award is released to the alternate list.",
+				"suggested_reminder_days": 7,
+				"stakes": "high"
+			},
+			{
+				"id": "enrollment-verification-deadline",
+				"title": "Proof of full-time enrollment due",
+				"category": "deadline",
+				"date": "2026-09-22",
+				"date_basis": "computed",
+				"computation": "2026-09-08 + 14 days = 2026-09-22",
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "You must submit proof of full-time enrollment to the Foundation within fourteen (14) days after the start of the fall semester.",
+				"details": "Registrar's letter or official enrollment certificate must be submitted to the Foundation within 14 days of the fall semester start.",
+				"suggested_reminder_days": 5,
+				"stakes": "high"
+			},
+			{
+				"id": "annual-gpa-report",
+				"title": "Annual GPA transcript due",
+				"category": "renewal_or_expiration",
+				"date": "2027-06-30",
+				"date_basis": "computed",
+				"computation": "Recurring annual deadline of June 30; first upcoming occurrence on or after 2026-07-01 is 2027-06-30",
+				"resolution": null,
+				"recurrence": {
+					"frequency": "yearly",
+					"day_of_month": 30,
+					"description": "Annually by June 30, each year the scholarship is held"
+				},
+				"in_past": false,
+				"source_excerpt": "you must submit an official transcript demonstrating a cumulative GPA of 3.25 or higher by June 30 of each year that you hold the scholarship",
+				"details": "An official transcript showing a cumulative GPA of 3.25 or higher must be submitted by June 30 each year to remain eligible for renewal.",
+				"suggested_reminder_days": 14,
+				"stakes": "high"
+			},
+			{
+				"id": "disbursement-fall",
+				"title": "Fall semester disbursement installment",
+				"category": "payment",
+				"date": "2026-09-08",
+				"date_basis": "stated",
+				"computation": null,
+				"resolution": null,
+				"recurrence": {
+					"frequency": "yearly",
+					"day_of_month": null,
+					"description": "Twice yearly, at the start of each semester (fall and spring)"
+				},
+				"in_past": false,
+				"source_excerpt": "The award is disbursed directly to your institution in two equal installments at the start of each semester.",
+				"details": "The Foundation disburses one installment of the award directly to the institution at the start of the fall semester; no action required from recipient.",
+				"suggested_reminder_days": 1,
+				"stakes": "low"
+			},
+			{
+				"id": "priority-housing-deadline-past",
+				"title": "Priority housing grant application deadline (closed)",
+				"category": "informational",
+				"date": "2026-06-01",
+				"date_basis": "stated",
+				"computation": null,
+				"resolution": null,
+				"recurrence": null,
+				"in_past": true,
+				"source_excerpt": "the priority housing grant application associated with this program closed on June 1, 2026, and late applications are not accepted",
+				"details": "The priority housing grant application window has already closed; late applications are not accepted.",
+				"suggested_reminder_days": 1,
+				"stakes": "low"
+			},
+			{
+				"id": "enrollment-change-notice",
+				"title": "Notice required for change in enrollment status",
+				"category": "notice_window_closes",
+				"date": null,
+				"date_basis": "unresolved",
+				"computation": "needs: date of change in enrollment status; then add 30 days",
+				"resolution": {
+					"anchor_label": "date of change in enrollment status",
+					"offset_days": 30,
+					"offset_months": 0,
+					"direction": "after"
+				},
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "You must notify the Foundation in writing within thirty (30) days of any change in your enrollment status, including a reduction below full-time status, a leave of absence, or a transfer to another institution.",
+				"details": "Written notice must be given to the Foundation within 30 days of any change in enrollment status (reduction below full-time, leave of absence, or transfer).",
+				"suggested_reminder_days": 5,
+				"stakes": "high"
+			}
+		],
+		"ambiguities": [
+			"The spring semester start date is not stated, so the second disbursement installment date and its enrollment-related timing cannot be computed.",
+			"The enrollment status change notice deadline cannot be computed because the document does not specify when such a change would occur; it is contingent on a future, undated event."
+		]
+	},
+	"auto-insurance-summary": {
+		"is_obligation_document": true,
+		"reason": null,
+		"document_label": "Auto insurance policy summary",
+		"anchor_dates": [
+			{
+				"label": "Policy period start",
+				"date": "2026-07-15"
+			},
+			{
+				"label": "Policy period expiration",
+				"date": "2027-01-14"
+			}
+		],
+		"events": [
+			{
+				"id": "monthly-premium-installment",
+				"title": "Monthly premium installment due",
+				"category": "payment",
+				"date": "2026-07-15",
+				"date_basis": "computed",
+				"computation": "Recurring on the 15th of each month; first upcoming occurrence on or after 2026-07-01 is 2026-07-15.",
+				"resolution": null,
+				"recurrence": {
+					"frequency": "monthly",
+					"day_of_month": 15,
+					"description": "Monthly on the 15th"
+				},
+				"in_past": false,
+				"source_excerpt": "payable in monthly installments of $124.00 due on the fifteenth (15th) day of each month",
+				"details": "A premium installment of $124.00 is due on the 15th of each month during the policy period.",
+				"suggested_reminder_days": 5,
+				"stakes": "medium"
+			},
+			{
+				"id": "grace-period-end-july",
+				"title": "Grace period ends for July installment",
+				"category": "deadline",
+				"date": "2026-07-25",
+				"date_basis": "computed",
+				"computation": "2026-07-15 plus 10 days = 2026-07-25",
+				"resolution": null,
+				"recurrence": {
+					"frequency": "monthly",
+					"day_of_month": 25,
+					"description": "Monthly, 10 days after each installment due date (i.e., on the 25th)"
+				},
+				"in_past": false,
+				"source_excerpt": "coverage continues during a ten (10) day grace period",
+				"details": "If the monthly installment is not paid by its due date, coverage continues for a 10-day grace period before risking cancellation for non-payment.",
+				"suggested_reminder_days": 3,
+				"stakes": "high"
+			},
+			{
+				"id": "cancellation-notice-deadline",
+				"title": "Deadline for cancellation notice to avoid short-rate penalty",
+				"category": "notice_window_closes",
+				"date": "2026-12-15",
+				"date_basis": "computed",
+				"computation": "2027-01-14 (policy expiration) minus 30 days = 2026-12-15",
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "written notice of cancellation must be received at least thirty (30) days before the policy expiration date",
+				"details": "To cancel the policy without incurring a short-rate cancellation penalty, written notice must be received by this date, at least 30 days before the policy's expiration on 2027-01-14.",
+				"suggested_reminder_days": 14,
+				"stakes": "medium"
+			},
+			{
+				"id": "renewal-offer-mail-deadline",
+				"title": "Renewal offer must be mailed by insurer",
+				"category": "renewal_or_expiration",
+				"date": "2026-12-01",
+				"date_basis": "stated",
+				"computation": null,
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "A renewal offer, including any premium changes, will be mailed to your address on file on or before December 1, 2026.",
+				"details": "The insurer is required to mail a renewal offer, including any premium changes, on or before this date.",
+				"suggested_reminder_days": 7,
+				"stakes": "medium"
+			},
+			{
+				"id": "policy-expiration",
+				"title": "Policy period expiration / automatic renewal",
+				"category": "renewal_or_expiration",
+				"date": "2027-01-14",
+				"date_basis": "stated",
+				"computation": null,
+				"resolution": null,
+				"recurrence": null,
+				"in_past": false,
+				"source_excerpt": "Your policy is effective from July 15, 2026 through January 14, 2027. Coverage ends at 12:01 a.m. on the expiration date unless the policy is renewed.",
+				"details": "The current policy period ends on this date; if no action is taken, the policy renews automatically on the terms of the mailed renewal offer.",
+				"suggested_reminder_days": 14,
+				"stakes": "high"
+			}
+		],
+		"ambiguities": [
+			"The document does not specify exactly when in each month the grace period recurs relative to non-July installments beyond the stated 10-day rule, though it is assumed to apply uniformly to each monthly due date.",
+			"The document does not state a specific deadline for reporting claims, only that they must be reported 'promptly,' so no dated event was created for this."
+		]
+	}
+}

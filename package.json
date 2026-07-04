@@ -22,6 +22,7 @@
     "generate:samples": "tsx ./scripts/generate-samples.mjs",
     "generate:screenshot-samples": "tsx ./scripts/generate-screenshot-samples.mjs",
     "generate:lease-samples": "tsx ./scripts/generate-lease-samples.mjs",
+    "generate:paperwork-samples": "tsx ./scripts/generate-paperwork-samples.mjs",
     "audit:local": "tsx ./scripts/site-health/run-audit.ts",
     "eval": "tsx ./scripts/evals/run-evals.ts"
   },
@@ -30,6 +31,7 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@primeuix/themes": "^2.0.3",
     "diff": "^9.0.0",
+    "mammoth": "^1.12.0",
     "pdfjs-dist": "^6.1.200",
     "pinia": "^3.0.4",
     "primevue": "^4.5.5",
