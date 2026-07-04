@@ -3,14 +3,18 @@ import { computed, reactive, ref, watch } from "vue";
 import Button from "primevue/button";
 import Checkbox from "primevue/checkbox";
 import DatePicker from "primevue/datepicker";
-import Message from "primevue/message";
 import InputText from "primevue/inputtext";
 import Select from "primevue/select";
 import Tag from "primevue/tag";
 import ToggleSwitch from "primevue/toggleswitch";
 import { useToast } from "primevue/usetoast";
 import { buildIcs, buildRrule, googleCalendarUrl, type IcsEvent } from "@/lib/ics";
-import { describeResolution, isPast, resolveDate } from "@/lib/paperwork-dates";
+import {
+	describeResolution,
+	formatOffset,
+	isPast,
+	resolveDate,
+} from "@/lib/paperwork-dates";
 import type { ObligationEvent, ObligationExtraction } from "@/lib/paperwork";
 
 // The review-and-edit step: nothing goes on a calendar un-reviewed. The
@@ -52,9 +56,10 @@ const REMINDER_OPTIONS = [1, 3, 7, 14, 30].map((days) => ({
 function toReviewEvent(event: ObligationEvent): ReviewEvent {
 	return {
 		source: event,
-		// Already-passed and informational dates default off — they'd pollute
-		// the calendar; re-check them to include.
-		included: !event.in_past && event.category !== "informational",
+		// Dateless (unresolved), already-passed, and informational events
+		// default off — they'd pollute the calendar; resolving or re-checking
+		// includes them.
+		included: event.date !== null && !event.in_past && event.category !== "informational",
 		title: event.title,
 		date: event.date,
 		basis: event.date_basis,
@@ -90,6 +95,17 @@ const upcoming = computed(() => events.filter((e) => !e.source.in_past));
 const past = computed(() => events.filter((e) => e.source.in_past));
 const unresolved = computed(() => events.filter((e) => e.basis === "unresolved"));
 
+// Checked events float to the top (soonest first); unchecked and unresolved
+// ones sink below so the list reads as "what's going on the calendar".
+// The TransitionGroup in the template animates the move.
+const sortedUpcoming = computed(() => {
+	const byDate = (a: ReviewEvent, b: ReviewEvent) =>
+		(a.date ?? "9999-99-99") < (b.date ?? "9999-99-99") ? -1 : 1;
+	const checked = upcoming.value.filter((e) => e.included).sort(byDate);
+	const unchecked = upcoming.value.filter((e) => !e.included).sort(byDate);
+	return [...checked, ...unchecked];
+});
+
 const selected = computed(() =>
 	events.filter((e) => e.included && e.date !== null && e.basis !== "unresolved"),
 );
@@ -102,6 +118,23 @@ const nextUp = computed(() => {
 });
 
 // --- Resolve-flow -----------------------------------------------------------
+
+// Plain-language question and consequence for each unresolved date, built
+// from the structured resolution the model returned.
+function resolveQuestion(event: ReviewEvent): string {
+	return event.source.resolution
+		? `When is the ${event.source.resolution.anchor_label}?`
+		: "What date should this be?";
+}
+
+function resolveConsequence(event: ReviewEvent): string {
+	const res = event.source.resolution;
+	if (!res) return "The date you pick becomes this event's date.";
+	if (res.offset_days === 0 && res.offset_months === 0) {
+		return "This event lands on the date you pick.";
+	}
+	return `We'll count ${formatOffset(res)} ${res.direction} the date you pick — calculated in your browser, never guessed.`;
+}
 
 // DatePicker yields a local-time Date; format via local parts (not
 // toISOString, which can shift the day across the UTC boundary).
@@ -134,21 +167,21 @@ function basisTag(event: ReviewEvent): { label: string; severity: string; toolti
 	switch (event.basis) {
 		case "stated":
 			return {
-				label: "stated",
+				label: "in the document",
 				severity: "success",
 				tooltip: "This date is written in the document.",
 			};
 		case "computed":
 			return {
-				label: "computed",
+				label: "calculated",
 				severity: "info",
-				tooltip: event.computation ?? "Computed from an anchor date in the document.",
+				tooltip: event.computation ?? "Calculated from an anchor date in the document.",
 			};
 		case "computed_from_input":
 			return {
-				label: "computed (from your input)",
+				label: "from your date",
 				severity: "info",
-				tooltip: event.computation ?? "Computed from the anchor date you supplied.",
+				tooltip: event.computation ?? "Calculated from the date you supplied.",
 			};
 		case "unresolved":
 			return {
@@ -156,7 +189,7 @@ function basisTag(event: ReviewEvent): { label: string; severity: string; toolti
 				severity: "warn",
 				tooltip:
 					event.computation ??
-					"The document doesn't contain the anchor date needed to compute this.",
+					"The document doesn't contain the date needed to place this.",
 			};
 	}
 }
@@ -169,12 +202,6 @@ const CATEGORY_LABELS: Record<ObligationEvent["category"], string> = {
 	renewal_or_expiration: "renewal / expiration",
 	required_action: "required action",
 	informational: "informational",
-};
-
-const STAKES_SEVERITY: Record<ObligationEvent["stakes"], string> = {
-	high: "danger",
-	medium: "warn",
-	low: "secondary",
 };
 
 // --- Export -----------------------------------------------------------------
@@ -268,55 +295,47 @@ function googleLink(event: ReviewEvent): string {
 			</span>
 		</div>
 
-		<Message
-			v-if="unresolved.length > 0"
-			severity="warn"
-			:closable="false"
-			class="resolve-panel"
-		>
-			<div class="resolve-content">
-				<p class="resolve-title">
-					{{ unresolved.length }} date{{ unresolved.length === 1 ? "" : "s" }} need{{
-						unresolved.length === 1 ? "s" : ""
-					}}
-					your input
-				</p>
-				<p class="resolve-sub">
-					The document doesn't contain the anchor date{{
-						unresolved.length === 1 ? "" : "s"
-					}}
-					needed — supply {{ unresolved.length === 1 ? "it" : "them" }} and the date is
-					computed in your browser, not guessed by the model.
-				</p>
-				<div v-for="event in unresolved" :key="event.source.id" class="resolve-row">
-					<div class="resolve-info">
-						<strong>{{ event.title }}</strong>
-						<span class="resolve-need">{{
-							event.computation ?? "needs a date from you"
-						}}</span>
-					</div>
-					<div class="resolve-input">
-						<DatePicker
-							v-model="event.anchorInput"
-							:placeholder="event.source.resolution?.anchor_label ?? 'Pick the date'"
-							date-format="yy-mm-dd"
-							show-icon
-							icon-display="input"
-						/>
-						<Button
-							label="Resolve"
-							size="small"
-							:disabled="!event.anchorInput"
-							@click="applyAnchor(event)"
-						/>
-					</div>
+		<div v-if="unresolved.length > 0" class="resolve-panel">
+			<div class="resolve-head">
+				<i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+				<div>
+					<p class="resolve-title">
+						{{ unresolved.length === 1 ? "One date" : `${unresolved.length} dates` }}
+						need{{ unresolved.length === 1 ? "s" : "" }} a detail from you
+					</p>
+					<p class="resolve-sub">
+						The document mentions {{ unresolved.length === 1 ? "a date" : "dates" }} it
+						never pins down. Fill in what you know — nothing here is guessed.
+					</p>
 				</div>
 			</div>
-		</Message>
+			<div v-for="event in unresolved" :key="event.source.id" class="resolve-row">
+				<div class="resolve-info">
+					<strong>{{ event.title }}</strong>
+					<span class="resolve-question">{{ resolveQuestion(event) }}</span>
+					<span class="resolve-consequence">{{ resolveConsequence(event) }}</span>
+				</div>
+				<div class="resolve-input">
+					<DatePicker
+						v-model="event.anchorInput"
+						placeholder="Pick a date"
+						date-format="yy-mm-dd"
+						show-icon
+						icon-display="input"
+					/>
+					<Button
+						label="Set date"
+						size="small"
+						:disabled="!event.anchorInput"
+						@click="applyAnchor(event)"
+					/>
+				</div>
+			</div>
+		</div>
 
-		<ul class="event-list" aria-label="Extracted events">
+		<TransitionGroup name="rows" tag="ul" class="event-list" aria-label="Extracted events">
 			<li
-				v-for="event in upcoming"
+				v-for="event in sortedUpcoming"
 				:key="event.source.id"
 				class="event-row"
 				:class="{ excluded: !event.included }"
@@ -354,7 +373,7 @@ function googleLink(event: ReviewEvent): string {
 						</div>
 						<div class="row-meta">
 							<span class="event-date" :class="{ missing: event.date === null }">
-								{{ event.date ?? "—" }}
+								{{ event.date ?? "no date yet" }}
 							</span>
 							<Tag
 								v-tooltip.top="basisTag(event).tooltip"
@@ -362,19 +381,19 @@ function googleLink(event: ReviewEvent): string {
 								:severity="basisTag(event).severity"
 								class="basis-tag"
 							/>
+							<span class="meta-text">{{
+								CATEGORY_LABELS[event.source.category]
+							}}</span>
 							<Tag
-								:value="CATEGORY_LABELS[event.source.category]"
-								severity="secondary"
+								v-if="event.source.stakes === 'high'"
+								value="high stakes"
+								severity="danger"
+								class="stakes-tag"
 							/>
-							<Tag
-								:value="`${event.source.stakes} stakes`"
-								:severity="STAKES_SEVERITY[event.source.stakes]"
-							/>
-							<Tag
-								v-if="event.source.recurrence"
-								:value="event.source.recurrence.description"
-								severity="contrast"
-							/>
+							<span v-if="event.source.recurrence" class="meta-text recurring">
+								<i class="fa-solid fa-repeat" aria-hidden="true"></i>
+								{{ event.source.recurrence.description }}
+							</span>
 							<Select
 								v-model="event.reminderDays"
 								:options="REMINDER_OPTIONS"
@@ -417,7 +436,7 @@ function googleLink(event: ReviewEvent): string {
 					</div>
 				</div>
 			</li>
-		</ul>
+		</TransitionGroup>
 
 		<details v-if="past.length > 0" class="past-section" :open="showPast">
 			<summary @click.prevent="showPast = !showPast">
@@ -449,10 +468,9 @@ function googleLink(event: ReviewEvent): string {
 									></i>
 									{{ event.date }}
 								</span>
-								<Tag
-									:value="CATEGORY_LABELS[event.source.category]"
-									severity="secondary"
-								/>
+								<span class="meta-text">{{
+									CATEGORY_LABELS[event.source.category]
+								}}</span>
 								<span class="past-note">already passed</span>
 							</div>
 						</div>
@@ -481,7 +499,7 @@ function googleLink(event: ReviewEvent): string {
 			</div>
 			<div class="summary-actions">
 				<Button
-					label="Download .ics"
+					label="Download calendar (.ics)"
 					icon="fa-solid fa-calendar-plus"
 					:disabled="selected.length === 0"
 					@click="downloadIcs"
@@ -496,10 +514,51 @@ function googleLink(event: ReviewEvent): string {
 				/>
 			</div>
 		</div>
+
+		<details class="ics-help">
+			<summary>
+				<i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+				What's an .ics file, and how do I get these onto my calendar?
+			</summary>
+			<div class="ics-help-body">
+				<p>
+					An .ics file is the standard format calendar apps use to exchange events —
+					every major calendar can import it. Download it above, then:
+				</p>
+				<ul>
+					<li>
+						<strong>Google Calendar:</strong> open
+						<a
+							href="https://calendar.google.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Google Calendar</a
+						>
+						in a browser, click the gear icon (Settings) →
+						<em>Import &amp; export</em> → <em>Select file from your computer</em>.
+					</li>
+					<li>
+						<strong>Apple Calendar:</strong> open the app, go to
+						<em>File → Import</em>, and select the .ics file. On iPhone, open the
+						file from Files or Mail and tap <em>Add All</em>.
+					</li>
+					<li>
+						<strong>Outlook (web):</strong> go to Outlook.com, open the Calendar
+						view, click <em>Add calendar</em> → <em>Upload from file</em>.
+					</li>
+				</ul>
+				<p>
+					Prefer one event at a time? Expand any event above and use its
+					<em>Add to Google Calendar</em> link — no file needed. If you edit events
+					here and download again, re-importing the new file updates your calendar
+					instead of creating duplicates.
+				</p>
+			</div>
+		</details>
+
 		<p class="export-note">
-			The .ics file is generated entirely in your browser from the reviewed events above —
-			it never touches a server. Import it into Google Calendar, Apple Calendar, or
-			Outlook; re-importing an updated file updates events instead of duplicating them.
+			The calendar file is generated entirely in your browser from the reviewed events
+			above — it never touches a server.
 		</p>
 	</div>
 </template>
@@ -545,19 +604,38 @@ function googleLink(event: ReviewEvent): string {
 	padding: 0.2rem 0.65rem;
 }
 
-.resolve-content {
+.resolve-panel {
+	border: 1px solid #ecd7a3;
+	border-left: 4px solid #e0a92e;
+	background: #fefaf0;
+	border-radius: 8px;
+	padding: 1rem 1.15rem;
 	display: flex;
 	flex-direction: column;
-	gap: 0.6rem;
+	gap: 0.4rem;
+}
+
+.resolve-head {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.75rem;
+}
+
+.resolve-head > i {
+	font-size: 1.4rem;
+	color: #e0a92e;
+	margin-top: 0.15rem;
 }
 
 .resolve-title {
 	font-weight: 700;
 	font-size: 1rem;
+	color: #414042;
 }
 
 .resolve-sub {
 	font-size: 0.85rem;
+	color: #6b6a6d;
 }
 
 .resolve-row {
@@ -566,20 +644,31 @@ function googleLink(event: ReviewEvent): string {
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.75rem;
-	padding: 0.6rem 0;
-	border-top: 1px solid rgba(0, 0, 0, 0.08);
+	padding: 0.75rem 0 0.25rem;
+	margin-top: 0.5rem;
+	border-top: 1px solid rgba(224, 169, 46, 0.25);
 }
 
 .resolve-info {
 	display: flex;
 	flex-direction: column;
-	gap: 0.2rem;
-	min-width: 220px;
+	gap: 0.15rem;
+	min-width: 240px;
+	flex: 1;
 }
 
-.resolve-need {
-	font-size: 0.82rem;
-	font-style: italic;
+.resolve-info strong {
+	font-size: 0.92rem;
+}
+
+.resolve-question {
+	font-size: 0.9rem;
+	color: #414042;
+}
+
+.resolve-consequence {
+	font-size: 0.8rem;
+	color: #9b9aa0;
 }
 
 .resolve-input {
@@ -595,18 +684,24 @@ function googleLink(event: ReviewEvent): string {
 	display: flex;
 	flex-direction: column;
 	gap: 0.6rem;
+	position: relative;
+}
+
+.rows-move {
+	transition: transform 0.35s ease;
 }
 
 .event-row {
-	border: 1px solid rgba(0, 0, 0, 0.12);
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
-	padding: 0.75rem 0.9rem;
+	padding: 0.7rem 0.9rem;
 	background: #fff;
 	transition: opacity 0.15s ease;
 }
 
 .event-row.excluded {
 	opacity: 0.55;
+	background: #fafafa;
 }
 
 .event-row.past {
@@ -624,7 +719,7 @@ function googleLink(event: ReviewEvent): string {
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
-	gap: 0.45rem;
+	gap: 0.35rem;
 }
 
 .row-top {
@@ -633,10 +728,25 @@ function googleLink(event: ReviewEvent): string {
 	gap: 0.5rem;
 }
 
+/* The title reads as text until you interact with it — a visible input box
+   on every row was the single biggest source of visual noise. */
 .title-input {
 	flex: 1;
 	font-weight: 600;
 	font-size: 0.92rem;
+	border-color: transparent;
+	background: transparent;
+	box-shadow: none;
+	padding-left: 0.25rem;
+}
+
+.title-input:hover {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.title-input:focus {
+	border-color: #27a9e0;
+	background: #fff;
 }
 
 .past-title {
@@ -669,18 +779,20 @@ function googleLink(event: ReviewEvent): string {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: 0.4rem;
+	gap: 0.35rem 0.65rem;
+	padding-left: 0.25rem;
 }
 
 .event-date {
 	font-variant-numeric: tabular-nums;
 	font-weight: 700;
 	font-size: 0.9rem;
-	margin-right: 0.2rem;
 }
 
 .event-date.missing {
-	color: #9b9aa0;
+	color: #b98a1d;
+	font-weight: 600;
+	font-style: italic;
 }
 
 .event-date.overdue {
@@ -691,8 +803,30 @@ function googleLink(event: ReviewEvent): string {
 	margin-right: 0.3rem;
 }
 
-.basis-tag {
+/* Soft, quiet tag treatment — one accent per row at most. */
+.basis-tag,
+.stakes-tag {
 	text-transform: none;
+	font-size: 0.72rem;
+	font-weight: 600;
+	padding: 0.15rem 0.5rem;
+}
+
+.meta-text {
+	font-size: 0.8rem;
+	color: #9b9aa0;
+}
+
+.meta-text.recurring {
+	max-width: 260px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.meta-text.recurring i {
+	margin-right: 0.25rem;
+	font-size: 0.7rem;
 }
 
 .reminder-select {
@@ -834,6 +968,41 @@ function googleLink(event: ReviewEvent): string {
 .summary-actions {
 	display: flex;
 	gap: 0.6rem;
+}
+
+.ics-help summary {
+	cursor: pointer;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #414042;
+	padding: 0.35rem 0;
+}
+
+.ics-help summary i {
+	color: #27a9e0;
+	margin-right: 0.4rem;
+}
+
+.ics-help-body {
+	font-size: 0.88rem;
+	color: #6b6a6d;
+	line-height: 1.65;
+	padding: 0.5rem 0.25rem 0.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.ics-help-body ul {
+	margin: 0;
+	padding-left: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.ics-help-body a {
+	color: #27a9e0;
 }
 
 .export-note {

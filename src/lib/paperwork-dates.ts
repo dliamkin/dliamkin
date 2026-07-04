@@ -70,7 +70,8 @@ export function todayUtcIso(now: Date = new Date()): string {
 	return now.toISOString().slice(0, 10);
 }
 
-function formatOffset(resolution: DateResolution): string {
+// Exported for the review UI's human phrasing ("we'll count 30 days after…").
+export function formatOffset(resolution: DateResolution): string {
 	const parts: string[] = [];
 	if (resolution.offset_months > 0) {
 		parts.push(`${resolution.offset_months} month${resolution.offset_months === 1 ? "" : "s"}`);
