@@ -207,13 +207,30 @@ const cases: EvalCase<LeasePairInput, LeaseComparison>[] = [
 					}),
 			},
 			{
-				name: "finds the tenant lease-break penalty removal (favors tenant)",
+				// The penalty removal shares Section 5 with the landlord's new
+				// termination right, and the prompt tells the model it may merge
+				// fragments of one clause. So accept both shapes: reported
+				// separately it must be favors_tenant; merged with the opposing
+				// change (detected by the either-party/30-day language in the same
+				// entry) "unclear" is the correct judgment, not a bias miss.
+				name: "finds the lease-break penalty removal (favors_tenant, or unclear when merged with the landlord's new termination right)",
 				run: (c) =>
-					hasChange(c, "lease-break penalty removed", {
-						categories: ["termination"],
-						impacts: ["favors_tenant"],
-						keyword: /penalty|break/,
-					}),
+					setContains(
+						c.changes,
+						"lease-break penalty removed (favors_tenant alone, or unclear when merged)",
+						(change) => {
+							const text = normalized(JSON.stringify(change));
+							if (change.category !== "termination" || !/penalty|break/.test(text)) {
+								return false;
+							}
+							return (
+								change.impact === "favors_tenant" ||
+								(change.impact === "unclear" &&
+									/either party|thirty|30/.test(text))
+							);
+						},
+						renderChange,
+					),
 			},
 			{
 				name: "finds the landlord's new right to terminate at will (favors landlord)",
