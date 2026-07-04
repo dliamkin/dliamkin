@@ -1,0 +1,693 @@
+{
+  "run_at": "2026-07-04T05:54:50.636Z",
+  "trigger": "push",
+  "suites": [
+    {
+      "project_id": "note-structurer",
+      "project_label": "Clinical Note Structurer",
+      "model": "claude-haiku-4-5",
+      "prompt_hash": "9f57f5519459",
+      "cases": [
+        {
+          "case_id": "note-followup-htn",
+          "description": "Bundled follow-up sample: two active meds extracted exactly, no invented allergies, vitals and the lipid-panel follow-up captured",
+          "passed": true,
+          "checks": [
+            {
+              "name": "extracts lisinopril 20 mg daily, active",
+              "passed": true,
+              "expected": "lisinopril 20 mg daily [active]",
+              "actual": "lisinopril 20 mg daily [active]"
+            },
+            {
+              "name": "extracts metformin 500 mg BID, active",
+              "passed": true,
+              "expected": "metformin 500 mg BID [active]",
+              "actual": "metformin 500 mg BID [active]"
+            },
+            {
+              "name": "allergies is empty (none mentioned in the note)",
+              "passed": true,
+              "expected": "empty array",
+              "actual": "empty array"
+            },
+            {
+              "name": "blood pressure 128/82 captured",
+              "passed": true,
+              "expected": "contains \"128/82\"",
+              "actual": "\"128/82 mmHg\""
+            },
+            {
+              "name": "lipid panel action captured (plan or follow-ups)",
+              "passed": true,
+              "expected": "contains \"lipid\"",
+              "actual": "\"Continue current medications (lisinopril 20 mg daily and metformin 500 mg BID) ; Order monofilament test ; Discussed diet improvements ; Patient to schedule lipid panel within 2 weeks ; Return to clinic ; Return sooner if foot symptoms worsen\""
+            }
+          ],
+          "duration_ms": 6632,
+          "error": null
+        },
+        {
+          "case_id": "note-newpatient-headache",
+          "description": "Bundled new-patient sample: both allergies with reactions, vitals transcribed exactly, explicitly-educated red flags surfaced",
+          "passed": true,
+          "checks": [
+            {
+              "name": "penicillin allergy captured",
+              "passed": true,
+              "expected": "contains \"penicillin\"",
+              "actual": "\"penicillin (hives) ; sulfa (unknown reaction)\""
+            },
+            {
+              "name": "sulfa allergy captured",
+              "passed": true,
+              "expected": "contains \"sulfa\"",
+              "actual": "\"penicillin (hives) ; sulfa (unknown reaction)\""
+            },
+            {
+              "name": "blood pressure 118/74 captured",
+              "passed": true,
+              "expected": "contains \"118/74\"",
+              "actual": "\"118/74\""
+            },
+            {
+              "name": "temperature 98.2 captured",
+              "passed": true,
+              "expected": "contains \"98.2\"",
+              "actual": "\"98.2°F\""
+            },
+            {
+              "name": "red flags present (note explicitly educates on them)",
+              "passed": true,
+              "expected": "at least one entry",
+              "actual": "[\"Worst headache of life\",\"Focal neurological deficits\",\"Fever with stiff neck\"]"
+            }
+          ],
+          "duration_ms": 4947,
+          "error": null
+        },
+        {
+          "case_id": "note-urgentcare-ankle",
+          "description": "Bundled urgent-care sample: new ibuprofen prescription with dose, return precautions not lost in extraction",
+          "passed": true,
+          "checks": [
+            {
+              "name": "extracts ibuprofen 600 mg, new or active",
+              "passed": true,
+              "expected": "ibuprofen 600 mg TID [new]",
+              "actual": "Ibuprofen 600mg three times daily with food [new]"
+            },
+            {
+              "name": "heart rate 80 captured",
+              "passed": true,
+              "expected": "contains \"80\"",
+              "actual": "\"80\""
+            },
+            {
+              "name": "return precautions captured (red flags or plan)",
+              "passed": true,
+              "expected": "contains \"bear weight\"",
+              "actual": "\"Inability to bear weight ; Numbness ; Worsening swelling ; RICE protocol (rest, ice, compression, elevation) ; Air stirrup brace dispensed ; Ibuprofen 600mg three times daily with food for 5 days ; Crutches as needed for first 48 hours ; Work note provided for 2 days ; Follow up with primary care physician if not improving\""
+            },
+            {
+              "name": "PCP follow-up captured",
+              "passed": true,
+              "expected": "a follow-up mentioning the PCP or 1 week",
+              "actual": "Follow up with primary care physician if not improving (1 week)"
+            }
+          ],
+          "duration_ms": 4113,
+          "error": null
+        },
+        {
+          "case_id": "note-dose-change",
+          "description": "Dose change mid-note: atorvastatin increased 20→40 mg — the extracted dose must be the new one, not the old",
+          "passed": true,
+          "checks": [
+            {
+              "name": "atorvastatin extracted at the NEW dose (40 mg nightly)",
+              "passed": true,
+              "expected": "atorvastatin 40 mg nightly",
+              "actual": "atorvastatin 40mg nightly [new]"
+            },
+            {
+              "name": "no active atorvastatin left at the old 20 mg dose",
+              "passed": true,
+              "expected": "no entry atorvastatin 20 mg still marked active/new",
+              "actual": "none found"
+            },
+            {
+              "name": "amlodipine 5 mg daily unchanged, active",
+              "passed": true,
+              "expected": "amlodipine 5 mg daily [active]",
+              "actual": "amlodipine 5mg daily [active]"
+            },
+            {
+              "name": "blood pressure 126/78 captured",
+              "passed": true,
+              "expected": "contains \"126/78\"",
+              "actual": "\"126/78\""
+            }
+          ],
+          "duration_ms": 7851,
+          "error": null
+        },
+        {
+          "case_id": "note-discontinued-med",
+          "description": "Discontinued medication: HCTZ stopped for hyponatremia — status must be discontinued, not active",
+          "passed": true,
+          "checks": [
+            {
+              "name": "hydrochlorothiazide status is discontinued",
+              "passed": true,
+              "expected": "hydrochlorothiazide 25 mg [discontinued]",
+              "actual": "hydrochlorothiazide 25mg daily [discontinued]"
+            },
+            {
+              "name": "no active/new hydrochlorothiazide entry remains",
+              "passed": true,
+              "expected": "no entry hydrochlorothiazide marked active or new",
+              "actual": "none found"
+            },
+            {
+              "name": "losartan 50 mg daily remains active",
+              "passed": true,
+              "expected": "losartan 50 mg daily [active]",
+              "actual": "losartan 50mg daily [active]"
+            }
+          ],
+          "duration_ms": 4112,
+          "error": null
+        },
+        {
+          "case_id": "note-no-allergies",
+          "description": "Allergies never mentioned: the allergies array must stay empty — not populated with NKDA or invented entries",
+          "passed": true,
+          "checks": [
+            {
+              "name": "allergies is an empty array (note never mentions allergies)",
+              "passed": true,
+              "expected": "empty array",
+              "actual": "empty array"
+            },
+            {
+              "name": "omeprazole 20 mg daily extracted, active",
+              "passed": true,
+              "expected": "omeprazole 20 mg daily [active]",
+              "actual": "omeprazole 20mg daily [active]"
+            }
+          ],
+          "duration_ms": 3214,
+          "error": null
+        },
+        {
+          "case_id": "note-explicit-redflags",
+          "description": "Explicit urgency in the note: ED precautions for possible unstable angina must appear in red_flags",
+          "passed": true,
+          "checks": [
+            {
+              "name": "red flags present (note explicitly flags urgent ED precautions)",
+              "passed": true,
+              "expected": "at least one entry",
+              "actual": "[\"Possible unstable angina\",\"Patient instructed to go to ED immediately if chest pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\"]"
+            },
+            {
+              "name": "red flags reference the cardiac concern",
+              "passed": true,
+              "expected": "mentions the chest pain / angina concern (matches \"chest\", \"angina\", or \"cardi…\")",
+              "actual": "\"Possible unstable angina ; Patient instructed to go to ED immediately if chest pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\""
+            },
+            {
+              "name": "aspirin 81 mg captured as newly started",
+              "passed": true,
+              "expected": "aspirin 81 mg daily [new]",
+              "actual": "Aspirin 81mg daily [new]"
+            }
+          ],
+          "duration_ms": 3551,
+          "error": null
+        },
+        {
+          "case_id": "note-benign-complex-meds",
+          "description": "Nothing urgent but four chronic meds: all extracted with doses, and red_flags stays empty — no false alarms",
+          "passed": true,
+          "checks": [
+            {
+              "name": "red_flags is empty (nothing urgent in the note)",
+              "passed": true,
+              "expected": "empty array",
+              "actual": "empty array"
+            },
+            {
+              "name": "metformin 1000 mg BID extracted",
+              "passed": true,
+              "expected": "metformin 1000 mg BID [active]",
+              "actual": "metformin 1000mg BID [active]"
+            },
+            {
+              "name": "glipizide 5 mg daily extracted",
+              "passed": true,
+              "expected": "glipizide 5 mg daily [active]",
+              "actual": "glipizide 5mg daily before breakfast [active]"
+            },
+            {
+              "name": "lisinopril 10 mg daily extracted",
+              "passed": true,
+              "expected": "lisinopril 10 mg daily [active]",
+              "actual": "lisinopril 10mg daily [active]"
+            },
+            {
+              "name": "levothyroxine 88 mcg daily extracted",
+              "passed": true,
+              "expected": "levothyroxine 88 mcg daily [active]",
+              "actual": "levothyroxine 88mcg daily on empty stomach [active]"
+            }
+          ],
+          "duration_ms": 4791,
+          "error": null
+        },
+        {
+          "case_id": "note-sparse-vitals",
+          "description": "Telehealth visit with only a reported home BP: every unmeasured vital must be null, not invented",
+          "passed": true,
+          "checks": [
+            {
+              "name": "reported home BP 119/75 captured",
+              "passed": true,
+              "expected": "contains \"119/75\"",
+              "actual": "\"119/75\""
+            },
+            {
+              "name": "heart rate is null (never measured)",
+              "passed": true,
+              "expected": "null (absent — not invented)",
+              "actual": "null"
+            },
+            {
+              "name": "temperature is null (never measured)",
+              "passed": true,
+              "expected": "null (absent — not invented)",
+              "actual": "null"
+            },
+            {
+              "name": "oxygen saturation is null (never measured)",
+              "passed": true,
+              "expected": "null (absent — not invented)",
+              "actual": "null"
+            },
+            {
+              "name": "weight is null (never measured)",
+              "passed": true,
+              "expected": "null (absent — not invented)",
+              "actual": "null"
+            }
+          ],
+          "duration_ms": 3577,
+          "error": null
+        },
+        {
+          "case_id": "note-ambiguous-dose",
+          "description": "Ambiguous dose (25 vs 50 mg, records pending): must land in extraction_notes and must not be resolved by guessing",
+          "passed": true,
+          "checks": [
+            {
+              "name": "metoprolol dose is not silently guessed as exactly 25 or exactly 50",
+              "passed": true,
+              "expected": "metoprolol present with dose null or explicitly uncertain (not a single guessed value)",
+              "actual": "Metoprolol 25 mg or 50 mg (unconfirmed) twice daily [active]"
+            },
+            {
+              "name": "the dose ambiguity lands in extraction_notes",
+              "passed": true,
+              "expected": "contains \"metoprolol\"",
+              "actual": "\"Patient unable to confirm metoprolol dose - reports uncertainty between 25 mg and 50 mg twice daily ; Diuretic agent not specifically named by patient (referred to as 'water pill') ; Pharmacy records requested and pending - will inform dose confirmation ; Route not specified for any medications ; Temperature, respiratory rate, oxygen saturation, and weight not documented ; Atorvastatin dose and frequency confirmed from bottle\""
+            },
+            {
+              "name": "confirmed atorvastatin 20 mg nightly extracted normally",
+              "passed": true,
+              "expected": "atorvastatin 20 mg nightly [active]",
+              "actual": "Atorvastatin 20 mg nightly [active]"
+            }
+          ],
+          "duration_ms": 5441,
+          "error": null
+        }
+      ],
+      "pass_count": 10,
+      "total": 10
+    },
+    {
+      "project_id": "lease-diff",
+      "project_label": "Lease Diff Explainer",
+      "model": "claude-sonnet-5",
+      "prompt_hash": "bdec4c8e9099",
+      "cases": [
+        {
+          "case_id": "lease-residential-renewal",
+          "description": "Bundled renewal pair — 8 planted landlord-favoring changes: rent +$145, auto-renewal added, water shifted to tenant, lawn care shifted to tenant, guest limit halved, notice 30→60 days, new pet fee, new early-termination fee",
+          "passed": true,
+          "checks": [
+            {
+              "name": "finds the rent increase to $1,595 (rent_and_deposits, favors landlord)",
+              "passed": true,
+              "expected": "rent increase to $1,595",
+              "actual": "\"Rent Increase\" [rent_and_deposits, favors_landlord, high]"
+            },
+            {
+              "name": "finds the new automatic-renewal clause (term_and_renewal, favors landlord)",
+              "passed": true,
+              "expected": "automatic renewal added",
+              "actual": "\"Automatic Renewal Clause Added\" [term_and_renewal, favors_landlord, high]"
+            },
+            {
+              "name": "finds water shifted from landlord to tenant (utilities, favors landlord)",
+              "passed": true,
+              "expected": "water responsibility shifted to tenant",
+              "actual": "\"Tenant Now Pays for Water\" [utilities, favors_landlord, medium]"
+            },
+            {
+              "name": "finds lawn care shifted to tenant (maintenance, favors landlord)",
+              "passed": true,
+              "expected": "lawn care shifted to tenant",
+              "actual": "\"Lawn Care Responsibility Shifted to Tenant\" [maintenance_and_repairs, favors_landlord, medium]"
+            },
+            {
+              "name": "finds the guest limit cut from 14 to 7 days (rules_and_use, favors landlord)",
+              "passed": true,
+              "expected": "guest stay limit halved",
+              "actual": "\"Shorter Allowed Guest Stay\" [rules_and_use, favors_landlord, low]"
+            },
+            {
+              "name": "finds notice to vacate extended 30→60 days (favors landlord)",
+              "passed": true,
+              "expected": "notice to vacate 30 → 60 days",
+              "actual": "\"Automatic Renewal Clause Added\" [term_and_renewal, favors_landlord, high]"
+            },
+            {
+              "name": "finds the new monthly pet fee (fees)",
+              "passed": true,
+              "expected": "new $35/month pet fee",
+              "actual": "\"New Pet Fee\" [fees, unclear, medium]"
+            },
+            {
+              "name": "finds the new early-termination fee (favors landlord)",
+              "passed": true,
+              "expected": "new early-termination fee of two months' rent",
+              "actual": "\"Early Termination Fee Added\" [termination, favors_landlord, high]"
+            },
+            {
+              "name": "no invented changes (8 planted, ≤ 9 reported)",
+              "passed": true,
+              "expected": "at most 9 reported changes",
+              "actual": "9 reported changes"
+            }
+          ],
+          "duration_ms": 28191,
+          "error": null
+        },
+        {
+          "case_id": "lease-month-to-month",
+          "description": "Bundled month-to-month pair — 7 planted concepts including two tenant-favorable changes that must not be mislabeled: term conversion, +$50 premium, late grace 3→5 days (favors tenant), deposit return 21→14 days (favors tenant), termination rework, entry notice 48→24h, new insurance requirement",
+          "passed": false,
+          "checks": [
+            {
+              "name": "finds the fixed-term → month-to-month conversion (term_and_renewal)",
+              "passed": false,
+              "expected": "conversion to month-to-month",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "finds the $50 month-to-month premium (favors landlord)",
+              "passed": false,
+              "expected": "new $50/month premium",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "BIAS CHECK: late-fee grace 3→5 days is favors_tenant",
+              "passed": false,
+              "expected": "late-fee grace period lengthened, judged favors_tenant",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "BIAS CHECK: deposit return 21→14 days is favors_tenant",
+              "passed": false,
+              "expected": "deposit return window shortened, judged favors_tenant",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "finds the tenant lease-break penalty removal (favors tenant)",
+              "passed": false,
+              "expected": "lease-break penalty removed",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "finds the landlord's new right to terminate at will (favors landlord)",
+              "passed": false,
+              "expected": "landlord can now terminate with 30 days' notice",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "finds entry notice cut 48→24 hours (entry_and_privacy, favors landlord)",
+              "passed": false,
+              "expected": "entry notice halved to 24 hours",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "finds the new renter's-insurance requirement (favors landlord)",
+              "passed": false,
+              "expected": "renter's insurance now required",
+              "actual": "no match among: \"placeholder\" [other, neutral, low]"
+            },
+            {
+              "name": "no invented changes (8 planted counting the termination rework as two, ≤ 9 reported)",
+              "passed": true,
+              "expected": "at most 9 reported changes",
+              "actual": "1 reported changes"
+            }
+          ],
+          "duration_ms": 5592,
+          "error": null
+        },
+        {
+          "case_id": "lease-late-fee-rewording",
+          "description": "False-positive restraint pair — the maintenance clause is reworded with identical meaning (must NOT be reported); the late fee quietly rises $50→$75 inside similar rewording (must be reported)",
+          "passed": true,
+          "checks": [
+            {
+              "name": "finds the late fee increase to $75 buried in the rewording (favors landlord)",
+              "passed": true,
+              "expected": "late fee $50 → $75",
+              "actual": "\"Late Fee Increased from $50 to $75\" [fees, favors_landlord, high]"
+            },
+            {
+              "name": "does not report the identically-meaning maintenance rewording as substantive",
+              "passed": true,
+              "expected": "no entry treating the reworded maintenance/cleanliness clause as a substantive change",
+              "actual": "none found"
+            },
+            {
+              "name": "no invented changes (1 planted, ≤ 2 reported)",
+              "passed": true,
+              "expected": "at most 2 reported changes",
+              "actual": "2 reported changes"
+            }
+          ],
+          "duration_ms": 10137,
+          "error": null
+        }
+      ],
+      "pass_count": 2,
+      "total": 3
+    },
+    {
+      "project_id": "screenshot-to-primevue",
+      "project_label": "Screenshot → PrimeVue",
+      "model": "claude-haiku-4-5",
+      "prompt_hash": "1613fea674d4",
+      "cases": [
+        {
+          "case_id": "shot-login",
+          "description": "Generated login mock: recognized as UI; the form maps to input + button components and the scaffold uses them",
+          "passed": true,
+          "checks": [
+            {
+              "name": "is_ui_screenshot is true",
+              "passed": true,
+              "expected": "true",
+              "actual": "true"
+            },
+            {
+              "name": "maps the credential fields to InputText/Password",
+              "passed": true,
+              "expected": "a mapping to InputText or Password",
+              "actual": "Email input field → InputText"
+            },
+            {
+              "name": "maps the sign-in action to Button",
+              "passed": true,
+              "expected": "a mapping to Button",
+              "actual": "Forgot password? link → None - plain link or Button"
+            },
+            {
+              "name": "scaffold uses an input component",
+              "passed": true,
+              "expected": "<InputText> or <Password> in scaffold",
+              "actual": "tag present in scaffold"
+            },
+            {
+              "name": "scaffold uses Button",
+              "passed": true,
+              "expected": "<Button> in scaffold",
+              "actual": "tag present in scaffold"
+            }
+          ],
+          "duration_ms": 15494,
+          "error": null
+        },
+        {
+          "case_id": "shot-dashboard",
+          "description": "Generated analytics-dashboard mock: recognized as UI; the table and chart map to DataTable and Chart",
+          "passed": true,
+          "checks": [
+            {
+              "name": "is_ui_screenshot is true",
+              "passed": true,
+              "expected": "true",
+              "actual": "true"
+            },
+            {
+              "name": "maps the data table to DataTable",
+              "passed": true,
+              "expected": "a mapping to DataTable",
+              "actual": "Top pages data table with columns: Page, Views, Status → DataTable"
+            },
+            {
+              "name": "maps the chart to Chart",
+              "passed": true,
+              "expected": "a mapping to Chart",
+              "actual": "Weekly sessions bar chart (Mon–Sun) → Chart"
+            },
+            {
+              "name": "scaffold uses DataTable",
+              "passed": true,
+              "expected": "<DataTable> in scaffold",
+              "actual": "tag present in scaffold"
+            }
+          ],
+          "duration_ms": 21744,
+          "error": null
+        },
+        {
+          "case_id": "shot-pricing",
+          "description": "Generated pricing-page mock: recognized as UI; plan cards map to Card, CTAs to Button, the top nav to Menubar/Toolbar",
+          "passed": true,
+          "checks": [
+            {
+              "name": "is_ui_screenshot is true",
+              "passed": true,
+              "expected": "true",
+              "actual": "true"
+            },
+            {
+              "name": "maps the plan tiers to Card",
+              "passed": true,
+              "expected": "a mapping to Card",
+              "actual": "Starter pricing card → Card"
+            },
+            {
+              "name": "maps the CTAs to Button",
+              "passed": true,
+              "expected": "a mapping to Button",
+              "actual": "CTA buttons (Get started, Start free trial, Talk to sales) → Button"
+            },
+            {
+              "name": "maps the top navigation to Menubar or Toolbar",
+              "passed": true,
+              "expected": "a mapping to Menubar or Toolbar",
+              "actual": "Top navigation bar with logo and links → Menubar"
+            },
+            {
+              "name": "scaffold uses Card",
+              "passed": true,
+              "expected": "<Card> in scaffold",
+              "actual": "tag present in scaffold"
+            }
+          ],
+          "duration_ms": 22670,
+          "error": null
+        },
+        {
+          "case_id": "shot-landscape-rejected",
+          "description": "Generated SVG landscape (no UI elements at all): must be rejected, with no mappings and no scaffold",
+          "passed": true,
+          "checks": [
+            {
+              "name": "is_ui_screenshot is false",
+              "passed": true,
+              "expected": "false",
+              "actual": "false"
+            },
+            {
+              "name": "a polite reason is given",
+              "passed": true,
+              "expected": "non-null reason explaining the rejection",
+              "actual": "\"This is an illustration of a landscape scenery with mountains and water under a sunset sky, not a software user interface.\""
+            },
+            {
+              "name": "no component mappings are forced",
+              "passed": true,
+              "expected": "empty mappings array",
+              "actual": "empty mappings array"
+            },
+            {
+              "name": "no scaffold code is generated",
+              "passed": true,
+              "expected": "null (absent — not invented)",
+              "actual": "null"
+            }
+          ],
+          "duration_ms": 1996,
+          "error": null
+        },
+        {
+          "case_id": "shot-text-document-rejected",
+          "description": "Generated plain prose document (text but no interface): must be rejected, with no mappings and no scaffold",
+          "passed": true,
+          "checks": [
+            {
+              "name": "is_ui_screenshot is false",
+              "passed": true,
+              "expected": "false",
+              "actual": "false"
+            },
+            {
+              "name": "a polite reason is given",
+              "passed": true,
+              "expected": "non-null reason explaining the rejection",
+              "actual": "\"This is a document or article layout displaying formatted text content, not a software user interface.\""
+            },
+            {
+              "name": "no component mappings are forced",
+              "passed": true,
+              "expected": "empty mappings array",
+              "actual": "empty mappings array"
+            },
+            {
+              "name": "no scaffold code is generated",
+              "passed": true,
+              "expected": "null (absent — not invented)",
+              "actual": "null"
+            }
+          ],
+          "duration_ms": 1973,
+          "error": null
+        }
+      ],
+      "pass_count": 5,
+      "total": 5
+    }
+  ],
+  "overall_pass_rate": 0.9444,
+  "regression_from_previous": false,
+  "regression_detail": null
+}
