@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-07-03T17:17:03.235Z",
+  "audited_at": "2026-07-04T10:26:02.494Z",
   "status": "warnings",
-  "summary": "The home page renders correctly on desktop and mobile but carries a slow LCP (7 s) dragging performance to 72. The /about page is a bare placeholder, and all three /projects pages return completely blank white screens with zeroed Lighthouse scores, indicating those routes are not yet live.",
+  "summary": "The three /projects routes are now live and rendering correctly — a major improvement since yesterday. The /about page remains a bare placeholder, and the homepage LCP (7.3 s) continues to drag performance to 70, which is a known issue below the 85 threshold.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 72,
+        "performance": 70,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 7082.076,
+        "lcp_ms": 7304.027,
         "cls": 0.015,
-        "tbt_ms": 181
+        "tbt_ms": 98.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with a teal-accented hero ('App' heading, 'Send me a message' CTA), four content sections (pillars, case studies, skills, contact form), and a dark teal footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -20,73 +20,75 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 96,
+        "performance": 82,
         "accessibility": 94,
         "best_practices": 100,
         "seo": 83,
-        "lcp_ms": 2454.236,
+        "lcp_ms": 3813.273,
         "cls": 0,
-        "tbt_ms": 2.5
+        "tbt_ms": 57
       },
       "visual_findings": [
-        "Page contains only the placeholder text 'This is an about page' on an otherwise blank white canvas — no real content, nav, or footer present."
+        "Page contains only the placeholder text 'This is an about page' on an otherwise blank white canvas — no real content, nav, or footer present on either desktop or mobile."
       ],
       "visual_fingerprint": "Entirely blank white page with only the stub text 'This is an about page' in the upper-left corner and no other UI elements."
     },
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 0,
-        "accessibility": 0,
-        "best_practices": 0,
-        "seo": 0,
-        "lcp_ms": null,
-        "cls": null,
-        "tbt_ms": null
+        "performance": 76,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 85,
+        "lcp_ms": 4102.003,
+        "cls": 0.003,
+        "tbt_ms": 151
       },
-      "visual_findings": [
-        "Page renders as a completely blank white screen with no content, navigation, or error message visible on desktop or mobile."
-      ],
-      "visual_fingerprint": "Completely blank white page with no visible content on either desktop or mobile."
+      "visual_findings": [],
+      "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, four project cards (Clinical Note Structurer, Screenshot → PrimeVue, Lease Diff Explainer, Paperwork → Calendar) in a 2-column desktop grid, and a dark contact footer — all content visible and correctly laid out on both desktop and mobile."
     },
     {
       "path": "/projects/note-structurer",
       "lighthouse": {
-        "performance": 0,
-        "accessibility": 0,
-        "best_practices": 0,
-        "seo": 0,
-        "lcp_ms": null,
-        "cls": null,
-        "tbt_ms": null
+        "performance": 87,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 85,
+        "lcp_ms": 3058.057,
+        "cls": 0.084,
+        "tbt_ms": 0
       },
-      "visual_findings": [
-        "Page renders as a completely blank white screen with no content, navigation, or error message visible on desktop or mobile."
-      ],
-      "visual_fingerprint": "Completely blank white page with no visible content on either desktop or mobile."
+      "visual_findings": [],
+      "visual_fingerprint": "Clinical Note Structurer detail page with breadcrumb nav, 'Evals: 10/10 passing' badge, a two-column visit note / structured result interactive demo, disclaimer banner, expandable JSON and HIPAA notes accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     },
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 0,
-        "accessibility": 0,
-        "best_practices": 0,
-        "seo": 0,
-        "lcp_ms": null,
-        "cls": null,
-        "tbt_ms": null
+        "performance": 88,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 85,
+        "lcp_ms": 3052.76,
+        "cls": 0.037,
+        "tbt_ms": 131.281
       },
-      "visual_findings": [
-        "Page renders as a completely blank white screen with no content, navigation, or error message visible on desktop or mobile."
-      ],
-      "visual_fingerprint": "Completely blank white page with no visible content on either desktop or mobile."
+      "visual_findings": [],
+      "visual_fingerprint": "Screenshot → PrimeVue detail page with breadcrumb nav, 'Evals: 5/5 passing' badge, a dashed-border image drop zone, three sample thumbnail cards (Login form, Analytics dashboard, Pricing page), a placeholder result panel, expandable accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     }
   ],
-  "score_deltas": [],
-  "top_fix": "Investigate and fix the blank /projects routes (all three return zeroed Lighthouse scores and pure-white screenshots), then address the 7 s LCP on the homepage — likely caused by an unoptimised hero image or render-blocking resource.",
-  "should_file_issue": false,
-  "issue_title": null,
-  "issue_body": null,
-  "issue_fingerprint": null,
+  "score_deltas": [
+    "/ performance 72 → 70 (within jitter, but remains below 85 — known LCP issue)",
+    "/ lcp_ms 7082 → 7304 (marginal regression, chronic slow LCP unchanged)",
+    "/ tbt_ms 181 → 99 (improvement)",
+    "/about performance 96 → 82 (drop of 14 pts — LCP rose from 2454 ms to 3813 ms, likely due to page now loading site shell/nav)",
+    "/projects performance 0 → 76 (page now live — major fix)",
+    "/projects/note-structurer performance 0 → 87 (page now live — major fix)",
+    "/projects/screenshot-to-primevue performance 0 → 88 (page now live — major fix)"
+  ],
+  "top_fix": "Fix the homepage LCP (currently 7.3 s, performance 70): identify and optimize or preload the hero image, and eliminate any render-blocking resources — this is the single highest-impact improvement remaining on an otherwise healthy site.",
+  "should_file_issue": true,
+  "issue_title": "/about page is still an empty placeholder — no real content",
+  "issue_body": "## /about is an unfinished placeholder\\n\\nBoth desktop and mobile screenshots show only the stub text **\"This is an about page\"** on a blank white canvas — no navigation, biography, photo, skills summary, or footer is rendered.\\n\\nThis has persisted across at least two consecutive audits (2026-07-03 and 2026-07-04).\\n\\n### Impact\\n- Any visitor or recruiter who navigates to `/about` sees an empty page with no information.\\n- The page also has an SEO score of 83 (below the 85 threshold) and a performance drop from 96 → 82 today.\\n\\n### Steps to reproduce\\n1. Visit https://dliamkin.com/about on desktop or mobile.\\n2. Observe that only the placeholder text is rendered.\\n\\n### Suggested fix\\nReplace the stub with real about-page content (bio, photo, skills summary, links) using the same layout shell as the rest of the site, including nav and contact footer.",
+  "issue_fingerprint": "about-page-placeholder",
   "error_reason": null
 }
