@@ -66,7 +66,13 @@ onUnmounted(() => {
 	<header ref="navbarEl" class="navbar" :class="{ scrolled: isScrolled }">
 		<div class="navbar-inner">
 			<a href="/" class="brand" aria-label="Denis Liamkin — home">
-				<img src="/images/DenisLiamkinLogo.png" alt="Denis Liamkin" class="brand-logo" />
+				<picture>
+					<source
+						srcset="/images/DenisLiamkinLogoDarkMode.png"
+						media="(prefers-color-scheme: dark)"
+					/>
+					<img src="/images/DenisLiamkinLogo.png" alt="Denis Liamkin" class="brand-logo" />
+				</picture>
 			</a>
 
 			<button
@@ -266,6 +272,36 @@ onUnmounted(() => {
 @media (prefers-reduced-motion: reduce) {
 	.nav-link::after {
 		transition: none;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.navbar.scrolled {
+		background-color: rgba(18, 20, 23, 0.92);
+		border-bottom-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.menu-toggle {
+		background: transparent;
+	}
+
+	.nav-link {
+		color: var(--dm-text-1);
+	}
+
+	.nav-link:hover,
+	.nav-link.active {
+		color: #27a9e0;
+	}
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 767px) {
+	.nav-links {
+		background: rgba(18, 20, 23, 0.97);
+	}
+
+	.nav-link {
+		border-bottom-color: rgba(255, 255, 255, 0.08);
 	}
 }
 </style>

@@ -38,8 +38,9 @@ app.use(router);
 app.use(PrimeVue, {
 	theme: {
 		preset: sitePreset,
-		// The site is designed light-only; keep PrimeVue in light mode too.
-		options: { darkModeSelector: "none" },
+		// Follow the visitor's OS color scheme, matching the site's own
+		// prefers-color-scheme styling.
+		options: { darkModeSelector: "system" },
 	},
 });
 app.use(ToastService);

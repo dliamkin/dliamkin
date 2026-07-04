@@ -354,4 +354,35 @@ watch(inView, (visible) => {
 		animation: none;
 	}
 }
+
+/* The IDE window is dark by design, so it needs no changes here. */
+@media (prefers-color-scheme: dark) {
+	.about {
+		background-color: var(--dm-bg-soft);
+	}
+
+	.about-heading {
+		color: var(--dm-text-1);
+	}
+
+	.about-lede {
+		color: var(--dm-text-2);
+	}
+
+	.about-lede strong {
+		color: var(--dm-text-1);
+	}
+
+	.stat-num {
+		color: var(--dm-text-1);
+	}
+
+	.stat-label {
+		color: var(--dm-text-3);
+	}
+
+	.editor {
+		box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+	}
+}
 </style>

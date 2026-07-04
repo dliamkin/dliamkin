@@ -257,4 +257,44 @@ const { target, inView } = useInView({ threshold: 0.1 });
 		transform: none;
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.skills {
+		background: var(--dm-bg);
+	}
+
+	.skills-head h2 {
+		color: var(--dm-text-1);
+	}
+
+	.sub {
+		color: var(--dm-text-2);
+	}
+
+	.skill-card {
+		background: var(--dm-bg-soft);
+		border-color: rgba(255, 255, 255, 0.09);
+	}
+
+	.skill-card:hover {
+		border-color: var(--accent);
+		box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+	}
+
+	.card-head h3 {
+		color: var(--dm-text-1);
+	}
+
+	.chip {
+		background: var(--dm-bg-mute);
+		color: var(--dm-text-2);
+		border-color: rgba(255, 255, 255, 0.07);
+	}
+
+	.chip:hover {
+		background: var(--accent);
+		color: #fff;
+		border-color: var(--accent);
+	}
+}
 </style>

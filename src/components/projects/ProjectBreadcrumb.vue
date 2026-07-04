@@ -65,4 +65,22 @@ withDefaults(
 .crumb-current {
 	color: #6b6a6d;
 }
+
+@media (prefers-color-scheme: dark) {
+	.crumb-back {
+		color: var(--dm-blue-soft);
+	}
+
+	.crumb-back:hover {
+		color: #8fd4f4;
+	}
+
+	.crumb-sep {
+		color: #4a4f57;
+	}
+
+	.crumb-current {
+		color: var(--dm-text-2);
+	}
+}
 </style>

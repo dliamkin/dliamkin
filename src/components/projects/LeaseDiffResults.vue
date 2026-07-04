@@ -379,4 +379,31 @@ async function copyQuestions() {
 		grid-template-columns: minmax(0, 1fr);
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.disclaimer {
+		color: #e3b341;
+	}
+
+	.summary-text,
+	.explanation,
+	.questions-list li {
+		color: var(--dm-text-2);
+	}
+
+	.excerpt h4,
+	.not-present {
+		color: var(--dm-text-3);
+	}
+
+	.excerpt blockquote {
+		background: var(--dm-bg-soft);
+		color: var(--dm-text-2);
+	}
+
+	.negotiation-note {
+		background: rgba(39, 169, 224, 0.1);
+		color: var(--dm-text-2);
+	}
+}
 </style>

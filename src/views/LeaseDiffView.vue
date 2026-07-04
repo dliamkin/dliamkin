@@ -628,4 +628,37 @@ h2 {
 		font-size: 1.75rem;
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.project-page {
+		color: var(--dm-text-2);
+		background: var(--dm-bg);
+	}
+
+	h1,
+	h2 {
+		color: var(--dm-text-1);
+	}
+
+	.intro,
+	.hint,
+	.extract-note {
+		color: var(--dm-text-2);
+	}
+
+	.char-counter,
+	.cost-note,
+	.placeholder,
+	.empty {
+		color: var(--dm-text-3);
+	}
+
+	.char-counter.over {
+		color: #ff6b6b;
+	}
+
+	.placeholder {
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+}
 </style>

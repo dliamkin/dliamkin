@@ -238,4 +238,42 @@ const { target, inView } = useInView({ threshold: 0.15 });
 		transform: none;
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.expertise {
+		background: var(--dm-bg);
+	}
+
+	.expertise-head h2 {
+		color: var(--dm-text-1);
+	}
+
+	.sub {
+		color: var(--dm-text-2);
+	}
+
+	.pillar {
+		background: var(--dm-bg-soft);
+		border-color: rgba(255, 255, 255, 0.09);
+	}
+
+	.pillar:hover {
+		border-color: var(--accent);
+		box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+	}
+
+	.pillar h3 {
+		color: var(--dm-text-1);
+	}
+
+	.pillar p {
+		color: var(--dm-text-2);
+	}
+
+	.tags li {
+		background: var(--dm-bg-mute);
+		color: var(--dm-text-2);
+		border-color: rgba(255, 255, 255, 0.07);
+	}
+}
 </style>

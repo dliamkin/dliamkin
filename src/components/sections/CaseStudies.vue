@@ -651,4 +651,38 @@ const { target, inView } = useInView({ threshold: 0.05 });
 		animation: none;
 	}
 }
+
+/* The mock browser windows deliberately stay light in dark mode — they read as
+   app screenshots, and a light window on a dark desk looks intentional. */
+@media (prefers-color-scheme: dark) {
+	.cases {
+		background: var(--dm-bg-soft);
+	}
+
+	.cases-head h2 {
+		color: var(--dm-text-1);
+	}
+
+	.sub {
+		color: var(--dm-text-2);
+	}
+
+	.case-copy h3 {
+		color: var(--dm-text-1);
+	}
+
+	.field p {
+		color: var(--dm-text-2);
+	}
+
+	.stack li {
+		background: var(--dm-bg-mute);
+		color: var(--dm-text-2);
+		border-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.window {
+		box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+	}
+}
 </style>

@@ -569,4 +569,59 @@ h2 {
 		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.project-page {
+		color: var(--dm-text-2);
+		background: var(--dm-bg);
+	}
+
+	h1,
+	h2 {
+		color: var(--dm-text-1);
+	}
+
+	.intro,
+	.hint,
+	.privacy-note,
+	.stage-note {
+		color: var(--dm-text-2);
+	}
+
+	.drop-zone .formats,
+	.placeholder,
+	.empty {
+		color: var(--dm-text-3);
+	}
+
+	.drop-zone {
+		background: rgba(39, 169, 224, 0.07);
+	}
+
+	.preview img {
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+
+	.sample {
+		background: var(--dm-bg-soft);
+		border-color: rgba(255, 255, 255, 0.14);
+	}
+
+	.sample span {
+		color: var(--dm-text-1);
+	}
+
+	.sample:hover {
+		border-color: #27a9e0;
+		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+	}
+
+	.placeholder {
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+
+	.architecture-notes code {
+		background: var(--dm-bg-mute);
+	}
+}
 </style>

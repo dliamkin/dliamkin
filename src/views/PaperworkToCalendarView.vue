@@ -844,4 +844,48 @@ h1 {
 		font-size: 1.75rem;
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.project-page {
+		color: var(--dm-text-2);
+		background: var(--dm-bg);
+	}
+
+	h1 {
+		color: var(--dm-text-1);
+	}
+
+	.intro,
+	.hint,
+	.extract-note,
+	.stage-note,
+	.page-label {
+		color: var(--dm-text-2);
+	}
+
+	.char-counter,
+	.cost-note,
+	.formats,
+	.placeholder,
+	.empty {
+		color: var(--dm-text-3);
+	}
+
+	.char-counter.over {
+		color: #ff6b6b;
+	}
+
+	.upload-zone,
+	.photo-zone {
+		background: rgba(39, 169, 224, 0.07);
+	}
+
+	.photo-preview img {
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+
+	.placeholder {
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+}
 </style>

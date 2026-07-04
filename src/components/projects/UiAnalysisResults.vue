@@ -254,4 +254,19 @@ async function copyScaffold() {
 		grid-template-columns: minmax(0, 1fr);
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.layout-summary,
+	.expansion {
+		color: var(--dm-text-2);
+	}
+
+	.image-card :deep(.shot) {
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+
+	.expansion code {
+		background: var(--dm-bg-mute);
+	}
+}
 </style>

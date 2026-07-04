@@ -42,4 +42,15 @@
 	height: auto;
 	margin-bottom: -10px;
 }
+
+@media (prefers-color-scheme: dark) {
+	.showcase {
+		background-color: var(--dm-bg);
+	}
+
+	.showcase-inner h2,
+	.showcase-inner p {
+		color: var(--dm-text-1);
+	}
+}
 </style>

@@ -95,7 +95,14 @@ const bgTris = (() => {
 		grid.push(row);
 	}
 
-	const polys: { pts: string; fill: string; g: number; delay: number; anim: boolean }[] = [];
+	const polys: {
+		pts: string;
+		fill: string;
+		fillDark: string;
+		g: number;
+		delay: number;
+		anim: boolean;
+	}[] = [];
 
 	const addPoly = (pts: Pt[]) => {
 		const n = pts.length;
@@ -113,9 +120,14 @@ const bgTris = (() => {
 		const hue = 200 + tc * 10; // 200 (ice blue) → 210 (deeper blue)
 		const sat = 40 + tc * 40; // 40% floor — transition zone reads as soft blue
 		const lit = 99 - tc * 69; // 99% at top (white) → 30% at bottom corners
+		// Dark-scheme twin of the same "U": lightness runs the other way, so the
+		// headline zone is near-black slate and the bottom corners glow ice blue.
+		const satDark = 18 + tc * 60; // desaturated slate up top → vivid blue below
+		const litDark = 9 + tc * 27; // 9% (near-black) → 36% (glowing blue)
 		polys.push({
 			pts: pts.map((p) => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" "),
 			fill: `hsl(${hue.toFixed(0)},${sat.toFixed(0)}%,${lit.toFixed(0)}%)`,
+			fillDark: `hsl(${hue.toFixed(0)},${satDark.toFixed(0)}%,${litDark.toFixed(0)}%)`,
 			g: Math.floor(Math.random() * 8),
 			delay: +(Math.random() * 10).toFixed(2),
 			anim: ny >= 0.4, // top 40% is static — keeps headline zone readable
@@ -153,11 +165,13 @@ const bgTris = (() => {
 				v-for="(tri, i) in bgTris"
 				:key="i"
 				:points="tri.pts"
-				:fill="tri.fill"
-				:stroke="tri.fill"
 				stroke-width="1"
 				:class="tri.anim ? `tri-g${tri.g}` : undefined"
-				:style="tri.anim ? { animationDelay: `${tri.delay}s` } : undefined"
+				:style="{
+					'--fill-light': tri.fill,
+					'--fill-dark': tri.fillDark,
+					...(tri.anim ? { animationDelay: `${tri.delay}s` } : {}),
+				}"
 			/>
 		</svg>
 
@@ -307,6 +321,28 @@ const bgTris = (() => {
 	width: 100%;
 	height: 100%;
 	z-index: 0;
+}
+
+/* Each polygon carries both scheme fills as inline vars; the media query picks
+   one, so the banner flips instantly when the OS theme changes. */
+.poly-bg polygon {
+	fill: var(--fill-light);
+	stroke: var(--fill-light);
+}
+
+@media (prefers-color-scheme: dark) {
+	.hero {
+		background-color: hsl(210, 28%, 7%);
+	}
+
+	.poly-bg polygon {
+		fill: var(--fill-dark);
+		stroke: var(--fill-dark);
+	}
+
+	.headline {
+		color: #ccd2da;
+	}
 }
 
 @keyframes tp0 {

@@ -704,4 +704,68 @@ h1 {
 		font-size: 1.75rem;
 	}
 }
+
+@media (prefers-color-scheme: dark) {
+	.evals-page {
+		color: var(--dm-text-2);
+		background: var(--dm-bg);
+	}
+
+	h1 {
+		color: var(--dm-text-1);
+	}
+
+	.intro,
+	.overall-rate,
+	.case-desc,
+	.check-detail dd,
+	.architecture-notes p {
+		color: var(--dm-text-2);
+	}
+
+	.intro a,
+	.pending a {
+		color: var(--dm-blue-soft);
+	}
+
+	.rate-number,
+	.suite-fraction {
+		color: var(--dm-text-1);
+	}
+
+	.overall-meta,
+	.fraction-total,
+	.trend-label,
+	.check-detail dt {
+		color: var(--dm-text-3);
+	}
+
+	.case-fail,
+	.check-failed i,
+	.check-failed .check-name,
+	.check-error {
+		color: #f0655f;
+	}
+
+	.dot-fail {
+		background: #f0655f;
+	}
+
+	.dot-none {
+		background: #3a4048;
+	}
+
+	.check-failed .check-detail dd {
+		color: #ff8f8f;
+	}
+
+	.raw-json,
+	.pending {
+		background: var(--dm-bg-soft);
+	}
+
+	.pending {
+		color: var(--dm-text-2);
+	}
+}
 </style>

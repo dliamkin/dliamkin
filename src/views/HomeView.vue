@@ -29,4 +29,10 @@ import SiteFooter from "@/components/sections/SiteFooter.vue";
 	font-family: "Raleway", sans-serif;
 	color: #414042;
 }
+
+@media (prefers-color-scheme: dark) {
+	.home-page {
+		color: var(--dm-text-2);
+	}
+}
 </style>
