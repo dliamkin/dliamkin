@@ -1,0 +1,60 @@
+# Continuous evals for the AI Projects: every suite runs the same
+# src/lib/pipelines/ code path production uses, results are committed back to
+# public/eval-results/ (rendered by the /evals dashboard and the per-demo
+# badges), and a suite whose pass count drops files a deduped GitHub issue.
+#
+# ANTHROPIC_API_KEY lives ONLY in this repo's Actions secrets, exactly like
+# the site-health workflow.
+name: Evals
+
+on:
+  schedule:
+    # GitHub cron is UTC. 09:45 UTC keeps a ≥ 1 hour offset from the 08:15
+    # site-health audit and dodges top-of-hour cron congestion.
+    - cron: "45 9 * * *"
+  workflow_dispatch:
+  # Push runs only when something that can change eval outcomes changes:
+  # pipelines, prompts/schemas, the diff engine, or the eval code itself.
+  # The workflow's own results commit touches public/eval-results/ only (and
+  # carries [skip ci]), so it can never retrigger this.
+  push:
+    branches: [main]
+    paths:
+      - "src/lib/pipelines/**"
+      - "src/lib/structured-note.ts"
+      - "src/lib/lease-diff.ts"
+      - "src/lib/lease-mechanical-diff.ts"
+      - "src/lib/ui-analysis.ts"
+      - "scripts/evals/**"
+
+# contents to push the results commit, issues to file/comment on regressions.
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: evals
+  cancel-in-progress: false
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      # The runner persists results and files issues BEFORE exiting nonzero,
+      # so a red run here is still a published run — the failure shows up on
+      # the public dashboard and in this workflow's status simultaneously.
+      - name: Run eval suites
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx tsx scripts/evals/run-evals.ts

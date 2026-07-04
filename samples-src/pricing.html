@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Acmetrics — Pricing</title>
+<style>
+	* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", Arial, sans-serif; }
+	body { background: #fff; color: #23324d; }
+	.topbar { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 2rem; border-bottom: 1px solid #eef1f5; }
+	.brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+	.brand-mark { width: 26px; height: 26px; border-radius: 6px; background: #3466d6; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; }
+	.nav { display: flex; gap: 1.4rem; font-size: 0.9rem; color: #5d6b80; }
+	.cta-small { background: #3466d6; color: #fff; border: none; border-radius: 7px; padding: 0.5rem 1rem; font-weight: 700; font-size: 0.85rem; }
+	.hero { text-align: center; padding: 2.2rem 1rem 1.6rem; }
+	.hero h1 { font-size: 1.8rem; margin-bottom: 0.4rem; }
+	.hero p { color: #7a8699; font-size: 0.95rem; }
+	.tiers { display: grid; grid-template-columns: repeat(3, 300px); gap: 1.25rem; justify-content: center; padding-bottom: 2rem; }
+	.tier { border: 1px solid #e1e7ee; border-radius: 12px; padding: 1.5rem; }
+	.tier.featured { border: 2px solid #3466d6; position: relative; box-shadow: 0 8px 24px rgba(52, 102, 214, 0.12); }
+	.badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #3466d6; color: #fff; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; padding: 0.25rem 0.8rem; border-radius: 99px; }
+	.tier h2 { font-size: 1.05rem; margin-bottom: 0.2rem; }
+	.tier .for { color: #8a96a8; font-size: 0.82rem; margin-bottom: 1rem; }
+	.price { font-size: 2rem; font-weight: 800; }
+	.price span { font-size: 0.85rem; color: #8a96a8; font-weight: 500; }
+	ul { list-style: none; margin: 1.1rem 0 1.4rem; }
+	li { font-size: 0.86rem; padding: 0.32rem 0 0.32rem 1.4rem; position: relative; color: #3d4a5f; }
+	li::before { content: "✓"; position: absolute; left: 0; color: #2e9e5b; font-weight: 800; }
+	.tier button { width: 100%; padding: 0.65rem; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+	.btn-outline { background: #fff; border: 1px solid #cdd6e1; color: #3d4a5f; }
+	.btn-solid { background: #3466d6; border: none; color: #fff; }
+	.footnote { text-align: center; color: #9aa6b5; font-size: 0.8rem; padding-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="brand"><div class="brand-mark">A</div>Acmetrics</div>
+		<nav class="nav"><span>Product</span><span>Docs</span><span>Pricing</span><span>Blog</span></nav>
+		<button class="cta-small">Start free</button>
+	</header>
+	<section class="hero">
+		<h1>Simple pricing that scales with you</h1>
+		<p>Every plan includes unlimited dashboards and a 14-day trial.</p>
+	</section>
+	<section class="tiers">
+		<div class="tier">
+			<h2>Starter</h2><p class="for">For side projects</p>
+			<div class="price">$0 <span>/ month</span></div>
+			<ul><li>1 workspace</li><li>10k events / month</li><li>7-day retention</li><li>Community support</li></ul>
+			<button class="btn-outline">Get started</button>
+		</div>
+		<div class="tier featured">
+			<div class="badge">MOST POPULAR</div>
+			<h2>Growth</h2><p class="for">For growing teams</p>
+			<div class="price">$49 <span>/ month</span></div>
+			<ul><li>5 workspaces</li><li>1M events / month</li><li>12-month retention</li><li>Funnels &amp; cohorts</li><li>Email support</li></ul>
+			<button class="btn-solid">Start free trial</button>
+		</div>
+		<div class="tier">
+			<h2>Scale</h2><p class="for">For large organizations</p>
+			<div class="price">$199 <span>/ month</span></div>
+			<ul><li>Unlimited workspaces</li><li>10M events / month</li><li>Unlimited retention</li><li>SSO &amp; audit log</li><li>Priority support</li></ul>
+			<button class="btn-outline">Talk to sales</button>
+		</div>
+	</section>
+	<p class="footnote">Prices in USD. Cancel anytime.</p>
+</body>
+</html>

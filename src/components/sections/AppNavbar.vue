@@ -26,7 +26,11 @@ const updateScrolled = () => {
 const scrollTo = (id: string) => {
 	isMobileMenuOpen.value = false;
 	const el = document.getElementById(id);
-	if (!el) return;
+	if (!el) {
+		// Section anchors only exist on the home page — navigate there first.
+		window.location.href = `/#${id}`;
+		return;
+	}
 	const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	el.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
 };
@@ -84,6 +88,13 @@ onUnmounted(() => {
 					:aria-current="activeId === item.id ? 'true' : undefined"
 					@click.prevent="scrollTo(item.id)"
 					>{{ item.label }}</a
+				>
+				<RouterLink
+					to="/projects"
+					class="nav-link"
+					:class="{ active: $route.path.startsWith('/projects') }"
+					@click="isMobileMenuOpen = false"
+					>My Projects</RouterLink
 				>
 				<a
 					href="#contact"

@@ -1,0 +1,156 @@
+{
+	"follow-up": {
+		"chief_complaint": "Follow-up on hypertension and type 2 diabetes mellitus",
+		"history_of_present_illness": "58-year-old male presents for follow-up of hypertension and type 2 diabetes mellitus. Reports good adherence to lisinopril 20 mg daily and metformin 500 mg BID. Home BP readings averaging 130s/80s. Denies chest pain, shortness of breath, and dizziness. Reports occasional tingling in feet, worse at night. Most recent A1c from last month is 7.1, down from 7.8.",
+		"medications": [
+			{
+				"name": "lisinopril",
+				"dose": "20 mg",
+				"route": null,
+				"frequency": "daily",
+				"status": "active"
+			},
+			{
+				"name": "metformin",
+				"dose": "500 mg",
+				"route": null,
+				"frequency": "BID",
+				"status": "active"
+			}
+		],
+		"allergies": [],
+		"vitals": {
+			"blood_pressure": "128/82",
+			"heart_rate": "72",
+			"temperature": null,
+			"respiratory_rate": null,
+			"oxygen_saturation": null,
+			"weight": "204 lbs"
+		},
+		"assessment": [
+			"Hypertension controlled",
+			"Type 2 diabetes mellitus improving",
+			"Possible early peripheral neuropathy"
+		],
+		"plan": [
+			"Continue current medications (lisinopril 20 mg daily and metformin 500 mg BID)",
+			"Order monofilament test",
+			"Discussed diet improvements",
+			"Patient to schedule lipid panel within 2 weeks",
+			"Return to clinic in 3 months, or sooner if foot symptoms worsen"
+		],
+		"follow_ups": [
+			{
+				"action": "Return to clinic",
+				"timeframe": "3 months, or sooner if foot symptoms worsen"
+			},
+			{
+				"action": "Schedule lipid panel",
+				"timeframe": "within 2 weeks"
+			}
+		],
+		"red_flags": [
+			"Occasional tingling in feet, worse at night (possible early peripheral neuropathy)"
+		],
+		"extraction_notes": [
+			"Route of administration not specified for either medication; assumed oral based on context but not explicitly stated",
+			"Temperature, respiratory rate, and oxygen saturation not documented in the visit note"
+		]
+	},
+	"new-patient": {
+		"chief_complaint": "Recurrent headaches × 2 months",
+		"history_of_present_illness": "34-year-old female presenting with bilateral, pressure-like headaches occurring 3–4 times per week, worse in late afternoon. Denies aura, vision changes, or nausea/vomiting. Works remotely with high screen time and reports poor sleep (5–6 hours).",
+		"medications": [],
+		"allergies": [
+			"Penicillin (hives)",
+			"Sulfa (unknown reaction per patient)"
+		],
+		"vitals": {
+			"blood_pressure": "118/74",
+			"heart_rate": "68",
+			"temperature": "98.2°F",
+			"respiratory_rate": null,
+			"oxygen_saturation": "99%",
+			"weight": null
+		},
+		"assessment": [
+			"Tension-type headache",
+			"Likely lifestyle contributors (screen time, poor sleep)",
+			"Rule out refractive error"
+		],
+		"plan": [
+			"Sleep hygiene counseling",
+			"Trial of OTC ibuprofen 400 mg PRN, max 3×/week",
+			"Recommend eye exam",
+			"Headache diary"
+		],
+		"follow_ups": [
+			{
+				"action": "Return visit or sooner if red flag symptoms develop",
+				"timeframe": "6 weeks"
+			}
+		],
+		"red_flags": [
+			"Worst headache of life",
+			"Focal neurological deficits",
+			"Fever with stiff neck"
+		],
+		"extraction_notes": [
+			"Respiratory rate not documented in note",
+			"Weight not documented in note",
+			"Patient given education on red flag symptoms (worst headache of life, focal deficits, fever with stiff neck) and advised to return sooner if these occur",
+			"Sulfa allergy reaction details unspecified per patient; documented as 'unknown reaction'",
+			"No current medications listed; ibuprofen is being trialed as new OTC recommendation, not currently prescribed"
+		]
+	},
+	"urgent-care": {
+		"chief_complaint": "Right ankle pain after inversion injury playing basketball",
+		"history_of_present_illness": "22-year-old male presents with right ankle pain sustained approximately 3 hours ago during a basketball game from an inversion injury. Patient is able to bear weight for 4 steps with pain. Physical examination reveals swelling over the lateral malleolus and tenderness to palpation in the anterior talofibular region, with no bony tenderness at the posterior malleolus or base of the 5th metatarsal. Ottawa criteria are negative.",
+		"medications": [
+			{
+				"name": "Ibuprofen",
+				"dose": "600 mg",
+				"route": "oral",
+				"frequency": "three times daily with food",
+				"status": "new"
+			}
+		],
+		"allergies": [],
+		"vitals": {
+			"blood_pressure": "122/78",
+			"heart_rate": "80",
+			"temperature": "98.6°F",
+			"respiratory_rate": null,
+			"oxygen_saturation": null,
+			"weight": null
+		},
+		"assessment": ["Grade I-II lateral ankle sprain"],
+		"plan": [
+			"RICE protocol (rest, ice, compression, elevation)",
+			"Air stirrup brace dispensed",
+			"Crutches as needed for first 48 hours",
+			"Ibuprofen 600 mg three times daily with food for 5 days"
+		],
+		"follow_ups": [
+			{
+				"action": "Follow up with PCP if not improving",
+				"timeframe": "1 week"
+			},
+			{
+				"action": "Work note provided",
+				"timeframe": "2 days"
+			}
+		],
+		"red_flags": [
+			"Inability to bear weight",
+			"Numbness",
+			"Worsening swelling"
+		],
+		"extraction_notes": [
+			"No respiratory rate or oxygen saturation documented in the note",
+			"No weight documented in the note",
+			"No drug allergies documented in the note",
+			"Return precautions listed are patient counseling points rather than clinical red flags identified at time of visit"
+		]
+	}
+}

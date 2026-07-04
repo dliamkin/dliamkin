@@ -1,0 +1,210 @@
+{
+	"residential-renewal": {
+		"overall_summary": "This renewal lease raises the rent, shifts several cost and maintenance burdens from landlord to tenant (water bill, lawn care), shortens the allowed guest stay, lengthens the required move-out notice, and adds three new clauses: a monthly pet fee, an early-termination fee, and an automatic renewal provision. Most changes shift financial obligations or flexibility toward the tenant, while the security deposit and late fee terms remain unchanged.",
+		"changes": [
+			{
+				"title": "Monthly Rent Increase",
+				"category": "rent_and_deposits",
+				"original_excerpt": "Tenant agrees to pay rent of $1,450.00 per month",
+				"revised_excerpt": "Tenant agrees to pay rent of $1,595.00 per month",
+				"explanation": "The monthly rent is increasing from $1,450 to $1,595, which is about a 10% increase.",
+				"impact": "favors_landlord",
+				"severity": "high",
+				"negotiation_note": "Is this increase in line with market rates for comparable units, and is it open to discussion given the length of tenancy?"
+			},
+			{
+				"title": "New Automatic Renewal Clause",
+				"category": "term_and_renewal",
+				"original_excerpt": null,
+				"revised_excerpt": "this lease automatically renews for an additional twelve (12) month term at the then-current rent plus any increase communicated by Landlord at least sixty (60) days before renewal",
+				"explanation": "This is a brand-new clause stating the lease will automatically renew for another full year unless proper notice is given, and the landlord can raise rent for that renewal term as long as the increase is communicated at least 60 days ahead.",
+				"impact": "favors_landlord",
+				"severity": "high",
+				"negotiation_note": "How much advance notice will be given of a future rent increase beyond the 60-day minimum, and is there a cap on how much rent can increase per renewal?"
+			},
+			{
+				"title": "New Early Termination Fee",
+				"category": "termination",
+				"original_excerpt": null,
+				"revised_excerpt": "Tenant shall pay an early-termination fee equal to two (2) months' rent, in addition to rent owed through the termination date",
+				"explanation": "This new clause requires the tenant to pay a fee equal to two months' rent (on top of rent already owed) if they end the lease before the term is up.",
+				"impact": "favors_landlord",
+				"severity": "high",
+				"negotiation_note": "Are there any circumstances (e.g., job relocation, military service) where this fee would be waived or reduced?"
+			},
+			{
+				"title": "Extended Notice to Vacate Requirement",
+				"category": "term_and_renewal",
+				"original_excerpt": "Tenant shall provide at least thirty (30) days' written notice",
+				"revised_excerpt": "Tenant shall provide at least sixty (60) days' written notice",
+				"explanation": "The tenant now must give twice as much advance notice (60 days instead of 30) before the lease ends if they plan to move out.",
+				"impact": "favors_landlord",
+				"severity": "medium",
+				"negotiation_note": "Is there flexibility to shorten this notice period if a replacement tenant is found?"
+			},
+			{
+				"title": "Lawn Care Responsibility Shifted to Tenant",
+				"category": "maintenance_and_repairs",
+				"original_excerpt": "Landlord shall also be responsible for lawn care, including mowing and seasonal trimming of the yard.",
+				"revised_excerpt": "Tenant shall be responsible for lawn care, including mowing and seasonal trimming of the yard.",
+				"explanation": "Previously the landlord handled mowing and yard trimming; now this task and any associated cost or effort falls on the tenant.",
+				"impact": "favors_landlord",
+				"severity": "medium",
+				"negotiation_note": "Is the tenant expected to provide their own lawn equipment, or will the landlord supply tools or a reduced rent to offset this new task?"
+			},
+			{
+				"title": "Water Bill Shifted to Tenant",
+				"category": "utilities",
+				"original_excerpt": "Landlord shall pay for water, sewer, and trash collection service.",
+				"revised_excerpt": "Landlord shall pay for sewer and trash collection service.",
+				"explanation": "The landlord will no longer cover the water bill; the tenant must now pay for water in addition to electricity, gas, and internet.",
+				"impact": "favors_landlord",
+				"severity": "medium",
+				"negotiation_note": "What has the typical monthly water cost been for this unit, so the added expense can be budgeted for?"
+			},
+			{
+				"title": "Shorter Permitted Guest Stay",
+				"category": "rules_and_use",
+				"original_excerpt": "Guests may stay no longer than fourteen (14) consecutive days",
+				"revised_excerpt": "Guests may stay no longer than seven (7) consecutive days",
+				"explanation": "Guests are now only allowed to stay for 7 consecutive days without landlord approval, down from 14 days.",
+				"impact": "favors_landlord",
+				"severity": "low",
+				"negotiation_note": "Would longer visits (e.g., for family during holidays) still be approvable with advance written notice?"
+			},
+			{
+				"title": "New Monthly Pet Fee",
+				"category": "fees",
+				"original_excerpt": null,
+				"revised_excerpt": "Tenant shall pay a pet fee of $35.00 per month in addition to rent for the duration of the pet's residence",
+				"explanation": "A new clause allows one approved pet but requires an additional $35 monthly fee for as long as the pet lives at the property.",
+				"impact": "favors_landlord",
+				"severity": "low",
+				"negotiation_note": "Is this fee negotiable based on the type or size of pet, and is a one-time pet deposit an alternative to the recurring monthly fee?"
+			},
+			{
+				"title": "Removed 'Lease Ends Unless Renewed' Language",
+				"category": "term_and_renewal",
+				"original_excerpt": "At the end of the term, this lease ends unless both parties sign a new agreement.",
+				"revised_excerpt": null,
+				"explanation": "The original lease stated it would simply end at the term's conclusion unless a new agreement was signed. This sentence was removed, consistent with the new automatic renewal clause replacing that default outcome.",
+				"impact": "favors_landlord",
+				"severity": "low",
+				"negotiation_note": null
+			}
+		],
+		"questions_to_ask": [
+			"Is the new rent of $1,595/month negotiable, and how was the roughly 10% increase determined?",
+			"Under the automatic renewal clause, what specific process and timeline will be used to notify the tenant of future rent increases?",
+			"Are there any conditions under which the two-month early-termination fee could be waived or prorated?",
+			"Why did the required move-out notice period double from 30 to 60 days, and is there flexibility if a replacement tenant is secured sooner?",
+			"What tools, equipment, or standards are expected for the tenant-performed lawn care under Section 6?",
+			"What has been the typical monthly water usage/cost for this unit now that it's the tenant's responsibility?",
+			"Is the $35/month pet fee a flat fee or does it vary by pet type, size, or number of pets beyond one?",
+			"Would exceptions to the new 7-day guest limit be considered for extended family visits with advance notice?"
+		],
+		"formatting_notes": "The title changed from 'RESIDENTIAL LEASE AGREEMENT' to 'RESIDENTIAL LEASE AGREEMENT (RENEWAL)', and sections 14 onward were renumbered/reordered to accommodate three new clauses (Pet Fee, Early Termination, Automatic Renewal) before the final Entire Agreement clause; these are structural/labeling changes only and are reflected in the substantive changes above where relevant.",
+		"ambiguities": [
+			"The Automatic Renewal clause references a rent increase 'communicated by Landlord at least sixty (60) days before renewal' but does not specify a maximum amount or percentage cap for such an increase.",
+			"It is unclear whether the new Early Termination fee applies in addition to or instead of the security deposit deductions described in Section 4.",
+			"The lease does not clarify whether the Pet Fee (Section 14) applies retroactively if a pet is added mid-term or only at lease signing."
+		]
+	},
+	"month-to-month": {
+		"overall_summary": "The lease structure changed fundamentally from a fixed 12-month term to an automatically renewing month-to-month tenancy, which brings both more flexibility and more instability. Termination is now easier for both parties (30 days' notice, no penalty) but the landlord can also end the tenancy at will, rent increased via a new $50/month premium, the security deposit return period shortened in the tenant's favor, entry notice shortened in the landlord's favor, the late-fee grace period lengthened in the tenant's favor, and a new renter's insurance requirement was added.",
+		"changes": [
+			{
+				"title": "Fixed 12-month term replaced with automatically renewing month-to-month tenancy",
+				"category": "term_and_renewal",
+				"original_excerpt": "The term of this lease is a fixed period of twelve (12) months, beginning on March 1 and ending on the last day of February of the following year.",
+				"revised_excerpt": "This lease continues on a month-to-month basis, beginning on March 1, and renews automatically each month until terminated as described in Section 5.",
+				"explanation": "Instead of committing to a full year, the tenancy now runs month to month and keeps renewing automatically until either side ends it. This removes the guarantee of a fixed-length home but also removes the long-term lock-in.",
+				"impact": "unclear",
+				"severity": "high",
+				"negotiation_note": "Is there an option to convert back to a fixed-term lease, and would that affect the monthly premium being charged?"
+			},
+			{
+				"title": "Landlord can now end the tenancy at will",
+				"category": "termination",
+				"original_excerpt": "Landlord may not terminate this lease during the fixed term except for Tenant's material breach of this Agreement.",
+				"revised_excerpt": "Either party may terminate this lease for any reason by giving the other party at least thirty (30) days' written notice, effective at the end of a monthly rental period. No lease-break penalty applies.",
+				"explanation": "Previously the landlord could only end the lease early if the tenant broke a rule. Now the landlord can end the tenancy at any time for any reason with 30 days' notice, just like the tenant can.",
+				"impact": "favors_landlord",
+				"severity": "high",
+				"negotiation_note": "Is there any limit on how soon after move-in the landlord could give notice to terminate, and would the landlord provide relocation assistance if notice is given?"
+			},
+			{
+				"title": "Lease-break penalty and 60-day notice removed for tenant termination",
+				"category": "termination",
+				"original_excerpt": "Tenant may terminate this lease before the end of the fixed term only by giving sixty (60) days' written notice and paying a lease-break penalty equal to one and one-half (1.5) months' rent.",
+				"revised_excerpt": "Either party may terminate this lease for any reason by giving the other party at least thirty (30) days' written notice, effective at the end of a monthly rental period. No lease-break penalty applies.",
+				"explanation": "The tenant no longer has to pay a penalty (previously 1.5 months' rent) or give 60 days' notice to leave early; now only 30 days' notice is required and no penalty applies.",
+				"impact": "favors_tenant",
+				"severity": "high",
+				"negotiation_note": null
+			},
+			{
+				"title": "New monthly premium added to rent",
+				"category": "rent_and_deposits",
+				"original_excerpt": "Tenant agrees to pay rent of $1,275.00 per month, due on the first day of each month",
+				"revised_excerpt": "Tenant agrees to pay rent of $1,275.00 per month, plus a month-to-month premium of $50.00 per month, for a total monthly payment of $1,325.00, due on the first day of each month",
+				"explanation": "An extra $50 per month is now charged on top of the base rent, described as a premium for the month-to-month arrangement, raising the total monthly payment to $1,325.00.",
+				"impact": "favors_landlord",
+				"severity": "high",
+				"negotiation_note": "Is the $50 premium waived if the tenant later commits to a new fixed term, and can this premium be increased in the future without a formal lease amendment?"
+			},
+			{
+				"title": "New renter's insurance requirement",
+				"category": "liability_and_insurance",
+				"original_excerpt": null,
+				"revised_excerpt": "Tenant shall maintain a renter's insurance policy with personal liability coverage of at least $100,000.00 for the duration of the tenancy and shall provide proof of coverage to Landlord upon request.",
+				"explanation": "The tenant is now required to buy and maintain a renter's insurance policy with at least $100,000 in personal liability coverage and show proof of it if asked. This is a new cost and obligation that did not exist before.",
+				"impact": "favors_landlord",
+				"severity": "medium",
+				"negotiation_note": "What happens if proof of insurance is not provided when requested — is there a grace period or fee, and does the landlord require a specific insurer or policy type?"
+			},
+			{
+				"title": "Security deposit return period shortened",
+				"category": "rent_and_deposits",
+				"original_excerpt": "to be returned within twenty-one (21) days after move-out",
+				"revised_excerpt": "to be returned within fourteen (14) days after move-out",
+				"explanation": "The landlord now must return the security deposit within 14 days after move-out instead of 21 days, meaning the tenant gets their deposit back faster.",
+				"impact": "favors_tenant",
+				"severity": "low",
+				"negotiation_note": null
+			},
+			{
+				"title": "Entry notice period shortened",
+				"category": "entry_and_privacy",
+				"original_excerpt": "after providing at least forty-eight (48) hours' written notice, except in an emergency",
+				"revised_excerpt": "after providing at least twenty-four (24) hours' written notice, except in an emergency",
+				"explanation": "The landlord now only needs to give 24 hours' notice before entering the unit for repairs, inspections, or showings, instead of 48 hours, giving the tenant less advance warning.",
+				"impact": "favors_landlord",
+				"severity": "medium",
+				"negotiation_note": "Is there flexibility to request a preferred entry window (e.g., business hours) even though the minimum notice is shorter?"
+			},
+			{
+				"title": "Late fee grace period lengthened",
+				"category": "fees",
+				"original_excerpt": "Rent received more than three (3) days after the due date is subject to a late fee of $60.00.",
+				"revised_excerpt": "Rent received more than five (5) days after the due date is subject to a late fee of $60.00.",
+				"explanation": "The tenant now has five days after rent is due before a $60 late fee applies, instead of three days, giving a slightly longer buffer before being charged.",
+				"impact": "favors_tenant",
+				"severity": "low",
+				"negotiation_note": null
+			}
+		],
+		"questions_to_ask": [
+			"Since the lease is now month-to-month, how much advance notice will the landlord realistically try to give beyond the 30-day minimum before ending the tenancy?",
+			"Is the new $50/month premium fixed for the life of the tenancy, or can it change with future notices?",
+			"Does the shortened 24-hour entry notice apply to all types of entry (repairs, inspections, showings) or could it differ by purpose?",
+			"What proof of renter's insurance will satisfy the landlord's request, and how often might proof be requested?",
+			"Given the lease-break penalty was removed, is there any other cost (e.g., re-letting fee) if the tenant gives the required 30 days' notice mid-cycle?"
+		],
+		"formatting_notes": "The document title was updated to add \"(MONTH-TO-MONTH)\" and Section 13 (Entire Agreement) was renumbered to Section 14 to accommodate the newly inserted Section 13 (Renter's Insurance); these are structural/renumbering changes rather than substantive ones beyond the new insurance clause itself.",
+		"ambiguities": [
+			"The revised Section 2 does not specify whether the $50 'month-to-month premium' is considered part of 'rent' for purposes of late fees, deposit deduction calculations, or future rent increase notices.",
+			"The revised Termination clause does not state whether the 30-day notice must align with a specific calendar date or simply be 30 days from whenever notice is given before the end of a rental period, which could create ambiguity about the exact effective termination date."
+		]
+	}
+}

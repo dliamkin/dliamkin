@@ -1,12 +1,21 @@
 {
-  // Static-assets-only Worker (no server code) for the built Vue SPA.
-  // Cloudflare Workers Builds runs `npm run build`, then `wrangler deploy`
-  // uploads ./dist and serves it. `single-page-application` makes any
+  // Worker serving the built Vue SPA as static assets, plus a small API.
+  // @cloudflare/vite-plugin (see vite.config.ts) builds the client to
+  // dist/client and the worker into dist/, and runs the worker in the Vite
+  // dev server so `npm run dev` serves both the SPA (HMR) and /api/*.
+  // Cloudflare Workers Builds runs `npm run build`, then `npx wrangler deploy`
+  // uploads the built worker + assets. `single-page-application` makes any
   // unknown path fall back to index.html so vue-router history mode works.
+  // `run_worker_first` routes /api/* to worker/index.ts (the demo endpoints);
+  // everything else is served directly from assets.
+  // The Worker needs the ANTHROPIC_API_KEY secret:
+  //   npx wrangler secret put ANTHROPIC_API_KEY
   "name": "dliamkin",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-07-02",
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
   }
 }

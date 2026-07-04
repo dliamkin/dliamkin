@@ -163,7 +163,9 @@ const bgTris = (() => {
 
 		<div class="hero-copy">
 			<h1 class="headline">
-				<span class="app-word"><span class="cap">A</span><span class="cap-rest">pp</span></span>
+				<span class="app-word"
+					><span class="cap">A</span><span class="cap-rest">pp</span></span
+				>
 				<span
 					class="word-wrapper"
 					:style="{ width: wordWidth !== null ? `${wordWidth}px` : 'auto' }"

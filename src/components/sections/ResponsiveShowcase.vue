@@ -2,7 +2,10 @@
 	<section class="showcase">
 		<div class="showcase-inner">
 			<h2>UI/UX Design is my specialty. Being Full Stack is just a plus.</h2>
-			<p>I create beautiful, functional websites that provide an excellent user experience across all devices.</p>
+			<p>
+				I create beautiful, functional websites that provide an excellent user experience
+				across all devices.
+			</p>
 			<img src="/images/mock.png" alt="Responsive device mockup" class="mock-img" />
 		</div>
 	</section>
@@ -37,6 +40,6 @@
 .mock-img {
 	max-width: 100%;
 	height: auto;
-	margin-bottom:-10px;
+	margin-bottom: -10px;
 }
 </style>

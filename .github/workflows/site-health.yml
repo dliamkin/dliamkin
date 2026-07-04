@@ -1,0 +1,68 @@
+# Nightly AI self-audit: Lighthouse + Playwright screenshots of the live site,
+# one Claude vision call comparing against the previous night's report, a
+# health report committed back to the repo (displayed by the site's widget),
+# and a GitHub issue when something genuinely regressed.
+#
+# ANTHROPIC_API_KEY lives ONLY in this repo's Actions secrets. It is passed to
+# the audit step as an env var, read by the SDK, and never echoed — GitHub's
+# secret masking covers accidental log hits as a second line of defense.
+name: Site Health
+
+# Deliberately NO push trigger: schedule + workflow_dispatch only. The report
+# commit this workflow pushes back therefore cannot retrigger it (and its
+# [skip ci] tag also keeps Cloudflare Workers Builds from redeploying).
+on:
+  schedule:
+    # GitHub cron is UTC. 08:15 UTC = 4:15 AM Eastern during daylight time
+    # (3:15 AM EST in winter — close enough for a nightly audit). Off the
+    # top of the hour to dodge GitHub's cron congestion.
+    - cron: "15 8 * * *"
+  workflow_dispatch:
+
+# The pipeline needs: contents to push the
+# report commit, issues to file/comment on regressions.
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: site-health
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      # run-audit.ts degrades gracefully on its own: any Lighthouse,
+      # screenshot, or API failure still commits a status:"audit_error"
+      # report and exits 0, so this step stays green without needing a
+      # blanket continue-on-error (which would also mask real infra failures
+      # like a broken npm ci).
+      - name: Run nightly audit
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx tsx scripts/site-health/run-audit.ts
+
+      # The exact JPEGs the model saw, kept 14 days for inspection.
+      - name: Upload screenshot artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-health-screenshots
+          path: site-health-artifacts/
+          retention-days: 14
+          if-no-files-found: warn

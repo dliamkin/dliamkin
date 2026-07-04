@@ -1,0 +1,263 @@
+{
+	"login": {
+		"is_ui_screenshot": true,
+		"reason": null,
+		"ui_type": "Login/Authentication Form",
+		"layout_summary": "A centered card containing a login form with an avatar and branding at the top, followed by email and password input fields, a checkbox for \"Remember me,\" primary and secondary action buttons, and account creation links at the bottom.",
+		"mappings": [
+			{
+				"detected_element": "Card container with rounded corners and shadow",
+				"primevue_component": "Card",
+				"rationale": "The white rounded container is the primary layout wrapper for the entire login form.",
+				"key_props": ["class for padding, shadow, and border-radius"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Avatar icon with 'A' letter in blue circle next to 'Acmetrics' title",
+				"primevue_component": "Avatar",
+				"rationale": "Visual identifier icon next to the brand name represents a user/app avatar.",
+				"key_props": [
+					"icon or label property",
+					"size",
+					"shape (circle)",
+					"styling"
+				],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Email address input field with placeholder text",
+				"primevue_component": "InputText",
+				"rationale": "Single-line text input for email address collection.",
+				"key_props": [
+					"v-model for binding",
+					"placeholder",
+					"type='email'"
+				],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Password input field with masked text",
+				"primevue_component": "InputText",
+				"rationale": "Single-line password input with type='password' to mask characters.",
+				"key_props": [
+					"v-model for binding",
+					"type='password'",
+					"placeholder"
+				],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Checkbox with 'Remember me' label",
+				"primevue_component": "Checkbox",
+				"rationale": "Binary input for toggling a persistence preference.",
+				"key_props": ["v-model for binding", "label property"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "'Forgot password?' link",
+				"primevue_component": "RouterLink or anchor (not a PrimeVue component)",
+				"rationale": "Simple hyperlink for password recovery; not a standard PrimeVue widget.",
+				"key_props": ["href or to property"],
+				"confidence": "medium"
+			},
+			{
+				"detected_element": "Primary blue 'Sign in' button",
+				"primevue_component": "Button",
+				"rationale": "Primary action button for form submission with prominent styling.",
+				"key_props": [
+					"label",
+					"severity='primary'",
+					"class for full width",
+					"@click handler"
+				],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Secondary 'Continue with SSO' button with border",
+				"primevue_component": "Button",
+				"rationale": "Alternative action button with outlined style.",
+				"key_props": [
+					"label",
+					"severity or outlined variant",
+					"class for full width"
+				],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "'Start a free trial' link with account creation prompt",
+				"primevue_component": "RouterLink or anchor",
+				"rationale": "Hyperlink for account signup; not a standard PrimeVue component.",
+				"key_props": ["href or to property"],
+				"confidence": "medium"
+			}
+		],
+		"scaffold_code": "\n<template>\n  <div class=\"login-container\">\n    <pv-card class=\"login-card\">\n      <template #header>\n        <div class=\"header-content\">\n          <pv-avatar\n            label=\"A\"\n            :style=\"{ backgroundColor: '#1e40af', color: '#fff' }\"\n            shape=\"circle\"\n            size=\"large\"\n          />\n          <h1 class=\"ml-3\">Acmetrics</h1>\n        </div>\n        <p class=\"subtitle\">Sign in to your workspace</p>\n      </template>\n\n      <template #content>\n        <form @submit.prevent=\"handleSignIn\">\n          <div class=\"form-group\">\n            <label for=\"email\" class=\"label\">Email address</label>\n            <pv-input-text\n              id=\"email\"\n              v-model=\"email\"\n              type=\"email\"\n              placeholder=\"you@company.com\"\n              class=\"w-full\"\n            />\n          </div>\n\n          <div class=\"form-group\">\n            <label for=\"password\" class=\"label\">Password</label>\n            <pv-input-text\n              id=\"password\"\n              v-model=\"password\"\n              type=\"password\"\n              placeholder=\"••••••••\"\n              class=\"w-full\"\n            />\n          </div>\n\n          <div class=\"checkbox-row\">\n            <pv-checkbox\n              v-model=\"rememberMe\"\n              input-id=\"remember\"\n              label=\"Remember me\"\n            />\n            <a href=\"#\" class=\"forgot-password\">Forgot password?</a>\n          </div>\n\n          <pv-button\n            label=\"Sign in\"\n            @click=\"handleSignIn\"\n            class=\"w-full mb-3\"\n            severity=\"primary\"\n          />\n        </form>\n\n        <div class=\"divider\">or</div>\n\n        <pv-button\n          label=\"Continue with SSO\"\n          @click=\"handleSSO\"\n          class=\"w-full mb-4\"\n          severity=\"secondary\"\n          outlined\n        />\n\n        <div class=\"signup-prompt\">\n          Don't have an account?\n          <a href=\"#\" class=\"signup-link\">Start a free trial</a>\n        </div>\n      </template>\n    </pv-card>\n  </div>\n</template>\n\n<script setup lang=\"ts\">\nimport { ref } from 'vue'\n\nconst email = ref<string>('')\nconst password = ref<string>('')\nconst rememberMe = ref<boolean>(false)\n\nconst handleSignIn = () => {\n  console.log('Sign in with:', { email: email.value, password: password.value, rememberMe: rememberMe.value })\n}\n\nconst handleSSO = () => {\n  console.log('Sign in with SSO')\n}\n</script>\n\n<style scoped>\n.login-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n  background-color: #e0e7ff;\n  padding: 1rem;\n}\n\n.login-card {\n  width: 100%;\n  max-width: 400px;\n}\n\n.header-content {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n  margin-bottom: 1rem;\n}\n\n.header-content h1 {\n  font-size: 1.5rem;\n  font-weight: bold;\n  margin: 0.5rem 0 0 0;\n  color: #1f2937;\n}\n\n.subtitle {\n  font-size: 0.875rem;\n  color: #6b7280;\n  margin: 0.5rem 0 1.5rem 0;\n  text-align: center;\n}\n\n.form-group {\n  margin-bottom: 1.5rem;\n}\n\n.label {\n  display: block;\n  font-weight: 500;\n  color: #374151;\n  margin-bottom: 0.5rem;\n  font-size: 0.875rem;\n}\n\n.checkbox-row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-bottom: 1.5rem;\n  font-size: 0.875rem;\n}\n\n.forgot-password {\n  color: #1e40af;\n  text-decoration: none;\n  font-weight: 500;\n}\n\n.forgot-password:hover {\n  text-decoration: underline;\n}\n\n.divider {\n  text-align: center;\n  color: #9ca3af;\n  margin: 1.5rem 0;\n  font-size: 0.875rem;\n}\n\n.signup-prompt {\n  text-align: center;\n  font-size: 0.875rem;\n  color: #6b7280;\n  margin-top: 1rem;\n}\n\n.signup-link {\n  color: #1e40af;\n  text-decoration: none;\n  font-weight: 500;\n}\n\n.signup-link:hover {\n  text-decoration: underline;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.mb-3 {\n  margin-bottom: 0.75rem;\n}\n\n.mb-4 {\n  margin-bottom: 1rem;\n}\n\n.ml-3 {\n  margin-left: 0.75rem;\n}\n</style>\n",
+		"gaps": [
+			"The 'Forgot password?' and 'Start a free trial' links are standard HTML anchors or routing links, not PrimeVue components—consider using RouterLink if part of a SPA. The brand logo ('A' avatar) is a placeholder; actual branding assets would be replaced in production."
+		]
+	},
+	"dashboard": {
+		"is_ui_screenshot": true,
+		"reason": null,
+		"ui_type": "Web Dashboard",
+		"layout_summary": "A analytics dashboard featuring a top navigation bar with logo and menu tabs, followed by a grid of four metric cards displaying key performance indicators, and below that a two-column layout with a bar chart on the left and a data table on the right.",
+		"mappings": [
+			{
+				"detected_element": "Logo and app title 'Acmetrics'",
+				"primevue_component": "No standard PrimeVue equivalent",
+				"rationale": "Brand identity element; typically custom JSX with optional Avatar for the icon",
+				"key_props": ["content/text only"],
+				"confidence": "medium"
+			},
+			{
+				"detected_element": "Navigation tabs (Overview, Reports, Segments, Settings)",
+				"primevue_component": "TabMenu or Menubar",
+				"rationale": "Horizontal menu with active state; TabMenu is ideal for tab-based navigation or Menubar for horizontal menu items",
+				"key_props": ["model", "activeItem", "@tab-change"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Top-right user profile area (Jane Placeholder, JP avatar)",
+				"primevue_component": "Avatar with optional Button or custom element",
+				"rationale": "Displays user initials in a badge; Avatar component fits well for profile initials",
+				"key_props": ["label", "image", "size", "shape"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Four metric cards (Active Users, Sessions, Bounce Rate, Avg. Duration)",
+				"primevue_component": "Card",
+				"rationale": "Each card displays a metric with value, label, and percent change indicator",
+				"key_props": ["header", "body content"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Metric values and trend indicators (8.2%, 3.1%, 1.8%, 0.4%)",
+				"primevue_component": "Tag or inline component",
+				"rationale": "Small badge-like elements showing trend; Tag component can display percentage changes with appropriate styling",
+				"key_props": ["value", "severity", "icon"],
+				"confidence": "medium"
+			},
+			{
+				"detected_element": "Weekly sessions bar chart",
+				"primevue_component": "Chart (Bar)",
+				"rationale": "Vertical bar chart showing daily session data across the week",
+				"key_props": ["type:bar", "data", "options"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Top pages table with columns (Page, Views, Status)",
+				"primevue_component": "DataTable",
+				"rationale": "Tabular data with sortable/filterable columns and status badges",
+				"key_props": [
+					"value",
+					"columns",
+					"scrollable",
+					"responsiveLayout"
+				],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Status badges (Healthy, Slow) in table",
+				"primevue_component": "Tag",
+				"rationale": "Color-coded status indicators; Tag component with severity styling",
+				"key_props": ["value", "severity", "icon"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Page heading 'Overview'",
+				"primevue_component": "Typography (h1/h2 via CSS)",
+				"rationale": "Standard page title; use semantic HTML or CSS classes for styling",
+				"key_props": ["text"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Section headings ('Weekly sessions', 'Top pages')",
+				"primevue_component": "Typography (h3 via CSS)",
+				"rationale": "Subsection titles; standard heading elements",
+				"key_props": ["text"],
+				"confidence": "high"
+			}
+		],
+		"scaffold_code": "\n<script setup lang=\"ts\">\nimport { ref } from 'vue'\nimport Card from 'primevue/card'\nimport Chart from 'primevue/chart'\nimport DataTable from 'primevue/datatable'\nimport Column from 'primevue/column'\nimport TabMenu from 'primevue/tabmenu'\nimport Tag from 'primevue/tag'\nimport Avatar from 'primevue/avatar'\n\nconst activeTab = ref(0)\n\nconst tabs = [\n  { label: 'Overview', icon: '' },\n  { label: 'Reports', icon: '' },\n  { label: 'Segments', icon: '' },\n  { label: 'Settings', icon: '' }\n]\n\nconst metrics = [\n  { label: 'ACTIVE USERS', value: '12,481', change: 8.2, direction: 'up' },\n  { label: 'SESSIONS', value: '48,902', change: 3.1, direction: 'up' },\n  { label: 'BOUNCE RATE', value: '31.4%', change: 1.8, direction: 'down' },\n  { label: 'AVG. DURATION', value: '4m 12s', change: 0.4, direction: 'up' }\n]\n\nconst chartData = {\n  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],\n  datasets: [\n    {\n      label: 'Sessions',\n      data: [3500, 4200, 3800, 5100, 4600, 5800, 4400],\n      backgroundColor: '#3B82F6'\n    }\n  ]\n}\n\nconst chartOptions = {\n  responsive: true,\n  maintainAspectRatio: true,\n  plugins: {\n    legend: { display: false }\n  }\n}\n\nconst topPages = [\n  { page: '/home', views: 18204, status: 'Healthy' },\n  { page: '/pricing', views: 9876, status: 'Healthy' },\n  { page: '/docs/setup', views: 7431, status: 'Slow' },\n  { page: '/blog/launch', views: 5208, status: 'Healthy' },\n  { page: '/changelog', views: 3990, status: 'Healthy' }\n]\n\nconst getSeverity = (status: string) => {\n  if (status === 'Healthy') return 'success'\n  if (status === 'Slow') return 'warning'\n  return 'danger'\n}\n</script>\n\n<template>\n  <div class=\"dashboard-container\">\n    <!-- Header -->\n    <div class=\"header\">\n      <div class=\"logo-section\">\n        <Avatar label=\"A\" style=\"background-color: #3B82F6; color: #fff\" />\n        <span class=\"app-title\">Acmetrics</span>\n      </div>\n      <TabMenu :model=\"tabs\" :activeIndex=\"activeTab\" />\n      <div class=\"user-profile\">\n        <span>User Name</span>\n        <Avatar label=\"JP\" style=\"background-color: #F59E0B\" />\n      </div>\n    </div>\n\n    <!-- Main Content -->\n    <div class=\"main-content\">\n      <h1>Overview</h1>\n\n      <!-- Metrics Grid -->\n      <div class=\"metrics-grid\">\n        <Card v-for=\"metric in metrics\" :key=\"metric.label\">\n          <template #content>\n            <p class=\"metric-label\">{{ metric.label }}</p>\n            <p class=\"metric-value\">{{ metric.value }}</p>\n            <Tag\n              :value=\"`${metric.direction === 'up' ? '▲' : '▼'} ${metric.change}%`\"\n              :severity=\"metric.direction === 'up' ? 'success' : 'danger'\"\n            />\n          </template>\n        </Card>\n      </div>\n\n      <!-- Charts and Tables Grid -->\n      <div class=\"content-grid\">\n        <!-- Weekly Sessions Chart -->\n        <Card>\n          <template #content>\n            <h3>Weekly sessions</h3>\n            <Chart type=\"bar\" :data=\"chartData\" :options=\"chartOptions\" />\n          </template>\n        </Card>\n\n        <!-- Top Pages Table -->\n        <Card>\n          <template #content>\n            <h3>Top pages</h3>\n            <DataTable :value=\"topPages\" responsiveLayout=\"scroll\">\n              <Column field=\"page\" header=\"PAGE\" />\n              <Column field=\"views\" header=\"VIEWS\" />\n              <Column field=\"status\" header=\"STATUS\">\n                <template #body=\"{ data }\">\n                  <Tag :value=\"data.status\" :severity=\"getSeverity(data.status)\" />\n                </template>\n              </Column>\n            </DataTable>\n          </template>\n        </Card>\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n.dashboard-container {\n  background-color: #f9fafb;\n  min-height: 100vh;\n}\n\n.header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 1rem 2rem;\n  background-color: #fff;\n  border-bottom: 1px solid #e5e7eb;\n}\n\n.logo-section {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n  font-size: 1.25rem;\n  font-weight: 600;\n}\n\n.app-title {\n  color: #1f2937;\n}\n\n.user-profile {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n  font-size: 0.875rem;\n  color: #6b7280;\n}\n\n.main-content {\n  padding: 2rem;\n  max-width: 1400px;\n  margin: 0 auto;\n}\n\n.main-content h1 {\n  font-size: 2rem;\n  font-weight: 700;\n  color: #1f2937;\n  margin-bottom: 2rem;\n}\n\n.metrics-grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n  gap: 1.5rem;\n  margin-bottom: 2rem;\n}\n\n.metric-label {\n  font-size: 0.75rem;\n  font-weight: 600;\n  color: #9ca3af;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  margin: 0;\n}\n\n.metric-value {\n  font-size: 2rem;\n  font-weight: 700;\n  color: #1f2937;\n  margin: 0.5rem 0;\n}\n\n.content-grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 2rem;\n}\n\n.content-grid h3 {\n  font-size: 1.125rem;\n  font-weight: 600;\n  color: #1f2937;\n  margin-bottom: 1.5rem;\n}\n\n@media (max-width: 768px) {\n  .header {\n    flex-direction: column;\n    gap: 1rem;\n  }\n\n  .content-grid {\n    grid-template-columns: 1fr;\n  }\n\n  .metrics-grid {\n    grid-template-columns: 1fr;\n  }\n}\n</style>\n",
+		"gaps": [
+			"Custom logo/branding element—typically a custom component or simple JSX; no direct PrimeVue match",
+			"Avatar initials and profile badge styling would benefit from custom wrapper component to match screenshot style exactly",
+			"Chart configuration details (axis labels, grid styling) would require fine-tuning PrimeVue Chart options",
+			"DataTable column sorting, filtering, and pagination not implemented in scaffold but should be added for production use"
+		]
+	},
+	"pricing": {
+		"is_ui_screenshot": true,
+		"reason": null,
+		"ui_type": "Pricing page",
+		"layout_summary": "A marketing pricing page with a navigation bar at the top, a centered headline describing the pricing model, and three pricing cards displayed horizontally below. The middle card is highlighted as \"Most Popular\" with a distinctive border and badge. Each card contains plan details with checkmark features and a call-to-action button.",
+		"mappings": [
+			{
+				"detected_element": "Top navigation bar with logo and menu links",
+				"primevue_component": "Menubar",
+				"rationale": "Menubar provides a horizontal navigation structure with logo on the left, menu items (Product, Docs, Pricing, Blog) in the center, and a right-aligned button",
+				"key_props": [
+					"model",
+					"start slot for logo",
+					"end slot for button"
+				],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "'Start free' button (top right)",
+				"primevue_component": "Button",
+				"rationale": "A primary call-to-action button with blue background and white text",
+				"key_props": ["label", "severity", "size"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Pricing cards (Starter, Growth, Scale)",
+				"primevue_component": "Card",
+				"rationale": "Each pricing plan is a self-contained card with title, description, price, feature list, and action button",
+				"key_props": ["title", "subtitle", "content slot"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "'MOST POPULAR' badge on Growth card",
+				"primevue_component": "Tag",
+				"rationale": "A small badge label indicating the recommended/popular plan",
+				"key_props": ["severity", "value"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Feature checkmarks in pricing cards",
+				"primevue_component": "i icon with v-if template",
+				"rationale": "Green checkmark icons are used as visual indicators for included features",
+				"key_props": ["class for icon styling"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "'Get started', 'Start free trial', 'Talk to sales' buttons",
+				"primevue_component": "Button",
+				"rationale": "Three action buttons with different styling—outlined, filled primary, and outlined variants",
+				"key_props": ["label", "severity", "outlined variant"],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Main heading and subheading",
+				"primevue_component": "Typography via template",
+				"rationale": "Pure text/heading elements; can be rendered as standard HTML or using template sections, not a specific PrimeVue component",
+				"key_props": [],
+				"confidence": "high"
+			},
+			{
+				"detected_element": "Disclaimer text at bottom",
+				"primevue_component": "Typography via template",
+				"rationale": "Small gray text for legal/informational disclaimer; standard HTML rendering",
+				"key_props": [],
+				"confidence": "high"
+			}
+		],
+		"scaffold_code": "\n<template>\n  <div class=\"pricing-page\">\n    <!-- Navigation Bar -->\n    <PrimeVueMenubar :model=\"menuItems\" class=\"navbar\">\n      <template #start>\n        <div class=\"navbar-logo\">\n          <span class=\"logo-badge\">A</span>\n          <span class=\"logo-text\">Acmetrics</span>\n        </div>\n      </template>\n      <template #end>\n        <PrimeVueButton label=\"Start free\" severity=\"primary\" @click=\"handleStartFree\" />\n      </template>\n    </PrimeVueMenubar>\n\n    <!-- Main Content -->\n    <div class=\"pricing-container\">\n      <!-- Heading Section -->\n      <div class=\"pricing-header\">\n        <h1 class=\"pricing-title\">Simple pricing that scales with you</h1>\n        <p class=\"pricing-subtitle\">Every plan includes unlimited dashboards and a 14-day trial.</p>\n      </div>\n\n      <!-- Pricing Cards -->\n      <div class=\"pricing-cards-grid\">\n        <!-- Starter Plan -->\n        <PrimeVueCard class=\"pricing-card\">\n          <template #title>\n            <div class=\"card-title\">Starter</div>\n          </template>\n          <template #subtitle>\n            <div class=\"card-subtitle\">For side projects</div>\n          </template>\n          <template #content>\n            <div class=\"card-content\">\n              <div class=\"price-section\">\n                <span class=\"price\">$0</span>\n                <span class=\"price-period\">/ month</span>\n              </div>\n              <ul class=\"features-list\">\n                <li><i class=\"pi pi-check feature-check\"></i> 1 workspace</li>\n                <li><i class=\"pi pi-check feature-check\"></i> 10k events / month</li>\n                <li><i class=\"pi pi-check feature-check\"></i> 7-day retention</li>\n                <li><i class=\"pi pi-check feature-check\"></i> Community support</li>\n              </ul>\n              <PrimeVueButton label=\"Get started\" class=\"w-full\" outlined @click=\"handleGetStarted\" />\n            </div>\n          </template>\n        </PrimeVueCard>\n\n        <!-- Growth Plan (Most Popular) -->\n        <PrimeVueCard class=\"pricing-card most-popular\">\n          <template #title>\n            <div class=\"card-title-wrapper\">\n              <PrimeVueTag value=\"MOST POPULAR\" severity=\"info\" class=\"popular-badge\" />\n              <div class=\"card-title\">Growth</div>\n            </div>\n          </template>\n          <template #subtitle>\n            <div class=\"card-subtitle\">For growing teams</div>\n          </template>\n          <template #content>\n            <div class=\"card-content\">\n              <div class=\"price-section\">\n                <span class=\"price\">$49</span>\n                <span class=\"price-period\">/ month</span>\n              </div>\n              <ul class=\"features-list\">\n                <li><i class=\"pi pi-check feature-check\"></i> 5 workspaces</li>\n                <li><i class=\"pi pi-check feature-check\"></i> 1M events / month</li>\n                <li><i class=\"pi pi-check feature-check\"></i> 12-month retention</li>\n                <li><i class=\"pi pi-check feature-check\"></i> Funnels & cohorts</li>\n                <li><i class=\"pi pi-check feature-check\"></i> Email support</li>\n              </ul>\n              <PrimeVueButton label=\"Start free trial\" class=\"w-full\" @click=\"handleStartTrial\" />\n            </div>\n          </template>\n        </PrimeVueCard>\n\n        <!-- Scale Plan -->\n        <PrimeVueCard class=\"pricing-card\">\n          <template #title>\n            <div class=\"card-title\">Scale</div>\n          </template>\n          <template #subtitle>\n            <div class=\"card-subtitle\">For large organizations</div>\n          </template>\n          <template #content>\n            <div class=\"card-content\">\n              <div class=\"price-section\">\n                <span class=\"price\">$199</span>\n                <span class=\"price-period\">/ month</span>\n              </div>\n              <ul class=\"features-list\">\n                <li><i class=\"pi pi-check feature-check\"></i> Unlimited workspaces</li>\n                <li><i class=\"pi pi-check feature-check\"></i> 10M events / month</li>\n                <li><i class=\"pi pi-check feature-check\"></i> Unlimited retention</li>\n                <li><i class=\"pi pi-check feature-check\"></i> SSO & audit log</li>\n                <li><i class=\"pi pi-check feature-check\"></i> Priority support</li>\n              </ul>\n              <PrimeVueButton label=\"Talk to sales\" class=\"w-full\" outlined @click=\"handleTalkToSales\" />\n            </div>\n          </template>\n        </PrimeVueCard>\n      </div>\n\n      <!-- Disclaimer -->\n      <div class=\"pricing-disclaimer\">\n        <p>Prices in USD. Cancel anytime.</p>\n      </div>\n    </div>\n  </div>\n</template>\n\n<script setup lang=\"ts\">\nimport { ref } from 'vue'\nimport PrimeVueMenubar from 'primevue/menubar'\nimport PrimeVueButton from 'primevue/button'\nimport PrimeVueCard from 'primevue/card'\nimport PrimeVueTag from 'primevue/tag'\n\nconst menuItems = ref([\n  { label: 'Product', command: () => {} },\n  { label: 'Docs', command: () => {} },\n  { label: 'Pricing', command: () => {} },\n  { label: 'Blog', command: () => {} }\n])\n\nconst handleStartFree = () => {\n  console.log('Start free clicked')\n}\n\nconst handleGetStarted = () => {\n  console.log('Get started clicked')\n}\n\nconst handleStartTrial = () => {\n  console.log('Start free trial clicked')\n}\n\nconst handleTalkToSales = () => {\n  console.log('Talk to sales clicked')\n}\n</script>\n\n<style scoped>\n.pricing-page {\n  width: 100%;\n  background-color: #f9f9f9;\n}\n\n.navbar {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 2rem;\n  background-color: white;\n  border-bottom: 1px solid #e0e0e0;\n}\n\n.navbar-logo {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  font-weight: 600;\n}\n\n.logo-badge {\n  background-color: #1e40af;\n  color: white;\n  width: 32px;\n  height: 32px;\n  border-radius: 6px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: bold;\n}\n\n.logo-text {\n  font-size: 1.2rem;\n  color: #1a202c;\n}\n\n.pricing-container {\n  max-width: 1200px;\n  margin: 4rem auto;\n  padding: 0 1.5rem;\n}\n\n.pricing-header {\n  text-align: center;\n  margin-bottom: 3rem;\n}\n\n.pricing-title {\n  font-size: 2.5rem;\n  font-weight: 700;\n  color: #1a202c;\n  margin: 0 0 0.5rem 0;\n}\n\n.pricing-subtitle {\n  font-size: 1.1rem;\n  color: #718096;\n  margin: 0;\n}\n\n.pricing-cards-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 2rem;\n  margin-bottom: 2rem;\n}\n\n.pricing-card {\n  border: 1px solid #e0e0e0;\n  border-radius: 8px;\n  transition: all 0.3s ease;\n}\n\n.pricing-card.most-popular {\n  border: 2px solid #1e40af;\n  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.15);\n}\n\n.card-title-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 0.5rem;\n}\n\n.card-title {\n  font-size: 1.3rem;\n  font-weight: 600;\n  color: #1a202c;\n}\n\n.card-subtitle {\n  font-size: 0.9rem;\n  color: #718096;\n}\n\n.popular-badge {\n  background-color: #1e40af;\n  color: white;\n  padding: 0.25rem 0.75rem;\n  border-radius: 12px;\n  font-size: 0.75rem;\n  font-weight: 600;\n  letter-spacing: 0.05em;\n}\n\n.card-content {\n  display: flex;\n  flex-direction: column;\n  gap: 1.5rem;\n}\n\n.price-section {\n  display: flex;\n  align-items: baseline;\n  gap: 0.5rem;\n}\n\n.price {\n  font-size: 2rem;\n  font-weight: 700;\n  color: #1a202c;\n}\n\n.price-period {\n  font-size: 0.9rem;\n  color: #718096;\n}\n\n.features-list {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  display: flex;\n  flex-direction: column;\n  gap: 0.75rem;\n}\n\n.features-list li {\n  display: flex;\n  align-items: center;\n  gap: 0.75rem;\n  font-size: 0.95rem;\n  color: #4a5568;\n}\n\n.feature-check {\n  color: #22863a;\n  font-weight: bold;\n}\n\n.w-full {\n  width: 100%;\n}\n\n.pricing-disclaimer {\n  text-align: center;\n  font-size: 0.9rem;\n  color: #a0aec0;\n  margin-top: 2rem;\n}\n\n@media (max-width: 1024px) {\n  .pricing-cards-grid {\n    grid-template-columns: 1fr;\n  }\n}\n</style>\n",
+		"gaps": [
+			"The Menubar component's menu items styling and layout differ slightly from the screenshot's navigation (items are centered rather than left-aligned). A custom Toolbar or manual flex layout might better match the exact header appearance.",
+			"The exact box-shadow and border styling on the 'most-popular' card would need fine-tuning via CSS to match pixel-perfect design.",
+			"Icon styling for checkmarks uses PrimeVue's pi-check class; if a custom icon color or weight is needed, additional CSS classes may be required."
+		]
+	}
+}

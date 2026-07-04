@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
+import SiteHealthWidget from "@/components/SiteHealthWidget.vue";
 
 const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "";
 
@@ -354,6 +355,7 @@ async function onSubmit() {
 
 		<div class="footer-bottom">
 			<p class="copyright">Denis Liamkin &copy; {{ new Date().getFullYear() }}</p>
+			<SiteHealthWidget />
 		</div>
 	</footer>
 </template>

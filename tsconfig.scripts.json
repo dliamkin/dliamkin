@@ -1,0 +1,21 @@
+// TSConfig for the site-health and eval pipeline scripts (run in Node via
+// tsx in CI, type-checked here). Mirrors tsconfig.worker.json's setup.
+{
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "include": [
+    "scripts/site-health/**/*",
+    "scripts/evals/**/*",
+    "src/lib/site-health.ts",
+    "src/lib/evals.ts"
+  ],
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+    "noUncheckedIndexedAccess": true,
+
+    // Type-checking only — tsx transpiles at run time.
+    "noEmit": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.scripts.tsbuildinfo"
+  }
+}

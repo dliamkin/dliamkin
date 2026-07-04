@@ -43,3 +43,15 @@ playwright-report/
 
 # Local Claude Code settings
 .claude/settings.local.json
+
+# Env files / local secrets (never commit API keys)
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+
+# Wrangler
+.wrangler/
+
+# Site-health audit screenshots (uploaded as workflow artifacts, never committed)
+site-health-artifacts/

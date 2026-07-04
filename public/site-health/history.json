@@ -1,0 +1,12 @@
+[
+  {
+    "audited_at": "2026-07-03T17:17:03.235Z",
+    "status": "warnings",
+    "scores": {
+      "performance": 34,
+      "accessibility": 38,
+      "best_practices": 40,
+      "seo": 35
+    }
+  }
+]
