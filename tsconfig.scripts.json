@@ -5,8 +5,10 @@
   "include": [
     "scripts/site-health/**/*",
     "scripts/evals/**/*",
+    "ml/datagen/**/*",
     "src/lib/site-health.ts",
-    "src/lib/evals.ts"
+    "src/lib/evals.ts",
+    "src/lib/med-extractor/**/*"
   ],
   "compilerOptions": {
     "module": "preserve",

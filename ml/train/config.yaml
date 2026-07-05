@@ -1,0 +1,47 @@
+# Training configuration for the distilled medication extractor. Config-driven
+# and seeded so runs reproduce. Each candidate base checkpoint is fine-tuned in
+# turn (train.py loops over `candidates`); the size-vs-F1 table is assembled
+# from their held-out test scores. The chosen one is exported to ONNX.
+
+seed: 20260705
+
+data_dir: ../data # JSONL splits from ml/datagen (train/val/test.jsonl)
+output_dir: ./outputs # per-candidate checkpoints + metrics (gitignored)
+docs_dir: ../../docs/internal # training curves (PNG/CSV) land here (gitignored on public repo)
+
+max_length: 256 # note tokens; notes are short (<300 words), 256 subwords is ample
+
+# Candidates, smallest to largest. bert-tiny/mini are the prajwal1 distilled
+# BERTs (2-layer / 4-layer); distilbert is the quality ceiling. int8-quantized
+# on-disk sizes are approximate and reported precisely by export_onnx.py.
+candidates:
+  - name: bert-tiny
+    checkpoint: prajjwal1/bert-tiny # ~4.4M params, ~4 MB int8
+  - name: bert-mini
+    checkpoint: prajjwal1/bert-mini # ~11M params, ~15 MB int8
+  - name: distilbert
+    checkpoint: distilbert-base-uncased # ~66M params, ~65 MB int8
+
+# Per-candidate hyperparameters. bert-tiny/mini need more epochs + higher LR to
+# converge; distilbert fine-tunes fast. Overrides merge over `defaults`.
+defaults:
+  epochs: 8
+  learning_rate: 5.0e-5
+  batch_size: 16
+  weight_decay: 0.01
+  warmup_ratio: 0.1
+
+overrides:
+  bert-tiny:
+    epochs: 20
+    learning_rate: 1.0e-3
+  bert-mini:
+    epochs: 15
+    learning_rate: 5.0e-4
+  distilbert:
+    epochs: 6
+    learning_rate: 5.0e-5
+
+# Which candidate gets exported to ONNX for shipping. Set after reviewing the
+# size-vs-F1 table (train.py prints it). Overridable with `ml:export -- <name>`.
+export_candidate: bert-mini

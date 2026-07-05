@@ -43,14 +43,12 @@
 	margin-bottom: -10px;
 }
 
-@media (prefers-color-scheme: dark) {
-	.showcase {
-		background-color: var(--dm-bg);
-	}
+html.dark .showcase {
+	background-color: var(--dm-bg);
+}
 
-	.showcase-inner h2,
-	.showcase-inner p {
-		color: var(--dm-text-1);
-	}
+html.dark .showcase-inner h2,
+html.dark .showcase-inner p {
+	color: var(--dm-text-1);
 }
 </style>

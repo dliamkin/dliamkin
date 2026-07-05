@@ -255,18 +255,16 @@ async function copyScaffold() {
 	}
 }
 
-@media (prefers-color-scheme: dark) {
-	.layout-summary,
-	.expansion {
-		color: var(--dm-text-2);
-	}
+html.dark .layout-summary,
+html.dark .expansion {
+	color: var(--dm-text-2);
+}
 
-	.image-card :deep(.shot) {
-		border-color: rgba(255, 255, 255, 0.16);
-	}
+html.dark .image-card :deep(.shot) {
+	border-color: rgba(255, 255, 255, 0.16);
+}
 
-	.expansion code {
-		background: var(--dm-bg-mute);
-	}
+html.dark .expansion code {
+	background: var(--dm-bg-mute);
 }
 </style>

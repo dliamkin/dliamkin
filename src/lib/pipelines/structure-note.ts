@@ -21,9 +21,10 @@ export const STRUCTURE_NOTE_MAX_TOKENS = 2000;
 export async function structureNote(
 	client: Anthropic,
 	noteText: string,
+	model: string = STRUCTURE_NOTE_MODEL,
 ): Promise<StructuredNote> {
 	const response = await client.messages.create({
-		model: STRUCTURE_NOTE_MODEL,
+		model,
 		max_tokens: STRUCTURE_NOTE_MAX_TOKENS,
 		system: STRUCTURE_NOTE_SYSTEM_PROMPT,
 		tools: [STRUCTURE_NOTE_TOOL],

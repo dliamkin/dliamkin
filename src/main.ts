@@ -38,9 +38,9 @@ app.use(router);
 app.use(PrimeVue, {
 	theme: {
 		preset: sitePreset,
-		// Follow the visitor's OS color scheme, matching the site's own
-		// prefers-color-scheme styling.
-		options: { darkModeSelector: "system" },
+		// The site themes off an html.dark class (dark by default, light as an
+		// explicit visitor choice) — keep PrimeVue on the same switch.
+		options: { darkModeSelector: ".dark" },
 	},
 });
 app.use(ToastService);

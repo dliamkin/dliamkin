@@ -1020,122 +1020,120 @@ function googleLink(event: ReviewEvent): string {
 	}
 }
 
-@media (prefers-color-scheme: dark) {
-	.not-advice {
-		color: #ffd28a;
-		background: rgba(224, 169, 46, 0.12);
-		border-color: rgba(224, 169, 46, 0.35);
-	}
+html.dark .not-advice {
+	color: #ffd28a;
+	background: rgba(224, 169, 46, 0.12);
+	border-color: rgba(224, 169, 46, 0.35);
+}
 
-	.anchor-chip {
-		color: var(--dm-text-2);
-		background: var(--dm-bg-mute);
-	}
+html.dark .anchor-chip {
+	color: var(--dm-text-2);
+	background: var(--dm-bg-mute);
+}
 
-	.resolve-panel {
-		background: rgba(224, 169, 46, 0.08);
-		border-color: rgba(224, 169, 46, 0.3);
-		border-left-color: #e0a92e;
-	}
+html.dark .resolve-panel {
+	background: rgba(224, 169, 46, 0.08);
+	border-color: rgba(224, 169, 46, 0.3);
+	border-left-color: #e0a92e;
+}
 
-	.resolve-title {
-		color: var(--dm-text-1);
-	}
+html.dark .resolve-title {
+	color: var(--dm-text-1);
+}
 
-	.resolve-sub,
-	.resolve-question {
-		color: var(--dm-text-2);
-	}
+html.dark .resolve-sub,
+html.dark .resolve-question {
+	color: var(--dm-text-2);
+}
 
-	.resolve-consequence {
-		color: var(--dm-text-3);
-	}
+html.dark .resolve-consequence {
+	color: var(--dm-text-3);
+}
 
-	.event-row {
-		background: var(--dm-bg-soft);
-		border-color: rgba(255, 255, 255, 0.12);
-	}
+html.dark .event-row {
+	background: var(--dm-bg-soft);
+	border-color: rgba(255, 255, 255, 0.12);
+}
 
-	.event-row.excluded {
-		background: var(--dm-bg);
-	}
+html.dark .event-row.excluded {
+	background: var(--dm-bg);
+}
 
-	.event-row.past {
-		background: rgba(255, 107, 107, 0.06);
-	}
+html.dark .event-row.past {
+	background: rgba(255, 107, 107, 0.06);
+}
 
-	.title-input:hover {
-		border-color: rgba(255, 255, 255, 0.25);
-	}
+html.dark .title-input:hover {
+	border-color: rgba(255, 255, 255, 0.25);
+}
 
-	.title-input:focus {
-		border-color: #27a9e0;
-		background: var(--dm-bg);
-	}
+html.dark .title-input:focus {
+	border-color: #27a9e0;
+	background: var(--dm-bg);
+}
 
-	.expand-toggle {
-		color: var(--dm-text-2);
-	}
+html.dark .expand-toggle {
+	color: var(--dm-text-2);
+}
 
-	.expand-toggle:hover {
-		background: var(--dm-bg-mute);
-	}
+html.dark .expand-toggle:hover {
+	background: var(--dm-bg-mute);
+}
 
-	.event-date.missing {
-		color: #e3b341;
-	}
+html.dark .event-date.missing {
+	color: #e3b341;
+}
 
-	.event-date.overdue {
-		color: #ff7b6e;
-	}
+html.dark .event-date.overdue {
+	color: #ff7b6e;
+}
 
-	.meta-text,
-	.resolve-consequence,
-	.export-note {
-		color: var(--dm-text-3);
-	}
+html.dark .meta-text,
+html.dark .resolve-consequence,
+html.dark .export-note {
+	color: var(--dm-text-3);
+}
 
-	.row-expansion {
-		border-top-color: rgba(255, 255, 255, 0.15);
-	}
+html.dark .row-expansion {
+	border-top-color: rgba(255, 255, 255, 0.15);
+}
 
-	.source-excerpt {
-		background: rgba(39, 169, 224, 0.1);
-		color: var(--dm-text-2);
-	}
+html.dark .source-excerpt {
+	background: rgba(39, 169, 224, 0.1);
+	color: var(--dm-text-2);
+}
 
-	.event-details,
-	.next-up,
-	.ambiguities,
-	.ics-help-body {
-		color: var(--dm-text-2);
-	}
+html.dark .event-details,
+html.dark .next-up,
+html.dark .ambiguities,
+html.dark .ics-help-body {
+	color: var(--dm-text-2);
+}
 
-	.event-computation {
-		color: var(--dm-blue-soft);
-	}
+html.dark .event-computation {
+	color: var(--dm-blue-soft);
+}
 
-	.past-section summary {
-		color: #e3b341;
-	}
+html.dark .past-section summary {
+	color: #e3b341;
+}
 
-	.past-note {
-		color: #ff8f8f;
-	}
+html.dark .past-note {
+	color: #ff8f8f;
+}
 
-	.ambiguities {
-		background: var(--dm-bg-soft);
-	}
+html.dark .ambiguities {
+	background: var(--dm-bg-soft);
+}
 
-	/* Still a solid fill for the same bleed-through reason — just a dark one. */
-	.summary-bar {
-		background: #14242e;
-		border-color: rgba(39, 169, 224, 0.4);
-		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
-	}
+/* Still a solid fill for the same bleed-through reason — just a dark one. */
+html.dark .summary-bar {
+	background: #14242e;
+	border-color: rgba(39, 169, 224, 0.4);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
 
-	.ics-help summary {
-		color: var(--dm-text-1);
-	}
+html.dark .ics-help summary {
+	color: var(--dm-text-1);
 }
 </style>

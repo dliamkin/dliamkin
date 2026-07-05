@@ -448,35 +448,33 @@ h2 {
 	}
 }
 
-@media (prefers-color-scheme: dark) {
-	.project-page {
-		color: var(--dm-text-2);
-		background: var(--dm-bg);
-	}
+html.dark .project-page {
+	color: var(--dm-text-2);
+	background: var(--dm-bg);
+}
 
-	h1,
-	h2 {
-		color: var(--dm-text-1);
-	}
+html.dark h1,
+html.dark h2 {
+	color: var(--dm-text-1);
+}
 
-	.intro,
-	.hint {
-		color: var(--dm-text-2);
-	}
+html.dark .intro,
+html.dark .hint {
+	color: var(--dm-text-2);
+}
 
-	.char-counter,
-	.cost-note,
-	.placeholder,
-	.empty {
-		color: var(--dm-text-3);
-	}
+html.dark .char-counter,
+html.dark .cost-note,
+html.dark .placeholder,
+html.dark .empty {
+	color: var(--dm-text-3);
+}
 
-	.char-counter.over {
-		color: #ff6b6b;
-	}
+html.dark .char-counter.over {
+	color: #ff6b6b;
+}
 
-	.placeholder {
-		border-color: rgba(255, 255, 255, 0.16);
-	}
+html.dark .placeholder {
+	border-color: rgba(255, 255, 255, 0.16);
 }
 </style>

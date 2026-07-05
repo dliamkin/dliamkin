@@ -30,9 +30,7 @@ import SiteFooter from "@/components/sections/SiteFooter.vue";
 	color: #414042;
 }
 
-@media (prefers-color-scheme: dark) {
-	.home-page {
-		color: var(--dm-text-2);
-	}
+html.dark .home-page {
+	color: var(--dm-text-2);
 }
 </style>

@@ -4,8 +4,25 @@
     <meta charset="UTF-8">
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#121417" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#121417">
+    <script>
+      // Dark is the site's default look; "light" is an explicit visitor choice
+      // (see src/composables/useTheme.ts). Runs before any paint so there is
+      // no light flash on load.
+      (function () {
+        var light = false;
+        try {
+          light = localStorage.getItem("theme") === "light";
+        } catch (e) {
+          /* storage unavailable — stay on the dark default */
+        }
+        if (light) {
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#ffffff");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
 
     <!-- Primary SEO -->
     <title>Denis Liamkin — Senior Software Engineer</title>

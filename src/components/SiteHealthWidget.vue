@@ -331,13 +331,11 @@ const sparkline = computed(() => {
 }
 
 /* The footer widget itself is already dark; only the dialog text needs help. */
-@media (prefers-color-scheme: dark) {
-	.dialog-framing a {
-		color: var(--dm-blue-soft);
-	}
+html.dark .dialog-framing a {
+	color: var(--dm-blue-soft);
+}
 
-	.trend-label {
-		color: var(--dm-text-3);
-	}
+html.dark .trend-label {
+	color: var(--dm-text-3);
 }
 </style>

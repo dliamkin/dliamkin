@@ -213,31 +213,29 @@ h1 {
 	}
 }
 
-@media (prefers-color-scheme: dark) {
-	.projects-page {
-		color: var(--dm-text-2);
-		background: var(--dm-bg);
-	}
+html.dark .projects-page {
+	color: var(--dm-text-2);
+	background: var(--dm-bg);
+}
 
-	h1 {
-		color: var(--dm-text-1);
-	}
+html.dark h1 {
+	color: var(--dm-text-1);
+}
 
-	.intro,
-	.evals-link {
-		color: var(--dm-text-2);
-	}
+html.dark .intro,
+html.dark .evals-link {
+	color: var(--dm-text-2);
+}
 
-	.evals-link a {
-		color: var(--dm-blue-soft);
-	}
+html.dark .evals-link a {
+	color: var(--dm-blue-soft);
+}
 
-	.card-desc {
-		color: var(--dm-text-2);
-	}
+html.dark .card-desc {
+	color: var(--dm-text-2);
+}
 
-	.project-link:hover .project-card {
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-	}
+html.dark .project-link:hover .project-card {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 </style>

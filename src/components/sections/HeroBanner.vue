@@ -323,26 +323,24 @@ const bgTris = (() => {
 	z-index: 0;
 }
 
-/* Each polygon carries both scheme fills as inline vars; the media query picks
-   one, so the banner flips instantly when the OS theme changes. */
+/* Each polygon carries both theme fills as inline vars; the html.dark class
+   picks one, so the banner flips instantly when the visitor toggles themes. */
 .poly-bg polygon {
 	fill: var(--fill-light);
 	stroke: var(--fill-light);
 }
 
-@media (prefers-color-scheme: dark) {
-	.hero {
-		background-color: hsl(210, 28%, 7%);
-	}
+html.dark .hero {
+	background-color: hsl(210, 28%, 7%);
+}
 
-	.poly-bg polygon {
-		fill: var(--fill-dark);
-		stroke: var(--fill-dark);
-	}
+html.dark .poly-bg polygon {
+	fill: var(--fill-dark);
+	stroke: var(--fill-dark);
+}
 
-	.headline {
-		color: #ccd2da;
-	}
+html.dark .headline {
+	color: #ccd2da;
 }
 
 @keyframes tp0 {

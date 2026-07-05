@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
+import { useTheme } from "@/composables/useTheme";
 
 interface NavItem {
 	id: string;
@@ -11,6 +12,8 @@ const navItems: NavItem[] = [
 	{ id: "work", label: "Work" },
 	{ id: "skills", label: "Skills" },
 ];
+
+const { theme, toggleTheme } = useTheme();
 
 const isScrolled = ref(false);
 const isMobileMenuOpen = ref(false);
@@ -66,50 +69,67 @@ onUnmounted(() => {
 	<header ref="navbarEl" class="navbar" :class="{ scrolled: isScrolled }">
 		<div class="navbar-inner">
 			<a href="/" class="brand" aria-label="Denis Liamkin — home">
-				<picture>
-					<source
-						srcset="/images/DenisLiamkinLogoDarkMode.png"
-						media="(prefers-color-scheme: dark)"
-					/>
-					<img src="/images/DenisLiamkinLogo.png" alt="Denis Liamkin" class="brand-logo" />
-				</picture>
+				<img
+					src="/images/DenisLiamkinLogo.png"
+					alt="Denis Liamkin"
+					class="brand-logo logo-light"
+				/>
+				<img
+					src="/images/DenisLiamkinLogoDarkMode.png"
+					alt="Denis Liamkin"
+					class="brand-logo logo-dark"
+				/>
 			</a>
 
-			<button
-				type="button"
-				class="menu-toggle"
-				:aria-expanded="isMobileMenuOpen"
-				@click="isMobileMenuOpen = !isMobileMenuOpen"
-			>
-				MENU
-			</button>
+			<div class="nav-cluster">
+				<button
+					type="button"
+					class="theme-toggle"
+					:aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+					@click="toggleTheme"
+				>
+					<i
+						:class="theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"
+						aria-hidden="true"
+					></i>
+				</button>
 
-			<nav class="nav-links" :class="{ open: isMobileMenuOpen }">
-				<a
-					v-for="item in navItems"
-					:key="item.id"
-					:href="`#${item.id}`"
-					class="nav-link"
-					:class="{ active: activeId === item.id }"
-					:aria-current="activeId === item.id ? 'true' : undefined"
-					@click.prevent="scrollTo(item.id)"
-					>{{ item.label }}</a
+				<button
+					type="button"
+					class="menu-toggle"
+					:aria-expanded="isMobileMenuOpen"
+					@click="isMobileMenuOpen = !isMobileMenuOpen"
 				>
-				<RouterLink
-					to="/projects"
-					class="nav-link"
-					:class="{ active: $route.path.startsWith('/projects') }"
-					@click="isMobileMenuOpen = false"
-					>My Projects</RouterLink
-				>
-				<a
-					href="#contact"
-					class="nav-cta"
-					:class="{ active: activeId === 'contact' }"
-					@click.prevent="scrollTo('contact')"
-					>Contact</a
-				>
-			</nav>
+					MENU
+				</button>
+
+				<nav class="nav-links" :class="{ open: isMobileMenuOpen }">
+					<a
+						v-for="item in navItems"
+						:key="item.id"
+						:href="`#${item.id}`"
+						class="nav-link"
+						:class="{ active: activeId === item.id }"
+						:aria-current="activeId === item.id ? 'true' : undefined"
+						@click.prevent="scrollTo(item.id)"
+						>{{ item.label }}</a
+					>
+					<RouterLink
+						to="/projects"
+						class="nav-link"
+						:class="{ active: $route.path.startsWith('/projects') }"
+						@click="isMobileMenuOpen = false"
+						>My Projects</RouterLink
+					>
+					<a
+						href="#contact"
+						class="nav-cta"
+						:class="{ active: activeId === 'contact' }"
+						@click.prevent="scrollTo('contact')"
+						>Contact</a
+					>
+				</nav>
+			</div>
 		</div>
 	</header>
 </template>
@@ -144,6 +164,55 @@ onUnmounted(() => {
 .brand-logo {
 	max-width: 220px;
 	display: block;
+}
+
+/* Both logos ship in the DOM; html.dark decides which one shows. */
+.logo-dark {
+	display: none;
+}
+
+html.dark .logo-dark {
+	display: block;
+}
+
+html.dark .logo-light {
+	display: none;
+}
+
+.nav-cluster {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+}
+
+.theme-toggle {
+	width: 2.4rem;
+	height: 2.4rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background: none;
+	border-radius: 50%;
+	color: #414042;
+	font-size: 1.05rem;
+	cursor: pointer;
+	transition:
+		color 0.25s ease,
+		background 0.25s ease;
+}
+
+.theme-toggle:hover {
+	color: #27a9e0;
+	background: rgba(39, 169, 224, 0.1);
+}
+
+html.dark .theme-toggle {
+	color: var(--dm-text-1);
+}
+
+html.dark .theme-toggle:hover {
+	color: #27a9e0;
 }
 
 .menu-toggle {
@@ -275,32 +344,30 @@ onUnmounted(() => {
 	}
 }
 
-@media (prefers-color-scheme: dark) {
-	.navbar.scrolled {
-		background-color: rgba(18, 20, 23, 0.92);
-		border-bottom-color: rgba(255, 255, 255, 0.08);
-	}
-
-	.menu-toggle {
-		background: transparent;
-	}
-
-	.nav-link {
-		color: var(--dm-text-1);
-	}
-
-	.nav-link:hover,
-	.nav-link.active {
-		color: #27a9e0;
-	}
+html.dark .navbar.scrolled {
+	background-color: rgba(18, 20, 23, 0.92);
+	border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-@media (prefers-color-scheme: dark) and (max-width: 767px) {
-	.nav-links {
+html.dark .menu-toggle {
+	background: transparent;
+}
+
+html.dark .nav-link {
+	color: var(--dm-text-1);
+}
+
+html.dark .nav-link:hover,
+html.dark .nav-link.active {
+	color: #27a9e0;
+}
+
+@media (max-width: 767px) {
+	html.dark .nav-links {
 		background: rgba(18, 20, 23, 0.97);
 	}
 
-	.nav-link {
+	html.dark .nav-link {
 		border-bottom-color: rgba(255, 255, 255, 0.08);
 	}
 }

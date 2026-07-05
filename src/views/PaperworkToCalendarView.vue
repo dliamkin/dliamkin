@@ -845,47 +845,45 @@ h1 {
 	}
 }
 
-@media (prefers-color-scheme: dark) {
-	.project-page {
-		color: var(--dm-text-2);
-		background: var(--dm-bg);
-	}
+html.dark .project-page {
+	color: var(--dm-text-2);
+	background: var(--dm-bg);
+}
 
-	h1 {
-		color: var(--dm-text-1);
-	}
+html.dark h1 {
+	color: var(--dm-text-1);
+}
 
-	.intro,
-	.hint,
-	.extract-note,
-	.stage-note,
-	.page-label {
-		color: var(--dm-text-2);
-	}
+html.dark .intro,
+html.dark .hint,
+html.dark .extract-note,
+html.dark .stage-note,
+html.dark .page-label {
+	color: var(--dm-text-2);
+}
 
-	.char-counter,
-	.cost-note,
-	.formats,
-	.placeholder,
-	.empty {
-		color: var(--dm-text-3);
-	}
+html.dark .char-counter,
+html.dark .cost-note,
+html.dark .formats,
+html.dark .placeholder,
+html.dark .empty {
+	color: var(--dm-text-3);
+}
 
-	.char-counter.over {
-		color: #ff6b6b;
-	}
+html.dark .char-counter.over {
+	color: #ff6b6b;
+}
 
-	.upload-zone,
-	.photo-zone {
-		background: rgba(39, 169, 224, 0.07);
-	}
+html.dark .upload-zone,
+html.dark .photo-zone {
+	background: rgba(39, 169, 224, 0.07);
+}
 
-	.photo-preview img {
-		border-color: rgba(255, 255, 255, 0.16);
-	}
+html.dark .photo-preview img {
+	border-color: rgba(255, 255, 255, 0.16);
+}
 
-	.placeholder {
-		border-color: rgba(255, 255, 255, 0.16);
-	}
+html.dark .placeholder {
+	border-color: rgba(255, 255, 255, 0.16);
 }
 </style>

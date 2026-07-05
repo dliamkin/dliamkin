@@ -79,21 +79,19 @@ const allPassing = computed(
 	border: 1px solid #ecd7a3;
 }
 
-@media (prefers-color-scheme: dark) {
-	.eval-badge:hover {
-		filter: brightness(1.15);
-	}
+html.dark .eval-badge:hover {
+	filter: brightness(1.15);
+}
 
-	.eval-badge.passing {
-		color: #7fd8a3;
-		background: rgba(34, 160, 90, 0.14);
-		border-color: rgba(34, 160, 90, 0.45);
-	}
+html.dark .eval-badge.passing {
+	color: #7fd8a3;
+	background: rgba(34, 160, 90, 0.14);
+	border-color: rgba(34, 160, 90, 0.45);
+}
 
-	.eval-badge.failing {
-		color: #ffd28a;
-		background: rgba(224, 169, 46, 0.12);
-		border-color: rgba(224, 169, 46, 0.4);
-	}
+html.dark .eval-badge.failing {
+	color: #ffd28a;
+	background: rgba(224, 169, 46, 0.12);
+	border-color: rgba(224, 169, 46, 0.4);
 }
 </style>

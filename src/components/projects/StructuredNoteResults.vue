@@ -239,14 +239,12 @@ const statusSeverity = (status: Medication["status"]): string => {
 	padding-left: 1.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-	.hpi {
-		color: var(--dm-text-2);
-	}
+html.dark .hpi {
+	color: var(--dm-text-2);
+}
 
-	.empty,
-	.vital dt {
-		color: var(--dm-text-3);
-	}
+html.dark .empty,
+html.dark .vital dt {
+	color: var(--dm-text-3);
 }
 </style>
