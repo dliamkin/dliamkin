@@ -1,7 +1,7 @@
 {
-  "audited_at": "2026-07-05T10:29:49.941Z",
+  "audited_at": "2026-07-06T12:18:24.417Z",
   "status": "warnings",
-  "summary": "The /about page remains a bare placeholder (\"This is an about page\" on a near-blank dark canvas with no nav or footer), and the homepage LCP has crept up to 7.8 s (performance 66, down from 70) — both are ongoing issues. All three /projects routes continue to render correctly.",
+  "summary": "The /about page remains a bare placeholder (\"This is an about page\" with no nav or footer) — unchanged from prior audits. All other pages render correctly; homepage LCP improved slightly to 7.4 s but performance (66) remains well below 85 and is an ongoing concern.",
   "pages": [
     {
       "path": "/",
@@ -10,9 +10,9 @@
         "accessibility": 96,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 7787.535,
+        "lcp_ms": 7404.296,
         "cls": 0.015,
-        "tbt_ms": 97
+        "tbt_ms": 109
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with a teal-accented hero ('App' heading, 'Send me a message' CTA), four content sections (pillars, case studies, skills, contact form), and a dark teal footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -24,9 +24,9 @@
         "accessibility": 94,
         "best_practices": 100,
         "seo": 83,
-        "lcp_ms": 3513.557,
+        "lcp_ms": 3510.165,
         "cls": 0,
-        "tbt_ms": 59
+        "tbt_ms": 102.64
       },
       "visual_findings": [
         "Page contains only the placeholder text 'This is an about page' on an otherwise near-blank dark canvas — no real content, nav, or footer present on either desktop or mobile."
@@ -36,13 +36,13 @@
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 76,
+        "performance": 75,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 4255.081,
+        "lcp_ms": 4280.058,
         "cls": 0.003,
-        "tbt_ms": 92.995
+        "tbt_ms": 113.99
       },
       "visual_findings": [],
       "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, four project cards (Clinical Note Structurer, Screenshot → PrimeVue, Lease Diff Explainer, Paperwork → Calendar) in a 2-column desktop grid, and a dark contact footer — all content visible and correctly laid out on both desktop and mobile."
@@ -54,8 +54,8 @@
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 3042.93,
-        "cls": 0.083,
+        "lcp_ms": 3049.431,
+        "cls": 0.089,
         "tbt_ms": 0
       },
       "visual_findings": [],
@@ -64,11 +64,11 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 88,
+        "performance": 90,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 3052.607,
+        "lcp_ms": 2909.73,
         "cls": 0.037,
         "tbt_ms": 0
       },
@@ -77,22 +77,22 @@
     }
   ],
   "score_deltas": [
-    "/ performance 70 → 66 (drop of 4 pts — within jitter range but LCP worsened to 7788 ms from 7304 ms; remains well below 85 threshold — chronic issue)",
-    "/ lcp_ms 7304 → 7788 (marginal regression, chronic slow LCP continues to worsen slightly)",
-    "/ tbt_ms 98.5 → 97 (stable, within jitter)",
-    "/about performance 82 → 84 (+2 pts, within jitter; LCP improved 3813 ms → 3514 ms; page remains a placeholder)",
+    "/ performance 66 → 66 (stable, chronically below 85 threshold)",
+    "/ lcp_ms 7788 → 7404 (slight improvement, still critically slow)",
+    "/ tbt_ms 97 → 109 (within jitter)",
+    "/about performance 84 → 84 (stable; page remains a placeholder)",
+    "/about tbt_ms 59 → 103 (within jitter for a near-empty page)",
     "/about seo 83 → 83 (stable, below 85 threshold)",
-    "/projects performance 76 → 76 (stable)",
-    "/projects tbt_ms 151 → 93 (improvement)",
+    "/projects performance 76 → 75 (within jitter)",
+    "/projects tbt_ms 93 → 114 (within jitter)",
     "/projects/note-structurer performance 87 → 87 (stable)",
-    "/projects/note-structurer cls 0.084 → 0.083 (stable)",
-    "/projects/screenshot-to-primevue performance 88 → 88 (stable)",
-    "/projects/screenshot-to-primevue tbt_ms 131 → 0 (improvement)"
+    "/projects/note-structurer cls 0.083 → 0.089 (within jitter, not actionable)",
+    "/projects/screenshot-to-primevue performance 88 → 90 (+2 pts, within jitter)"
   ],
-  "top_fix": "Fix the homepage LCP (currently 7.8 s, performance 66, worsening day-over-day): identify and preload or optimize the hero image and eliminate any render-blocking resources — this is the single highest-impact improvement on the site.",
+  "top_fix": "Fix the homepage LCP (currently 7.4 s, performance 66, persistently below 85): preload or optimize the hero image and eliminate render-blocking resources — this remains the single highest-impact improvement on the site.",
   "should_file_issue": true,
   "issue_title": "/about page is still an empty placeholder — no real content",
-  "issue_body": "## /about is an unfinished placeholder\\n\\nBoth desktop and mobile screenshots show only the stub text **\"This is an about page\"** on a near-blank dark canvas — no navigation, biography, photo, skills summary, or footer is rendered.\\n\\nThis has now persisted across at least three consecutive audits (2026-07-03, 2026-07-04, and 2026-07-05).\\n\\n### Impact\\n- Any visitor or recruiter who navigates to `/about` sees an empty page with no information.\\n- The page SEO score (83) remains below the 85 threshold.\\n\\n### Steps to reproduce\\n1. Visit https://dliamkin.com/about on desktop or mobile.\\n2. Observe that only the placeholder text is rendered with no other UI.\\n\\n### Suggested fix\\nReplace the stub with real about-page content (bio, photo, skills summary, links) using the same layout shell as the rest of the site, including nav and contact footer.",
+  "issue_body": "## /about is an unfinished placeholder\\n\\nBoth desktop and mobile screenshots again show only the stub text **\\\"This is an about page\\\"** on a near-blank dark canvas — no navigation, biography, photo, skills summary, or footer is rendered.\\n\\nThis has now persisted across at least four consecutive audits (2026-07-03 through 2026-07-06).\\n\\n### Impact\\n- Any visitor or recruiter who navigates to `/about` sees an empty page with no information.\\n- The page SEO score (83) remains below the 85 threshold.\\n- No nav or footer means the page is a dead end for site navigation.\\n\\n### Steps to reproduce\\n1. Visit https://dliamkin.com/about on desktop or mobile.\\n2. Observe that only the placeholder text is rendered with no other UI.\\n\\n### Suggested fix\\nReplace the stub with real about-page content (bio, photo, skills summary, links) using the same layout shell as the rest of the site, including nav and contact footer.",
   "issue_fingerprint": "about-page-placeholder",
   "error_reason": null
 }
