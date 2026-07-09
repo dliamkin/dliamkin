@@ -43,6 +43,11 @@ const router = createRouter({
 			component: () => import("../views/PaperworkToCalendarView.vue"),
 		},
 		{
+			path: "/projects/upgrade-planner",
+			name: "upgrade-planner",
+			component: () => import("../views/UpgradePlannerView.vue"),
+		},
+		{
 			path: "/evals",
 			name: "evals",
 			component: () => import("../views/EvalsView.vue"),

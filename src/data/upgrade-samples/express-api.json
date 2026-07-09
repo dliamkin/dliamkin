@@ -1,0 +1,19 @@
+{
+	"name": "billing-api",
+	"version": "3.2.0",
+	"private": true,
+	"description": "A fictional, well-maintained Express API — the honest quiet case",
+	"dependencies": {
+		"express": "^5.2.0",
+		"cors": "^2.8.6",
+		"helmet": "^8.2.0",
+		"morgan": "1.10.1",
+		"dotenv": "^17.4.0",
+		"zod": "^4.4.0",
+		"pino": "^10.3.0"
+	},
+	"devDependencies": {
+		"nodemon": "~3.1.10",
+		"supertest": "~7.1.0"
+	}
+}

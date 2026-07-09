@@ -21,7 +21,12 @@ import {
 	type PaperworkInput,
 } from "../src/lib/pipelines/extract-obligations";
 import { PipelineOutputError } from "../src/lib/pipelines/shared";
+import { planUpgrades } from "../src/lib/pipelines/plan-upgrades";
 import { structureNote } from "../src/lib/pipelines/structure-note";
+import {
+	validatePlanRequestFacts,
+	type UpgradePlanResult,
+} from "../src/lib/upgrade-planner";
 
 // Each handler here is a thin wrapper: rate limiting, input validation, and
 // error mapping. The actual model pipelines (prompt assembly, API call,
@@ -40,6 +45,9 @@ interface Env {
 	// arithmetic (see extract-obligations.ts) — don't downgrade without the
 	// eval suite's computed-date cases passing.
 	PAPERWORK_MODEL?: string;
+	// Optional model override for the upgrade-plan synthesis endpoint. Haiku
+	// by default — see plan-upgrades.ts for why the cheap model is safe here.
+	UPGRADE_PLANNER_MODEL?: string;
 }
 
 // Simple in-memory limiters. Workers isolates are ephemeral and per-PoP, so
@@ -72,6 +80,11 @@ const leaseDailyLimiter = createRateLimiter(20, 86_400_000); // 20/day/IP
 // vision-call pricing sets the daily cap, like the screenshot endpoint.
 const paperworkLimiter = createRateLimiter(6, 60_000); // 6/min/IP
 const paperworkDailyLimiter = createRateLimiter(30, 86_400_000); // 30/day/IP
+// Upgrade-plan synthesis is text-only Haiku with a hard-capped facts payload
+// — cheap per call, but the input is fully attacker-shapeable JSON, so the
+// same per-minute/daily pattern applies.
+const upgradePlanLimiter = createRateLimiter(6, 60_000); // 6/min/IP
+const upgradePlanDailyLimiter = createRateLimiter(30, 86_400_000); // 30/day/IP
 
 function json(body: unknown, status: number): Response {
 	return new Response(JSON.stringify(body), {
@@ -411,6 +424,61 @@ async function handleExtractObligations(request: Request, env: Env): Promise<Res
 	}
 }
 
+async function handlePlanUpgrades(request: Request, env: Env): Promise<Response> {
+	const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+	if (upgradePlanLimiter(ip)) {
+		return json({ error: "Please wait a minute between plans and try again." }, 429);
+	}
+	if (upgradePlanDailyLimiter(ip)) {
+		return json(
+			{ error: "You've hit today's planning limit for this demo. Come back tomorrow!" },
+			429,
+		);
+	}
+
+	let rawFacts: unknown;
+	try {
+		const body = (await request.json()) as Record<string, unknown>;
+		rawFacts = body.facts;
+	} catch {
+		return json({ error: "Request body must be JSON." }, 400);
+	}
+
+	// The payload is the distilled DependencyFact projection the browser
+	// computed against the npm registry — validated field by field (shape,
+	// entry cap, per-string caps, total size) before it can reach the prompt.
+	const facts = validatePlanRequestFacts(rawFacts);
+	if (typeof facts === "string") {
+		return json({ error: facts }, 400);
+	}
+
+	// Privacy: the dependency list is held in memory for this request only —
+	// never written to storage and never logged (metadata only, below).
+	const startedAt = Date.now();
+	const anthropic = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+
+	try {
+		const result: UpgradePlanResult = await planUpgrades(
+			anthropic,
+			facts,
+			env.UPGRADE_PLANNER_MODEL,
+		);
+		console.log(
+			`plan-upgrades outcome=ok facts=${facts.length} warnings=${result.validation_warnings.length} duration_ms=${Date.now() - startedAt}`,
+		);
+		return json(result, 200);
+	} catch (error) {
+		const outcome = error instanceof PipelineOutputError ? "malformed" : "error";
+		console.log(
+			`plan-upgrades outcome=${outcome} facts=${facts.length} duration_ms=${Date.now() - startedAt}`,
+		);
+		return friendlyApiError(
+			error,
+			"The model did not return a complete upgrade plan. Please try again.",
+		);
+	}
+}
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url);
@@ -439,6 +507,12 @@ export default {
 				return json({ error: "Method not allowed." }, 405);
 			}
 			return handleExtractObligations(request, env);
+		}
+		if (url.pathname === "/api/plan-upgrades") {
+			if (request.method !== "POST") {
+				return json({ error: "Method not allowed." }, 405);
+			}
+			return handlePlanUpgrades(request, env);
 		}
 		return json({ error: "Not found." }, 404);
 	},

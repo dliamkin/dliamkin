@@ -45,6 +45,14 @@ const projects: ProjectEntry[] = [
 		description:
 			"Paste, upload, or photograph any document with deadlines buried in it and get back a downloadable .ics — every deadline, notice window, and renewal as calendar events with reminders set before the date, not on it.",
 	},
+	{
+		to: "/projects/upgrade-planner",
+		icon: "fa-solid fa-arrow-up-right-dots",
+		title: "Dependency Upgrade Planner",
+		tags: ["npm registry", "Semver math", "Structured output"],
+		description:
+			"Paste a package.json and get computed facts — versions behind, deprecations, peer conflicts, straight from the npm registry in your browser — then an AI-synthesized upgrade plan: risk tiers, ordered waves, and the commands to run.",
+	},
 ];
 </script>
 
@@ -69,7 +77,12 @@ const projects: ProjectEntry[] = [
 			</header>
 
 			<div class="project-cards">
-				<RouterLink v-for="project in projects" :key="project.to" :to="project.to" class="project-link">
+				<RouterLink
+					v-for="project in projects"
+					:key="project.to"
+					:to="project.to"
+					class="project-link"
+				>
 					<Card class="project-card">
 						<template #title>
 							<div class="card-title">

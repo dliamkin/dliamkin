@@ -31,12 +31,14 @@ import { leaseDiffSuite } from "./suites/lease-diff";
 import { noteStructurerSuite } from "./suites/note-structurer";
 import { paperworkSuite } from "./suites/paperwork-to-calendar";
 import { screenshotSuite } from "./suites/screenshot-to-primevue";
+import { upgradePlannerSuite } from "./suites/upgrade-planner";
 
 const ALL_SUITES: RunnableSuite[] = [
 	noteStructurerSuite,
 	leaseDiffSuite,
 	screenshotSuite,
 	paperworkSuite,
+	upgradePlannerSuite,
 ];
 
 function parseArgs(argv: string[]): { project: EvalProjectId | null; json: boolean; noCommit: boolean } {
