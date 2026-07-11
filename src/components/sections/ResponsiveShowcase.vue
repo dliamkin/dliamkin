@@ -6,7 +6,14 @@
 				I create beautiful, functional websites that provide an excellent user experience
 				across all devices.
 			</p>
-			<img src="/images/mock.png" alt="Responsive device mockup" class="mock-img" />
+			<img
+				src="/images/mock.webp"
+				alt="Responsive device mockup"
+				class="mock-img"
+				width="1099"
+				height="284"
+				loading="lazy"
+			/>
 		</div>
 	</section>
 </template>

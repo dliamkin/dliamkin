@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import Button from "primevue/button";
-import Column from "primevue/column";
-import DataTable from "primevue/datatable";
-import Dialog from "primevue/dialog";
+import { computed, defineAsyncComponent, onMounted, ref } from "vue";
 import Tag from "primevue/tag";
 import {
 	HEALTH_STATUSES,
-	type HealthHistoryEntry,
 	type HealthReport,
 	type HealthStatus,
 } from "@/lib/site-health";
@@ -18,13 +13,16 @@ import {
 // index.html (HTTP 200), so "missing" is detected by content-type + shape,
 // not status code.
 
-const REPO_URL = "https://github.com/dliamkin/dliamkin";
-const ISSUES_URL = `${REPO_URL}/issues?q=is%3Aissue+is%3Aopen+label%3Asite-health`;
-const WORKFLOW_URL = `${REPO_URL}/blob/main/.github/workflows/site-health.yml`;
+// The details dialog pulls in PrimeVue's DataTable + Dialog — by far the
+// heaviest components in the library. Loading them only on the first click
+// keeps them out of the main bundle every page ships.
+const SiteHealthDetailsDialog = defineAsyncComponent(
+	() => import("@/components/SiteHealthDetailsDialog.vue"),
+);
 
 const report = ref<HealthReport | null>(null);
-const history = ref<HealthHistoryEntry[]>([]);
 const showDetails = ref(false);
+const detailsRequested = ref(false);
 
 function isHealthReport(value: unknown): value is HealthReport {
 	return (
@@ -35,33 +33,22 @@ function isHealthReport(value: unknown): value is HealthReport {
 	);
 }
 
-async function fetchJson(path: string): Promise<unknown> {
-	const response = await fetch(path);
-	if (!response.ok || !response.headers.get("content-type")?.includes("json")) {
-		return null;
-	}
-	return response.json();
-}
-
 onMounted(async () => {
 	try {
-		const data = await fetchJson("/site-health/latest.json");
+		const response = await fetch("/site-health/latest.json");
+		if (!response.ok || !response.headers.get("content-type")?.includes("json")) {
+			return;
+		}
+		const data = await response.json();
 		if (isHealthReport(data)) report.value = data;
 	} catch {
 		// No report yet (or unreachable) — render nothing.
 	}
 });
 
-async function openDetails() {
+function openDetails() {
+	detailsRequested.value = true;
 	showDetails.value = true;
-	if (history.value.length === 0) {
-		try {
-			const data = await fetchJson("/site-health/history.json");
-			if (Array.isArray(data)) history.value = data as HealthHistoryEntry[];
-		} catch {
-			// Sparkline just stays hidden.
-		}
-	}
 }
 
 const statusMeta: Record<HealthStatus, { severity: string; label: string }> = {
@@ -95,22 +82,6 @@ const averages = computed(() => {
 		{ label: "SEO", value: avg((p) => p.lighthouse.seo) },
 	];
 });
-
-// Minimal inline SVG sparkline of nightly average performance — no chart
-// dependency needed for a 90-point line.
-const sparkline = computed(() => {
-	const points = history.value.map((entry) => entry.scores.performance);
-	if (points.length < 2) return null;
-	const width = 140;
-	const height = 36;
-	const step = width / (points.length - 1);
-	return points
-		.map(
-			(score, i) =>
-				`${(i * step).toFixed(1)},${(height - (score / 100) * height).toFixed(1)}`,
-		)
-		.join(" ");
-});
 </script>
 
 <template>
@@ -134,80 +105,13 @@ const sparkline = computed(() => {
 			</span>
 		</button>
 
-		<Dialog
+		<SiteHealthDetailsDialog
+			v-if="detailsRequested"
 			v-model:visible="showDetails"
-			modal
-			header="Nightly AI Site Health Audit"
-			class="health-dialog"
-			:style="{ width: 'min(680px, 94vw)' }"
-		>
-			<p class="dialog-framing">
-				This site audits itself nightly —
-				<a :href="WORKFLOW_URL" target="_blank" rel="noopener noreferrer"
-					>Lighthouse + Playwright + an AI reviewer in CI</a
-				>. Findings are filed as
-				<a :href="ISSUES_URL" target="_blank" rel="noopener noreferrer">GitHub issues</a>
-				automatically.
-			</p>
-
-			<p class="dialog-status">
-				<Tag :severity="meta.severity" :value="meta.label" />
-				<span>{{ report.summary }}</span>
-			</p>
-
-			<DataTable :value="report.pages" size="small" class="dialog-table">
-				<Column field="path" header="Page" />
-				<Column header="Perf">
-					<template #body="{ data }">{{ data.lighthouse.performance }}</template>
-				</Column>
-				<Column header="A11y">
-					<template #body="{ data }">{{ data.lighthouse.accessibility }}</template>
-				</Column>
-				<Column header="Best">
-					<template #body="{ data }">{{ data.lighthouse.best_practices }}</template>
-				</Column>
-				<Column header="SEO">
-					<template #body="{ data }">{{ data.lighthouse.seo }}</template>
-				</Column>
-			</DataTable>
-
-			<p v-if="report.top_fix" class="dialog-topfix">
-				<strong>Top recommended fix:</strong> {{ report.top_fix }}
-			</p>
-
-			<div v-if="sparkline" class="dialog-trend">
-				<span class="trend-label">Performance trend (nightly avg)</span>
-				<svg
-					viewBox="0 0 140 36"
-					width="140"
-					height="36"
-					role="img"
-					aria-label="Performance score trend"
-				>
-					<polyline
-						:points="sparkline"
-						fill="none"
-						stroke="#27a9e0"
-						stroke-width="2"
-						stroke-linejoin="round"
-						stroke-linecap="round"
-					/>
-				</svg>
-			</div>
-
-			<template #footer>
-				<Button
-					label="Open site-health issues"
-					icon="fa-brands fa-github"
-					severity="secondary"
-					size="small"
-					as="a"
-					:href="ISSUES_URL"
-					target="_blank"
-					rel="noopener noreferrer"
-				/>
-			</template>
-		</Dialog>
+			:report="report"
+			:status-label="meta.label"
+			:status-severity="meta.severity"
+		/>
 	</div>
 </template>
 
@@ -289,53 +193,9 @@ const sparkline = computed(() => {
 	color: #8a8b8f;
 }
 
-.dialog-framing,
-.dialog-status,
-.dialog-topfix {
-	font-family: "Raleway", sans-serif;
-	font-size: 0.92rem;
-	line-height: 1.55;
-	margin: 0 0 1rem;
-}
-
-.dialog-framing a {
-	color: #1f8fc0;
-}
-
-.dialog-status {
-	display: flex;
-	align-items: flex-start;
-	gap: 0.6rem;
-}
-
-.dialog-table {
-	margin-bottom: 1rem;
-}
-
-.dialog-trend {
-	display: flex;
-	align-items: center;
-	gap: 0.8rem;
-}
-
-.trend-label {
-	font-family: "Raleway", sans-serif;
-	font-size: 0.8rem;
-	color: #6b7280;
-}
-
 @media (max-width: 700px) {
 	.health-scores {
 		display: none;
 	}
-}
-
-/* The footer widget itself is already dark; only the dialog text needs help. */
-html.dark .dialog-framing a {
-	color: var(--dm-blue-soft);
-}
-
-html.dark .trend-label {
-	color: var(--dm-text-3);
 }
 </style>

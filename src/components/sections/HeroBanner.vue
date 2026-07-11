@@ -61,17 +61,19 @@ const scrollToContact = () => {
 	el.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
 };
 
+// The first two form the wall's top row and are usually the page's LCP
+// element — index.html preloads them, so keep the lists in sync.
 const portfolioImages = [
-	"entomology.jpg",
-	"resetu.jpg",
-	"oakwood.jpg",
-	"ole.jpg",
-	"firsteyefilm.jpg",
-	"toolsoffitness.jpg",
-	"spicegalgourmet.jpg",
-	"plumbingeasy.jpg",
-	"aptsintally.jpg",
-	"grenninglab.jpg",
+	"entomology.webp",
+	"resetu.webp",
+	"oakwood.webp",
+	"ole.webp",
+	"firsteyefilm.webp",
+	"toolsoffitness.webp",
+	"spicegalgourmet.webp",
+	"plumbingeasy.webp",
+	"aptsintally.webp",
+	"grenninglab.webp",
 ];
 
 // Procedurally generated animated low-poly background
@@ -209,7 +211,14 @@ const bgTris = (() => {
 				>
 					<div class="item-card">
 						<figure class="item-thumb">
-							<img :src="`/images/${image}`" alt="" loading="lazy" />
+							<img
+								:src="`/images/${image}`"
+								alt=""
+								width="500"
+								height="320"
+								:loading="idx < 2 ? 'eager' : 'lazy'"
+								:fetchpriority="idx < 2 ? 'high' : undefined"
+							/>
 							<span class="item-shadow"></span>
 						</figure>
 					</div>

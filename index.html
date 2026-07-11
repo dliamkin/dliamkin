@@ -51,10 +51,20 @@
     <meta name="twitter:image" content="https://dliamkin.com/og-image.png">
     <meta name="twitter:image:alt" content="Denis Liamkin — Senior Software Engineer">
 
-    <!-- Fonts -->
+    <!-- LCP: the hero portfolio wall's top-row images. The SPA only requests
+         them after the JS bundle runs; preloading starts the fetch during HTML
+         parse instead. Keep in sync with portfolioImages in HeroBanner.vue. -->
+    <link rel="preload" as="image" href="/images/entomology.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/resetu.webp" fetchpriority="high">
+
+    <!-- Fonts: loaded async (media swap on load) so the stylesheet never
+         blocks first paint; all families already use display=swap. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=JetBrains+Mono:wght@400;500;700&family=Quicksand:wght@300;400;500&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=JetBrains+Mono:wght@400;500;700&family=Quicksand:wght@300;400;500&family=Raleway:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=JetBrains+Mono:wght@400;500;700&family=Quicksand:wght@300;400;500&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    </noscript>
   </head>
   <body>
     <div id="app"></div>
