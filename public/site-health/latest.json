@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-07-13T11:30:44.350Z",
+  "audited_at": "2026-07-14T10:10:50.724Z",
   "status": "warnings",
-  "summary": "Homepage performance holds at 73 (LCP 6.5 s) — persistently below 85 with no improvement in trend; /about remains a near-blank placeholder with stub text only, no nav or footer, and SEO 83 still below threshold. All other pages are visually intact.",
+  "summary": "Homepage performance remains at 72 (LCP 6.6 s), persistently below 85 with no improvement trend; /about is still a near-blank placeholder with stub text only and SEO 83 below threshold. Project pages recovered well above 85, and all other pages are visually intact.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 73,
+        "performance": 72,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 6542.194,
+        "lcp_ms": 6595.082,
         "cls": 0.015,
-        "tbt_ms": 174
+        "tbt_ms": 206
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with teal-accented hero ('App' heading, 'Send me a message' CTA), four content sections (pillars, case studies, skills, contact form), and a dark contact footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -20,13 +20,13 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 89,
+        "performance": 90,
         "accessibility": 94,
         "best_practices": 100,
         "seo": 83,
-        "lcp_ms": 3059.542,
+        "lcp_ms": 3130.893,
         "cls": 0,
-        "tbt_ms": 98.784
+        "tbt_ms": 110
       },
       "visual_findings": [
         "Page still contains only the placeholder text 'This is an about page' on a near-blank dark canvas — no real content, nav, or footer present on either desktop or mobile."
@@ -36,13 +36,13 @@
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 83,
+        "performance": 92,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 3664.33,
+        "lcp_ms": 3003.665,
         "cls": 0.003,
-        "tbt_ms": 78
+        "tbt_ms": 85.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, five project cards (Clinical Note Structurer, Screenshot → PrimeVue, Lease Diff Explainer, Paperwork → Calendar, Dependency Upgrade Planner) in a 2-column desktop grid with the fifth card left-aligned, and a dark contact footer visible on both desktop and mobile."
@@ -50,13 +50,13 @@
     {
       "path": "/projects/note-structurer",
       "lighthouse": {
-        "performance": 84,
+        "performance": 90,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 3391.341,
-        "cls": 0.084,
-        "tbt_ms": 68.5
+        "lcp_ms": 2910.87,
+        "cls": 0.09,
+        "tbt_ms": 131.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer detail page with breadcrumb nav, 'Evals: 10/10 passing' badge, two-column visit note / structured result interactive demo, amber disclaimer banner, expandable JSON and HIPAA notes accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -64,46 +64,46 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 81,
+        "performance": 90,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 3812.324,
-        "cls": 0.037,
-        "tbt_ms": 126
+        "lcp_ms": 3156.978,
+        "cls": 0.036,
+        "tbt_ms": 125
       },
       "visual_findings": [],
       "visual_fingerprint": "Screenshot → PrimeVue detail page with breadcrumb nav, 'Evals: 5/5 passing' badge, dashed-border image drop zone, three sample thumbnail cards (Login form, Analytics dashboard, Pricing page), a placeholder result panel, expandable accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     }
   ],
   "score_deltas": [
-    "/ performance 74 → 73 (-1 pt, within jitter — still persistently below 85)",
-    "/ lcp_ms 6810 → 6542 (-268 ms, within jitter — still critically slow above 6 s)",
-    "/ tbt_ms 123 → 174 (+51 ms, within jitter)",
+    "/ performance 73 → 72 (-1 pt, within jitter — still persistently below 85)",
+    "/ lcp_ms 6542 → 6595 (+53 ms, within jitter — still critically slow above 6 s)",
+    "/ tbt_ms 174 → 206 (+32 ms, within jitter)",
     "/ accessibility 96 → 96 (stable)",
     "/ seo 92 → 92 (stable)",
     "/ cls 0.015 → 0.015 (stable)",
-    "/about performance 89 → 89 (stable)",
+    "/about performance 89 → 90 (+1 pt, within jitter — stable)",
     "/about accessibility 94 → 94 (stable)",
     "/about seo 83 → 83 (stable, below 85 threshold — unchanged)",
-    "/about lcp_ms 3070 → 3060 (stable)",
-    "/about tbt_ms 76 → 99 (+23 ms, within jitter)",
-    "/projects performance 92 → 83 (-9 pts, dropped back below 85 threshold — warrants monitoring)",
-    "/projects lcp_ms 2939 → 3664 (+725 ms, notable regression)",
-    "/projects tbt_ms 54 → 78 (+24 ms, within jitter)",
-    "/projects/note-structurer performance 91 → 84 (-7 pts, dropped below 85 threshold)",
-    "/projects/note-structurer lcp_ms 2902 → 3391 (+489 ms, regression)",
-    "/projects/note-structurer tbt_ms 95 → 69 (-26 ms, within jitter)",
-    "/projects/note-structurer cls 0.085 → 0.084 (stable)",
-    "/projects/screenshot-to-primevue performance 83 → 81 (-2 pts, within jitter — below 85)",
-    "/projects/screenshot-to-primevue lcp_ms 3681 → 3812 (+131 ms, within jitter)",
-    "/projects/screenshot-to-primevue tbt_ms 47 → 126 (+79 ms, within jitter)",
-    "/projects/screenshot-to-primevue cls 0.036 → 0.037 (stable)"
+    "/about lcp_ms 3060 → 3131 (+71 ms, within jitter)",
+    "/about tbt_ms 99 → 110 (+11 ms, within jitter)",
+    "/projects performance 83 → 92 (+9 pts, recovered well above 85 threshold)",
+    "/projects lcp_ms 3664 → 3004 (-661 ms, improved)",
+    "/projects tbt_ms 78 → 86 (+8 ms, within jitter)",
+    "/projects/note-structurer performance 84 → 90 (+6 pts, recovered above 85 threshold)",
+    "/projects/note-structurer lcp_ms 3391 → 2911 (-480 ms, improved)",
+    "/projects/note-structurer tbt_ms 69 → 132 (+63 ms, within jitter)",
+    "/projects/note-structurer cls 0.084 → 0.090 (+0.006, within jitter)",
+    "/projects/screenshot-to-primevue performance 81 → 90 (+9 pts, recovered above 85 threshold)",
+    "/projects/screenshot-to-primevue lcp_ms 3812 → 3157 (-655 ms, improved)",
+    "/projects/screenshot-to-primevue tbt_ms 126 → 125 (stable)",
+    "/projects/screenshot-to-primevue cls 0.037 → 0.036 (stable)"
   ],
-  "top_fix": "Fix the homepage LCP (currently 6.5 s, performance score 73, persistently below 85 across many consecutive audits): preload the hero image with `<link rel=\"preload\" as=\"image\">`, serve it in WebP/AVIF at mobile-appropriate dimensions, and defer render-blocking resources above the fold — this remains the single highest-impact unresolved issue on the site.",
+  "top_fix": "Fix the homepage LCP (currently 6.6 s, performance score 72, persistently below 85 across many consecutive audits): preload the hero image with `<link rel=\"preload\" as=\"image\">`, serve it in WebP/AVIF at mobile-appropriate dimensions, and defer render-blocking resources above the fold — this remains the single highest-impact unresolved issue on the site.",
   "should_file_issue": true,
-  "issue_title": "Homepage performance 73 (LCP 6.5 s) — persistent multi-audit regression unresolved; /about still an empty placeholder with SEO 83; /projects and /note-structurer slipped below 85",
-  "issue_body": "## Homepage performance remains critically slow — persistent, unresolved\n\nThe homepage (`/`) scored **73** on today's mobile Lighthouse audit (2026-07-13), with LCP at **6,542 ms**. The score has been below 85 for many consecutive audits with no sustained fix applied.\n\n### Current metrics (mobile) — `/`\n| Metric | Value | vs. Previous |\n|---|---|---|\n| Performance | 73 | -1 pt (within jitter — still persistently below 85) |\n| LCP | 6,542 ms | -268 ms (within jitter — still critically slow) |\n| CLS | 0.015 | stable |\n| TBT | 174 ms | +51 ms (within jitter) |\n\n### Still open — `/about`\n- `/about` remains an empty placeholder (stub text only, no nav or footer); SEO score **83**, below the 85 threshold — unchanged across multiple audits.\n\n### New regressions this audit\n- `/projects` performance dropped **92 → 83** (-9 pts, fell below 85 threshold); LCP rose +725 ms.\n- `/projects/note-structurer` performance dropped **91 → 84** (-7 pts, fell below 85 threshold); LCP rose +489 ms.\n- `/projects/screenshot-to-primevue` remains at **81** (below 85 threshold, stable pattern).\n\n### Suggested fixes for `/` (highest priority)\n1. Preload the LCP hero image with `<link rel=\"preload\" as=\"image\">`.\n2. Serve the hero in a next-gen format (WebP/AVIF) sized for mobile viewports.\n3. Defer or remove render-blocking stylesheets/scripts above the fold.\n4. Consider lazy-loading below-fold images to reduce initial payload.\n\n### Suggested fix for `/about`\n- Build out the About page with real content, nav, and footer to resolve the SEO score and the placeholder breakage.\n\n### Note on /projects and /projects/note-structurer drops\n- The -9 and -7 pt performance drops on these two pages crossed the 85 threshold. Monitor next audit to determine if this is jitter bounce-back or a genuine regression requiring action.",
+  "issue_title": "Homepage performance 72 (LCP 6.6 s) — persistent multi-audit regression unresolved; /about still an empty placeholder with SEO 83",
+  "issue_body": "## Homepage performance remains critically slow — persistent, unresolved\n\nThe homepage (`/`) scored **72** on today's mobile Lighthouse audit (2026-07-14), with LCP at **6,595 ms**. The score has now been below 85 for many consecutive audits with no sustained improvement applied.\n\n### Current metrics (mobile) — `/`\n| Metric | Value | vs. Previous |\n|---|---|---|\n| Performance | 72 | -1 pt (within jitter — still persistently below 85) |\n| LCP | 6,595 ms | +53 ms (within jitter — still critically slow) |\n| CLS | 0.015 | stable |\n| TBT | 206 ms | +32 ms (within jitter) |\n\n### Still open — `/about`\n- `/about` remains an empty placeholder (stub text only, no nav or footer); SEO score **83**, below the 85 threshold — unchanged across multiple consecutive audits.\n\n### Positive news this audit\n- `/projects` performance recovered from **83 → 92** (+9 pts, last audit's drop appears to have been jitter).\n- `/projects/note-structurer` performance recovered from **84 → 90** (+6 pts).\n- `/projects/screenshot-to-primevue` performance recovered from **81 → 90** (+9 pts).\n\n### Suggested fixes for `/` (highest priority)\n1. Preload the LCP hero image with `<link rel=\"preload\" as=\"image\">`.\n2. Serve the hero in a next-gen format (WebP/AVIF) sized for mobile viewports.\n3. Defer or remove render-blocking stylesheets/scripts above the fold.\n4. Consider lazy-loading below-fold images to reduce initial payload.\n\n### Suggested fix for `/about`\n- Build out the About page with real content, nav, and footer to resolve the SEO score and the placeholder breakage.",
   "issue_fingerprint": "home-performance-lcp-regression",
   "error_reason": null
 }
