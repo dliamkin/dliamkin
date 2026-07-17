@@ -190,7 +190,7 @@ export function validatePlanRequestFacts(value: unknown): PlanRequestFact[] | st
 // ---------------------------------------------------------------------------
 // Prompt and tool schema
 
-export const PLAN_UPGRADES_SYSTEM_PROMPT = `You are an upgrade-planning engine inside a technical demo for developers. You receive computed dependency facts: current declared ranges, latest versions, versions-behind counts, deprecation flags, and detected peer conflicts. These facts are ground truth — never contradict them, never introduce version numbers not present in them. Your job is judgment: assign each package a risk tier (safe_now: patch/minor with no known breakage; needs_testing: minor with meaningful surface or ecosystem coupling; breaking_likely: major bumps, deprecated packages, or known migration efforts), group packages into ordered upgrade waves where each wave is safe to do together (keep tightly coupled ecosystems — a framework and its plugins, a lint stack, a test stack — in the same wave; sequence waves so peer conflicts resolve in order; put tooling-only devDependencies before runtime dependencies when reasonable), and write a short rationale per wave plus concrete npm install commands. When you note a known breaking change or migration (e.g. a major version's renamed API), mark your confidence (high/medium/low) — your knowledge may be outdated, and the reader will be told to verify against changelogs. If facts are sparse for a package, tier it conservatively and say why. Do not pad: a package that is current belongs in already_current, not in a wave. A deprecated package always belongs in breaking_likely with a deprecated_alerts entry naming its replacement when you know one, plainly marked as your suggestion to verify. Write one peer_conflict_guidance entry per detected conflict explaining how the wave order resolves it. general_advice holds at most 3 concrete items — no filler.`;
+export const PLAN_UPGRADES_SYSTEM_PROMPT = `You are an upgrade-planning engine inside a technical demo for developers. You receive computed dependency facts: current declared ranges, latest versions, versions-behind counts, deprecation flags, and detected peer conflicts. These facts are ground truth — never contradict them, never introduce version numbers not present in them. Your job is judgment: assign each package a risk tier (safe_now: patch/minor with no known breakage; needs_testing: minor with meaningful surface or ecosystem coupling; breaking_likely: major bumps, deprecated packages, or known migration efforts), group packages into ordered upgrade waves where each wave is safe to do together (keep tightly coupled ecosystems — a framework and its own plugins, router, or state store, a lint stack, a test stack — together in one single wave; for peer conflicts between otherwise-unrelated packages, order the waves so the required package lands no later than its dependent — sharing a wave counts as resolved; put tooling-only devDependencies before runtime dependencies when reasonable), and write a short rationale per wave plus concrete npm install commands. Hard rule on coupled stacks: a framework and its companion packages migrate atomically, in ONE wave listing all of them (e.g. vue + vue-router + vuex, or react + react-dom), because the application cannot build in a half-migrated intermediate state. A conflict message saying "upgrade X first" does not mean X goes in an earlier wave — it is satisfied by X sharing the same wave as its dependent, and splitting a coupled stack across waves is always wrong. When you note a known breaking change or migration (e.g. a major version's renamed API), mark your confidence (high/medium/low) — your knowledge may be outdated, and the reader will be told to verify against changelogs. If facts are sparse for a package, tier it conservatively and say why. Do not pad: a package that is current belongs in already_current, not in a wave. A deprecated package always belongs in breaking_likely with a deprecated_alerts entry naming its replacement when you know one, plainly marked as your suggestion to verify. Never emit a wave whose packages list is empty: advice to remove or replace a deprecated package belongs in deprecated_alerts and general_advice, not in a wave of its own — waves exist only to upgrade the listed packages. Write one peer_conflict_guidance entry per detected conflict explaining how the wave order resolves it. general_advice holds at most 3 concrete items — no filler.`;
 
 // Mirrors UpgradePlan 1:1 (validation_warnings is added by post-validation,
 // never by the model). strict: true means the API validates the model's
@@ -375,6 +375,7 @@ export function validateUpgradePlan(
 
 	const waves = plan.waves
 		.map((wave) => {
+			const arrivedEmpty = wave.packages.length === 0;
 			const packages = wave.packages.filter((name) => {
 				if (plannedNames.has(name)) return true;
 				warnings.push(
@@ -382,13 +383,17 @@ export function validateUpgradePlan(
 				);
 				return false;
 			});
-			return { ...wave, packages, command: buildWaveCommand(packages, factsByName) };
+			return { ...wave, packages, arrivedEmpty, command: buildWaveCommand(packages, factsByName) };
 		})
 		.filter((wave) => {
 			if (wave.packages.length > 0) return true;
-			warnings.push(`Dropped empty wave "${wave.title}".`);
+			// A wave the model sent with no packages at all (e.g. a "remove the
+			// deprecated package" advice wave) contains nothing invented — drop
+			// it silently. Only warn when stripping invented entries emptied it.
+			if (!wave.arrivedEmpty) warnings.push(`Dropped empty wave "${wave.title}".`);
 			return false;
 		})
+		.map(({ arrivedEmpty: _arrivedEmpty, ...wave }) => wave)
 		// Preserve the model's intended sequence, then renumber 1..n so the
 		// timeline never shows gaps.
 		.sort((a, b) => a.order - b.order)
