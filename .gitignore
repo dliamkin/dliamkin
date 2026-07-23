@@ -74,3 +74,6 @@ __pycache__/
 # Private engineering docs (public repo → these stay local only; mirror to a
 # private repo/drive for backup — see docs/internal/README.md).
 docs/internal/
+
+# ToS watchdog: local clone of the private snapshot repo (never committed here)
+tos-snapshots/

@@ -26,6 +26,8 @@
     "generate:upgrade-samples": "tsx ./scripts/generate-upgrade-samples.mjs",
     "audit:local": "tsx ./scripts/site-health/run-audit.ts",
     "eval": "tsx ./scripts/evals/run-evals.ts",
+    "tos-watch:run": "tsx ./scripts/tos-watch/run.ts",
+    "tos-watch:shakeout": "tsx ./scripts/tos-watch/shakeout.ts",
     "ml:generate-data": "tsx ./ml/datagen/index.ts",
     "ml:train": "ml/train/.venv/bin/python ml/train/train.py",
     "ml:export": "ml/train/.venv/bin/python ml/train/export_onnx.py"

@@ -32,9 +32,9 @@ This publishes claims about real organizations' legal documents under the owner'
 
 2. **Normalization as one pure, heavily-tested module** (`scripts/tos-watch/normalize.ts`): selector extraction → boilerplate strip → whitespace collapse → volatile-fragment strip (copyright years; "last updated" lines captured as metadata, never hashed). This module is the false-positive defense; everything downstream trusts it. Hash = SHA-256 of normalized text.
 
-3. **Mechanical diff reuses the `diff` package pattern from the lease engine** but as a new script-side module (`scripts/tos-watch/mechanical-diff.ts`) rather than importing the lease-specific one — the lease module carries lease-specific block semantics. Only changed blocks + N surrounding context blocks go to the model; never both full documents (ToS run tens of thousands of words — token-cost control).
+3. **Mechanical diff reuses the `diff` package pattern from the lease engine** but as a new module (`src/lib/tos-watch-diff.ts`, script-side only like `lease-mechanical-diff.ts`) rather than importing the lease-specific one — the lease module carries lease-specific block semantics. Only changed blocks + N surrounding context blocks go to the model; never both full documents (ToS run tens of thousands of words — token-cost control).
 
-4. **Model: `claude-sonnet-4-6` default, `TOS_WATCH_MODEL` env override** (Haiku budget fallback), forced tool use, `max_tokens` 4000. Legal text + published output + very low volume (a few calls/month) justify the better model. System prompt as approved by the owner verbatim (cosmetic gate first; neutral; ≤25-word excerpts; `unclear` over guessing; no advice).
+4. **Model: `claude-sonnet-5` default (matching the lease pipeline's current house model), `TOS_WATCH_MODEL` env override** (Haiku budget fallback), forced tool use, `max_tokens` 4000. Legal text + published output + very low volume (a few calls/month) justify the better model. System prompt as approved by the owner verbatim (cosmetic gate first; neutral; ≤25-word excerpts; `unclear` over guessing; no advice).
 
 5. **Schema uses `favors_provider`, not `favors_company`** — the monitored set includes university departments. Shared types live in `src/lib/tos-watch.ts` (imported by both the page and scripts, like the lease types).
 
@@ -63,6 +63,6 @@ Deploy is additive (new files only; router + homepage teaser are the only touche
 
 ## Open Questions
 
-- Exact CSS selectors per document — resolved empirically during the checkpoint-2 shake-out run.
+- ~~Exact CSS selectors per document~~ — resolved in the shake-out: fallback extraction works for 15 of 16 documents; Reddit's User Agreement uses `#text-content1` (US variant), and Reddit's privacy policy was dropped (client-rendered).
 - Whether X/TikTok-style swaps are needed does not apply anymore (list is UF-majority + four bot-friendly consumer services), but the shake-out may still reject a URL; owner approves any swap.
-- RSS vs Atom flavor — default to RSS 2.0 unless the owner objects (widest reader support, simplest to hand-generate).
+- ~~RSS vs Atom flavor~~ — resolved: RSS 2.0 (widest reader support, simplest to hand-generate).

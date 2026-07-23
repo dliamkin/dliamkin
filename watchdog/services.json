@@ -1,0 +1,161 @@
+{
+	"services": [
+		{
+			"id": "uf-policy-office",
+			"name": "UF Policy Office",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Acceptable Use Policy",
+					"url": "https://policy.ufl.edu/policy/acceptable-use-policy/",
+					"selector": null
+				},
+				{
+					"label": "Acceptable Data Use Policy",
+					"url": "https://policy.ufl.edu/policy/acceptable-data-use/",
+					"selector": null
+				},
+				{
+					"label": "Control of Electronic Media Policy",
+					"url": "https://policy.ufl.edu/policy/control-of-electronic-media/",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "uf-privacy-office",
+			"name": "UF Privacy Office",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Online/Internet Privacy Policy",
+					"url": "https://privacy.ufl.edu/policies/onlineinternet-privacy-policy-/",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "uf-career-hub",
+			"name": "UF Career Hub",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Privacy Policy",
+					"url": "https://careerhub.ufl.edu/privacy-policy/",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "uf-smathers-libraries",
+			"name": "UF Smathers Libraries",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Privacy Policy",
+					"url": "https://uflib.ufl.edu/about/user-policies/privacy-policy/",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "uf-lastinger-center",
+			"name": "UF Lastinger Center for Learning",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Privacy Policy",
+					"url": "https://lastinger.ufl.edu/privacy-policy/",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "uf-med-physiology",
+			"name": "UF Medical Physiology Online",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Privacy, Terms & Cookies Policies",
+					"url": "https://distance.physiology.med.ufl.edu/privacy-terms-cookies-policies/",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "uf-web-services",
+			"name": "UF Web Services",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Digital Standards",
+					"url": "https://webservices.it.ufl.edu/digital-standards/",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "google",
+			"name": "Google",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Terms of Service",
+					"url": "https://policies.google.com/terms",
+					"selector": null
+				},
+				{
+					"label": "Privacy Policy",
+					"url": "https://policies.google.com/privacy",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "reddit",
+			"name": "Reddit",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "User Agreement (US)",
+					"url": "https://redditinc.com/policies/user-agreement",
+					"selector": "#text-content1"
+				}
+			]
+		},
+		{
+			"id": "github",
+			"name": "GitHub",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Terms of Service",
+					"url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+					"selector": null
+				},
+				{
+					"label": "General Privacy Statement",
+					"url": "https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement",
+					"selector": null
+				}
+			]
+		},
+		{
+			"id": "anthropic",
+			"name": "Anthropic",
+			"enabled": true,
+			"documents": [
+				{
+					"label": "Consumer Terms of Service",
+					"url": "https://www.anthropic.com/legal/consumer-terms",
+					"selector": null
+				},
+				{
+					"label": "Privacy Policy",
+					"url": "https://www.anthropic.com/legal/privacy",
+					"selector": null
+				}
+			]
+		}
+	]
+}

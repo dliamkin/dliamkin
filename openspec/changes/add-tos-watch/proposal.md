@@ -4,9 +4,9 @@ Terms-of-service and policy documents change silently — services and instituti
 
 ## What Changes
 
-- New config `watchdog/services.json`: 13 monitored entries (17 documents) — UF-majority list approved by the owner — each with id, name, enabled flag, and per-document label/URL/optional CSS selector.
+- New config `watchdog/services.json`: 11 monitored entries (16 documents; Reddit's privacy policy was dropped during the shake-out — it redirects to a client-rendered page with no text in the HTML, and the posture is drop, not work around) — UF-majority list approved by the owner — each with id, name, enabled flag, and per-document label/URL/optional CSS selector.
 - New fetch/extract/normalize/hash layer (`scripts/tos-watch/`): honest User-Agent, robots.txt compliance, volatile-fragment stripping so date bumps never false-positive, content hashing.
-- New pipeline `src/lib/pipelines/explain-tos-change.ts`: paragraph-level mechanical diff → Claude (sonnet-4-6 default, `TOS_WATCH_MODEL` override) explains only the changed blocks; cosmetic gate; forced tool use.
+- New pipeline `src/lib/pipelines/explain-tos-change.ts`: paragraph-level mechanical diff → Claude (claude-sonnet-5 default, `TOS_WATCH_MODEL` override) explains only the changed blocks; cosmetic gate; forced tool use.
 - New shared schema: `TosChange` / `TosChangeReport` / `ChangelogEntry` with `impact: favors_provider | favors_user | neutral | unclear` (note: `favors_provider`, not `favors_company` — providers include university departments).
 - Editorial safety layer (post-processing): excerpt hard-cap at 25 words, forbidden loaded-language scan (violations file an ops issue instead of auto-publishing), "detected on {date}" dating only.
 - New nightly workflow `.github/workflows/tos-watch.yml` (cron offset from site-health/evals, `workflow_dispatch`, `[skip ci]` commits, deduped ops issues on 3 consecutive fetch failures).

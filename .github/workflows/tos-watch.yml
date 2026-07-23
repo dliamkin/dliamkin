@@ -1,0 +1,59 @@
+# Nightly ToS watchdog: fetch every configured policy document, hash-compare
+# normalized text against the private snapshot repo, and — only when a
+# document actually changed — run the diff-and-explain pipeline and publish a
+# changelog entry + RSS feed. Unchanged nights make zero model calls.
+#
+# Secrets: ANTHROPIC_API_KEY (model calls, change days only) and
+# TOS_SNAPSHOT_PAT (fine-grained PAT, contents read/write on
+# dliamkin/tos-snapshots only). Full document text lives ONLY in that private
+# repo; the public commit carries hashes, summaries, and <=25-word excerpts.
+name: ToS Watch
+
+# Deliberately NO push trigger: schedule + workflow_dispatch only. The public
+# commit this workflow pushes back therefore cannot retrigger it (and its
+# [skip ci] tag also keeps Cloudflare Workers Builds from redeploying).
+on:
+  schedule:
+    # GitHub cron is UTC. 10:20 UTC keeps a clear offset from the 08:15
+    # site-health audit and the 09:45 evals run, off the top of the hour to
+    # dodge GitHub's cron congestion.
+    - cron: "20 10 * * *"
+  workflow_dispatch:
+
+# contents to push the public state/changelog/feed commit, issues to file
+# unreachable/robots/editorial-review ops issues.
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: tos-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone private snapshot repo
+        uses: actions/checkout@v4
+        with:
+          repository: dliamkin/tos-snapshots
+          token: ${{ secrets.TOS_SNAPSHOT_PAT }}
+          path: tos-snapshots
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Nightly check
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOS_SNAPSHOT_DIR: tos-snapshots
+        run: npx tsx scripts/tos-watch/run.ts

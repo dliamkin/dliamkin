@@ -1,0 +1,41 @@
+Acmecloud Terms of Service
+
+Section 1 — Acceptance of Terms
+
+These Terms of Service (the "Terms") constitute a legally binding agreement between you and Acmecloud, Inc. ("Acmecloud," "we," or "us") governing your access to and use of the Acmecloud platform, applications, and related services (collectively, the "Services"). By creating an account, accessing, or using the Services, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, you may not access or use the Services.
+
+Section 2 — Account Registration and Security
+
+To use the Services, you must register for an account and provide accurate, current, and complete information. Maintaining the confidentiality of your account credentials is your responsibility, as are all activities that occur under your account. You must notify us promptly at security@acmecloud.example of any unauthorized use of your account or any other breach of security. Acmecloud will not be liable for any loss or damage arising from your failure to safeguard your credentials.
+
+Section 3 — Subscription Fees and Billing
+
+Certain Services are offered on a subscription basis. Subscription fees are billed in advance on a monthly or annual basis, as selected at the time of purchase, and are due on the first day of each billing period. Fees do not include applicable taxes; you are responsible for any such taxes. We may modify subscription pricing upon at least thirty (30) days' prior written notice; price modifications take effect at the start of your next billing period.
+
+Section 4 — Refunds
+
+If you are dissatisfied with a paid subscription, you may request a full refund within fourteen (14) days of your initial purchase by contacting billing@acmecloud.example. Refunds are not available for renewal periods, partial billing periods, or add-on purchases, except where required by applicable law.
+
+Section 5 — User Content and License
+
+You retain all ownership rights in the content you upload, store, or transmit through the Services ("User Content"). By submitting User Content, you grant Acmecloud a worldwide, non-exclusive, royalty-free license to host, store, reproduce, and display such User Content solely to the extent necessary to provide and maintain the Services. This license terminates when you delete the applicable User Content or close your account, except to the extent retention is required by law.
+
+Section 6 — Data Collection and Sharing
+
+We collect information you provide directly and information generated through your use of the Services, as described in our Privacy Policy. We do not sell your personal information. We share personal information only with service providers who process it on our behalf under written agreements limiting their use of that information, or where disclosure is required by law, regulation, or valid legal process.
+
+Section 7 — Limitation of Liability
+
+To the maximum extent permitted by law, the aggregate liability of Acmecloud and its officers, directors, employees, and agents arising out of or relating to these Terms or the Services shall not exceed the total amount of fees you paid to Acmecloud in the twelve (12) months preceding the event giving rise to the claim. In no event shall Acmecloud be liable for indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill.
+
+Section 8 — Dispute Resolution
+
+Any dispute, claim, or controversy arising out of or relating to these Terms or the Services shall be brought exclusively in the state or federal courts located in New Castle County, Delaware, and you consent to the personal jurisdiction of such courts. These Terms are governed by the laws of the State of Delaware without regard to its conflict of laws principles.
+
+Section 9 — Termination
+
+You may close your account at any time through your account settings. We may suspend or terminate your access to the Services if you materially breach these Terms and fail to cure the breach within fifteen (15) days after we provide notice. Upon termination, your right to use the Services ceases immediately, and we will make your User Content available for export for thirty (30) days following termination, after which it may be permanently deleted.
+
+Section 10 — Changes to These Terms
+
+From time to time, we may revise these Terms. If we make material changes, we will notify you at least thirty (30) days before the changes take effect by email or by prominent notice within the Services. Your continued use of the Services after the effective date of revised Terms constitutes acceptance of the revised Terms.
