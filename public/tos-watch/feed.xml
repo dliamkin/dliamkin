@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ToS Watchdog — dliamkin.com</title>
+    <link>https://dliamkin.com/projects/tos-watch</link>
+    <description>Automated nightly monitoring of terms-of-service and policy documents. Entries describe detected changes in neutral, plain English. Not legal advice; not affiliated with any monitored service.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Jul 2026 17:27:11 GMT</lastBuildDate>
+    <atom:link href="https://dliamkin.com/tos-watch/feed.xml" rel="self" type="application/rss+xml"/>
+
+  </channel>
+</rss>
