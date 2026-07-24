@@ -5,7 +5,7 @@
     <link>https://dliamkin.com/projects/tos-watch</link>
     <description>Automated nightly monitoring of terms-of-service and policy documents. Entries describe detected changes in neutral, plain English. Not legal advice; not affiliated with any monitored service.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2026 17:27:11 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2026 11:58:07 GMT</lastBuildDate>
     <atom:link href="https://dliamkin.com/tos-watch/feed.xml" rel="self" type="application/rss+xml"/>
 
   </channel>
