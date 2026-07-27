@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-07-26T11:15:24.530Z",
+  "run_at": "2026-07-27T12:51:28.447Z",
   "trigger": "schedule",
   "suites": [
     {
@@ -17,13 +17,13 @@
               "name": "extracts lisinopril 20 mg daily, active",
               "passed": true,
               "expected": "lisinopril 20 mg daily [active]",
-              "actual": "Lisinopril 20 mg daily [active]"
+              "actual": "lisinopril 20mg daily [active]"
             },
             {
               "name": "extracts metformin 500 mg BID, active",
               "passed": true,
               "expected": "metformin 500 mg BID [active]",
-              "actual": "Metformin 500 mg twice daily [active]"
+              "actual": "metformin 500mg BID [active]"
             },
             {
               "name": "allergies is empty (none mentioned in the note)",
@@ -41,10 +41,10 @@
               "name": "lipid panel action captured (plan or follow-ups)",
               "passed": true,
               "expected": "contains \"lipid\"",
-              "actual": "\"Continue current medications (lisinopril 20 mg daily, metformin 500 mg BID) ; Order monofilament test ; Discussed diet wins ; Return to clinic ; Sooner if foot symptoms worsen ; Schedule lipid panel\""
+              "actual": "\"Continue current medications (lisinopril 20mg daily and metformin 500mg BID) ; Order monofilament test ; Discussed diet wins ; Return to clinic ; Schedule lipid panel\""
             }
           ],
-          "duration_ms": 28032,
+          "duration_ms": 49997,
           "error": null
         },
         {
@@ -56,13 +56,13 @@
               "name": "penicillin allergy captured",
               "passed": true,
               "expected": "contains \"penicillin\"",
-              "actual": "\"penicillin (hives) ; sulfa (unknown reaction per patient)\""
+              "actual": "\"penicillin (hives) ; sulfa (unknown reaction)\""
             },
             {
               "name": "sulfa allergy captured",
               "passed": true,
               "expected": "contains \"sulfa\"",
-              "actual": "\"penicillin (hives) ; sulfa (unknown reaction per patient)\""
+              "actual": "\"penicillin (hives) ; sulfa (unknown reaction)\""
             },
             {
               "name": "blood pressure 118/74 captured",
@@ -80,10 +80,10 @@
               "name": "red flags present (note explicitly educates on them)",
               "passed": true,
               "expected": "at least one entry",
-              "actual": "[\"Worst headache of life\",\"Focal neurological deficits\",\"Fever with stiff neck\"]"
+              "actual": "[\"worst headache of life\",\"focal neurological deficits\",\"fever with stiff neck\"]"
             }
           ],
-          "duration_ms": 28946,
+          "duration_ms": 36747,
           "error": null
         },
         {
@@ -95,7 +95,7 @@
               "name": "extracts ibuprofen 600 mg, new or active",
               "passed": true,
               "expected": "ibuprofen 600 mg TID [new]",
-              "actual": "Ibuprofen 600mg three times daily [new]"
+              "actual": "ibuprofen 600mg three times daily [new]"
             },
             {
               "name": "heart rate 80 captured",
@@ -107,16 +107,16 @@
               "name": "return precautions captured (red flags or plan)",
               "passed": true,
               "expected": "contains \"bear weight\"",
-              "actual": "\"RICE protocol (rest, ice, compression, elevation) ; Air stirrup brace dispensed ; Ibuprofen 600mg three times daily with food for 5 days ; Crutches as needed for first 48 hours ; Work note provided for 2 days ; Return precautions: unable to bear weight, numbness, or worsening swelling ; Follow-up with PCP if not improving\""
+              "actual": "\"Inability to bear weight ; Numbness ; Worsening swelling ; RICE protocol ; Air stirrup brace dispensed ; Ibuprofen 600mg three times daily with food for 5 days ; Crutches as needed for first 48 hours ; Work note provided for 2 days ; Follow up with PCP\""
             },
             {
               "name": "PCP follow-up captured",
               "passed": true,
               "expected": "a follow-up mentioning the PCP or 1 week",
-              "actual": "Follow-up with PCP if not improving (1 week)"
+              "actual": "Follow up with PCP (1 week if not improving)"
             }
           ],
-          "duration_ms": 4751,
+          "duration_ms": 3772,
           "error": null
         },
         {
@@ -128,7 +128,7 @@
               "name": "atorvastatin extracted at the NEW dose (40 mg nightly)",
               "passed": true,
               "expected": "atorvastatin 40 mg nightly",
-              "actual": "atorvastatin 40 mg nightly [new]"
+              "actual": "atorvastatin 40mg nightly [new]"
             },
             {
               "name": "no active atorvastatin left at the old 20 mg dose",
@@ -140,7 +140,7 @@
               "name": "amlodipine 5 mg daily unchanged, active",
               "passed": true,
               "expected": "amlodipine 5 mg daily [active]",
-              "actual": "amlodipine 5 mg daily [active]"
+              "actual": "amlodipine 5mg daily [active]"
             },
             {
               "name": "blood pressure 126/78 captured",
@@ -149,7 +149,7 @@
               "actual": "\"126/78\""
             }
           ],
-          "duration_ms": 4470,
+          "duration_ms": 4324,
           "error": null
         },
         {
@@ -161,7 +161,7 @@
               "name": "hydrochlorothiazide status is discontinued",
               "passed": true,
               "expected": "hydrochlorothiazide 25 mg [discontinued]",
-              "actual": "hydrochlorothiazide 25mg daily [discontinued]"
+              "actual": "Hydrochlorothiazide 25mg daily [discontinued]"
             },
             {
               "name": "no active/new hydrochlorothiazide entry remains",
@@ -173,10 +173,10 @@
               "name": "losartan 50 mg daily remains active",
               "passed": true,
               "expected": "losartan 50 mg daily [active]",
-              "actual": "losartan 50mg daily [active]"
+              "actual": "Losartan 50mg daily [active]"
             }
           ],
-          "duration_ms": 3843,
+          "duration_ms": 4135,
           "error": null
         },
         {
@@ -197,7 +197,7 @@
               "actual": "omeprazole 20 mg daily [active]"
             }
           ],
-          "duration_ms": 3143,
+          "duration_ms": 3276,
           "error": null
         },
         {
@@ -221,10 +221,10 @@
               "name": "aspirin 81 mg captured as newly started",
               "passed": true,
               "expected": "aspirin 81 mg daily [new]",
-              "actual": "Aspirin 81 mg daily [new]"
+              "actual": "Aspirin 81mg daily [new]"
             }
           ],
-          "duration_ms": 3792,
+          "duration_ms": 4349,
           "error": null
         },
         {
@@ -242,7 +242,7 @@
               "name": "metformin 1000 mg BID extracted",
               "passed": true,
               "expected": "metformin 1000 mg BID [active]",
-              "actual": "metformin 1000mg twice daily [active]"
+              "actual": "metformin 1000mg BID [active]"
             },
             {
               "name": "glipizide 5 mg daily extracted",
@@ -263,7 +263,7 @@
               "actual": "levothyroxine 88mcg daily on empty stomach [active]"
             }
           ],
-          "duration_ms": 4165,
+          "duration_ms": 5623,
           "error": null
         },
         {
@@ -302,7 +302,7 @@
               "actual": "null"
             }
           ],
-          "duration_ms": 3298,
+          "duration_ms": 4128,
           "error": null
         },
         {
@@ -314,22 +314,22 @@
               "name": "metoprolol dose is not silently guessed as exactly 25 or exactly 50",
               "passed": true,
               "expected": "metoprolol present with dose null or explicitly uncertain (not a single guessed value)",
-              "actual": "Metoprolol 25-50 mg (unconfirmed) twice daily (unconfirmed) [unknown]"
+              "actual": "metoprolol 25mg or 50mg (unconfirmed) twice daily (unconfirmed) [unknown]"
             },
             {
               "name": "the dose ambiguity lands in extraction_notes",
               "passed": true,
               "expected": "contains \"metoprolol\"",
-              "actual": "\"Diuretic name not specified; described only as 'water pill' ; Metoprolol dose uncertain per patient report (25 mg vs 50 mg twice daily); pending pharmacy confirmation ; Route of administration not documented for any medications ; Only atorvastatin dose and frequency confirmed by bottle ; Temperature, respiratory rate, oxygen saturation, and weight not recorded ; No allergies documented in note\""
+              "actual": "\"Metoprolol dose unconfirmed—patient estimates 25mg or 50mg twice daily; exact dose to be verified via pharmacy records ; Diuretic agent name not specified; documented only as 'water pill' with dose and frequency unknown ; Temperature, respiratory rate, oxygen saturation, and weight not recorded at this visit ; Medication routes not specified for metoprolol or diuretic ; Atorvastatin dose and frequency confirmed by patient-brought bottle\""
             },
             {
               "name": "confirmed atorvastatin 20 mg nightly extracted normally",
               "passed": true,
               "expected": "atorvastatin 20 mg nightly [active]",
-              "actual": "Atorvastatin 20 mg nightly [active]"
+              "actual": "atorvastatin 20mg nightly [active]"
             }
           ],
-          "duration_ms": 8588,
+          "duration_ms": 6503,
           "error": null
         }
       ],
@@ -351,19 +351,19 @@
               "name": "finds the rent increase to $1,595 (rent_and_deposits, favors landlord)",
               "passed": true,
               "expected": "rent increase to $1,595",
-              "actual": "\"Rent increase\" [rent_and_deposits, favors_landlord, high]"
+              "actual": "\"Monthly rent increased by $145\" [rent_and_deposits, favors_landlord, high]"
             },
             {
               "name": "finds the new automatic-renewal clause (term_and_renewal, favors landlord)",
               "passed": true,
               "expected": "automatic renewal added",
-              "actual": "\"Automatic renewal clause added\" [term_and_renewal, favors_landlord, high]"
+              "actual": "\"New automatic renewal clause with future rent increases\" [term_and_renewal, favors_landlord, high]"
             },
             {
               "name": "finds water shifted from landlord to tenant (utilities, favors landlord)",
               "passed": true,
               "expected": "water responsibility shifted to tenant",
-              "actual": "\"Tenant now pays water bill\" [utilities, favors_landlord, medium]"
+              "actual": "\"Tenant now pays for water\" [utilities, favors_landlord, medium]"
             },
             {
               "name": "finds lawn care shifted to tenant (maintenance, favors landlord)",
@@ -375,19 +375,19 @@
               "name": "finds the guest limit cut from 14 to 7 days (rules_and_use, favors landlord)",
               "passed": true,
               "expected": "guest stay limit halved",
-              "actual": "\"Allowed guest stay shortened\" [rules_and_use, favors_landlord, low]"
+              "actual": "\"Permitted guest stay shortened\" [rules_and_use, favors_landlord, low]"
             },
             {
               "name": "finds notice to vacate extended 30→60 days (favors landlord)",
               "passed": true,
               "expected": "notice to vacate 30 → 60 days",
-              "actual": "\"Automatic renewal clause added\" [term_and_renewal, favors_landlord, high]"
+              "actual": "\"New automatic renewal clause with future rent increases\" [term_and_renewal, favors_landlord, high]"
             },
             {
               "name": "finds the new monthly pet fee (fees)",
               "passed": true,
               "expected": "new $35/month pet fee",
-              "actual": "\"New pet fee added\" [fees, unclear, low]"
+              "actual": "\"New pet fee added\" [fees, favors_landlord, medium]"
             },
             {
               "name": "finds the new early-termination fee (favors landlord)",
@@ -399,10 +399,10 @@
               "name": "no invented changes (8 planted, ≤ 9 reported)",
               "passed": true,
               "expected": "at most 9 reported changes",
-              "actual": "8 reported changes"
+              "actual": "9 reported changes"
             }
           ],
-          "duration_ms": 37519,
+          "duration_ms": 43438,
           "error": null
         },
         {
@@ -414,13 +414,13 @@
               "name": "finds the fixed-term → month-to-month conversion (term_and_renewal)",
               "passed": true,
               "expected": "conversion to month-to-month",
-              "actual": "\"Fixed 12-month term changed to month-to-month tenancy\" [term_and_renewal, unclear, high]"
+              "actual": "\"Fixed 12-month term replaced with month-to-month tenancy\" [term_and_renewal, unclear, high]"
             },
             {
               "name": "finds the $50 month-to-month premium (favors landlord)",
               "passed": true,
               "expected": "new $50/month premium",
-              "actual": "\"New month-to-month rent premium added\" [rent_and_deposits, favors_landlord, high]"
+              "actual": "\"Rent increased via new month-to-month premium\" [rent_and_deposits, favors_landlord, high]"
             },
             {
               "name": "BIAS CHECK: late-fee grace 3→5 days is favors_tenant",
@@ -438,13 +438,13 @@
               "name": "finds the lease-break penalty removal (favors_tenant, or unclear when merged with the landlord's new termination right)",
               "passed": true,
               "expected": "lease-break penalty removed (favors_tenant alone, or unclear when merged)",
-              "actual": "\"Lease-break penalty removed\" [termination, favors_tenant, high]"
+              "actual": "\"Termination rights and lease-break penalty changed\" [termination, unclear, high]"
             },
             {
               "name": "finds the landlord's new right to terminate at will (favors landlord)",
               "passed": true,
               "expected": "landlord can now terminate with 30 days' notice",
-              "actual": "\"Fixed 12-month term changed to month-to-month tenancy\" [term_and_renewal, unclear, high]"
+              "actual": "\"Fixed 12-month term replaced with month-to-month tenancy\" [term_and_renewal, unclear, high]"
             },
             {
               "name": "finds entry notice cut 48→24 hours (entry_and_privacy, favors landlord)",
@@ -462,10 +462,10 @@
               "name": "no invented changes (8 planted counting the termination rework as two, ≤ 9 reported)",
               "passed": true,
               "expected": "at most 9 reported changes",
-              "actual": "8 reported changes"
+              "actual": "7 reported changes"
             }
           ],
-          "duration_ms": 39629,
+          "duration_ms": 41084,
           "error": null
         },
         {
@@ -477,7 +477,7 @@
               "name": "finds the late fee increase to $75 buried in the rewording (favors landlord)",
               "passed": true,
               "expected": "late fee $50 → $75",
-              "actual": "\"Late fee increased from $50 to $75\" [fees, favors_landlord, high]"
+              "actual": "\"Late Fee Increased from $50 to $75\" [fees, favors_landlord, high]"
             },
             {
               "name": "does not report the identically-meaning maintenance rewording as substantive",
@@ -492,7 +492,7 @@
               "actual": "2 reported changes"
             }
           ],
-          "duration_ms": 9168,
+          "duration_ms": 9407,
           "error": null
         }
       ],
@@ -520,13 +520,13 @@
               "name": "maps the credential fields to InputText/Password",
               "passed": true,
               "expected": "a mapping to InputText or Password",
-              "actual": "Email address input field → InputText"
+              "actual": "Email input field → InputText"
             },
             {
               "name": "maps the sign-in action to Button",
               "passed": true,
               "expected": "a mapping to Button",
-              "actual": "Forgot password link → Button (text/link style)"
+              "actual": "Forgot password link → Button with link styling (or RouterLink)"
             },
             {
               "name": "scaffold uses an input component",
@@ -541,7 +541,7 @@
               "actual": "tag present in scaffold"
             }
           ],
-          "duration_ms": 55315,
+          "duration_ms": 46235,
           "error": null
         },
         {
@@ -559,7 +559,7 @@
               "name": "maps the data table to DataTable",
               "passed": true,
               "expected": "a mapping to DataTable",
-              "actual": "Top pages table with columns (Page, Views, Status) → DataTable"
+              "actual": "Top pages table → DataTable"
             },
             {
               "name": "maps the chart to Chart",
@@ -574,7 +574,7 @@
               "actual": "tag present in scaffold"
             }
           ],
-          "duration_ms": 56305,
+          "duration_ms": 53679,
           "error": null
         },
         {
@@ -592,19 +592,19 @@
               "name": "maps the plan tiers to Card",
               "passed": true,
               "expected": "a mapping to Card",
-              "actual": "Starter pricing card → Card"
+              "actual": "Pricing card tier - Starter, Growth, Scale → Card"
             },
             {
               "name": "maps the CTAs to Button",
               "passed": true,
               "expected": "a mapping to Button",
-              "actual": "Start free button (top right) → Button"
+              "actual": "Start free button in top right → Button"
             },
             {
               "name": "maps the top navigation to Menubar or Toolbar",
               "passed": true,
               "expected": "a mapping to Menubar or Toolbar",
-              "actual": "Top navigation bar with logo and menu → Menubar"
+              "actual": "Top navigation bar with logo and menu links → Menubar"
             },
             {
               "name": "scaffold uses Card",
@@ -613,7 +613,7 @@
               "actual": "tag present in scaffold"
             }
           ],
-          "duration_ms": 22667,
+          "duration_ms": 44324,
           "error": null
         },
         {
@@ -631,7 +631,7 @@
               "name": "a polite reason is given",
               "passed": true,
               "expected": "non-null reason explaining the rejection",
-              "actual": "\"This is an illustrated landscape artwork featuring mountains, water, and sky rather than a software user interface.\""
+              "actual": "\"This image is a decorative landscape illustration with mountains, sky, and water, not a software user interface.\""
             },
             {
               "name": "no component mappings are forced",
@@ -646,7 +646,7 @@
               "actual": "null"
             }
           ],
-          "duration_ms": 2909,
+          "duration_ms": 3151,
           "error": null
         },
         {
@@ -664,7 +664,7 @@
               "name": "a polite reason is given",
               "passed": true,
               "expected": "non-null reason explaining the rejection",
-              "actual": "\"This is a document or article page displaying formatted text content, not a software user interface with interactive UI components.\""
+              "actual": "\"This is a scanned document or manuscript page containing literary text, not a software user interface screenshot.\""
             },
             {
               "name": "no component mappings are forced",
@@ -679,7 +679,7 @@
               "actual": "null"
             }
           ],
-          "duration_ms": 2352,
+          "duration_ms": 2684,
           "error": null
         }
       ],
@@ -707,7 +707,7 @@
               "name": "move-out inspection extracted as stated 2027-09-01",
               "passed": true,
               "expected": "move-out inspection on 2027-09-01, basis stated",
-              "actual": "\"Move-out inspection\" [deadline, 2027-09-01, stated]"
+              "actual": "\"Move-out inspection scheduled\" [deadline, 2027-09-01, stated]"
             },
             {
               "name": "rent is one recurring monthly event on the 1st, not expanded",
@@ -719,7 +719,7 @@
               "name": "FABRICATION GUARD: the anniversary-based renewal offer is unresolved with date null",
               "passed": true,
               "expected": "renewal-offer event with date null and basis unresolved",
-              "actual": "\"Landlord renewal offer window opens (Anniversary Date)\" [notice_window_opens, null, unresolved]"
+              "actual": "\"Landlord renewal offer window opens\" [notice_window_opens, null, unresolved]"
             },
             {
               "name": "FABRICATION GUARD: no unresolved event carries a date",
@@ -734,7 +734,7 @@
               "actual": "none found"
             }
           ],
-          "duration_ms": 41280,
+          "duration_ms": 40237,
           "error": null
         },
         {
@@ -758,13 +758,13 @@
               "name": "annual GPA report is a yearly recurrence",
               "passed": true,
               "expected": "GPA report with yearly recurrence",
-              "actual": "\"Annual GPA transcript due\" [renewal_or_expiration, 2027-06-30, computed]"
+              "actual": "\"Annual GPA report due (renewal requirement)\" [renewal_or_expiration, 2027-06-30, computed]"
             },
             {
               "name": "the closed housing-grant date (2026-06-01) is flagged in_past",
               "passed": true,
               "expected": "housing grant deadline flagged as already passed",
-              "actual": "\"Priority housing grant application deadline (closed)\" [informational, 2026-06-01, stated]"
+              "actual": "\"Priority housing grant application deadline (past)\" [informational, 2026-06-01, stated]"
             },
             {
               "name": "every source excerpt appears verbatim in the letter",
@@ -773,7 +773,7 @@
               "actual": "none found"
             }
           ],
-          "duration_ms": 33749,
+          "duration_ms": 33084,
           "error": null
         },
         {
@@ -791,7 +791,7 @@
               "name": "HEADLINE: cancellation notice computed across the year boundary (2027-01-14 minus 30 days = 2026-12-15)",
               "passed": true,
               "expected": "cancellation notice deadline on 2026-12-15, basis computed",
-              "actual": "\"Deadline to give notice to avoid short-rate cancellation penalty\" [notice_window_closes, 2026-12-15, computed]"
+              "actual": "\"Deadline for policyholder cancellation notice to avoid short-rate penalty\" [notice_window_closes, 2026-12-15, computed]"
             },
             {
               "name": "premium is one recurring monthly event on the 15th, not expanded",
@@ -803,7 +803,7 @@
               "name": "renewal offer mail date extracted as stated 2026-12-01",
               "passed": true,
               "expected": "renewal offer mailed on 2026-12-01, basis stated",
-              "actual": "\"Renewal offer to be mailed\" [renewal_or_expiration, 2026-12-01, stated]"
+              "actual": "\"Renewal offer to be mailed by insurer\" [informational, 2026-12-01, stated]"
             },
             {
               "name": "every source excerpt appears verbatim in the summary",
@@ -812,7 +812,7 @@
               "actual": "none found"
             }
           ],
-          "duration_ms": 14709,
+          "duration_ms": 16799,
           "error": null
         },
         {
@@ -824,7 +824,7 @@
               "name": "HEADLINE: cancellation notice computed across short-February (2027-03-01 minus 45 days = 2027-01-15)",
               "passed": true,
               "expected": "cancellation notice deadline on 2027-01-15, basis computed",
-              "actual": "\"Deadline to send cancellation notice for end of initial term\" [deadline, 2027-01-15, computed]"
+              "actual": "\"Deadline to give written cancellation notice for end of initial term\" [notice_window_closes, 2027-01-15, computed]"
             },
             {
               "name": "monthly dues recur on the 5th",
@@ -845,7 +845,7 @@
               "actual": "none found"
             }
           ],
-          "duration_ms": 15217,
+          "duration_ms": 13613,
           "error": null
         },
         {
@@ -863,7 +863,7 @@
               "name": "early-payment discount window computed (2028-01-31 plus 10 days = 2028-02-10)",
               "passed": true,
               "expected": "discount deadline on 2028-02-10, basis computed",
-              "actual": "\"Early payment discount deadline\" [deadline, 2028-02-10, computed]"
+              "actual": "\"Early payment discount window closes\" [notice_window_closes, 2028-02-10, computed]"
             },
             {
               "name": "every source excerpt appears verbatim in the invoice",
@@ -872,7 +872,7 @@
               "actual": "none found"
             }
           ],
-          "duration_ms": 9642,
+          "duration_ms": 7848,
           "error": null
         },
         {
@@ -905,7 +905,7 @@
               "actual": "none found"
             }
           ],
-          "duration_ms": 10111,
+          "duration_ms": 12026,
           "error": null
         },
         {
@@ -917,19 +917,19 @@
               "name": "report date extracted as stated 2026-09-14",
               "passed": true,
               "expected": "jury report date on 2026-09-14, basis stated",
-              "actual": "\"Report for jury service\" [deadline, 2026-09-14, stated]"
+              "actual": "\"Report for jury service\" [required_action, 2026-09-14, stated]"
             },
             {
               "name": "confirmation deadline extracted as stated 2026-09-07",
               "passed": true,
               "expected": "confirmation deadline on 2026-09-07, basis stated",
-              "actual": "\"Confirm jury attendance\" [deadline, 2026-09-07, stated]"
+              "actual": "\"Confirm jury service attendance\" [deadline, 2026-09-07, stated]"
             },
             {
               "name": "no invented dated events (2 planted dates, ≤ 3 events)",
               "passed": true,
               "expected": "at most 3 events",
-              "actual": "3 events: \"Report for jury service\" [deadline, 2026-09-14, stated] | \"Confirm jury attendance\" [deadline, 2026-09-07, stated] | \"Deadline to request postponement\" [notice_window_closes, 2026-09-07, stated]"
+              "actual": "3 events: \"Confirm jury service attendance\" [deadline, 2026-09-07, stated] | \"Report for jury service\" [required_action, 2026-09-14, stated] | \"Deadline to request jury service postponement\" [notice_window_closes, 2026-09-07, stated]"
             },
             {
               "name": "every source excerpt appears verbatim in the summons",
@@ -938,7 +938,7 @@
               "actual": "none found"
             }
           ],
-          "duration_ms": 8333,
+          "duration_ms": 8017,
           "error": null
         },
         {
@@ -959,7 +959,7 @@
               "actual": "0 events"
             }
           ],
-          "duration_ms": 4298,
+          "duration_ms": 4249,
           "error": null
         }
       ],
@@ -993,7 +993,7 @@
               "name": "request appears in deprecated_alerts",
               "passed": true,
               "expected": "an alert naming request",
-              "actual": "request@2.88.2 is fully deprecated and unmaintained. Even its latest version receives no updates. Consider migrating to axios (recommended for axios-based projects), node-fetch (lightweight ES6 fetch), or got (feature-rich, modern streaming). Verify your usage patterns against the replacement library's API before full migration."
+              "actual": "request@2.88.2 is fully deprecated and no longer maintained (see https://github.com/request/request/issues/3142). Recommend replacing with axios (modern, widely-used), node-fetch (lightweight, standards-aligned), or got (Node-friendly HTTP client with better retry/timeout handling). Even the latest release is a band-aid without ongoing support."
             },
             {
               "name": "2-majors-behind vue-router is tiered breaking_likely",
@@ -1011,7 +1011,7 @@
               "name": "peer conflicts yield sequencing guidance",
               "passed": true,
               "expected": "at least one entry",
-              "actual": "[\"vuex@4.1.0 requires vue@^3.2.0 but your declared range was ^2.6.10 — this is resolved by upgrading vue to 3.5.39 in Wave 1 alongside vuex, so both land in the same wave.\",\"vue-router@5.1.0 requires vue@^3.5.34 but your declared range was ^2.6.10 — this is resolved by upgrading vue to 3.5.39 in Wave 1 alongside vue-router, so both land in the same wave.\"]"
+              "actual": "[\"Vuex@4.1.0 requires Vue ^3.2.0 and vue-router@5.1.0 requires Vue ^3.5.34: both are satisfied by upgrading to vue@3.5.39 in the same wave (Wave 1), eliminating the conflict atomically.\"]"
             },
             {
               "name": "vuex is never sequenced before vue (its peer requirement)",
@@ -1026,7 +1026,7 @@
               "actual": "already_current: [typescript], wave: none"
             }
           ],
-          "duration_ms": 30057,
+          "duration_ms": 31700,
           "error": null
         },
         {
@@ -1053,7 +1053,7 @@
               "actual": "axios wave: none"
             }
           ],
-          "duration_ms": 26978,
+          "duration_ms": 28695,
           "error": null
         },
         {
@@ -1086,7 +1086,7 @@
               "actual": "empty array"
             }
           ],
-          "duration_ms": 3071,
+          "duration_ms": 8505,
           "error": null
         },
         {
@@ -1119,7 +1119,7 @@
               "actual": "lodash→4.17.21 [safe_now] | debug→4.4.0 [safe_now]"
             }
           ],
-          "duration_ms": 5032,
+          "duration_ms": 5539,
           "error": null
         },
         {
@@ -1143,47 +1143,22 @@
               "name": "moment appears in deprecated_alerts",
               "passed": true,
               "expected": "an alert naming moment",
-              "actual": "moment@2.30.1: Moment.js is in maintenance mode and not recommended for new projects. Suggested alternatives: Luxon (robust timezone support), Day.js (minimal bundle size, Moment-like API), or date-fns (functional, modular approach). Verify your use cases and migrate incrementally where feasible."
+              "actual": "moment: This package is in maintenance mode. Consider migrating to Luxon, Day.js, or date-fns instead of upgrading in place. If you must upgrade moment as an interim step, target 2.30.1, but plan a full replacement."
             }
           ],
-          "duration_ms": 5671,
+          "duration_ms": 5836,
           "error": null
         },
         {
           "case_id": "planner-react-majors",
           "description": "react + react-dom three majors behind with a lockstep peer requirement, plus an unrelated patch bump",
-          "passed": true,
-          "checks": [
-            {
-              "name": "HEADLINE: no invented versions",
-              "passed": true,
-              "expected": "validation_warnings empty (no invented packages or versions)",
-              "actual": "empty"
-            },
-            {
-              "name": "3-majors-behind react is breaking_likely",
-              "passed": true,
-              "expected": "react tiered breaking_likely",
-              "actual": "react tiered breaking_likely"
-            },
-            {
-              "name": "react-dom is never sequenced before react",
-              "passed": true,
-              "expected": "react (wave n) upgraded no later than react-dom (wave ≥ n)",
-              "actual": "react: wave 1, react-dom: wave 1"
-            },
-            {
-              "name": "patch-behind classnames is safe_now",
-              "passed": true,
-              "expected": "classnames tiered safe_now",
-              "actual": "classnames tiered safe_now"
-            }
-          ],
-          "duration_ms": 9248,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 10457,
+          "error": "TypeError: plan.plans.filter is not a function"
         }
       ],
-      "pass_count": 6,
+      "pass_count": 5,
       "total": 6
     },
     {
@@ -1207,7 +1182,7 @@
               "name": "finds the arbitration clause (arbitration_and_disputes, favors_provider)",
               "passed": true,
               "expected": "binding arbitration + class-action waiver added",
-              "actual": "\"Mandatory Arbitration and Class Action Waiver Introduced\" [arbitration_and_disputes, favors_provider, high]"
+              "actual": "\"Mandatory Arbitration and Class Action Waiver Replaces Court Litigation\" [arbitration_and_disputes, favors_provider, high]"
             },
             {
               "name": "no invented changes (1 planted, ≤ 2 reported)",
@@ -1217,15 +1192,15 @@
             },
             {
               "name": "all excerpts within the 25-word cap",
-              "passed": false,
+              "passed": true,
               "expected": "every excerpt <= 25 words",
-              "actual": "20 words: \"resolved exclusively through final and binding individual arbitration...rather than in court...waive the right to a trial by jury and...class action\""
+              "actual": "all within cap"
             },
             {
               "name": "excerpts verbatim-contained in fixture text (anti-fabrication)",
               "passed": false,
               "expected": "every excerpt appears verbatim in its source fixture text",
-              "actual": "fabricated/paraphrased: \"resolved exclusively through final and binding individual arbitration...rather than in court...waive the right to a trial by jury and...class action\""
+              "actual": "fabricated/paraphrased: \"resolved exclusively through final and binding individual arbitration administered by the American Arbitration Association... rather than in court\""
             },
             {
               "name": "zero loaded-language violations",
@@ -1234,7 +1209,7 @@
               "actual": "clean"
             }
           ],
-          "duration_ms": 21158,
+          "duration_ms": 19485,
           "error": null
         },
         {
@@ -1279,20 +1254,12 @@
               "actual": "clean"
             }
           ],
-          "duration_ms": 20798,
+          "duration_ms": 17282,
           "error": null
         },
         {
           "case_id": "tos-refund-window-extended",
           "description": "BIAS CHECK: refund window extended 14 → 30 days — a user-favorable change that must be judged favors_user, not reflexively favors_provider.",
-          "passed": false,
-          "checks": [],
-          "duration_ms": 26407,
-          "error": "PipelineOutputError: Model did not return a complete record_tos_change_report tool call (hit max_tokens)"
-        },
-        {
-          "case_id": "tos-liability-cap-lowered",
-          "description": "Liability cap changed from 12 months of fees to a flat $100. Must be liability, favors_provider.",
           "passed": true,
           "checks": [
             {
@@ -1302,10 +1269,10 @@
               "actual": "true"
             },
             {
-              "name": "finds the liability cap change (liability, favors_provider)",
+              "name": "BIAS CHECK: refund extension judged favors_user (pricing_and_billing)",
               "passed": true,
-              "expected": "liability cap: 12 months of fees → $100",
-              "actual": "\"Liability Cap Reduced to Fixed $100 Amount\" [liability, favors_provider, high]"
+              "expected": "refund window 14 → 30 days, judged favors_user",
+              "actual": "\"Extended Refund Window\" [pricing_and_billing, favors_user, low]"
             },
             {
               "name": "no invented changes (1 planted, ≤ 2 reported)",
@@ -1332,7 +1299,52 @@
               "actual": "clean"
             }
           ],
-          "duration_ms": 5513,
+          "duration_ms": 5441,
+          "error": null
+        },
+        {
+          "case_id": "tos-liability-cap-lowered",
+          "description": "Liability cap changed from 12 months of fees to a flat $100. Must be liability, favors_provider.",
+          "passed": true,
+          "checks": [
+            {
+              "name": "gated substantive",
+              "passed": true,
+              "expected": "true",
+              "actual": "true"
+            },
+            {
+              "name": "finds the liability cap change (liability, favors_provider)",
+              "passed": true,
+              "expected": "liability cap: 12 months of fees → $100",
+              "actual": "\"Liability Cap Reduced to Fixed $100\" [liability, favors_provider, high]"
+            },
+            {
+              "name": "no invented changes (1 planted, ≤ 2 reported)",
+              "passed": true,
+              "expected": "at most 2 reported changes",
+              "actual": "1 reported changes"
+            },
+            {
+              "name": "all excerpts within the 25-word cap",
+              "passed": true,
+              "expected": "every excerpt <= 25 words",
+              "actual": "all within cap"
+            },
+            {
+              "name": "excerpts verbatim-contained in fixture text (anti-fabrication)",
+              "passed": true,
+              "expected": "every excerpt appears verbatim in its source fixture text",
+              "actual": "all excerpts contained"
+            },
+            {
+              "name": "zero loaded-language violations",
+              "passed": true,
+              "expected": "zero loaded-language violations",
+              "actual": "clean"
+            }
+          ],
+          "duration_ms": 7719,
           "error": null
         },
         {
@@ -1359,15 +1371,15 @@
               "actual": "clean"
             }
           ],
-          "duration_ms": 8609,
+          "duration_ms": 4365,
           "error": null
         }
       ],
-      "pass_count": 3,
+      "pass_count": 4,
       "total": 5
     }
   ],
   "overall_pass_rate": 0.9459,
   "regression_from_previous": true,
-  "regression_detail": "tos-watch: 4/5 → 3/5"
+  "regression_detail": "upgrade-planner: 6/6 → 5/6"
 }
