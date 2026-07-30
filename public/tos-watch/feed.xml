@@ -5,8 +5,14 @@
     <link>https://dliamkin.com/projects/tos-watch</link>
     <description>Automated nightly monitoring of terms-of-service and policy documents. Entries describe detected changes in neutral, plain English. Not legal advice; not affiliated with any monitored service.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jul 2026 12:24:32 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jul 2026 12:08:05 GMT</lastBuildDate>
     <atom:link href="https://dliamkin.com/tos-watch/feed.xml" rel="self" type="application/rss+xml"/>
-
+    <item>
+      <title>Google · Terms of Service — change detected 2026-07-30</title>
+      <link>https://dliamkin.com/projects/tos-watch</link>
+      <guid isPermaLink="false">google/terms-of-service/2026-07-30</guid>
+      <pubDate>Thu, 30 Jul 2026 00:00:00 GMT</pubDate>
+      <description>placeholder (0 changes detected by automated comparison — see the full entry for excerpts and details.)</description>
+    </item>
   </channel>
 </rss>

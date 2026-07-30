@@ -1,0 +1,18 @@
+[
+  {
+    "id": "google/terms-of-service/2026-07-30",
+    "service_id": "google",
+    "service_name": "Google",
+    "document_label": "Terms of Service",
+    "document_url": "https://policies.google.com/terms",
+    "detected_at": "2026-07-30",
+    "report": {
+      "substantive": true,
+      "cosmetic_note": null,
+      "changes": [],
+      "summary": "placeholder"
+    },
+    "model": "claude-sonnet-5",
+    "pipeline_version": "1.0.0"
+  }
+]
