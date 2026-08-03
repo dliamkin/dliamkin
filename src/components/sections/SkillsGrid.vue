@@ -13,7 +13,7 @@ const categories: SkillCategory[] = [
 		icon: "fa-solid fa-code",
 		accent: "#27a9e0",
 		title: "Frontend",
-		skills: ["Vue", "PrimeVue", "Angular", "TypeScript", "JavaScript", "HTML / CSS", "RxJS"],
+		skills: ["Vue", "PrimeVue", "React", "Angular", "TypeScript", "JavaScript", "HTML / CSS", "RxJS"],
 	},
 	{
 		icon: "fa-solid fa-server",
