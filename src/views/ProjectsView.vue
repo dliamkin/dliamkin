@@ -54,6 +54,14 @@ const projects: ProjectEntry[] = [
 			"Paste a package.json and get computed facts — versions behind, deprecations, peer conflicts, straight from the npm registry in your browser — then an AI-synthesized upgrade plan: risk tiers, ordered waves, and the commands to run.",
 	},
 	{
+		to: "/projects/dry-run-oracle",
+		icon: "fa-solid fa-cloud-bolt",
+		title: "Dry-Run Oracle",
+		tags: ["Pre-flight simulation", "Cost forecasting", "Cheap-model leverage"],
+		description:
+			"A weather forecast for AI spend: paste an agent plan and a cheap model simulates it — failure points, retry-storm probability, and the token bill per step — before an expensive model burns a single token. Approve, apply suggested fixes, or abort.",
+	},
+	{
 		to: "/projects/tos-watch",
 		icon: "fa-solid fa-tower-observation",
 		title: "ToS Watchdog",

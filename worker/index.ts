@@ -22,7 +22,9 @@ import {
 } from "../src/lib/pipelines/extract-obligations";
 import { PipelineOutputError } from "../src/lib/pipelines/shared";
 import { planUpgrades } from "../src/lib/pipelines/plan-upgrades";
+import { simulatePlan } from "../src/lib/pipelines/simulate-plan";
 import { structureNote } from "../src/lib/pipelines/structure-note";
+import { validateSimulateRequest, type SimulationResult } from "../src/lib/dry-run-oracle";
 import {
 	validatePlanRequestFacts,
 	type UpgradePlanResult,
@@ -48,6 +50,9 @@ interface Env {
 	// Optional model override for the upgrade-plan synthesis endpoint. Haiku
 	// by default — see plan-upgrades.ts for why the cheap model is safe here.
 	UPGRADE_PLANNER_MODEL?: string;
+	// Optional model override for the Dry-Run Oracle simulation endpoint.
+	// Haiku by default — the demo's entire premise is a cheap-model forecast.
+	DRY_RUN_ORACLE_MODEL?: string;
 }
 
 // Simple in-memory limiters. Workers isolates are ephemeral and per-PoP, so
@@ -85,6 +90,11 @@ const paperworkDailyLimiter = createRateLimiter(30, 86_400_000); // 30/day/IP
 // same per-minute/daily pattern applies.
 const upgradePlanLimiter = createRateLimiter(6, 60_000); // 6/min/IP
 const upgradePlanDailyLimiter = createRateLimiter(30, 86_400_000); // 30/day/IP
+// The oracle is text-only Haiku with a 1.5K output cap — cheap per call, and
+// the client also caches forecasts by plan hash, so repeat submissions of an
+// unchanged plan never reach this endpoint at all.
+const simulatePlanLimiter = createRateLimiter(6, 60_000); // 6/min/IP
+const simulatePlanDailyLimiter = createRateLimiter(40, 86_400_000); // 40/day/IP
 
 function json(body: unknown, status: number): Response {
 	return new Response(JSON.stringify(body), {
@@ -479,6 +489,67 @@ async function handlePlanUpgrades(request: Request, env: Env): Promise<Response>
 	}
 }
 
+async function handleSimulatePlan(request: Request, env: Env): Promise<Response> {
+	const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+	if (simulatePlanLimiter(ip)) {
+		return json(
+			{ error: "The oracle needs a breather — please wait a minute between forecasts." },
+			429,
+		);
+	}
+	if (simulatePlanDailyLimiter(ip)) {
+		return json(
+			{ error: "You've hit today's forecast limit for this demo. Come back tomorrow!" },
+			429,
+		);
+	}
+
+	let body: unknown;
+	try {
+		body = await request.json();
+	} catch {
+		return json({ error: "Request body must be JSON." }, 400);
+	}
+
+	// Field-by-field validation (step caps, per-string caps, exactly one of
+	// steps | freeform) before anything can reach the prompt.
+	const simulateRequest = validateSimulateRequest(body);
+	if (typeof simulateRequest === "string") {
+		return json({ error: simulateRequest }, 400);
+	}
+
+	// Privacy: the plan is held in memory for this request only — never
+	// written to storage and never logged (metadata only, below).
+	const startedAt = Date.now();
+	const anthropic = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+
+	const sizeLabel =
+		simulateRequest.freeform !== undefined
+			? `freeform_chars=${simulateRequest.freeform.length}`
+			: `steps=${simulateRequest.steps?.length ?? 0}`;
+
+	try {
+		const result: SimulationResult = await simulatePlan(
+			anthropic,
+			simulateRequest,
+			env.DRY_RUN_ORACLE_MODEL,
+		);
+		console.log(
+			`simulate-plan outcome=ok ${sizeLabel} oracle_cost_usd=${result.oracleCostUsd.toFixed(5)} duration_ms=${Date.now() - startedAt}`,
+		);
+		return json(result, 200);
+	} catch (error) {
+		const outcome = error instanceof PipelineOutputError ? "malformed" : "error";
+		console.log(
+			`simulate-plan outcome=${outcome} ${sizeLabel} duration_ms=${Date.now() - startedAt}`,
+		);
+		return friendlyApiError(
+			error,
+			"The oracle did not return a complete forecast. Please try again.",
+		);
+	}
+}
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url);
@@ -513,6 +584,12 @@ export default {
 				return json({ error: "Method not allowed." }, 405);
 			}
 			return handlePlanUpgrades(request, env);
+		}
+		if (url.pathname === "/api/simulate-plan") {
+			if (request.method !== "POST") {
+				return json({ error: "Method not allowed." }, 405);
+			}
+			return handleSimulatePlan(request, env);
 		}
 		return json({ error: "Not found." }, 404);
 	},

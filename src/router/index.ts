@@ -53,6 +53,17 @@ const router = createRouter({
 			component: () => import("../views/TosWatchView.vue"),
 		},
 		{
+			path: "/projects/dry-run-oracle",
+			name: "dry-run-oracle",
+			component: () => import("../views/DryRunOracleView.vue"),
+		},
+		{
+			// Convenience alias — the canonical home is under /projects like
+			// every other demo.
+			path: "/dry-run-oracle",
+			redirect: "/projects/dry-run-oracle",
+		},
+		{
 			path: "/evals",
 			name: "evals",
 			component: () => import("../views/EvalsView.vue"),

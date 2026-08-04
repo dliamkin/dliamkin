@@ -27,6 +27,7 @@ import {
 	loadPreviousReport,
 	writeReport,
 } from "./persist";
+import { dryRunOracleSuite } from "./suites/dry-run-oracle";
 import { leaseDiffSuite } from "./suites/lease-diff";
 import { noteStructurerSuite } from "./suites/note-structurer";
 import { paperworkSuite } from "./suites/paperwork-to-calendar";
@@ -41,6 +42,7 @@ const ALL_SUITES: RunnableSuite[] = [
 	paperworkSuite,
 	upgradePlannerSuite,
 	tosWatchSuite,
+	dryRunOracleSuite,
 ];
 
 function parseArgs(argv: string[]): { project: EvalProjectId | null; json: boolean; noCommit: boolean } {
