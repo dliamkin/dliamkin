@@ -29,6 +29,7 @@ import {
 } from "./persist";
 import { dryRunOracleSuite } from "./suites/dry-run-oracle";
 import { leaseDiffSuite } from "./suites/lease-diff";
+import { noiseTranslatorSuite } from "./suites/noise-translator";
 import { noteStructurerSuite } from "./suites/note-structurer";
 import { paperworkSuite } from "./suites/paperwork-to-calendar";
 import { screenshotSuite } from "./suites/screenshot-to-primevue";
@@ -43,6 +44,7 @@ const ALL_SUITES: RunnableSuite[] = [
 	upgradePlannerSuite,
 	tosWatchSuite,
 	dryRunOracleSuite,
+	noiseTranslatorSuite,
 ];
 
 function parseArgs(argv: string[]): { project: EvalProjectId | null; json: boolean; noCommit: boolean } {

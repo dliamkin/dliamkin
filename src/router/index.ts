@@ -75,6 +75,17 @@ const router = createRouter({
 			redirect: "/projects/tail-risk-lab",
 		},
 		{
+			path: "/projects/noise-translator",
+			name: "noise-translator",
+			component: () => import("../views/NoiseTranslatorView.vue"),
+		},
+		{
+			// Convenience alias — the canonical home is under /projects like
+			// every other demo.
+			path: "/noise-translator",
+			redirect: "/projects/noise-translator",
+		},
+		{
 			path: "/evals",
 			name: "evals",
 			component: () => import("../views/EvalsView.vue"),

@@ -77,6 +77,14 @@ const projects: ProjectEntry[] = [
 			"Monte Carlo cost simulator for AI agent runs. Point estimates lie about agent costs — retry loops make the distribution fat-tailed. This tool simulates a run thousands of times client-side (zero API tokens) and lets you buy down tail risk with policy knobs before spending a cent.",
 	},
 	{
+		to: "/projects/noise-translator",
+		icon: "fa-solid fa-ear-listen",
+		title: "Noise Translator",
+		tags: ["Client-side audio", "Vision", "Structured output"],
+		description:
+			"Record the sound your car, dryer, or furnace is making and your browser turns it into a spectrogram plus measured acoustic facts — then a model translates them into the precise description a mechanic needs, with the questions they'll ask next. It describes; it never diagnoses.",
+	},
+	{
 		to: "/projects/tos-watch",
 		icon: "fa-solid fa-tower-observation",
 		title: "ToS Watchdog",

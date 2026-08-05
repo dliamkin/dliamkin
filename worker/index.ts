@@ -20,7 +20,13 @@ import {
 	type PaperworkImage,
 	type PaperworkInput,
 } from "../src/lib/pipelines/extract-obligations";
+import { describeNoise } from "../src/lib/pipelines/describe-noise";
 import { PipelineOutputError } from "../src/lib/pipelines/shared";
+import {
+	evaluateSafetyGate,
+	validateDescribeNoiseRequest,
+	type DescribeNoiseResponse,
+} from "../src/lib/noise-translator";
 import { planUpgrades } from "../src/lib/pipelines/plan-upgrades";
 import { simulatePlan } from "../src/lib/pipelines/simulate-plan";
 import { structureNote } from "../src/lib/pipelines/structure-note";
@@ -53,6 +59,11 @@ interface Env {
 	// Optional model override for the Dry-Run Oracle simulation endpoint.
 	// Haiku by default — the demo's entire premise is a cheap-model forecast.
 	DRY_RUN_ORACLE_MODEL?: string;
+	// Optional model override for the noise-description endpoint. Sonnet by
+	// default — spectrogram reading is hard perception work (see
+	// describe-noise.ts); Haiku is the cheap fallback if cost ever matters
+	// more than characterization quality.
+	NOISE_TRANSLATOR_MODEL?: string;
 }
 
 // Simple in-memory limiters. Workers isolates are ephemeral and per-PoP, so
@@ -95,6 +106,10 @@ const upgradePlanDailyLimiter = createRateLimiter(30, 86_400_000); // 30/day/IP
 // unchanged plan never reach this endpoint at all.
 const simulatePlanLimiter = createRateLimiter(6, 60_000); // 6/min/IP
 const simulatePlanDailyLimiter = createRateLimiter(40, 86_400_000); // 40/day/IP
+// One Sonnet vision call per request over a small fixed-size spectrogram PNG
+// — same cost profile as the other vision endpoints, same cap pattern.
+const describeNoiseLimiter = createRateLimiter(6, 60_000); // 6/min/IP
+const describeNoiseDailyLimiter = createRateLimiter(30, 86_400_000); // 30/day/IP
 
 function json(body: unknown, status: number): Response {
 	return new Response(JSON.stringify(body), {
@@ -550,6 +565,89 @@ async function handleSimulatePlan(request: Request, env: Env): Promise<Response>
 	}
 }
 
+async function handleDescribeNoise(request: Request, env: Env): Promise<Response> {
+	const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+	if (describeNoiseLimiter(ip)) {
+		return json(
+			{ error: "Please wait a minute between recordings and try again." },
+			429,
+		);
+	}
+	if (describeNoiseDailyLimiter(ip)) {
+		return json(
+			{ error: "You've hit today's description limit for this demo. Come back tomorrow!" },
+			429,
+		);
+	}
+
+	let body: unknown;
+	try {
+		body = await request.json();
+	} catch {
+		return json({ error: "Request body must be JSON." }, 400);
+	}
+
+	// Field-by-field validation (spectrogram base64 + size, features shape,
+	// context enums and per-field caps) before anything can reach the prompt.
+	const noiseRequest = validateDescribeNoiseRequest(body);
+	if (typeof noiseRequest === "string") {
+		return json({ error: noiseRequest }, 400);
+	}
+	const decodedBytes = Math.floor((noiseRequest.spectrogramPngBase64.length * 3) / 4);
+	if (decodedBytes > MAX_IMAGE_BYTES) {
+		return json({ error: "The spectrogram payload is too large." }, 400);
+	}
+
+	// Defense in depth: the browser runs this same gate before ever calling
+	// the API, but a hand-crafted request could skip it — a danger phrase in
+	// the context answers must never reach the model from any caller.
+	const safety = evaluateSafetyGate(noiseRequest.context);
+	if (safety.blocked) {
+		return json(
+			{
+				error:
+					"This describes a potential safety hazard. Stop using the equipment and contact a professional or emergency service now.",
+			},
+			400,
+		);
+	}
+
+	// Privacy: only the derived artifacts ever arrive here — spectrogram PNG,
+	// measured features, and form answers; raw audio never leaves the browser.
+	// All of it is held in memory for this request only, never written to
+	// storage and never logged (metadata only, below).
+	const startedAt = Date.now();
+	const anthropic = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
+
+	try {
+		const result: DescribeNoiseResponse = await describeNoise(
+			anthropic,
+			noiseRequest.spectrogramPngBase64,
+			noiseRequest.features,
+			noiseRequest.context,
+			env.NOISE_TRANSLATOR_MODEL,
+		);
+		if (result.stripped.length > 0) {
+			// The deny-list fired — log the count (never the content) so drift
+			// in the model's discipline is visible in the logs.
+			console.log(`describe-noise stripped=${result.stripped.length}`);
+		}
+		console.log(
+			`describe-noise outcome=ok bytes=${decodedBytes} duration_ms=${Date.now() - startedAt}`,
+		);
+		return json(result, 200);
+	} catch (error) {
+		const outcome = error instanceof PipelineOutputError ? "malformed" : "error";
+		console.log(
+			`describe-noise outcome=${outcome} bytes=${decodedBytes} duration_ms=${Date.now() - startedAt}`,
+		);
+		return friendlyApiError(
+			error,
+			"The model did not return a complete description. Please try again.",
+		);
+	}
+}
+
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url);
@@ -590,6 +688,12 @@ export default {
 				return json({ error: "Method not allowed." }, 405);
 			}
 			return handleSimulatePlan(request, env);
+		}
+		if (url.pathname === "/api/describe-noise") {
+			if (request.method !== "POST") {
+				return json({ error: "Method not allowed." }, 405);
+			}
+			return handleDescribeNoise(request, env);
 		}
 		return json({ error: "Not found." }, 404);
 	},

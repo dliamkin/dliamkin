@@ -1,0 +1,23 @@
+{
+	"features": {
+		"duration_s": 4,
+		"effective_duration_s": 4,
+		"pattern": "continuous",
+		"event_rate_hz": null,
+		"regularity": null,
+		"spectral_character": "mid",
+		"dominant_bands_hz": [
+			711,
+			2110
+		],
+		"pitch_trend": "steady"
+	},
+	"quality": {
+		"clipping_ratio": 0.6349,
+		"noise_floor_db": -1.7,
+		"peak_db": 0,
+		"issues": [
+			"clipped"
+		]
+	}
+}

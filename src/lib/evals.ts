@@ -12,6 +12,7 @@ export const EVAL_PROJECT_IDS = [
 	"upgrade-planner",
 	"tos-watch",
 	"dry-run-oracle",
+	"noise-translator",
 ] as const;
 
 export type EvalProjectId = (typeof EVAL_PROJECT_IDS)[number];
@@ -24,6 +25,7 @@ export const EVAL_PROJECT_LABELS: Record<EvalProjectId, string> = {
 	"upgrade-planner": "Dependency Upgrade Planner",
 	"tos-watch": "ToS Watchdog",
 	"dry-run-oracle": "Dry-Run Oracle",
+	"noise-translator": "Noise Translator",
 };
 
 // Where the runner writes and the dashboard reads.

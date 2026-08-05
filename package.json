@@ -24,6 +24,7 @@
     "generate:lease-samples": "tsx ./scripts/generate-lease-samples.mjs",
     "generate:paperwork-samples": "tsx ./scripts/generate-paperwork-samples.mjs",
     "generate:upgrade-samples": "tsx ./scripts/generate-upgrade-samples.mjs",
+    "generate:noise-samples": "tsx ./scripts/generate-noise-samples.mjs",
     "audit:local": "tsx ./scripts/site-health/run-audit.ts",
     "eval": "tsx ./scripts/evals/run-evals.ts",
     "tos-watch:run": "tsx ./scripts/tos-watch/run.ts",
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.43.0",
+    "@napi-rs/canvas": "^1.0.3",
     "@playwright/test": "^1.61.0",
     "@tsconfig/node24": "^24.0.4",
     "@types/jsdom": "^28.0.3",

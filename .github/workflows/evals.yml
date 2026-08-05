@@ -25,6 +25,8 @@ on:
       - "src/lib/lease-diff.ts"
       - "src/lib/lease-mechanical-diff.ts"
       - "src/lib/ui-analysis.ts"
+      - "src/lib/noise-translator.ts"
+      - "src/lib/audio-analysis/**"
       - "scripts/evals/**"
 
 # contents to push the results commit, issues to file/comment on regressions.

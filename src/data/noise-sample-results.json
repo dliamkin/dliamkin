@@ -1,0 +1,186 @@
+{
+	"rhythmic-thumping": {
+		"features": {
+			"duration_s": 8,
+			"effective_duration_s": 8,
+			"pattern": "intermittent",
+			"event_rate_hz": 2,
+			"regularity": "highly_regular",
+			"spectral_character": "broadband",
+			"dominant_bands_hz": [129],
+			"pitch_trend": "steady"
+		},
+		"response": {
+			"description": {
+				"characterizations": [
+					{
+						"descriptor": "regular clicking/ticking",
+						"evidence": "highly_regular intermittent pattern with event_rate_hz of 2, visible as evenly spaced bright bursts along the time axis roughly every half second",
+						"confidence": "high"
+					},
+					{
+						"descriptor": "low-pitched thump or knock accompanying each click",
+						"evidence": "dominant_bands_hz at 129 Hz with each burst concentrated near the bottom of the spectrogram (near 0-1k Hz) and brighter/louder than the rest of the band",
+						"confidence": "medium"
+					},
+					{
+						"descriptor": "background broadband hiss/noise floor",
+						"evidence": "spectral_character marked broadband, with faint energy spread fairly evenly from 0 to 8k Hz between the distinct events",
+						"confidence": "low"
+					}
+				],
+				"conditions_summary": "The sound occurs constantly while the dryer runs, has been present for about two weeks, and does not change with drum speed or intensity setting, matching the steady, evenly repeating pattern seen throughout the full 8-second recording.",
+				"professional_summary": "My clothes dryer has been making a repeating clicking/knocking sound for about two weeks. It happens constantly while running and doesn't change with speed or intensity. Measured, the events repeat at a rate of 2 Hz and are highly regular in timing, with the sound energy concentrated around 129 Hz, sitting on top of a broadband background noise across the recording's 8 second duration.",
+				"likely_questions": [
+					{
+						"question": "Does the clicking occur only during drum rotation, or also when the dryer is idle but powered on?",
+						"how_to_find_out": "Run the dryer empty and listen both while the drum turns and during any pause between tumbles, noting if the clicking continues."
+					},
+					{
+						"question": "Does the sound change when the drum is loaded versus empty?",
+						"how_to_find_out": "Run one cycle empty and one with a normal load, comparing whether the clicking rate or loudness shifts."
+					},
+					{
+						"question": "Is the clicking synchronized with drum rotation (i.e., once per revolution) or independent of it?",
+						"how_to_find_out": "Mark a spot on the drum, count revolutions over a timed interval, and compare that rate to the clicking you hear."
+					},
+					{
+						"question": "Does the noise persist across both dry-heat and cool-down/no-heat cycles?",
+						"how_to_find_out": "Run the dryer on a no-heat/fluff cycle and see if the clicking is still present."
+					},
+					{
+						"question": "Has anything changed recently, like moving the dryer, a new load type, or maintenance, around the time the sound started two weeks ago?",
+						"how_to_find_out": "Recall any recent events (moving, cleaning, new items dried) that coincide with when the sound began."
+					},
+					{
+						"question": "Is the sound coming from the drum area, the motor/base, or the venting system?",
+						"how_to_find_out": "With the dryer running, listen close to the front, back, and underside panels separately to localize where the sound is loudest."
+					}
+				],
+				"recording_notes": "The recording shows a fairly high background noise floor across the full frequency range, which could be masking finer detail in the clicking events; a closer, quieter recording positioned nearer the suspected source with reduced ambient room noise would help clarify the true frequency content and sharpness of each click."
+			},
+			"stripped": []
+		}
+	},
+	"high-pitched-whine": {
+		"features": {
+			"duration_s": 7,
+			"effective_duration_s": 7,
+			"pattern": "continuous",
+			"event_rate_hz": null,
+			"regularity": null,
+			"spectral_character": "high",
+			"dominant_bands_hz": [3790],
+			"pitch_trend": "steady"
+		},
+		"response": {
+			"description": {
+				"characterizations": [
+					{
+						"descriptor": "steady high-pitched whine/tone",
+						"evidence": "a continuous, narrow, bright band held steadily at about 3790 Hz for the full 7-second recording with no pitch drift",
+						"confidence": "high"
+					},
+					{
+						"descriptor": "constant-pitch electronic-sounding tone rather than a knock or rattle",
+						"evidence": "the dominant energy is confined to a single thin horizontal line rather than broadband bursts or repeating clicks, and 'pattern' is marked continuous with no event rate detected",
+						"confidence": "medium"
+					}
+				],
+				"conditions_summary": "The user reports this in a car, occurring only under load or at speed and tracking with speed/intensity, and it has been present for a few days; the spectrogram itself is a single continuous recording (no separate load/no-load segments captured) showing an unbroken steady tone throughout.",
+				"professional_summary": "I'm hearing a continuous, steady high-pitched whine in my car that sits right around 3790 Hz and holds that pitch steadily for the whole recording with no drift. It only happens under load or at speed, and its intensity tracks with speed/intensity, and it's been going on for a few days.",
+				"likely_questions": [
+					{
+						"question": "Does the pitch of the whine change with engine RPM or with vehicle road speed specifically?",
+						"how_to_find_out": "Rev the engine in neutral/park versus driving at varying speeds in the same gear and note if the tone's pitch rises/falls with RPM or with speed."
+					},
+					{
+						"question": "Is the sound present with the car stationary but engine running, or only while the vehicle is moving?",
+						"how_to_find_out": "Let the engine idle and rev it while parked, listen for the tone, then compare to driving conditions."
+					},
+					{
+						"question": "Does the tone change or disappear when coasting in neutral, braking, or turning?",
+						"how_to_find_out": "On a safe stretch of road, shift to neutral and coast, and try gentle turns, noting any change in the sound's presence or pitch."
+					},
+					{
+						"question": "Is the sound audible from inside the cabin, under the hood, or near a specific wheel/area?",
+						"how_to_find_out": "Have someone listen from different vantage points (inside cabin, near open hood, near each wheel) while the car is running under load, or use a mechanic's stethoscope if available."
+					},
+					{
+						"question": "Has anything changed recently (new tires, recent service, fluid levels, mileage since last maintenance) around the time this started a few days ago?",
+						"how_to_find_out": "Check maintenance records and recent history for the past week or two for any service, part replacement, or road hazard encountered."
+					},
+					{
+						"question": "Does the volume or pitch change with steering input or vehicle load (e.g., cargo weight, number of passengers)?",
+						"how_to_find_out": "Test turning the steering wheel while stationary and note any change, then compare sound with varying passenger/cargo load."
+					}
+				],
+				"recording_notes": "The spectrogram shows a single continuous 7-second capture with no clearly separated 'no-load' versus 'under-load' segments, so it's not possible to see how the tone's frequency or level changes with speed directly from this recording. A better recording would include labeled segments at idle, at a steady low speed, and at a steady higher speed or under acceleration, so the pitch-vs-speed relationship the user describes could be verified visually on the spectrogram."
+			},
+			"stripped": []
+		}
+	},
+	"erratic-rattle": {
+		"features": {
+			"duration_s": 5.6,
+			"effective_duration_s": 2,
+			"pattern": "intermittent",
+			"event_rate_hz": 2.2,
+			"regularity": "erratic",
+			"spectral_character": "mid",
+			"dominant_bands_hz": [904],
+			"pitch_trend": "steady"
+		},
+		"response": {
+			"description": {
+				"characterizations": [
+					{
+						"descriptor": "sharp clicking/ticking",
+						"evidence": "brief vertical broadband transients spanning up to the 8k Hz axis limit at each event, with the brightest, most sustained energy concentrated around 904 Hz — consistent with short percussive clicks rather than sustained tonal noise",
+						"confidence": "high"
+					},
+					{
+						"descriptor": "irregular, uneven spacing between clicks",
+						"evidence": "event_rate_hz of 2.2 with regularity marked 'erratic' and visibly uneven gaps between vertical strikes in the spectrogram (e.g., tight clusters near 2.1-2.7s and 4.1-4.5s versus longer gaps like 3.3s to 4.1s)",
+						"confidence": "high"
+					},
+					{
+						"descriptor": "mid-pitched knock component",
+						"evidence": "dominant_bands_hz at 904 with steady pitch_trend, and each click shows a clear brightest band around 1k Hz on the spectrogram",
+						"confidence": "medium"
+					}
+				],
+				"conditions_summary": "The user reports this sound occurs only at startup of the furnace/HVAC system, with unclear speed dependence, and it has been happening since last month; the recording shows intermittent clicking events at an average rate of 2.2 Hz over an effective active duration of 2 seconds within the 5.6-second clip.",
+				"professional_summary": "I'm hearing an intermittent clicking sound from my furnace/HVAC system that only happens at startup and has been going on since last month. The measured event rate is 2.2 Hz but the spacing between clicks is erratic rather than steady. Each click has a broadband transient character reaching up toward 8k Hz, with the strongest, most consistent energy sitting around 904 Hz. The pitch of that dominant band stays steady across the recording. The active clicking only fills about 2 seconds of the total 5.6-second clip, meaning it's bursty rather than continuous.",
+				"likely_questions": [
+					{
+						"question": "Does the clicking happen every time the system starts, or only sometimes?",
+						"how_to_find_out": "Record a few consecutive startup cycles and note whether the clicking is present each time."
+					},
+					{
+						"question": "How long after startup does the clicking begin, and how long does it last before stopping?",
+						"how_to_find_out": "Time the delay from power-on to first click, and the delay from last click to when the sound stops."
+					},
+					{
+						"question": "Does the clicking change in rate or loudness as the blower or burner ramps up to full speed?",
+						"how_to_find_out": "Listen or record continuously through the full startup sequence, noting any change in click spacing or volume as the system stabilizes."
+					},
+					{
+						"question": "Is the clicking heard from a specific location (near the blower, ductwork, burner assembly, or thermostat)?",
+						"how_to_find_out": "Walk around the unit during startup with a phone or your ear near different components to localize the sound source."
+					},
+					{
+						"question": "Has anything changed in the system recently (filter change, thermostat settings, recent service) around the time this started last month?",
+						"how_to_find_out": "Check maintenance records or recall any changes made to the system in the past month."
+					},
+					{
+						"question": "Does the clicking occur only on a cold start, or also when restarting after the system has been briefly cycled off and on while already warm?",
+						"how_to_find_out": "Compare a cold morning startup recording to one taken after cycling the thermostat off and on later in the day."
+					}
+				],
+				"recording_notes": "The clip captures clear individual click events, but the erratic spacing and clustering pattern make it hard to tell if this is a fixed mechanical rate or truly random; a longer recording spanning a full startup-to-steady-state cycle (rather than 5.6 seconds) would help confirm whether the rate settles or changes over time."
+			},
+			"stripped": []
+		}
+	}
+}
