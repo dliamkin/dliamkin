@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Card from "primevue/card";
 import Tag from "primevue/tag";
 import AppNavbar from "@/components/sections/AppNavbar.vue";
 import SiteFooter from "@/components/sections/SiteFooter.vue";
+import ProjectVignette from "@/components/projects/ProjectVignette.vue";
 
 interface ProjectEntry {
 	to: string;
@@ -10,6 +10,7 @@ interface ProjectEntry {
 	title: string;
 	tags: string[];
 	description: string;
+	featured?: boolean;
 }
 
 const projects: ProjectEntry[] = [
@@ -65,6 +66,7 @@ const projects: ProjectEntry[] = [
 		to: "/projects/tail-risk-lab",
 		icon: "fa-solid fa-chart-area",
 		title: "Tail Risk Lab",
+		featured: true,
 		tags: [
 			"TypeScript",
 			"Monte Carlo",
@@ -80,6 +82,7 @@ const projects: ProjectEntry[] = [
 		to: "/projects/noise-translator",
 		icon: "fa-solid fa-ear-listen",
 		title: "Noise Translator",
+		featured: true,
 		tags: ["Client-side audio", "Vision", "Structured output"],
 		description:
 			"Record the sound your car, dryer, or furnace is making and your browser turns it into a spectrogram plus measured acoustic facts — then a model translates them into the precise description a mechanic needs, with the questions they'll ask next. It describes; it never diagnoses.",
@@ -93,6 +96,12 @@ const projects: ProjectEntry[] = [
 			"A standing nightly monitor over terms-of-service and policy documents — UF campus policies and major consumer services. Hash comparison makes unchanged nights free; when a document changes, a diff-and-explain pipeline publishes a dated, neutral changelog entry anyone can subscribe to.",
 	},
 ];
+
+// Projects are listed oldest-first; featured rows show newest first.
+const featuredProjects = projects.filter((p) => p.featured).reverse();
+const gridProjects = projects.filter((p) => !p.featured);
+
+const vignetteKind = (to: string): string => to.split("/").pop() ?? "";
 </script>
 
 <template>
@@ -115,21 +124,27 @@ const projects: ProjectEntry[] = [
 				</p>
 			</header>
 
-			<div class="project-cards">
-				<RouterLink
-					v-for="project in projects"
-					:key="project.to"
-					:to="project.to"
-					class="project-link"
-				>
-					<Card class="project-card">
-						<template #title>
+			<section class="featured-section" aria-label="Latest builds">
+				<h2 class="section-label">
+					<i class="fa-solid fa-star" aria-hidden="true"></i>
+					Latest builds
+				</h2>
+				<div class="featured-rows">
+					<RouterLink
+						v-for="(project, index) in featuredProjects"
+						:key="project.to"
+						:to="project.to"
+						class="featured-row"
+						:class="{ reverse: index % 2 === 1 }"
+					>
+						<div class="featured-visual">
+							<ProjectVignette :kind="vignetteKind(project.to)" />
+						</div>
+						<div class="featured-body">
 							<div class="card-title">
 								<i :class="project.icon" aria-hidden="true"></i>
 								<span>{{ project.title }}</span>
 							</div>
-						</template>
-						<template #content>
 							<p class="card-desc">{{ project.description }}</p>
 							<div class="card-tags">
 								<Tag
@@ -139,10 +154,50 @@ const projects: ProjectEntry[] = [
 									severity="secondary"
 								/>
 							</div>
-						</template>
-					</Card>
-				</RouterLink>
-			</div>
+							<span class="try-it">
+								Open project
+								<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+							</span>
+						</div>
+					</RouterLink>
+				</div>
+			</section>
+
+			<section class="grid-section" aria-label="All projects">
+				<h2 class="section-label">
+					<i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+					All projects
+				</h2>
+				<div class="project-cards">
+					<RouterLink
+						v-for="project in gridProjects"
+						:key="project.to"
+						:to="project.to"
+						class="project-link"
+					>
+						<article class="project-card">
+							<div class="card-banner">
+								<ProjectVignette :kind="vignetteKind(project.to)" />
+							</div>
+							<div class="card-body">
+								<div class="card-title">
+									<i :class="project.icon" aria-hidden="true"></i>
+									<span>{{ project.title }}</span>
+								</div>
+								<p class="card-desc clamped">{{ project.description }}</p>
+								<div class="card-tags">
+									<Tag
+										v-for="tag in project.tags"
+										:key="tag"
+										:value="tag"
+										severity="secondary"
+									/>
+								</div>
+							</div>
+						</article>
+					</RouterLink>
+				</div>
+			</section>
 		</main>
 
 		<SiteFooter />
@@ -169,7 +224,7 @@ const projects: ProjectEntry[] = [
 
 .projects-header {
 	max-width: 720px;
-	margin-bottom: 2rem;
+	margin-bottom: 2.5rem;
 }
 
 .eyebrow {
@@ -208,21 +263,108 @@ h1 {
 	font-weight: 600;
 }
 
+.section-label {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #6b6a6d;
+	margin-bottom: 1.25rem;
+}
+
+.section-label i {
+	color: #27a9e0;
+}
+
+/* Featured rows */
+.featured-section {
+	margin-bottom: 3rem;
+}
+
+.featured-rows {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.featured-row {
+	display: grid;
+	grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	text-decoration: none;
+	color: inherit;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 14px;
+	overflow: hidden;
+	transition:
+		box-shadow 0.2s ease,
+		transform 0.2s ease;
+}
+
+.featured-row:hover {
+	box-shadow: 0 10px 30px rgba(39, 169, 224, 0.2);
+	transform: translateY(-3px);
+}
+
+.featured-row.reverse .featured-visual {
+	order: 2;
+}
+
+.featured-visual {
+	min-height: 240px;
+}
+
+.featured-body {
+	padding: 1.75rem 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.9rem;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.try-it {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	font-weight: 700;
+	font-size: 0.9rem;
+	color: #1f8fc0;
+}
+
+.try-it i {
+	transition: transform 0.2s ease;
+}
+
+.featured-row:hover .try-it i {
+	transform: translateX(4px);
+}
+
+/* Grid */
 .project-cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 	gap: 1.5rem;
-	max-width: 900px;
 }
 
 .project-link {
 	text-decoration: none;
 	color: inherit;
 	display: block;
+	height: 100%;
 }
 
 .project-card {
 	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 14px;
+	overflow: hidden;
 	transition:
 		box-shadow 0.2s ease,
 		transform 0.2s ease;
@@ -233,10 +375,25 @@ h1 {
 	transform: translateY(-2px);
 }
 
+.card-banner {
+	aspect-ratio: 2 / 1;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.card-body {
+	padding: 1.25rem 1.4rem 1.4rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	flex: 1;
+}
+
 .card-title {
 	display: flex;
 	align-items: center;
 	gap: 0.6rem;
+	font-size: 1.15rem;
+	font-weight: 700;
 }
 
 .card-title i {
@@ -246,13 +403,45 @@ h1 {
 .card-desc {
 	color: #6b6a6d;
 	line-height: 1.6;
-	margin-bottom: 1rem;
+}
+
+.card-desc.clamped {
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .card-tags {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.4rem;
+	margin-top: auto;
+}
+
+.featured-body .card-tags {
+	margin-top: 0;
+}
+
+@media (max-width: 860px) {
+	.featured-row,
+	.featured-row.reverse {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.featured-row.reverse .featured-visual {
+		order: 0;
+	}
+
+	.featured-visual {
+		min-height: 0;
+		aspect-ratio: 16 / 9;
+	}
+
+	.featured-body {
+		padding: 1.4rem 1.5rem 1.6rem;
+	}
 }
 
 @media (max-width: 900px) {
@@ -283,10 +472,37 @@ html.dark .evals-link a {
 	color: var(--dm-blue-soft);
 }
 
+html.dark .section-label {
+	color: var(--dm-text-3);
+}
+
+html.dark .section-label i {
+	color: var(--dm-blue-soft);
+}
+
+html.dark .featured-row,
+html.dark .project-card {
+	background: var(--dm-bg-soft);
+	border-color: var(--dm-border);
+}
+
+html.dark .card-banner {
+	border-bottom-color: var(--dm-border);
+}
+
+html.dark .card-title {
+	color: var(--dm-text-1);
+}
+
 html.dark .card-desc {
 	color: var(--dm-text-2);
 }
 
+html.dark .try-it {
+	color: var(--dm-blue-soft);
+}
+
+html.dark .featured-row:hover,
 html.dark .project-link:hover .project-card {
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
