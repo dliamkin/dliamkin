@@ -62,6 +62,21 @@ const projects: ProjectEntry[] = [
 			"A weather forecast for AI spend: paste an agent plan and a cheap model simulates it — failure points, retry-storm probability, and the token bill per step — before an expensive model burns a single token. Approve, apply suggested fixes, or abort.",
 	},
 	{
+		to: "/projects/tail-risk-lab",
+		icon: "fa-solid fa-chart-area",
+		title: "Tail Risk Lab",
+		tags: [
+			"TypeScript",
+			"Monte Carlo",
+			"Statistics",
+			"Canvas",
+			"Web Workers",
+			"AI Cost Engineering",
+		],
+		description:
+			"Monte Carlo cost simulator for AI agent runs. Point estimates lie about agent costs — retry loops make the distribution fat-tailed. This tool simulates a run thousands of times client-side (zero API tokens) and lets you buy down tail risk with policy knobs before spending a cent.",
+	},
+	{
 		to: "/projects/tos-watch",
 		icon: "fa-solid fa-tower-observation",
 		title: "ToS Watchdog",

@@ -64,6 +64,17 @@ const router = createRouter({
 			redirect: "/projects/dry-run-oracle",
 		},
 		{
+			path: "/projects/tail-risk-lab",
+			name: "tail-risk-lab",
+			component: () => import("../views/TailRiskLabView.vue"),
+		},
+		{
+			// Convenience alias — the canonical home is under /projects like
+			// every other demo.
+			path: "/tail-risk-lab",
+			redirect: "/projects/tail-risk-lab",
+		},
+		{
 			path: "/evals",
 			name: "evals",
 			component: () => import("../views/EvalsView.vue"),
