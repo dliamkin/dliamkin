@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-08-04T10:51:14.553Z",
+  "audited_at": "2026-08-05T10:48:52.347Z",
   "status": "warnings",
-  "summary": "Homepage performance remains at 73 (LCP 6.30 s), now the ninth consecutive audit persistently below 85 with no structural fix applied; /about continues to render only a stub placeholder with no real content or navigation.",
+  "summary": "Homepage performance holds at 72 (LCP 6.16 s), now the tenth consecutive audit below 85 with no structural fix applied; /about remains a near-blank stub placeholder with no real content or navigation.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 73,
+        "performance": 72,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 6300.808,
+        "lcp_ms": 6162.329,
         "cls": 0.015,
-        "tbt_ms": 159
+        "tbt_ms": 195
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with teal-accented hero ('App' heading, 'Send me a message' CTA), four content sections (pillars, case studies, skills, contact form), and a dark contact footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -20,13 +20,13 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 90,
+        "performance": 91,
         "accessibility": 94,
         "best_practices": 100,
         "seo": 83,
-        "lcp_ms": 3071.988,
+        "lcp_ms": 2944.491,
         "cls": 0,
-        "tbt_ms": 103
+        "tbt_ms": 54.5
       },
       "visual_findings": [
         "Page still contains only the placeholder text 'This is an about page' on a near-blank dark canvas — no real content, nav, or footer present on either desktop or mobile."
@@ -36,27 +36,27 @@
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 92,
+        "performance": 90,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 2935.831,
-        "cls": 0.003,
-        "tbt_ms": 81.5
+        "lcp_ms": 3086.623,
+        "cls": 0.002,
+        "tbt_ms": 83.5
       },
       "visual_findings": [],
-      "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, six project cards (Clinical Note Structurer, Screenshot → PrimeVue, Lease Diff Explainer, Paperwork → Calendar, Dependency Upgrade Planner, ToS Watchdog) in a 2-column desktop grid collapsing to single-column on mobile, and a dark contact footer visible on both desktop and mobile."
+      "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, featured 'Latest Builds' section (Noise Translator, Tail Risk Lab), six project cards in a 2-column desktop grid collapsing to single-column on mobile, and a dark contact footer visible on both desktop and mobile."
     },
     {
       "path": "/projects/note-structurer",
       "lighthouse": {
-        "performance": 91,
+        "performance": 90,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 2854.641,
-        "cls": 0.085,
-        "tbt_ms": 58
+        "lcp_ms": 2998.475,
+        "cls": 0.084,
+        "tbt_ms": 59
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer detail page with breadcrumb nav, 'Evals: 10/10 passing' badge, two-column visit note / structured result interactive demo, amber disclaimer banner, expandable JSON and HIPAA notes accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -64,49 +64,50 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 91,
+        "performance": 90,
         "accessibility": 96,
         "best_practices": 100,
         "seo": 85,
-        "lcp_ms": 3008.405,
+        "lcp_ms": 3174.881,
         "cls": 0.036,
-        "tbt_ms": 112.5
+        "tbt_ms": 56.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Screenshot → PrimeVue detail page with breadcrumb nav, 'Evals: 5/5 passing' badge, dashed-border image drop zone, three sample thumbnail cards (Login form, Analytics dashboard, Pricing page), a placeholder result panel, expandable accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     }
   ],
   "score_deltas": [
-    "/ performance 73 → 73 (stable, within jitter — persistently below 85 for 9+ consecutive audits)",
-    "/ lcp_ms 6447 → 6301 (-146 ms, still critically slow above 6 s)",
-    "/ tbt_ms 175 → 159 (-16 ms, within jitter)",
+    "/ performance 73 → 72 (-1 pt, within jitter — persistently below 85 for 10+ consecutive audits)",
+    "/ lcp_ms 6301 → 6162 (-139 ms, still critically slow above 6 s)",
+    "/ tbt_ms 159 → 195 (+36 ms, within acceptable range)",
     "/ accessibility 96 → 96 (stable)",
     "/ best_practices 100 → 100 (stable)",
     "/ seo 92 → 92 (stable)",
     "/ cls 0.015 → 0.015 (stable)",
-    "/about performance 88 → 90 (+2 pts, within jitter)",
-    "/about lcp_ms 3211 → 3072 (-139 ms, within jitter)",
-    "/about tbt_ms 91 → 103 (+12 ms, within jitter)",
+    "/about performance 90 → 91 (+1 pt, within jitter)",
+    "/about lcp_ms 3072 → 2944 (-128 ms, within jitter)",
+    "/about tbt_ms 103 → 54.5 (-48.5 ms, improved)",
     "/about seo 83 → 83 (stable, persistently below 85 threshold)",
     "/about accessibility 94 → 94 (stable)",
     "/about best_practices 100 → 100 (stable)",
     "/about cls 0 → 0 (stable)",
-    "/projects performance 83 → 92 (+9 pts, strong improvement)",
-    "/projects lcp_ms 3670 → 2936 (-734 ms, improved)",
-    "/projects tbt_ms 85 → 81.5 (-3.5 ms, within jitter)",
-    "/projects/note-structurer performance 87 → 91 (+4 pts, within jitter)",
-    "/projects/note-structurer lcp_ms 3131 → 2855 (-276 ms, improved)",
-    "/projects/note-structurer tbt_ms 65.5 → 58 (-7.5 ms, within jitter)",
-    "/projects/note-structurer cls 0.083 → 0.085 (stable)",
-    "/projects/screenshot-to-primevue performance 85 → 91 (+6 pts, improved)",
-    "/projects/screenshot-to-primevue lcp_ms 3543 → 3008 (-535 ms, improved)",
-    "/projects/screenshot-to-primevue tbt_ms 61.5 → 112.5 (+51 ms, notable increase but within acceptable range)",
+    "/projects performance 92 → 90 (-2 pts, within jitter)",
+    "/projects lcp_ms 2936 → 3087 (+151 ms, within jitter)",
+    "/projects tbt_ms 81.5 → 83.5 (+2 ms, within jitter)",
+    "/projects cls 0.003 → 0.002 (stable)",
+    "/projects/note-structurer performance 91 → 90 (-1 pt, within jitter)",
+    "/projects/note-structurer lcp_ms 2855 → 2998 (+143 ms, within jitter)",
+    "/projects/note-structurer tbt_ms 58 → 59 (+1 ms, within jitter)",
+    "/projects/note-structurer cls 0.085 → 0.084 (stable)",
+    "/projects/screenshot-to-primevue performance 91 → 90 (-1 pt, within jitter)",
+    "/projects/screenshot-to-primevue lcp_ms 3008 → 3175 (+167 ms, within jitter)",
+    "/projects/screenshot-to-primevue tbt_ms 112.5 → 56.5 (-56 ms, improved)",
     "/projects/screenshot-to-primevue cls 0.036 → 0.036 (stable)"
   ],
-  "top_fix": "Fix the homepage LCP (currently 6.30 s, performance 73, below 85 for 9+ consecutive audits): preload the hero image with `<link rel=\"preload\" as=\"image\">`, serve it in WebP/AVIF at mobile-appropriate dimensions, and defer render-blocking resources above the fold — this single change would yield the largest score improvement across the site.",
+  "top_fix": "Fix the homepage LCP (currently 6.16 s, performance 72, below 85 for 10+ consecutive audits): preload the hero image with `<link rel=\"preload\" as=\"image\">`, serve it in WebP/AVIF at mobile-appropriate dimensions, and defer render-blocking resources above the fold — this single change would yield the largest score improvement across the site.",
   "should_file_issue": true,
-  "issue_title": "Homepage performance persistently below 85 for 9+ consecutive audits (LCP > 6.3 s)",
-  "issue_body": "## Homepage Performance Regression — 9+ Consecutive Audits Below 85\n\n**Audited:** 2026-08-04T10:50:39.143Z\n**Page:** `/`\n\n### Current scores\n| Metric | Value |\n|---|---|\n| Performance | 73 |\n| LCP | 6301 ms |\n| CLS | 0.015 |\n| TBT | 159 ms |\n\n### History\nThe homepage has scored 73 on every audit for at least 9 consecutive runs, with LCP consistently above 6.3 s. Previous audit: 73 / 6447 ms. No structural fix has been applied across any of these audits.\n\n### Root cause (likely)\nThe hero image (above-the-fold) is not preloaded and is likely served in a non-optimised format/size, causing a slow LCP. Render-blocking resources may also be delaying first paint.\n\n### Recommended fix\n1. Add `<link rel=\"preload\" as=\"image\" href=\"...hero...\" imagesrcset=\"...\" imagesizes=\"...\">` in `<head>`.\n2. Serve the hero image in WebP or AVIF, sized appropriately for mobile (≤ 800 px wide).\n3. Audit and defer any render-blocking JS/CSS above the fold.\n\nThis is the single highest-impact improvement available on the site and has now persisted for 9+ audits without action.",
+  "issue_title": "Homepage performance persistently below 85 for 10+ consecutive audits (LCP > 6.1 s)",
+  "issue_body": "## Homepage Performance Regression — 10+ Consecutive Audits Below 85\n\n**Audited:** 2026-08-05T10:47:16.638Z\n**Page:** `/`\n\n### Current scores\n| Metric | Value |\n|---|---|\n| Performance | 72 |\n| LCP | 6162 ms |\n| CLS | 0.015 |\n| TBT | 195 ms |\n\n### History\nThe homepage has scored 72–73 on every audit for at least 10 consecutive runs, with LCP consistently above 6.1 s. Previous audit: 73 / 6301 ms. No structural fix has been applied across any of these audits.\n\n### Root cause (likely)\nThe hero image (above-the-fold) is not preloaded and is likely served in a non-optimised format/size, causing a slow LCP. Render-blocking resources may also be delaying first paint.\n\n### Recommended fix\n1. Add `<link rel=\"preload\" as=\"image\" href=\"...hero...\" imagesrcset=\"...\" imagesizes=\"...\">` in `<head>`.\n2. Serve the hero image in WebP or AVIF, sized appropriately for mobile (≤ 800 px wide).\n3. Audit and defer any render-blocking JS/CSS above the fold.\n\nThis is the single highest-impact improvement available on the site and has now persisted for 10+ audits without action.",
   "issue_fingerprint": "home-performance-lcp-persistent-regression",
   "error_reason": null
 }
