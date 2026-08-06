@@ -67,6 +67,11 @@ const router = createRouter({
 			path: "/projects/tail-risk-lab",
 			name: "tail-risk-lab",
 			component: () => import("../views/TailRiskLabView.vue"),
+			// The particle field recedes to ambient texture on tool pages so it
+			// never competes with the instruments for attention or frames. Any
+			// /projects/* tool route recedes by default (see useParticleDirector);
+			// meta.recedeField exists to flag routes outside that convention.
+			meta: { recedeField: true },
 		},
 		{
 			// Convenience alias — the canonical home is under /projects like
@@ -78,6 +83,17 @@ const router = createRouter({
 			path: "/projects/noise-translator",
 			name: "noise-translator",
 			component: () => import("../views/NoiseTranslatorView.vue"),
+		},
+		{
+			path: "/projects/particle-engine",
+			name: "particle-engine",
+			component: () => import("../views/ParticleEngineLab.vue"),
+		},
+		{
+			// Convenience alias — the canonical home is under /projects like
+			// every other demo.
+			path: "/particle-engine",
+			redirect: "/projects/particle-engine",
 		},
 		{
 			// Convenience alias — the canonical home is under /projects like

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref, type ComponentPublicInstance } from "vue";
 import Tag from "primevue/tag";
 import AppNavbar from "@/components/sections/AppNavbar.vue";
 import SiteFooter from "@/components/sections/SiteFooter.vue";
 import ProjectVignette from "@/components/projects/ProjectVignette.vue";
+import { useParticleDirector } from "@/composables/useParticleDirector";
 
 interface ProjectEntry {
 	to: string;
@@ -88,6 +90,15 @@ const projects: ProjectEntry[] = [
 			"Record the sound your car, dryer, or furnace is making and your browser turns it into a spectrogram plus measured acoustic facts — then a model translates them into the precise description a mechanic needs, with the questions they'll ask next. It describes; it never diagnoses.",
 	},
 	{
+		to: "/projects/particle-engine",
+		icon: "fa-solid fa-braille",
+		title: "Token Field",
+		featured: true,
+		tags: ["TypeScript", "Canvas", "Generative Art", "Physics", "Performance"],
+		description:
+			"The particle system running behind this site. 3,000 simulated 'tokens' with flow-field physics, formation morphing, and mouse interaction — one persistent canvas, zero libraries, 60fps. Open the playground to drive it yourself.",
+	},
+	{
 		to: "/projects/tos-watch",
 		icon: "fa-solid fa-tower-observation",
 		title: "ToS Watchdog",
@@ -102,6 +113,26 @@ const featuredProjects = projects.filter((p) => p.featured).reverse();
 const gridProjects = projects.filter((p) => !p.featured);
 
 const vignetteKind = (to: string): string => to.split("/").pop() ?? "";
+
+// The particle field behind this page morphs into a project's signature shape
+// while its card dominates the viewport. Giving another project a formation
+// is one line once you have its element:
+//   cleanups.push(registerSection(el, "columns", { columns: [...] }));
+const { registerSection } = useParticleDirector();
+const tailRiskRow = ref<Element | null>(null);
+
+const setTailRiskRef = (el: Element | ComponentPublicInstance | null, to: string): void => {
+	if (to !== "/projects/tail-risk-lab") return;
+	tailRiskRow.value = el && "$el" in el ? (el.$el as Element) : el;
+};
+
+const cleanups: (() => void)[] = [];
+onMounted(() => {
+	if (tailRiskRow.value) cleanups.push(registerSection(tailRiskRow.value, "distribution"));
+});
+onBeforeUnmount(() => {
+	cleanups.forEach((cleanup) => cleanup());
+});
 </script>
 
 <template>
@@ -133,6 +164,7 @@ const vignetteKind = (to: string): string => to.split("/").pop() ?? "";
 					<RouterLink
 						v-for="(project, index) in featuredProjects"
 						:key="project.to"
+						:ref="(el) => setTailRiskRef(el, project.to)"
 						:to="project.to"
 						class="featured-row"
 						:class="{ reverse: index % 2 === 1 }"
@@ -208,7 +240,10 @@ const vignetteKind = (to: string): string => to.split("/").pop() ?? "";
 .projects-page {
 	font-family: "Raleway", sans-serif;
 	color: #414042;
-	background: #fff;
+	/* Transparent so the site-wide particle field shows through; the body
+	   already paints the same #fff / var(--dm-bg) this used to. Cards and
+	   surfaces below keep opaque backgrounds so text never sits on particles. */
+	background: transparent;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -456,7 +491,7 @@ h1 {
 
 html.dark .projects-page {
 	color: var(--dm-text-2);
-	background: var(--dm-bg);
+	background: transparent;
 }
 
 html.dark h1 {

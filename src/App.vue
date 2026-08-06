@@ -1,5 +1,15 @@
+<script setup lang="ts">
+import ParticleField from "@/components/ParticleField.vue";
+</script>
+
 <template>
-	<router-view />
+	<!-- The one persistent particle canvas — mounted once, never unmounts on
+	     navigation. All page content renders above it (see .site-content);
+	     page roots that should reveal the field use transparent backgrounds. -->
+	<ParticleField />
+	<div class="site-content">
+		<router-view />
+	</div>
 </template>
 
 <style>
@@ -42,6 +52,12 @@ html.dark body {
 
 * {
 	box-sizing: border-box;
+}
+
+/* Everything the router renders sits above the fixed particle canvas. */
+.site-content {
+	position: relative;
+	z-index: 1;
 }
 
 /* Offset anchor jumps so sections aren't hidden under the fixed navbar */

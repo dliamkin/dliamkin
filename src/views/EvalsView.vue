@@ -379,7 +379,9 @@ function sortedChecks(caseResult: CaseResult): CaseResult["checks"] {
 .evals-page {
 	font-family: "Raleway", sans-serif;
 	color: #414042;
-	background: #fff;
+	/* Transparent so the site-wide particle field shows through; the body
+	   already paints the same background this used to. */
+	background: transparent;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -707,7 +709,7 @@ h1 {
 
 html.dark .evals-page {
 	color: var(--dm-text-2);
-	background: var(--dm-bg);
+	background: transparent;
 }
 
 html.dark h1 {

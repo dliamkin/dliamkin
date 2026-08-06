@@ -247,6 +247,43 @@ defineProps<{
 			<circle cx="256" cy="74" r="4" class="blip" />
 		</svg>
 
+		<!-- Token Field: a particle swarm condensing into ordered rows -->
+		<svg
+			v-else-if="kind === 'particle-engine'"
+			viewBox="0 0 320 200"
+			preserveAspectRatio="xMidYMid slice"
+		>
+			<g class="tf-swarm">
+				<circle cx="38" cy="58" r="3" class="tf-dot" />
+				<circle cx="62" cy="112" r="2.4" class="tf-dot t2" />
+				<circle cx="50" cy="152" r="2.8" class="tf-dot t3" />
+				<circle cx="84" cy="44" r="2.2" class="tf-dot t4" />
+				<circle cx="96" cy="90" r="3.2" class="tf-dot t5" />
+				<circle cx="78" cy="132" r="2.4" class="tf-dot t2" />
+				<circle cx="112" cy="60" r="2.6" class="tf-dot t3" />
+				<circle cx="120" cy="150" r="2.2" class="tf-dot t4" />
+				<circle cx="134" cy="104" r="2.8" class="tf-dot t5" />
+				<circle cx="104" cy="170" r="2.2" class="tf-dot" />
+				<circle cx="130" cy="34" r="2.4" class="tf-dot t2" />
+				<circle cx="46" cy="86" r="2.2" class="tf-dot t4" />
+			</g>
+			<path class="flow" d="M148 100 h24" />
+			<path class="flow" d="M166 93 l10 7 -10 7" fill="none" />
+			<g class="tf-formed">
+				<g v-for="row in 4" :key="row">
+					<circle
+						v-for="col in 8"
+						:key="col"
+						:cx="192 + (col - 1) * 14"
+						:cy="70 + (row - 1) * 20"
+						r="2.6"
+						class="tf-grid-dot"
+						:style="{ animationDelay: `${((row - 1) * 8 + col) * 0.09}s` }"
+					/>
+				</g>
+			</g>
+		</svg>
+
 		<!-- Fallback: gentle pulsing dots -->
 		<svg v-else viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice">
 			<circle cx="130" cy="100" r="8" class="fb-dot" />
@@ -975,6 +1012,55 @@ html.dark .vignette {
 	0%,
 	100% {
 		opacity: 0.3;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+/* Token Field */
+.tf-dot {
+	fill: var(--vg-accent);
+	opacity: 0.75;
+	animation: tfDrift 3.2s ease-in-out infinite alternate;
+}
+
+.tf-dot.t2 {
+	fill: var(--vg-accent-soft);
+	animation-delay: 0.4s;
+}
+.tf-dot.t3 {
+	animation-delay: 0.9s;
+	animation-duration: 2.6s;
+}
+.tf-dot.t4 {
+	fill: var(--vg-ink);
+	animation-delay: 1.3s;
+}
+.tf-dot.t5 {
+	fill: var(--vg-accent-soft);
+	animation-delay: 1.8s;
+	animation-duration: 3.8s;
+}
+
+@keyframes tfDrift {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(6px, -8px);
+	}
+}
+
+.tf-grid-dot {
+	fill: var(--vg-accent);
+	animation: tfSettle 2.4s ease-in-out infinite;
+}
+
+@keyframes tfSettle {
+	0%,
+	100% {
+		opacity: 0.35;
 	}
 	50% {
 		opacity: 1;
