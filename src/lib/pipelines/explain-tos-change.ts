@@ -21,7 +21,7 @@ export const EXPLAIN_TOS_DEFAULT_MODEL = "claude-sonnet-5";
 
 // Bumped when prompt/schema/diff behavior changes meaningfully; stamped on
 // every published changelog entry so old entries stay attributable.
-export const TOS_PIPELINE_VERSION = "1.0.0";
+export const TOS_PIPELINE_VERSION = "1.1.0";
 
 export interface TosDocumentMeta {
 	serviceName: string;
