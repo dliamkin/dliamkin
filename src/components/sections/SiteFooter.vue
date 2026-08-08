@@ -206,7 +206,7 @@ async function onSubmit() {
 					</li>
 					<li>
 						<span class="detail-icon"><i class="fa-solid fa-location-dot"></i></span>
-						<span>Gainesville, FL</span>
+						<span>Melbourne, FL</span>
 					</li>
 				</ul>
 

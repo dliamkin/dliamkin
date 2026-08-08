@@ -70,7 +70,7 @@ watch(inView, (visible) => {
 				><code><span class="ln">const</span> <span class="var">developer</span> <span class="op">=</span> {
   <span class="key">name</span>: <span class="str">"Denis Liamkin"</span>,
   <span class="key">role</span>: <span class="str">"Senior Software Engineer"</span>,
-  <span class="key">location</span>: <span class="str">"Gainesville, FL"</span>,
+  <span class="key">location</span>: <span class="str">"Melbourne, FL"</span>,
   <span class="key">experience</span>: <span class="num">12</span> <span class="op">+</span> <span class="str">" years"</span>,
   <span class="key">industries</span>: [<span class="str">"Telehealth"</span>, <span class="str">"Real Estate"</span>],
   <span class="key">stack</span>: {
