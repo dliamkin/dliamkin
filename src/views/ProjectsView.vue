@@ -4,6 +4,7 @@ import Tag from "primevue/tag";
 import AppNavbar from "@/components/sections/AppNavbar.vue";
 import SiteFooter from "@/components/sections/SiteFooter.vue";
 import ProjectVignette from "@/components/projects/ProjectVignette.vue";
+import SupportBanner from "@/components/sections/SupportBanner.vue";
 import { useParticleDirector } from "@/composables/useParticleDirector";
 
 interface ProjectEntry {
@@ -154,6 +155,8 @@ onBeforeUnmount(() => {
 					<RouterLink to="/evals">see the live eval dashboard</RouterLink>.
 				</p>
 			</header>
+
+			<SupportBanner />
 
 			<section class="featured-section" aria-label="Latest builds">
 				<h2 class="section-label">
