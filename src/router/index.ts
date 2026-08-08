@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, START_LOCATION } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
@@ -110,6 +110,20 @@ const router = createRouter({
 	scrollBehavior(to, from, savedPosition) {
 		return savedPosition ?? { top: 0 };
 	},
+});
+
+// Report page views to Google Analytics. Auto page_view is disabled in
+// index.html (the SPA never reloads, so gtag would only ever see one), and
+// every view — including the initial load — is sent from here instead.
+// Hash-only navigations (in-page anchor links such as the "About"/"Contact"
+// nav items) keep the same path and are not page views.
+router.afterEach((to, from) => {
+	if (from !== START_LOCATION && to.path === from.path) return;
+	window.gtag?.("event", "page_view", {
+		page_path: to.path,
+		page_location: window.location.origin + to.fullPath,
+		page_title: document.title,
+	});
 });
 
 export default router;

@@ -61,6 +61,25 @@
     <link rel="preload" as="image" href="/images/oakwood.webp" fetchpriority="high">
     <link rel="preload" as="image" href="/images/ole.webp" fetchpriority="high">
 
+    <!-- Google Analytics (gtag.js). The gtag stub is defined inline so calls
+         queue in dataLayer from the first moment, but the library itself is
+         only fetched after the window load event — it never competes with the
+         LCP images, fonts, or app bundle for bandwidth; queued events flush
+         once it arrives. The SPA reports every page view itself (see
+         src/router/index.ts), including the first, so auto page_view is off. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-HRJ8CP3WVN", { send_page_view: false });
+      window.addEventListener("load", function () {
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-HRJ8CP3WVN";
+        document.head.appendChild(s);
+      });
+    </script>
+
     <!-- Fonts: loaded async (media swap on load) so the stylesheet never
          blocks first paint; all families already use display=swap. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
