@@ -65,6 +65,15 @@ const scrollToContact = () => {
 // usually in row one, but on mobile the wall shifts right so row TWO's left
 // image (index 3) becomes the largest visible element — index.html preloads
 // all four, so keep the lists in sync.
+// Rendered width of one wall image in CSS px, mirroring the wall's breakpoint
+// styles below. High-DPR screens multiply this and land on the 500w file;
+// 1x screens land on the 340w variant.
+const wallImageSizes = [
+	"(max-width: 600px) 440px",
+	"(max-width: 1024px) 510px",
+	"calc(clamp(760px, 50vw, 1440px) / 2 - 40px)",
+].join(", ");
+
 const portfolioImages = [
 	"entomology.webp",
 	"resetu.webp",
@@ -213,8 +222,14 @@ const bgTris = (() => {
 				>
 					<div class="item-card">
 						<figure class="item-thumb">
+							<!-- The 340w variants come from scripts/optimize-images.mjs;
+							     sizes mirrors the .portfolio-wall/.portfolio-column CSS
+							     (50% of the wall minus 40px padding) so 1x screens pull
+							     the small file. Keep in sync with index.html's preloads. -->
 							<img
 								:src="`/images/${image}`"
+								:srcset="`/images/${image.replace('.webp', '-340.webp')} 340w, /images/${image} 500w`"
+								:sizes="wallImageSizes"
 								alt=""
 								width="500"
 								height="320"
@@ -312,7 +327,8 @@ const bgTris = (() => {
 .contact-me-btn {
 	display: inline-block;
 	padding: 0.9rem 2rem;
-	background-color: #5cb85c;
+	/* AA-contrast green (5.5:1 with white) — keep in sync with .nav-cta and .submit-btn. */
+	background-color: #337733;
 	color: #fff;
 	text-decoration: none;
 	font-family: "Raleway", sans-serif;
@@ -323,7 +339,7 @@ const bgTris = (() => {
 }
 
 .contact-me-btn:hover {
-	background-color: #398639;
+	background-color: #275f27;
 }
 
 .poly-bg {

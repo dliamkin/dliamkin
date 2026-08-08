@@ -1,0 +1,26 @@
+# Denis Liamkin — Senior Software Engineer
+
+> Portfolio of Denis Liamkin, a senior software engineer with 12+ years building
+> full-stack enterprise applications across telehealth and real estate (Vue,
+> Angular, C#/.NET, AWS, Azure). The site includes working AI demos that call
+> real models through a serverless proxy, each continuously tested by an
+> automated eval suite.
+
+## Pages
+
+- [Home](https://dliamkin.com/): background, work history, skills, and contact form
+- [Projects](https://dliamkin.com/projects): interactive AI demos built into the site
+- [Eval Dashboard](https://dliamkin.com/evals): live quality metrics for every demo
+
+## Demos
+
+- [Note Structurer](https://dliamkin.com/projects/note-structurer): turns free-form notes into structured documents
+- [Screenshot to PrimeVue](https://dliamkin.com/projects/screenshot-to-primevue): rebuilds UI screenshots as PrimeVue code
+- [Lease Diff](https://dliamkin.com/projects/lease-diff): compares lease documents and explains substantive changes
+- [Paperwork to Calendar](https://dliamkin.com/projects/paperwork-to-calendar): extracts dates from paperwork into an importable calendar
+- [Upgrade Planner](https://dliamkin.com/projects/upgrade-planner): plans dependency upgrade paths
+- [ToS Watch](https://dliamkin.com/projects/tos-watch): tracks terms-of-service changes over time
+- [Dry-Run Oracle](https://dliamkin.com/projects/dry-run-oracle): pre-flight simulation of risky operations
+- [Tail Risk Lab](https://dliamkin.com/projects/tail-risk-lab): client-side Monte Carlo cost simulator
+- [Noise Translator](https://dliamkin.com/projects/noise-translator): interprets audio recordings of ambiguous noises
+- [Token Field](https://dliamkin.com/projects/particle-engine): the site's particle system, as an interactive playground

@@ -69,14 +69,20 @@ onUnmounted(() => {
 	<header ref="navbarEl" class="navbar" :class="{ scrolled: isScrolled }">
 		<div class="navbar-inner">
 			<a href="/" class="brand" aria-label="Denis Liamkin — home">
+				<!-- Lossless WebP twins of the PNG originals, emitted by
+				     scripts/optimize-images.mjs (~half the bytes). -->
 				<img
-					src="/images/DenisLiamkinLogo.png"
+					src="/images/DenisLiamkinLogo.webp"
 					alt="Denis Liamkin"
+					width="326"
+					height="50"
 					class="brand-logo logo-light"
 				/>
 				<img
-					src="/images/DenisLiamkinLogoDarkMode.png"
+					src="/images/DenisLiamkinLogoDarkMode.webp"
 					alt="Denis Liamkin"
+					width="326"
+					height="50"
 					class="brand-logo logo-dark"
 				/>
 			</a>
@@ -163,6 +169,7 @@ onUnmounted(() => {
 
 .brand-logo {
 	max-width: 220px;
+	height: auto;
 	display: block;
 }
 
@@ -278,7 +285,9 @@ html.dark .theme-toggle:hover {
 	letter-spacing: 0.03em;
 	text-transform: uppercase;
 	color: #fff;
-	background: #5cb85c;
+	/* #337733 keeps white text at 5.5:1 (WCAG AA); the old #5cb85c was 2.3:1.
+	   Same green in HeroBanner's .contact-me-btn and SiteFooter's .submit-btn. */
+	background: #337733;
 	text-decoration: none;
 	padding: 0.55rem 1.3rem;
 	border-radius: 6px;
@@ -289,7 +298,7 @@ html.dark .theme-toggle:hover {
 }
 
 .nav-cta:hover {
-	background: #4a9d4a;
+	background: #275f27;
 }
 
 .nav-cta:active {

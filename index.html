@@ -24,6 +24,16 @@
       })();
     </script>
 
+    <!-- The app CSS ships inside the JS bundle (vite-plugin-css-injected-by-js),
+         so until the bundle runs the page has NO stylesheet. These few rules
+         keep that pre-JS frame on the correct theme background — mirror
+         App.vue's --dm-bg (dark, same as the theme-color meta above) if that
+         ever changes. -->
+    <style>
+      body { margin: 0; background: #ffffff; }
+      html.dark body { background: #121417; }
+    </style>
+
     <!-- Primary SEO -->
     <title>Denis Liamkin — Senior Software Engineer</title>
     <meta name="description" content="Senior Software Engineer with 12+ years building full-stack enterprise applications across telehealth and real estate. Expert in Vue, Angular, C#/.NET, AWS, and Azure.">
@@ -55,11 +65,13 @@
          them after the JS bundle runs; preloading starts the fetch during HTML
          parse instead. Desktop's LCP element sits in row one, mobile's in row
          two (the wall shifts right on small screens), so all four are
-         preloaded. Keep in sync with portfolioImages in HeroBanner.vue. -->
-    <link rel="preload" as="image" href="/images/entomology.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/resetu.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/oakwood.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/ole.webp" fetchpriority="high">
+         preloaded. imagesrcset/imagesizes MUST match the <img> srcset/sizes in
+         HeroBanner.vue exactly, or the preload is wasted and the image fetched
+         twice. The -340 variants come from scripts/optimize-images.mjs. -->
+    <link rel="preload" as="image" fetchpriority="high" imagesrcset="/images/entomology-340.webp 340w, /images/entomology.webp 500w" imagesizes="(max-width: 600px) 440px, (max-width: 1024px) 510px, calc(clamp(760px, 50vw, 1440px) / 2 - 40px)">
+    <link rel="preload" as="image" fetchpriority="high" imagesrcset="/images/resetu-340.webp 340w, /images/resetu.webp 500w" imagesizes="(max-width: 600px) 440px, (max-width: 1024px) 510px, calc(clamp(760px, 50vw, 1440px) / 2 - 40px)">
+    <link rel="preload" as="image" fetchpriority="high" imagesrcset="/images/oakwood-340.webp 340w, /images/oakwood.webp 500w" imagesizes="(max-width: 600px) 440px, (max-width: 1024px) 510px, calc(clamp(760px, 50vw, 1440px) / 2 - 40px)">
+    <link rel="preload" as="image" fetchpriority="high" imagesrcset="/images/ole-340.webp 340w, /images/ole.webp 500w" imagesizes="(max-width: 600px) 440px, (max-width: 1024px) 510px, calc(clamp(760px, 50vw, 1440px) / 2 - 40px)">
 
     <!-- Google Analytics (gtag.js). The gtag stub is defined inline so calls
          queue in dataLayer from the first moment, but the library itself is

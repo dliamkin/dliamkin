@@ -587,7 +587,8 @@ textarea.field-input {
 	align-items: center;
 	justify-content: center;
 	gap: 0.6rem;
-	background: #5cb85c;
+	/* AA-contrast green (5.5:1 with white) — keep in sync with .nav-cta and .contact-me-btn. */
+	background: #337733;
 	color: #fff;
 	border: none;
 	padding: 0.9rem 1.5rem;
@@ -602,7 +603,7 @@ textarea.field-input {
 }
 
 .submit-btn:hover:not(:disabled) {
-	background: #4a9d4a;
+	background: #275f27;
 }
 
 .submit-btn:active:not(:disabled) {

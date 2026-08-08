@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Canonical routes only (redirect aliases like /dry-run-oracle are omitted).
+     Add an entry when adding a route in src/router/index.ts. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url><loc>https://dliamkin.com/</loc></url>
+	<url><loc>https://dliamkin.com/about</loc></url>
+	<url><loc>https://dliamkin.com/projects</loc></url>
+	<url><loc>https://dliamkin.com/projects/note-structurer</loc></url>
+	<url><loc>https://dliamkin.com/projects/screenshot-to-primevue</loc></url>
+	<url><loc>https://dliamkin.com/projects/lease-diff</loc></url>
+	<url><loc>https://dliamkin.com/projects/paperwork-to-calendar</loc></url>
+	<url><loc>https://dliamkin.com/projects/upgrade-planner</loc></url>
+	<url><loc>https://dliamkin.com/projects/tos-watch</loc></url>
+	<url><loc>https://dliamkin.com/projects/dry-run-oracle</loc></url>
+	<url><loc>https://dliamkin.com/projects/tail-risk-lab</loc></url>
+	<url><loc>https://dliamkin.com/projects/noise-translator</loc></url>
+	<url><loc>https://dliamkin.com/projects/particle-engine</loc></url>
+	<url><loc>https://dliamkin.com/evals</loc></url>
+</urlset>

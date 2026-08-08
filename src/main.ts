@@ -1,5 +1,7 @@
 import "./assets/main.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+// Generated subset of Font Awesome (only the icons the site uses) — see
+// scripts/generate-fa-subset.mjs; rerun it when adding icons.
+import "./assets/fontawesome-subset.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
