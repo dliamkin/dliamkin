@@ -61,8 +61,10 @@ const scrollToContact = () => {
 	el.scrollIntoView({ behavior: prefersReduced ? "auto" : "smooth", block: "start" });
 };
 
-// The first two form the wall's top row and are usually the page's LCP
-// element — index.html preloads them, so keep the lists in sync.
+// The first four form the wall's top two rows. Desktop's LCP element is
+// usually in row one, but on mobile the wall shifts right so row TWO's left
+// image (index 3) becomes the largest visible element — index.html preloads
+// all four, so keep the lists in sync.
 const portfolioImages = [
 	"entomology.webp",
 	"resetu.webp",
@@ -216,8 +218,8 @@ const bgTris = (() => {
 								alt=""
 								width="500"
 								height="320"
-								:loading="idx < 2 ? 'eager' : 'lazy'"
-								:fetchpriority="idx < 2 ? 'high' : undefined"
+								:loading="idx < 4 ? 'eager' : 'lazy'"
+								:fetchpriority="idx < 4 ? 'high' : undefined"
 							/>
 							<span class="item-shadow"></span>
 						</figure>
@@ -460,8 +462,12 @@ html.dark .headline {
 	z-index: 1;
 	opacity: 0;
 	transform: translateY(60px);
+	/* Opacity fades fast while the translateY rise stays slow: the browser
+	   only records a paint (and thus LCP, often a wall image) once opacity is
+	   non-zero, so a long fade silently taxes the metric while a long rise
+	   does not. */
 	transition:
-		opacity 1s ease-out,
+		opacity 0.35s ease-out,
 		transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 

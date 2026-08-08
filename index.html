@@ -51,11 +51,15 @@
     <meta name="twitter:image" content="https://dliamkin.com/og-image.png">
     <meta name="twitter:image:alt" content="Denis Liamkin — Senior Software Engineer">
 
-    <!-- LCP: the hero portfolio wall's top-row images. The SPA only requests
+    <!-- LCP: the hero portfolio wall's top two rows. The SPA only requests
          them after the JS bundle runs; preloading starts the fetch during HTML
-         parse instead. Keep in sync with portfolioImages in HeroBanner.vue. -->
+         parse instead. Desktop's LCP element sits in row one, mobile's in row
+         two (the wall shifts right on small screens), so all four are
+         preloaded. Keep in sync with portfolioImages in HeroBanner.vue. -->
     <link rel="preload" as="image" href="/images/entomology.webp" fetchpriority="high">
     <link rel="preload" as="image" href="/images/resetu.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/oakwood.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/ole.webp" fetchpriority="high">
 
     <!-- Fonts: loaded async (media swap on load) so the stylesheet never
          blocks first paint; all families already use display=swap. -->
