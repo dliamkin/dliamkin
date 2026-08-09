@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-08-08T09:00:18.541Z",
-  "status": "regression",
-  "summary": "Homepage performance has dropped sharply to 53 (LCP 8.39 s, TBT 405 ms), a material regression from 73 last audit and now the worst recorded score in the series; all other pages also show significant performance drops, likely reflecting a heavier build or new render-blocking resources introduced since yesterday.",
+  "audited_at": "2026-08-09T09:03:59.623Z",
+  "status": "warnings",
+  "summary": "Performance has partially recovered since yesterday's regression — homepage improved from 53 to 84 (LCP 3.8 s, TBT 114 ms) — but /projects and /screenshot-to-primevue remain at 65 (below the 85 threshold) and the /about page is still a content stub with no real content.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 53,
+        "performance": 84,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 8391.676,
+        "lcp_ms": 3786.922,
         "cls": 0.015,
-        "tbt_ms": 405
+        "tbt_ms": 114.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with teal-accented hero ('App Design' heading, 'Send me a message' CTA), four content sections (pillars, case studies, skills, contact form), and a dark contact footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -20,13 +20,13 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 83,
+        "performance": 85,
         "accessibility": 95,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 3565.818,
+        "lcp_ms": 3517.643,
         "cls": 0,
-        "tbt_ms": 178.5
+        "tbt_ms": 107
       },
       "visual_findings": [
         "Page still contains only the placeholder text 'This is an about page' on a near-blank dark particle-animation canvas — no real content, navigation, or footer present on either desktop or mobile."
@@ -40,9 +40,9 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 5007.073,
+        "lcp_ms": 5583.342,
         "cls": 0.01,
-        "tbt_ms": 319.5
+        "tbt_ms": 205
       },
       "visual_findings": [],
       "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, featured 'Latest Builds' section (Token Field, Noise Translator, Tail Risk Lab), nine project cards in a multi-column desktop grid collapsing to single-column on mobile, and a dark contact footer visible on both desktop and mobile."
@@ -50,13 +50,13 @@
     {
       "path": "/projects/note-structurer",
       "lighthouse": {
-        "performance": 75,
+        "performance": 79,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 4109.399,
-        "cls": 0.09,
-        "tbt_ms": 199
+        "lcp_ms": 4126.295,
+        "cls": 0.089,
+        "tbt_ms": 78.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer detail page with breadcrumb nav, 'Evals: 10/10 passing' badge, two-column visit note / structured result interactive demo, amber disclaimer banner, expandable JSON and HIPAA notes accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -64,50 +64,50 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 79,
+        "performance": 65,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 92,
-        "lcp_ms": 4133.556,
+        "lcp_ms": 6574.267,
         "cls": 0.036,
-        "tbt_ms": 189
+        "tbt_ms": 74.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Screenshot → PrimeVue detail page with breadcrumb nav, 'Evals: 5/5 passing' badge, dashed-border image drop zone, three sample thumbnail cards (Login form, Analytics dashboard, Pricing page), a placeholder result panel, expandable accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     }
   ],
   "score_deltas": [
-    "/ performance 73 → 53 (-20 pts, material regression — worst score in series, well below 85)",
-    "/ lcp_ms 6445 → 8392 (+1947 ms, significant degradation — now above 8 s)",
-    "/ tbt_ms 137 → 405 (+268 ms, major regression in interactivity)",
-    "/ accessibility 96 → 100 (+4 pts, improved)",
+    "/ performance 53 → 84 (+31 pts, strong recovery — now just below 85 threshold)",
+    "/ lcp_ms 8392 → 3787 (-4605 ms, major improvement)",
+    "/ tbt_ms 405 → 114.5 (-290.5 ms, major improvement)",
+    "/ accessibility 100 → 100 (stable)",
     "/ best_practices 100 → 100 (stable)",
-    "/ seo 92 → 100 (+8 pts, improved)",
+    "/ seo 100 → 100 (stable)",
     "/ cls 0.015 → 0.015 (stable)",
-    "/about performance 88 → 83 (-5 pts, at threshold — within jitter boundary)",
-    "/about lcp_ms 3225 → 3566 (+341 ms, within jitter)",
-    "/about tbt_ms 37 → 178.5 (+141.5 ms, notable increase)",
+    "/about performance 83 → 85 (+2 pts, within jitter)",
+    "/about lcp_ms 3566 → 3518 (-48 ms, stable)",
+    "/about tbt_ms 178.5 → 107 (-71.5 ms, improved)",
     "/about accessibility 95 → 95 (stable)",
     "/about best_practices 100 → 100 (stable)",
-    "/about seo 83 → 92 (+9 pts, improved above 85 threshold)",
+    "/about seo 92 → 92 (stable)",
     "/about cls 0 → 0 (stable)",
-    "/projects performance 83 → 65 (-18 pts, material regression — below 85)",
-    "/projects lcp_ms 3665 → 5007 (+1342 ms, significant degradation)",
-    "/projects tbt_ms 58.5 → 319.5 (+261 ms, major regression)",
-    "/projects cls 0.002 → 0.01 (slight increase, within normal range)",
-    "/projects/note-structurer performance 90 → 75 (-15 pts, material regression — below 85)",
-    "/projects/note-structurer lcp_ms 3025 → 4109 (+1084 ms, notable degradation)",
-    "/projects/note-structurer tbt_ms 39.5 → 199 (+159.5 ms, major regression)",
-    "/projects/note-structurer cls 0.088 → 0.09 (stable)",
-    "/projects/screenshot-to-primevue performance 89 → 79 (-10 pts, material regression — below 85)",
-    "/projects/screenshot-to-primevue lcp_ms 3337 → 4134 (+797 ms, notable degradation)",
-    "/projects/screenshot-to-primevue tbt_ms 39.5 → 189 (+149.5 ms, major regression)",
+    "/projects performance 65 → 65 (stable, remains below 85 threshold)",
+    "/projects lcp_ms 5007 → 5583 (+576 ms, slight degradation)",
+    "/projects tbt_ms 319.5 → 205 (-114.5 ms, improved but still elevated)",
+    "/projects cls 0.01 → 0.01 (stable)",
+    "/projects/note-structurer performance 75 → 79 (+4 pts, within jitter — still below 85)",
+    "/projects/note-structurer lcp_ms 4109 → 4126 (+17 ms, stable)",
+    "/projects/note-structurer tbt_ms 199 → 78.5 (-120.5 ms, significant improvement)",
+    "/projects/note-structurer cls 0.09 → 0.089 (stable)",
+    "/projects/screenshot-to-primevue performance 79 → 65 (-14 pts, material regression — below 85)",
+    "/projects/screenshot-to-primevue lcp_ms 4134 → 6574 (+2440 ms, significant degradation)",
+    "/projects/screenshot-to-primevue tbt_ms 189 → 74.5 (-114.5 ms, improved)",
     "/projects/screenshot-to-primevue cls 0.036 → 0.036 (stable)"
   ],
-  "top_fix": "Investigate and revert whatever changed since the 2026-08-07 build: TBT has exploded 5–7× across every page (homepage: 137 ms → 405 ms, /projects: 58 ms → 320 ms), indicating newly introduced render-blocking or long-task JavaScript — audit the latest deploy for large synchronous scripts, undeferred third-party bundles, or a removed code-splitting boundary, then re-apply hero image preloading to address the compounding LCP regression (8.39 s).",
+  "top_fix": "Investigate the persistent LCP regression on /projects/screenshot-to-primevue (6.57 s, performance 65) and /projects (5.58 s, performance 65) — preload or lazy-load the large above-the-fold images on these pages (sample thumbnails and project card images) and ensure they are served in WebP/AVIF to bring LCP under 2.5 s and performance above 85.",
   "should_file_issue": true,
-  "issue_title": "Site-wide performance regression: TBT up 5–7× and LCP up 20–30% across all pages after 2026-08-07 deploy",
-  "issue_body": "## Site-wide performance regression detected — 2026-08-08\n\nEvery audited page shows a material performance drop compared to the previous audit (2026-08-07). The pattern of simultaneous TBT explosions across all pages strongly suggests a new render-blocking or long-task script was introduced in the latest deploy.\n\n### Score summary\n\n| Page | Prev perf | Curr perf | Δ | Prev TBT | Curr TBT | Δ TBT |\n|---|---|---|---|---|---|---|\n| `/` | 73 | **53** | **-20** | 137 ms | **405 ms** | **+268 ms** |\n| `/projects` | 83 | **65** | **-18** | 58.5 ms | **319.5 ms** | **+261 ms** |\n| `/projects/note-structurer` | 90 | **75** | **-15** | 39.5 ms | **199 ms** | **+159.5 ms** |\n| `/projects/screenshot-to-primevue` | 89 | **79** | **-10** | 39.5 ms | **189 ms** | **+149.5 ms** |\n| `/about` | 88 | 83 | -5 | 37 ms | 178.5 ms | +141.5 ms |\n\nHomepage LCP has also worsened: **6.45 s → 8.39 s**.\n\n### Likely causes\n1. A large synchronous JavaScript bundle added to the global layout (no code-splitting / deferred loading).\n2. A removed dynamic import or lazy-load boundary that previously kept a heavy module off the critical path.\n3. A new third-party script loaded eagerly in `<head>`.\n\n### Suggested actions\n- [ ] Diff the latest deploy's bundle manifest / build output against the previous one — look for newly inlined or un-split chunks.\n- [ ] Run `chrome://tracing` or Lighthouse trace on `/` locally and identify the long task(s) driving TBT above 400 ms.\n- [ ] Re-check that the hero image on `/` is preloaded and served in WebP/AVIF — LCP at 8.39 s is the worst recorded value.\n- [ ] Consider reverting the deploy if the root cause isn't immediately apparent.\n\n### Visual status\nNo visual breakage detected; all pages render correctly. The `/about` page remains a content stub (placeholder text only) — pre-existing issue, not caused by this regression.\n\n*Audited at 2026-08-08T08:59:35.705Z*",
-  "issue_fingerprint": "homepage-performance-regression-tbt-lcp",
+  "issue_title": "Persistent performance below 85: /projects (65) and /projects/screenshot-to-primevue (65) with high LCP",
+  "issue_body": "## Persistent performance regression — /projects and /projects/screenshot-to-primevue\\n\\n*Audited at 2026-08-09T09:02:20.188Z*\\n\\nWhile the homepage has largely recovered from yesterday's regression (53 → 84), two pages continue to score 65 on performance — well below the 85 threshold — driven primarily by slow LCP.\\n\\n### Score summary\\n\\n| Page | Performance | LCP | TBT |\\n|---|---|---|---|\\n| `/projects` | **65** | **5583 ms** | 205 ms |\\n| `/projects/screenshot-to-primevue` | **65** | **6574 ms** | 74.5 ms |\\n\\nNote: `/projects/screenshot-to-primevue` LCP has worsened from 4134 ms → 6574 ms (+2440 ms) compared to the previous audit.\\n\\n### Likely causes\\n1. Large unoptimized project card/thumbnail images on `/projects` loading eagerly without preload hints.\\n2. The three sample screenshot thumbnails on `/projects/screenshot-to-primevue` are likely not served in a next-gen format (WebP/AVIF) and may lack explicit dimensions.\\n3. No `fetchpriority=\\\"high\\\"` or `<link rel=\\\"preload\\\">` on the LCP image candidate.\\n\\n### Suggested actions\\n- [ ] Identify the LCP element on each page using Lighthouse trace and add `fetchpriority=\\\"high\\\"` to it.\\n- [ ] Convert project thumbnail images to WebP/AVIF and serve appropriately sized variants via `srcset`.\\n- [ ] Add explicit `width` and `height` attributes to all thumbnail `<img>` elements to prevent layout shifts.\\n- [ ] Consider lazy-loading below-the-fold project cards while keeping above-the-fold ones eager.\\n\\n### Also ongoing\\n- `/about` remains a content stub (placeholder text only) — pre-existing issue.\\n- `/projects/note-structurer` performance is 79 (below 85) with LCP 4126 ms — worth monitoring.\\n\\n*Previous regression issue: homepage-performance-regression-tbt-lcp (filed 2026-08-08) — homepage has recovered.*",
+  "issue_fingerprint": "projects-pages-performance-lcp-below-85",
   "error_reason": null
 }
