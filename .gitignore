@@ -77,3 +77,7 @@ docs/internal/
 
 # ToS watchdog: local clone of the private snapshot repo (never committed here)
 tos-snapshots/
+
+# chrome-launcher under WSL can mis-resolve TEMP into a literal
+# "\\wsl.localhost\..." directory name in the cwd — never commit those.
+*wsl.localhost*

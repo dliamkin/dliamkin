@@ -476,19 +476,15 @@ html.dark .headline {
 	perspective: 3500px;
 	pointer-events: none;
 	z-index: 1;
-	opacity: 0;
 	transform: translateY(60px);
-	/* Opacity fades fast while the translateY rise stays slow: the browser
-	   only records a paint (and thus LCP, often a wall image) once opacity is
-	   non-zero, so a long fade silently taxes the metric while a long rise
-	   does not. */
-	transition:
-		opacity 0.35s ease-out,
-		transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+	/* Transform-only entrance, deliberately no opacity fade: the browser only
+	   records a paint (and thus LCP — usually a wall image) once opacity is
+	   non-zero, so any fade-in delays the metric by its full duration while a
+	   translateY rise costs nothing. */
+	transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .portfolio-wall.wall-visible {
-	opacity: 1;
 	transform: translateY(0);
 }
 

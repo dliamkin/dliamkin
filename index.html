@@ -74,22 +74,40 @@
     <link rel="preload" as="image" fetchpriority="high" imagesrcset="/images/ole-340.webp 340w, /images/ole.webp 500w" imagesizes="(max-width: 600px) 440px, (max-width: 1024px) 510px, calc(clamp(760px, 50vw, 1440px) / 2 - 40px)">
 
     <!-- Google Analytics (gtag.js). The gtag stub is defined inline so calls
-         queue in dataLayer from the first moment, but the library itself is
-         only fetched after the window load event — it never competes with the
-         LCP images, fonts, or app bundle for bandwidth; queued events flush
-         once it arrives. The SPA reports every page view itself (see
-         src/router/index.ts), including the first, so auto page_view is off. -->
+         queue in dataLayer from the first moment; the library itself loads on
+         the visitor's FIRST interaction (scroll/tap/keypress), or 8 s after
+         the load event as a fallback for passive readers. Even deferred to
+         the load event, gtag's ~200 ms of script evaluation landed inside the
+         Lighthouse trace window and cost real LCP/TBT on throttled mobile —
+         interaction gating keeps it out of the load window entirely, for lab
+         runs and real visitors alike. Queued events (including the first
+         page_view from src/router/index.ts) flush once it arrives; sessions
+         that end within 8 s with zero interaction go uncounted, an accepted
+         trade. Auto page_view stays off — the SPA reports its own. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-HRJ8CP3WVN", { send_page_view: false });
-      window.addEventListener("load", function () {
-        var s = document.createElement("script");
-        s.async = true;
-        s.src = "https://www.googletagmanager.com/gtag/js?id=G-HRJ8CP3WVN";
-        document.head.appendChild(s);
-      });
+      (function () {
+        var loaded = false;
+        var events = ["pointerdown", "keydown", "scroll", "touchstart"];
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          events.forEach(function (e) { window.removeEventListener(e, loadGtag); });
+          var s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtag/js?id=G-HRJ8CP3WVN";
+          document.head.appendChild(s);
+        }
+        events.forEach(function (e) {
+          window.addEventListener(e, loadGtag, { passive: true, once: true });
+        });
+        window.addEventListener("load", function () {
+          setTimeout(loadGtag, 8000);
+        }, { once: true });
+      })();
     </script>
 
     <!-- Fonts: loaded async (media swap on load) so the stylesheet never

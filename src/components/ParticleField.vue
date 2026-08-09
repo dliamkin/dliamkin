@@ -119,13 +119,17 @@ async function start(): Promise<void> {
 }
 
 onMounted(() => {
-	// Defer the engine chunk until the browser is idle — first paint and LCP
-	// must never wait on generative art.
+	// Defer the engine chunk until the page has fully loaded AND the browser
+	// is idle — first paint and LCP must never wait on generative art. Idle
+	// alone isn't enough: on a throttled mobile load the idle timeout fires
+	// mid-load and the engine's chunks + rAF loop compete with the LCP paint.
 	const idle: (cb: () => void) => unknown =
 		typeof window.requestIdleCallback === "function"
-			? (cb) => window.requestIdleCallback(cb, { timeout: 1500 })
-			: (cb) => setTimeout(cb, 300);
-	idle(() => void start());
+			? (cb) => window.requestIdleCallback(cb, { timeout: 2000 })
+			: (cb) => setTimeout(cb, 500);
+	const kickoff = () => idle(() => void start());
+	if (document.readyState === "complete") kickoff();
+	else window.addEventListener("load", kickoff, { once: true });
 
 	// The canvas has pointer-events: none so it never intercepts clicks —
 	// pointer position comes from a window listener instead.
