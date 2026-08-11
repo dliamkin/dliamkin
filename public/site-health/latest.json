@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-08-11T20:30:06.694Z",
+  "audited_at": "2026-08-11T23:35:52.841Z",
   "status": "warnings",
-  "summary": "Homepage performance has recovered strongly to 96 (LCP 2.7 s), resolving the persistent regression; all Lighthouse scores are at or above threshold. The /about page continues to show only placeholder content — no real page has been built out.",
+  "summary": "The /about page has been fully built out since the last audit — it now shows a complete bio, code snippet panel, stats, engineering culture section, and contact footer, resolving the persistent placeholder issue. Homepage performance dropped from 96 to 91 (LCP 3.3 s vs 2.7 s) and /projects from 91 to 89, both within acceptable range; /projects/screenshot-to-primevue holds at 78, just below the 85 threshold and worth monitoring.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 96,
+        "performance": 91,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 2653.408,
+        "lcp_ms": 3292.198,
         "cls": 0.015,
-        "tbt_ms": 47
+        "tbt_ms": 76.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with teal-accented hero ('App Design' heading, 'Send me a message' CTA), four content sections (pillars, case studies, skills, contact form), and a dark contact footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -20,32 +20,30 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 91,
+        "performance": 90,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3272.662,
-        "cls": 0.001,
-        "tbt_ms": 23
+        "lcp_ms": 3414.365,
+        "cls": 0,
+        "tbt_ms": 53
       },
-      "visual_findings": [
-        "Page still contains only the placeholder text 'This is an about page' on a near-blank dark particle-animation canvas — no real content, navigation, or footer present on either desktop or mobile."
-      ],
-      "visual_fingerprint": "Nearly blank dark page with an animated teal particle canvas and only the stub text 'This is an about page' in the upper-left corner, with no nav, no footer, and no other UI elements visible on desktop or mobile."
+      "visual_findings": [],
+      "visual_fingerprint": "Fully built About page with shared nav, 'About Me' hero section, two-column bio + dark-themed code snippet panel, 12+/16+/2 stats row, engineering culture section, and dark contact footer — correctly rendered on both desktop and mobile."
     },
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 91,
+        "performance": 89,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3285.06,
-        "cls": 0.009,
-        "tbt_ms": 46
+        "lcp_ms": 3454.227,
+        "cls": 0,
+        "tbt_ms": 86
       },
       "visual_findings": [],
-      "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, featured 'Latest Builds' section (Token Field, Noise Translator, Tail Risk Lab), nine project cards in a multi-column desktop grid collapsing to single-column on mobile, and a dark contact footer visible on both desktop and mobile."
+      "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, featured 'Latest Builds' section (Token Field, Noise Translator, Tail Risk Lab), seven project cards in a multi-column desktop grid collapsing to single-column on mobile, and a dark contact footer visible on both desktop and mobile."
     },
     {
       "path": "/projects/note-structurer",
@@ -54,9 +52,9 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3777.194,
-        "cls": 0.086,
-        "tbt_ms": 112.5
+        "lcp_ms": 4059.981,
+        "cls": 0,
+        "tbt_ms": 82.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer detail page with breadcrumb nav, 'Evals: 10/10 passing' badge, two-column visit note / structured result interactive demo, amber disclaimer banner, expandable JSON and HIPAA notes accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -64,55 +62,55 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 82,
+        "performance": 78,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4092.703,
-        "cls": 0.037,
-        "tbt_ms": 113
+        "lcp_ms": 4783.638,
+        "cls": 0,
+        "tbt_ms": 55
       },
       "visual_findings": [],
       "visual_fingerprint": "Screenshot → PrimeVue detail page with breadcrumb nav, 'Evals: 5/5 passing' badge, dashed-border image drop zone, three sample thumbnail cards (Login form, Analytics dashboard, Pricing page), a placeholder result panel, expandable accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     }
   ],
   "score_deltas": [
-    "/ performance 70 → 96 (+26 pts, major recovery — now well above 85 threshold)",
-    "/ lcp_ms 5050 → 2653 (-2397 ms, strong improvement)",
-    "/ tbt_ms 128 → 47 (-81 ms, improved)",
+    "/ performance 96 → 91 (-5 pts, at regression threshold — LCP 2653 → 3292 ms)",
+    "/ lcp_ms 2653 → 3292 (+639 ms, moderate regression)",
+    "/ tbt_ms 47 → 76.5 (+29.5 ms, within jitter)",
     "/ cls 0.015 → 0.015 (stable)",
     "/ accessibility 100 → 100 (stable)",
     "/ best_practices 100 → 100 (stable)",
     "/ seo 100 → 100 (stable)",
-    "/about performance 85 → 91 (+6 pts, improved)",
-    "/about lcp_ms 3543 → 3273 (-270 ms, improved)",
-    "/about tbt_ms 112 → 23 (-89 ms, improved)",
-    "/about cls 0 → 0.001 (stable)",
-    "/about accessibility 95 → 100 (+5 pts, improved)",
+    "/about performance 91 → 90 (-1 pt, within jitter)",
+    "/about lcp_ms 3273 → 3414 (+141 ms, within jitter)",
+    "/about tbt_ms 23 → 53 (+30 ms, within jitter)",
+    "/about cls 0.001 → 0 (stable)",
+    "/about accessibility 100 → 100 (stable)",
     "/about best_practices 100 → 100 (stable)",
-    "/about seo 92 → 100 (+8 pts, improved)",
-    "/projects performance 78 → 91 (+13 pts, strong recovery — now above 85)",
-    "/projects lcp_ms 4328 → 3285 (-1043 ms, improved)",
-    "/projects tbt_ms 124.5 → 46 (-78.5 ms, improved)",
-    "/projects cls 0.010 → 0.009 (stable)",
+    "/about seo 100 → 100 (stable)",
+    "/projects performance 91 → 89 (-2 pts, within jitter)",
+    "/projects lcp_ms 3285 → 3454 (+169 ms, within jitter)",
+    "/projects tbt_ms 46 → 86 (+40 ms, within jitter)",
+    "/projects cls 0.009 → 0 (improved)",
     "/projects accessibility 100 → 100 (stable)",
     "/projects best_practices 100 → 100 (stable)",
-    "/projects seo 92 → 100 (+8 pts, improved)",
-    "/projects/note-structurer performance 84 → 83 (-1 pt, within jitter — just below 85)",
-    "/projects/note-structurer lcp_ms 3886 → 3777 (-109 ms, stable)",
-    "/projects/note-structurer tbt_ms 75.5 → 112.5 (+37 ms, within jitter)",
-    "/projects/note-structurer cls 0.088 → 0.086 (stable)",
-    "/projects/note-structurer seo 92 → 100 (+8 pts, improved)",
-    "/projects/screenshot-to-primevue performance 83 → 82 (-1 pt, within jitter)",
-    "/projects/screenshot-to-primevue lcp_ms 3974 → 4093 (+119 ms, within jitter)",
-    "/projects/screenshot-to-primevue tbt_ms 60.5 → 113 (+52.5 ms, within jitter)",
-    "/projects/screenshot-to-primevue cls 0.036 → 0.037 (stable)",
-    "/projects/screenshot-to-primevue seo 92 → 100 (+8 pts, improved)"
+    "/projects seo 100 → 100 (stable)",
+    "/projects/note-structurer performance 83 → 83 (stable)",
+    "/projects/note-structurer lcp_ms 3777 → 4060 (+283 ms, slight increase)",
+    "/projects/note-structurer tbt_ms 112.5 → 82.5 (-30 ms, improved)",
+    "/projects/note-structurer cls 0.086 → 0 (improved significantly)",
+    "/projects/note-structurer accessibility 100 → 100 (stable)",
+    "/projects/screenshot-to-primevue performance 82 → 78 (-4 pts, below 85 threshold — monitor)",
+    "/projects/screenshot-to-primevue lcp_ms 4093 → 4784 (+691 ms, degraded)",
+    "/projects/screenshot-to-primevue tbt_ms 113 → 55 (-58 ms, improved)",
+    "/projects/screenshot-to-primevue cls 0.037 → 0 (improved significantly)",
+    "/projects/screenshot-to-primevue accessibility 100 → 100 (stable)"
   ],
-  "top_fix": "Build out the /about page — it has shown only the placeholder text 'This is an about page' for multiple consecutive audits with no nav, no real content, and no footer; this is a missing page that should be prioritized.",
+  "top_fix": "Investigate the LCP regression on /projects/screenshot-to-primevue (performance 78, LCP 4.8 s) — likely a large unoptimized image; lazy-load or compress the sample thumbnail images and the drop-zone hero asset to bring performance above 85.",
   "should_file_issue": true,
-  "issue_title": "/about page is still a blank placeholder — no content, nav, or footer",
-  "issue_body": "# /about — Persistent blank placeholder page\\n\\n**Detected:** 2026-08-11T20:29:38.313Z \\n**Prior audit:** 2026-08-11T09:15:25.007Z (same finding)\\n\\n## Problem\\nThe `/about` page renders only the stub text `\\\"This is an about page\\\"` over an animated teal particle canvas. There is no navigation bar, no real content (bio, experience, skills narrative, etc.), and no footer. This has persisted across multiple consecutive audits.\\n\\n## Impact\\n- Visitors who navigate to `/about` from the portfolio nav see a blank, unfinished page — a poor first impression.\\n- The page is indexed (SEO 100) so it may surface in search results in this broken state.\\n\\n## Steps to reproduce\\n1. Visit https://dliamkin.com/about on desktop or mobile.\\n2. Observe: only the particle animation background and the placeholder string are present.\\n\\n## Suggested fix\\nImplement the About page content: add the shared site nav, a bio/intro section, experience or skills narrative, and the shared contact footer — matching the style of the rest of the site.",
-  "issue_fingerprint": "about-page-placeholder-no-content",
+  "issue_title": "/projects/screenshot-to-primevue performance below 85 — LCP at 4.8 s",
+  "issue_body": "# /projects/screenshot-to-primevue — Performance below threshold\\n\\n**Detected:** 2026-08-11T23:35:13.018Z\\n**Previous score:** 82 (LCP 4093 ms)\\n**Current score:** 78 (LCP 4784 ms)\\n\\n## Problem\\nThe Screenshot → PrimeVue project page scores 78 on Lighthouse performance with an LCP of 4.8 s, which is below the 85-point threshold. The score has now dropped a further 4 points from the prior audit's already-below-threshold 82.\\n\\n## Likely cause\\nThe three sample screenshot thumbnails (Login form, Analytics dashboard, Pricing page) are loaded eagerly and appear to be unoptimised, high-resolution images. The LCP element is likely the hero drop-zone or one of these thumbnails.\\n\\n## Suggested fixes\\n1. Convert sample thumbnails to WebP and serve at display size (≈300 px wide).\\n2. Add `loading=\\\"lazy\\\"` to below-the-fold thumbnail images.\\n3. Ensure the drop-zone illustration/icon is inlined or preloaded if it is the LCP element.\\n4. Consider adding an explicit `fetchpriority=\\\"high\\\"` hint to the LCP image.\\n\\n## Steps to reproduce\\n1. Run Lighthouse (mobile) on https://dliamkin.com/projects/screenshot-to-primevue.\\n2. Observe performance score of 78 and LCP ≥ 4.5 s.",
+  "issue_fingerprint": "screenshot-to-primevue-performance-lcp",
   "error_reason": null
 }
