@@ -1,6 +1,8 @@
 <script setup lang="ts">
+// Deliberately PrimeVue-free: this banner sits on the home page's critical
+// path, and a plain anchor keeps primevue/button (and its theme CSS) out of
+// that bundle. The CTA is fully custom-styled below either way.
 import { useId } from "vue";
-import Button from "primevue/button";
 import { useInView } from "@/composables/useInView";
 
 // Swap this for the Stripe Payment Link and nothing else here needs to change.
@@ -45,16 +47,15 @@ const { target, inView } = useInView();
 					<p class="support-blurb">{{ blurb }}</p>
 				</div>
 
-				<Button
+				<a
 					class="support-cta"
-					:label="ctaLabel"
-					icon="fa-solid fa-bolt"
-					as="a"
 					:href="STRIPE_PAYMENT_LINK"
 					target="_blank"
 					rel="noopener noreferrer"
-					:pt="{ icon: { 'aria-hidden': 'true' } }"
-				/>
+				>
+					<i class="fa-solid fa-bolt" aria-hidden="true"></i>
+					<span>{{ ctaLabel }}</span>
+				</a>
 			</div>
 
 			<p class="support-trust">
@@ -181,15 +182,16 @@ const { target, inView } = useInView();
 	margin: 0;
 }
 
-/* CTA — the .support-banner prefix is load-bearing: PrimeVue's themed
-   `.p-button:not(:disabled):hover` otherwise ties on specificity and wins
-   on source order, repainting the button its pale primary-hover cyan.
-   The gradient stays in the 700–800 range of the site accent because the
-   white label needs 4.5:1 against its lightest stop. */
+/* CTA — the gradient stays in the 700–800 range of the site accent because
+   the white label needs 4.5:1 against its lightest stop. */
 .support-banner .support-cta {
 	position: relative;
 	overflow: hidden;
 	flex-shrink: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 	border: 0;
 	background: linear-gradient(135deg, #1b7ea9 0%, #145d80 100%);
 	color: #fff;

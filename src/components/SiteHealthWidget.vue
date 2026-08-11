@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, onMounted, ref } from "vue";
 import Tag from "primevue/tag";
-import {
-	HEALTH_STATUSES,
-	type HealthReport,
-	type HealthStatus,
-} from "@/lib/site-health";
+import { HEALTH_STATUSES, type HealthReport, type HealthStatus } from "@/lib/site-health";
 
 // Reads the static JSON committed nightly by .github/workflows/site-health.yml
 // — no API, no key, no per-visitor cost. Before the first audit exists the
@@ -86,12 +82,10 @@ const averages = computed(() => {
 
 <template>
 	<div v-if="report && meta" class="site-health">
-		<button
-			type="button"
-			class="health-summary-btn"
-			:aria-label="`Site health: ${meta.label}. Open details.`"
-			@click="openDetails"
-		>
+		<!-- No aria-label: it hid the visible text from the accessible name
+		     (a WCAG 2.5.3 label-in-name failure); the button's own content —
+		     status tag, title, blurb, scores — already names it. -->
+		<button type="button" class="health-summary-btn" @click="openDetails">
 			<Tag :severity="meta.severity" :value="meta.label" class="health-tag" />
 			<span class="health-copy">
 				<span class="health-title">Site health · audited {{ lastAudited }}</span>

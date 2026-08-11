@@ -6,8 +6,13 @@
 				I create beautiful, functional websites that provide an excellent user experience
 				across all devices.
 			</p>
+			<!-- The 560w sibling comes from scripts/optimize-images.mjs; sizes
+			     mirrors .showcase (2rem side padding) and the 1100px container
+			     cap so phones pull the small file. -->
 			<img
 				src="/images/mock.webp"
+				srcset="/images/mock-560.webp 560w, /images/mock.webp 1099w"
+				sizes="(max-width: 1164px) calc(100vw - 4rem), 1100px"
 				alt="Responsive device mockup"
 				class="mock-img"
 				width="1099"

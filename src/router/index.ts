@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, START_LOCATION } from "vue-router";
+import { applyPageMeta } from "../lib/page-meta";
 import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
@@ -110,6 +111,13 @@ const router = createRouter({
 	scrollBehavior(to, from, savedPosition) {
 		return savedPosition ?? { top: 0 };
 	},
+});
+
+// Keep the document head (title, description, canonical, og/twitter tags)
+// in sync with the route. Registered before the GA hook below so the
+// page_view event reads the already-updated document.title.
+router.afterEach((to) => {
+	applyPageMeta(to);
 });
 
 // Report page views to Google Analytics. Auto page_view is disabled in

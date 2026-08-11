@@ -28,7 +28,6 @@ const measureWidth = (word: string) => {
 };
 
 onMounted(() => {
-	wordWidth.value = measureWidth(activeWord.value);
 	setTimeout(() => {
 		wallVisible.value = true;
 	}, 150);
@@ -47,7 +46,16 @@ onMounted(() => {
 		activeWord.value = next;
 		timer = setTimeout(cycle, 2000);
 	};
-	timer = setTimeout(cycle, 2000);
+	// The initial measure reads offsetWidth, which forces layout — done inside
+	// the mount task (whole page dirty) it cost ~60ms of main-thread time
+	// right in the LCP window. Until it runs, the wrapper is width:auto around
+	// the same word, so deferring past first paint changes nothing visually.
+	requestAnimationFrame(() => {
+		timer = setTimeout(() => {
+			wordWidth.value = measureWidth(activeWord.value);
+			timer = setTimeout(cycle, 2000);
+		}, 0);
+	});
 });
 
 onUnmounted(() => {

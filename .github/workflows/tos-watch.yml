@@ -35,16 +35,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Clone private snapshot repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: dliamkin/tos-snapshots
           token: ${{ secrets.TOS_SNAPSHOT_PAT }}
           path: tos-snapshots
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 24
           cache: npm
