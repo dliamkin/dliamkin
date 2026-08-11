@@ -1,6 +1,6 @@
 import {
+	capExcerpts,
 	findLoadedLanguage,
-	truncateExcerpt,
 	type LoadedLanguageViolation,
 	type TosChangeReport,
 } from "../../src/lib/tos-watch";
@@ -17,13 +17,9 @@ export interface EditorialResult {
 }
 
 export function applyEditorialGate(raw: TosChangeReport): EditorialResult {
-	const report: TosChangeReport = {
-		...raw,
-		changes: raw.changes.map((change) => ({
-			...change,
-			new_excerpt: truncateExcerpt(change.new_excerpt),
-			old_excerpt: change.old_excerpt === null ? null : truncateExcerpt(change.old_excerpt),
-		})),
-	};
+	// explainTosChange already caps excerpts at the pipeline boundary; this
+	// re-application is a cheap idempotent belt-and-braces for callers that
+	// construct reports some other way.
+	const report = capExcerpts(raw);
 	return { report, violations: findLoadedLanguage(report) };
 }

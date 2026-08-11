@@ -19,7 +19,8 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import sharp from "sharp";
 
-const imagesDir = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "public", "images");
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+const imagesDir = path.join(root, "public", "images");
 
 const WALL_IMAGES = [
 	"entomology.webp",
@@ -62,6 +63,18 @@ for (const name of WALL_IMAGES) {
 	console.log(
 		`${name}: 500w ${kb(current.length)} -> ${keepCurrent ? "kept" : kb(recompressed.length)}, 340w ${kb(small.length)}`,
 	);
+}
+
+// Sample-picker card thumbnails for the Screenshot → PrimeVue demo: the
+// cards render ~290 CSS px wide, so the 1280px PNG masters get 576w webp
+// twins (2x DPR). The PNGs stay untouched — they're what actually loads
+// into the demo preview (see src/data/screenshot-sample-images.ts).
+for (const name of ["login", "dashboard", "pricing"]) {
+	const src = path.join(root, "src", "assets", "demo-samples", `${name}.png`);
+	const master = await fs.readFile(src);
+	const thumb = await sharp(master).resize(576, 360).webp({ quality: 70, effort: 6 }).toBuffer();
+	await fs.writeFile(src.replace(/\.png$/, "-thumb.webp"), thumb);
+	console.log(`${name}.png: thumb 576w ${kb(thumb.length)}`);
 }
 
 // The ResponsiveShowcase mockup renders at up to 1099 CSS px on desktop but

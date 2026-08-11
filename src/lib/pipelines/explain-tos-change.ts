@@ -1,5 +1,6 @@
 import type Anthropic from "@anthropic-ai/sdk";
 import {
+	capExcerpts,
 	EXPLAIN_TOS_MAX_TOKENS,
 	EXPLAIN_TOS_SYSTEM_PROMPT,
 	EXPLAIN_TOS_TOOL,
@@ -21,7 +22,9 @@ export const EXPLAIN_TOS_DEFAULT_MODEL = "claude-sonnet-5";
 
 // Bumped when prompt/schema/diff behavior changes meaningfully; stamped on
 // every published changelog entry so old entries stay attributable.
-export const TOS_PIPELINE_VERSION = "1.1.0";
+// 1.1.1: excerpt cap enforced at the pipeline boundary (was publisher-only,
+// so eval runs saw uncapped model output — caught by tos-arbitration-added).
+export const TOS_PIPELINE_VERSION = "1.1.1";
 
 export interface TosDocumentMeta {
 	serviceName: string;
@@ -58,5 +61,8 @@ export async function explainTosChange(
 			},
 		],
 	});
-	return extractToolInput<TosChangeReport>(response, EXPLAIN_TOS_TOOL.name);
+	// The prompt asks for <= 25-word excerpts; capExcerpts is the code-level
+	// guarantee, applied here so every consumer of this pipeline (nightly
+	// runner, evals) receives a report that honors the type's contract.
+	return capExcerpts(extractToolInput<TosChangeReport>(response, EXPLAIN_TOS_TOOL.name));
 }

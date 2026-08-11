@@ -70,10 +70,14 @@ function hasChange(
 // come from — fabricated or paraphrased "quotes" on a public record would be
 // worse than no excerpt at all.
 function excerptsContained(report: TosChangeReport, newText: string): CheckResult {
+	// The pipeline hard-caps excerpts and marks truncation with a trailing
+	// "…" (see truncateExcerpt) — strip that marker before the verbatim test,
+	// since the words before it must still quote the source exactly.
+	const quoted = (excerpt: string) => normalized(excerpt.replace(/…$/u, ""));
 	const missing = report.changes.filter(
 		(c) =>
-			!normalized(newText).includes(normalized(c.new_excerpt)) ||
-			(c.old_excerpt !== null && !normalized(original).includes(normalized(c.old_excerpt))),
+			!normalized(newText).includes(quoted(c.new_excerpt)) ||
+			(c.old_excerpt !== null && !normalized(original).includes(quoted(c.old_excerpt))),
 	);
 	return {
 		passed: missing.length === 0,
@@ -86,18 +90,27 @@ function excerptsContained(report: TosChangeReport, newText: string): CheckResul
 }
 
 function excerptsWithinCap(report: TosChangeReport): CheckResult {
-	const over = report.changes.filter(
-		(c) =>
-			countWords(c.new_excerpt) > EXCERPT_MAX_WORDS ||
-			(c.old_excerpt !== null && countWords(c.old_excerpt) > EXCERPT_MAX_WORDS),
+	// Report the excerpt that actually broke the cap — this check once
+	// flagged an over-long old_excerpt while printing the compliant
+	// new_excerpt, which made the dashboard failure unreadable.
+	const offenders = report.changes.flatMap((c) =>
+		[
+			{ field: "new_excerpt", excerpt: c.new_excerpt },
+			{ field: "old_excerpt", excerpt: c.old_excerpt },
+		].filter(
+			(e): e is { field: string; excerpt: string } =>
+				e.excerpt !== null && countWords(e.excerpt) > EXCERPT_MAX_WORDS,
+		),
 	);
 	return {
-		passed: over.length === 0,
+		passed: offenders.length === 0,
 		expected: `every excerpt <= ${EXCERPT_MAX_WORDS} words`,
 		actual:
-			over.length === 0
+			offenders.length === 0
 				? "all within cap"
-				: over.map((c) => `${countWords(c.new_excerpt)} words: "${c.new_excerpt}"`).join(" | "),
+				: offenders
+						.map((e) => `${e.field} ${countWords(e.excerpt)} words: "${e.excerpt}"`)
+						.join(" | "),
 	};
 }
 

@@ -39,7 +39,12 @@ const scrollTo = (id: string) => {
 };
 
 onMounted(() => {
-	updateScrolled();
+	// updateScrolled reads offsetHeight, which forces layout — inside the
+	// mount task (whole page dirty) that read cost ~40ms of main-thread time
+	// during the LCP window on every page. Deferred past first paint it's
+	// nearly free, and the pre-scroll default (not scrolled) is correct for
+	// the first frame anyway.
+	requestAnimationFrame(() => setTimeout(updateScrolled, 0));
 	window.addEventListener("scroll", updateScrolled);
 	window.addEventListener("resize", updateScrolled);
 

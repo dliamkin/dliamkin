@@ -65,4 +65,14 @@ section[id],
 footer[id] {
 	scroll-margin-top: 5rem;
 }
+
+/* PrimeVue's Message mounts inside a <Transition appear> that animates its
+   height open (grid-template-rows 0fr -> 1fr, 300ms). For the disclaimer
+   banners that are simply part of a page, that entrance visibly pushes the
+   whole page down while it plays — the single largest CLS source on the
+   demo pages. Messages appear instantly instead; the leave animation is
+   untouched. */
+.p-message-enter-active {
+	animation: none !important;
+}
 </style>

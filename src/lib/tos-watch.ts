@@ -106,11 +106,27 @@ export function countWords(text: string): number {
 }
 
 // Hard cap, applied after the model call: the prompt asks for <= 25 words,
-// this guarantees it.
+// this guarantees it. Truncation is marked with a trailing "…" — consumers
+// that verbatim-match excerpts against source text must strip it first.
 export function truncateExcerpt(excerpt: string, maxWords: number = EXCERPT_MAX_WORDS): string {
 	const words = excerpt.trim().split(/\s+/);
 	if (words.length <= maxWords) return excerpt.trim();
 	return words.slice(0, maxWords).join(" ") + "…";
+}
+
+// Applies the excerpt cap to a whole report. Called at the pipeline boundary
+// (explainTosChange) so the TosChangeReport type's "<= EXCERPT_MAX_WORDS,
+// enforced in code" promise holds for every consumer — the nightly runner,
+// the site, and the eval suite all receive already-capped excerpts.
+export function capExcerpts(report: TosChangeReport): TosChangeReport {
+	return {
+		...report,
+		changes: report.changes.map((change) => ({
+			...change,
+			new_excerpt: truncateExcerpt(change.new_excerpt),
+			old_excerpt: change.old_excerpt === null ? null : truncateExcerpt(change.old_excerpt),
+		})),
+	};
 }
 
 // Loaded/editorializing language the project's neutral posture forbids. The
@@ -224,7 +240,8 @@ export const EXPLAIN_TOS_TOOL: Anthropic.Tool = {
 						},
 						explanation: {
 							type: "string",
-							description: "1-3 neutral, factual sentences an ordinary user can understand",
+							description:
+								"1-3 neutral, factual sentences an ordinary user can understand",
 						},
 						practical_effect: {
 							type: "string",
@@ -251,7 +268,8 @@ export const EXPLAIN_TOS_TOOL: Anthropic.Tool = {
 			},
 			summary: {
 				type: "string",
-				description: "1-2 neutral sentences summarizing the change set, used in the RSS feed",
+				description:
+					"1-2 neutral sentences summarizing the change set, used in the RSS feed",
 			},
 		},
 		required: ["substantive", "cosmetic_note", "changes", "summary"],
