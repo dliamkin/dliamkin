@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-08-12T09:32:40.656Z",
+  "audited_at": "2026-08-13T09:35:35.728Z",
   "status": "warnings",
-  "summary": "All pages are visually intact and accessibility/SEO/best-practices remain perfect across the board. Homepage performance slipped to 86 (LCP 3.7 s, TBT 128 ms), a further 5-point drop from 91 that now sits at the regression threshold; /projects/screenshot-to-primevue remains below 85 at 77 (LCP 4.6 s) and continues to warrant attention.",
+  "summary": "All pages are visually intact with perfect accessibility, best-practices, and SEO scores across the board. Homepage performance recovered slightly to 87 (LCP 3.67 s), /about dipped 3 pts to 87 (within jitter), and /projects/screenshot-to-primevue remains below 85 at 78 (LCP 4.5 s) for a third consecutive audit.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 86,
+        "performance": 87,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3730.674,
+        "lcp_ms": 3669.033,
         "cls": 0.015,
-        "tbt_ms": 128.09
+        "tbt_ms": 103.527
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with teal-accented hero ('App Design' heading, 'Send me a message' CTA), four content sections (pillars, case studies, skills, contact form), and a dark contact footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -20,13 +20,13 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 90,
+        "performance": 87,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3285.569,
+        "lcp_ms": 3456.295,
         "cls": 0,
-        "tbt_ms": 107
+        "tbt_ms": 94.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Fully built About page with shared nav, 'About Me' hero section, two-column bio + dark-themed code snippet panel, 12+/16+/2 stats row, engineering culture section, and dark contact footer — correctly rendered on both desktop and mobile."
@@ -34,13 +34,13 @@
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 88,
+        "performance": 89,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3302.267,
+        "lcp_ms": 3287.689,
         "cls": 0,
-        "tbt_ms": 172
+        "tbt_ms": 170
       },
       "visual_findings": [],
       "visual_fingerprint": "Fully styled projects index page with 'My Projects' heading, featured 'Latest Builds' section (Token Field, Noise Translator, Tail Risk Lab), seven project cards in a multi-column desktop grid collapsing to single-column on mobile, and a dark contact footer visible on both desktop and mobile."
@@ -48,13 +48,13 @@
     {
       "path": "/projects/note-structurer",
       "lighthouse": {
-        "performance": 83,
+        "performance": 80,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3934.753,
+        "lcp_ms": 4253.767,
         "cls": 0,
-        "tbt_ms": 155
+        "tbt_ms": 181
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer detail page with breadcrumb nav, 'Evals: 10/10 passing' badge, two-column visit note / structured result interactive demo, amber disclaimer banner, expandable JSON and HIPAA notes accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -62,59 +62,59 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 77,
+        "performance": 78,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4617.548,
+        "lcp_ms": 4525.987,
         "cls": 0,
-        "tbt_ms": 188.5
+        "tbt_ms": 193.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Screenshot → PrimeVue detail page with breadcrumb nav, 'Evals: 5/5 passing' badge, dashed-border image drop zone, three sample thumbnail cards (Login form, Analytics dashboard, Pricing page), a placeholder result panel, expandable accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     }
   ],
   "score_deltas": [
-    "/ performance 91 → 86 (-5 pts, at regression threshold — LCP 3292 → 3731 ms, TBT 76.5 → 128 ms)",
-    "/ lcp_ms 3292 → 3731 (+439 ms, continued degradation)",
-    "/ tbt_ms 76.5 → 128.09 (+51.6 ms, notable increase)",
+    "/ performance 86 → 87 (+1 pt, within jitter — slight recovery)",
+    "/ lcp_ms 3731 → 3669 (-62 ms, marginal improvement)",
+    "/ tbt_ms 128 → 103.5 (-24.5 ms, slight improvement)",
     "/ cls 0.015 → 0.015 (stable)",
     "/ accessibility 100 → 100 (stable)",
     "/ best_practices 100 → 100 (stable)",
     "/ seo 100 → 100 (stable)",
-    "/about performance 90 → 90 (stable)",
-    "/about lcp_ms 3414 → 3286 (-128 ms, slight improvement)",
-    "/about tbt_ms 53 → 107 (+54 ms, within jitter)",
-    "/ about cls 0 → 0 (stable)",
+    "/about performance 90 → 87 (-3 pts, within jitter)",
+    "/about lcp_ms 3286 → 3456 (+170 ms, within normal variance)",
+    "/about tbt_ms 107 → 94.5 (-12.5 ms, slight improvement)",
+    "/about cls 0 → 0 (stable)",
     "/about accessibility 100 → 100 (stable)",
     "/about best_practices 100 → 100 (stable)",
     "/about seo 100 → 100 (stable)",
-    "/projects performance 89 → 88 (-1 pt, within jitter)",
-    "/projects lcp_ms 3454 → 3302 (-152 ms, slight improvement)",
-    "/projects tbt_ms 86 → 172 (+86 ms, elevated — monitor)",
+    "/projects performance 88 → 89 (+1 pt, within jitter)",
+    "/projects lcp_ms 3302 → 3288 (-14 ms, stable)",
+    "/projects tbt_ms 172 → 170 (-2 ms, stable)",
     "/projects cls 0 → 0 (stable)",
     "/projects accessibility 100 → 100 (stable)",
     "/projects best_practices 100 → 100 (stable)",
     "/projects seo 100 → 100 (stable)",
-    "/projects/note-structurer performance 83 → 83 (stable)",
-    "/projects/note-structurer lcp_ms 4060 → 3935 (-125 ms, slight improvement)",
-    "/projects/note-structurer tbt_ms 82.5 → 155 (+72.5 ms, elevated — monitor)",
+    "/projects/note-structurer performance 83 → 80 (-3 pts, within jitter)",
+    "/projects/note-structurer lcp_ms 3935 → 4254 (+319 ms, moderate increase — monitor)",
+    "/projects/note-structurer tbt_ms 155 → 181 (+26 ms, within jitter)",
     "/projects/note-structurer cls 0 → 0 (stable)",
     "/projects/note-structurer accessibility 100 → 100 (stable)",
     "/projects/note-structurer best_practices 100 → 100 (stable)",
     "/projects/note-structurer seo 100 → 100 (stable)",
-    "/projects/screenshot-to-primevue performance 78 → 77 (-1 pt, still below 85 threshold)",
-    "/projects/screenshot-to-primevue lcp_ms 4784 → 4618 (-166 ms, marginal improvement, still elevated)",
-    "/projects/screenshot-to-primevue tbt_ms 55 → 188.5 (+133.5 ms, significant increase — monitor)",
+    "/projects/screenshot-to-primevue performance 77 → 78 (+1 pt, still below 85 threshold — third consecutive audit)",
+    "/projects/screenshot-to-primevue lcp_ms 4618 → 4526 (-92 ms, marginal improvement, still elevated)",
+    "/projects/screenshot-to-primevue tbt_ms 188.5 → 193.5 (+5 ms, stable)",
     "/projects/screenshot-to-primevue cls 0 → 0 (stable)",
     "/projects/screenshot-to-primevue accessibility 100 → 100 (stable)",
     "/projects/screenshot-to-primevue best_practices 100 → 100 (stable)",
     "/projects/screenshot-to-primevue seo 100 → 100 (stable)"
   ],
-  "top_fix": "Optimize /projects/screenshot-to-primevue (performance 77, LCP 4.6 s, TBT 189 ms): convert the three sample thumbnail images to WebP at display size (~300 px), add loading=\"lazy\" to below-fold thumbnails, and preload/inline the drop-zone icon — this page has been below 85 for two consecutive audits and TBT has now nearly quadrupled.",
-  "should_file_issue": false,
-  "issue_title": null,
-  "issue_body": null,
+  "top_fix": "Optimize /projects/screenshot-to-primevue (performance 78, LCP 4.5 s, TBT 194 ms, below 85 for three consecutive audits): convert the three sample thumbnail images to WebP at display size (~300 px wide), add loading=\"lazy\" to below-fold thumbnails, and preload or inline the drop-zone icon SVG to cut LCP.",
+  "should_file_issue": true,
+  "issue_title": "Performance regression: /projects/screenshot-to-primevue below 85 for three consecutive audits (currently 78)",
+  "issue_body": "# Performance regression: `/projects/screenshot-to-primevue` — third consecutive audit below 85\n\n## Summary\nThe Screenshot → PrimeVue project page has scored below the 85 performance threshold for **three consecutive nightly audits** and shows no meaningful improvement.\n\n| Date | Perf | LCP (ms) | TBT (ms) |\n|---|---|---|---|\n| 2026-08-11 | 78 | 4784 | 55 |\n| 2026-08-12 | 77 | 4618 | 189 |\n| 2026-08-13 | 78 | 4526 | 194 |\n\nAll other scores (accessibility, best practices, SEO) remain 100.\n\n## Root cause (likely)\n- The three sample thumbnail images (Login form, Analytics dashboard, Pricing page) are served at full resolution and likely in PNG/JPEG format — converting to WebP at display size (~300 px wide) would be the single largest win.\n- Below-fold thumbnails have no `loading=\"lazy\"` attribute, blocking LCP.\n- The drop-zone icon is likely render-blocking; inlining or preloading it would reduce LCP.\n\n## Recommended fixes\n1. Convert sample thumbnails to WebP at ~300 px wide and serve via `<picture>` or `srcset`.\n2. Add `loading=\"lazy\"` to the two below-fold thumbnail images.\n3. Preload or inline the drop-zone SVG/icon so it doesn't delay the critical path.\n4. Verify no large unused JS bundles are loaded on this page (TBT is consistently ~190 ms).\n\n## Acceptance criteria\n- Lighthouse performance ≥ 85 on next nightly audit.\n- LCP ≤ 3 500 ms.\n",
   "issue_fingerprint": "screenshot-to-primevue-performance-lcp",
   "error_reason": null
 }
