@@ -1,5 +1,32 @@
 [
   {
+    "id": "uf-career-hub/privacy-policy/2026-08-18",
+    "service_id": "uf-career-hub",
+    "service_name": "UF Career Hub",
+    "document_label": "Privacy Policy",
+    "document_url": "https://careerhub.ufl.edu/privacy-policy/",
+    "detected_at": "2026-08-18",
+    "report": {
+      "substantive": true,
+      "cosmetic_note": null,
+      "changes": [
+        {
+          "title": "Automatic sign-in via university single sign-on",
+          "category": "privacy_and_data",
+          "new_excerpt": "the Platform may sign you in automatically. You can sign out at any time, and you will only be signed into an account",
+          "old_excerpt": null,
+          "explanation": "The updated policy adds a new provision stating that if a user has an active single sign-on session with their university, the Platform may automatically log them in without a separate login step. It notes users can sign out and will only be signed into a pre-existing account.",
+          "practical_effect": "Users who are already logged into their university's single sign-on system may find themselves automatically signed into the Platform without taking any additional login action.",
+          "impact": "unclear",
+          "severity": "low"
+        }
+      ],
+      "summary": "The privacy policy adds a new section describing automatic sign-in through a user's university single sign-on session, noting users can sign out and will only access an existing account."
+    },
+    "model": "claude-sonnet-5",
+    "pipeline_version": "1.1.1"
+  },
+  {
     "id": "google/terms-of-service/2026-07-30",
     "service_id": "google",
     "service_name": "Google",

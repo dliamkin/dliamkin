@@ -5,8 +5,15 @@
     <link>https://dliamkin.com/projects/tos-watch</link>
     <description>Automated nightly monitoring of terms-of-service and policy documents. Entries describe detected changes in neutral, plain English. Not legal advice; not affiliated with any monitored service.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jul 2026 12:08:05 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 10:50:03 GMT</lastBuildDate>
     <atom:link href="https://dliamkin.com/tos-watch/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>UF Career Hub · Privacy Policy — change detected 2026-08-18</title>
+      <link>https://dliamkin.com/projects/tos-watch</link>
+      <guid isPermaLink="false">uf-career-hub/privacy-policy/2026-08-18</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <description>The privacy policy adds a new section describing automatic sign-in through a user's university single sign-on session, noting users can sign out and will only access an existing account. (1 change detected by automated comparison — see the full entry for excerpts and details.)</description>
+    </item>
     <item>
       <title>Google · Terms of Service — change detected 2026-07-30</title>
       <link>https://dliamkin.com/projects/tos-watch</link>
