@@ -6,9 +6,11 @@
 import ResponsiveShowcase from "@/components/sections/ResponsiveShowcase.vue";
 import AboutSection from "@/components/sections/AboutSection.vue";
 import ExpertisePillars from "@/components/sections/ExpertisePillars.vue";
+import CareerTimeline from "@/components/sections/CareerTimeline.vue";
 import CaseStudies from "@/components/sections/CaseStudies.vue";
 import EngineeringValues from "@/components/sections/EngineeringValues.vue";
 import SkillsGrid from "@/components/sections/SkillsGrid.vue";
+import ConferencesSection from "@/components/sections/ConferencesSection.vue";
 import SupportBanner from "@/components/sections/SupportBanner.vue";
 import SiteFooter from "@/components/sections/SiteFooter.vue";
 </script>
@@ -17,9 +19,11 @@ import SiteFooter from "@/components/sections/SiteFooter.vue";
 	<ResponsiveShowcase />
 	<AboutSection />
 	<ExpertisePillars />
+	<CareerTimeline />
 	<CaseStudies />
 	<EngineeringValues />
 	<SkillsGrid />
+	<ConferencesSection />
 	<SupportBanner
 		variant="band"
 		eyebrow="// Support"

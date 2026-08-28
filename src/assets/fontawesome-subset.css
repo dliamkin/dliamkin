@@ -99,6 +99,9 @@
 .fa-braille::before {
 	content: "\f2a1";
 }
+.fa-building::before {
+	content: "\f1ad";
+}
 .fa-bullseye::before {
 	content: "\f140";
 }
@@ -222,6 +225,9 @@
 .fa-google::before {
 	content: "\f1a0";
 }
+.fa-graduation-cap::before {
+	content: "\f19d";
+}
 .fa-hourglass-half::before {
 	content: "\f252";
 }
@@ -233,6 +239,9 @@
 }
 .fa-language::before {
 	content: "\f1ab";
+}
+.fa-laptop-code::before {
+	content: "\f5fc";
 }
 .fa-layer-group::before {
 	content: "\f5fd";
@@ -290,6 +299,9 @@
 }
 .fa-repeat::before {
 	content: "\f363";
+}
+.fa-rocket::before {
+	content: "\f135";
 }
 .fa-rss::before {
 	content: "\f09e";

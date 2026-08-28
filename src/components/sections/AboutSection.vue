@@ -53,7 +53,11 @@ watch(inView, (visible) => {
 					</div>
 					<div class="stat">
 						<span class="stat-num">2</span>
-						<span class="stat-label">Cloud Ecosystems</span>
+						<span class="stat-label">Cloud Stacks</span>
+					</div>
+					<div class="stat">
+						<span class="stat-num">7</span>
+						<span class="stat-label">Conferences</span>
 					</div>
 				</div>
 			</div>
@@ -78,6 +82,7 @@ watch(inView, (visible) => {
     <span class="key">backend</span>:  [<span class="str">"C#/.NET"</span>, <span class="str">"Node"</span>, <span class="str">"PHP"</span>],
     <span class="key">cloud</span>:    [<span class="str">"AWS Lambda"</span>, <span class="str">"DynamoDB"</span>, <span class="str">"Azure"</span>],
   },
+  <span class="key">education</span>: <span class="str">"B.A.S. Computer Information Systems"</span>,
   <span class="key">focus</span>: <span class="str">"weightless, data-heavy UIs"</span>,
   <span class="key">available</span>: <span class="bool">true</span>,
 };</code></pre>
@@ -161,7 +166,8 @@ watch(inView, (visible) => {
 
 .stat-row {
 	display: flex;
-	gap: 2.5rem;
+	flex-wrap: wrap;
+	gap: 2rem 2.25rem;
 }
 
 .stat {

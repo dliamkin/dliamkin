@@ -98,3 +98,32 @@ for (const name of LOGOS) {
 
 	console.log(`${name}: png ${kb(original.length)} -> webp ${kb(full.length)}`);
 }
+
+// Conference carousel photos (ConferencesSection.vue): the cards render
+// 4:3 at ~370 CSS px wide on desktop, so every JPG master in the folder
+// gets a 760x570 webp (2x DPR) plus a 380x285 sibling for 1x screens,
+// cover-cropped to 4:3 so portrait/odd-ratio sources don't letterbox. The
+// JPGs stay in git as the editable originals; the component only loads webp.
+{
+	const dir = path.join(imagesDir, "conferences");
+	const jpgs = (await fs.readdir(dir)).filter((f) => /\.jpe?g$/i.test(f)).sort();
+	for (const name of jpgs) {
+		const master = await fs.readFile(path.join(dir, name));
+		const base = name.replace(/\.jpe?g$/i, "");
+		const large = await sharp(master)
+			.rotate()
+			.resize(760, 570, { fit: "cover" })
+			.webp(WEBP_OPTS)
+			.toBuffer();
+		const small = await sharp(master)
+			.rotate()
+			.resize(380, 285, { fit: "cover" })
+			.webp(WEBP_OPTS)
+			.toBuffer();
+		await fs.writeFile(path.join(dir, `${base}.webp`), large);
+		await fs.writeFile(path.join(dir, `${base}-380.webp`), small);
+		console.log(
+			`conferences/${name}: jpg ${kb(master.length)} -> 760w ${kb(large.length)}, 380w ${kb(small.length)}`,
+		);
+	}
+}
