@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-08-30T13:50:23.493Z",
+  "audited_at": "2026-08-31T16:12:27.224Z",
   "status": "warnings",
-  "summary": "All pages remain visually intact with perfect accessibility, best-practices, and SEO scores. The homepage recovered modestly (79 → 81) but remains below 85; the two project detail pages continue their persistent sub-85 performance pattern, with /projects/screenshot-to-primevue (76) remaining the weakest page on site.",
+  "summary": "All pages remain visually intact with perfect accessibility, best-practices, and SEO scores. Performance scores on /about (90 → 83) and /projects (89 → 81) dropped materially this run, and both project detail pages continue their persistent sub-85 pattern; homepage (81 → 76) also regressed, driven by LCPs above 4 s across the board.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 81,
+        "performance": 76,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4077.03,
+        "lcp_ms": 4314.651,
         "cls": 0.015,
-        "tbt_ms": 217.5
+        "tbt_ms": 229.808
       },
       "visual_findings": [],
       "visual_fingerprint": "Full-page portfolio homepage with teal-accented hero ('App Design' heading, 'Send Me a Message' CTA), four dark content sections (pillars, timeline, case studies, skills, conferences, contact form), and a dark contact footer — all sections visible and correctly laid out on both desktop and mobile."
@@ -20,13 +20,13 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 90,
+        "performance": 83,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3299.958,
+        "lcp_ms": 4064.63,
         "cls": 0,
-        "tbt_ms": 115
+        "tbt_ms": 91.739
       },
       "visual_findings": [],
       "visual_fingerprint": "Fully built About page with shared nav, 'About Me' hero, two-column bio + dark-themed code snippet panel, 12+/16+/2/7 stats row, engineering culture section, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -34,13 +34,13 @@
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 89,
+        "performance": 81,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3303.664,
+        "lcp_ms": 4087.387,
         "cls": 0,
-        "tbt_ms": 153.5
+        "tbt_ms": 138
       },
       "visual_findings": [],
       "visual_fingerprint": "Fully styled projects index with 'My Projects' heading, 'Latest Builds' featured row (Token Field, Noise Translator, Tail Risk Lab), seven project cards in a multi-column desktop grid collapsing to single-column on mobile, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -48,13 +48,13 @@
     {
       "path": "/projects/note-structurer",
       "lighthouse": {
-        "performance": 80,
+        "performance": 71,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4316.136,
+        "lcp_ms": 5677.622,
         "cls": 0,
-        "tbt_ms": 184.5
+        "tbt_ms": 129
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer detail page with breadcrumb nav, 'Evals: 10/10 passing' badge, amber disclaimer banner, two-column visit note / structured result interactive demo, expandable JSON and HIPAA architecture accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
@@ -62,59 +62,59 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 76,
+        "performance": 69,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4816.69,
+        "lcp_ms": 6095.03,
         "cls": 0,
-        "tbt_ms": 194
+        "tbt_ms": 154.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Screenshot → PrimeVue detail page with breadcrumb nav, 'Evals: 5/5 passing' badge, dashed-border image drop zone, three sample thumbnail cards (Login form, Analytics dashboard, Pricing page), a placeholder result panel, expandable accordions, and a dark contact footer — correctly rendered on both desktop and mobile."
     }
   ],
   "score_deltas": [
-    "/ performance 79 → 81 (+2 pts, within jitter — still below 85, ongoing concern)",
-    "/ lcp_ms 4059.02 → 4077.03 ms (+18 ms, effectively stable, still above 4 s)",
-    "/ tbt_ms 248.5 → 217.5 ms (−31 ms, modest improvement, still elevated)",
+    "/ performance 81 → 76 (−5 pts, at the regression threshold, LCP worsened slightly)",
+    "/ lcp_ms 4077.03 → 4314.65 ms (+238 ms, notable increase, still well above 4 s)",
+    "/ tbt_ms 217.5 → 229.8 ms (+12 ms, within jitter, still elevated)",
     "/ cls 0.015 → 0.015 (stable)",
     "/ accessibility 100 → 100 (stable)",
     "/ best_practices 100 → 100 (stable)",
     "/ seo 100 → 100 (stable)",
-    "/about performance 89 → 90 (+1 pt, within jitter, stable)",
-    "/about lcp_ms 3327.218 → 3299.958 ms (−27 ms, effectively stable)",
-    "/about tbt_ms 130.446 → 115 ms (−15 ms, stable)",
+    "/about performance 90 → 83 (−7 pts, meaningful regression, dropped below 85)",
+    "/about lcp_ms 3299.958 → 4064.63 ms (+765 ms, significant increase, crossed 4 s threshold)",
+    "/about tbt_ms 115 → 91.7 ms (−23 ms, improvement)",
     "/about cls 0 → 0 (stable)",
     "/about accessibility 100 → 100 (stable)",
     "/about best_practices 100 → 100 (stable)",
     "/about seo 100 → 100 (stable)",
-    "/projects performance 88 → 89 (+1 pt, within jitter, stable)",
-    "/projects lcp_ms 3353.761 → 3303.664 ms (−50 ms, effectively stable)",
-    "/projects tbt_ms 176.53 → 153.5 ms (−23 ms, stable)",
+    "/projects performance 89 → 81 (−8 pts, meaningful regression, dropped below 85)",
+    "/projects lcp_ms 3303.664 → 4087.39 ms (+784 ms, significant increase, crossed 4 s threshold)",
+    "/projects tbt_ms 153.5 → 138 ms (−15 ms, slight improvement)",
     "/projects cls 0 → 0 (stable)",
     "/projects accessibility 100 → 100 (stable)",
     "/projects best_practices 100 → 100 (stable)",
     "/projects seo 100 → 100 (stable)",
-    "/projects/note-structurer performance 79 → 80 (+1 pt, within jitter — persistently below 85, ongoing concern)",
-    "/projects/note-structurer lcp_ms 4411.376 → 4316.136 ms (−95 ms, modest improvement, still above 4 s)",
-    "/projects/note-structurer tbt_ms 193.5 → 184.5 ms (−9 ms, stable)",
+    "/projects/note-structurer performance 80 → 71 (−9 pts, meaningful regression, well below 85)",
+    "/projects/note-structurer lcp_ms 4316.136 → 5677.62 ms (+1361 ms, significant degradation)",
+    "/projects/note-structurer tbt_ms 184.5 → 129 ms (−55 ms, improvement)",
     "/projects/note-structurer cls 0 → 0 (stable)",
     "/projects/note-structurer accessibility 100 → 100 (stable)",
     "/projects/note-structurer best_practices 100 → 100 (stable)",
     "/projects/note-structurer seo 100 → 100 (stable)",
-    "/projects/screenshot-to-primevue performance 74 → 76 (+2 pts, within jitter — persistently below 85, worst on site)",
-    "/projects/screenshot-to-primevue lcp_ms 4688.969 → 4816.69 ms (+128 ms, slight degradation, still well above 4 s)",
-    "/projects/screenshot-to-primevue tbt_ms 262 → 194 ms (−68 ms, meaningful improvement but still elevated)",
+    "/projects/screenshot-to-primevue performance 76 → 69 (−7 pts, meaningful regression, worst on site)",
+    "/projects/screenshot-to-primevue lcp_ms 4816.69 → 6095.03 ms (+1278 ms, significant degradation)",
+    "/projects/screenshot-to-primevue tbt_ms 194 → 154.5 ms (−40 ms, improvement)",
     "/projects/screenshot-to-primevue cls 0 → 0 (stable)",
     "/projects/screenshot-to-primevue accessibility 100 → 100 (stable)",
     "/projects/screenshot-to-primevue best_practices 100 → 100 (stable)",
     "/projects/screenshot-to-primevue seo 100 → 100 (stable)"
   ],
-  "top_fix": "Reduce LCP on the homepage and both project detail pages (/, /projects/note-structurer, /projects/screenshot-to-primevue all remain below 85 with LCPs above 4 s): convert hero/thumbnail images to WebP at display dimensions with `fetchpriority=\"high\"` and an `<link rel=\"preload\">` in `<head>`, and defer or code-split non-critical JS to bring TBT below 150 ms — this is the single change most likely to push all three pages above 85.",
-  "should_file_issue": false,
-  "issue_title": null,
-  "issue_body": null,
-  "issue_fingerprint": null,
+  "top_fix": "LCP has materially worsened across all five pages (three now above 5–6 s), dragging every performance score below 85: convert hero and project thumbnail images to WebP at display dimensions with `fetchpriority=\"high\"` and a `<link rel=\"preload\">` in `<head>`, and defer or code-split non-critical JS — this is the single change most likely to push LCP under 2.5 s and lift all pages above 85.",
+  "should_file_issue": true,
+  "issue_title": "Performance regression: LCP spiked site-wide, all pages now below 85",
+  "issue_body": "## Performance Regression — 2026-08-31\n\nAll five audited pages regressed meaningfully on the 2026-08-31 nightly run. Every performance score fell below 85 and LCP worsened substantially on every page.\n\n### Score changes\n\n| Page | Prev | Now | Δ |\n|---|---|---|---|\n| `/` | 81 | 76 | −5 |\n| `/about` | 90 | 83 | **−7** |\n| `/projects` | 89 | 81 | **−8** |\n| `/projects/note-structurer` | 80 | 71 | **−9** |\n| `/projects/screenshot-to-primevue` | 76 | 69 | **−7** |\n\n### LCP changes\n\n| Page | Prev LCP | Now LCP | Δ |\n|---|---|---|---|\n| `/` | 4077 ms | 4315 ms | +238 ms |\n| `/about` | 3300 ms | 4065 ms | **+765 ms** |\n| `/projects` | 3304 ms | 4087 ms | **+784 ms** |\n| `/projects/note-structurer` | 4316 ms | 5678 ms | **+1362 ms** |\n| `/projects/screenshot-to-primevue` | 4817 ms | 6095 ms | **+1278 ms** |\n\n### Likely cause\nLCP inflated consistently across all pages in a single run, suggesting either a CDN/hosting cold-start, an unoptimised hero or LCP image element, or a recently introduced render-blocking resource.\n\n### Recommended fix\n1. Identify the LCP element on each page (typically the hero image or above-the-fold heading) and serve it as WebP at display dimensions with `fetchpriority=\"high\"` and a `<link rel=\"preload\">` in `<head>`.\n2. Audit for any newly added render-blocking scripts or stylesheets and defer/async them.\n3. Check CDN cache-hit rates — a global cache miss would explain the simultaneous spike across all pages.\n\n### Visuals\nNo visual breakage was observed on any page (desktop or mobile). Accessibility, best-practices, and SEO remain perfect at 100 across the board.",
+  "issue_fingerprint": "lcp-spike-performance-below-85-site-wide",
   "error_reason": null
 }
