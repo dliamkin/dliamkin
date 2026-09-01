@@ -5,8 +5,15 @@
     <link>https://dliamkin.com/projects/tos-watch</link>
     <description>Automated nightly monitoring of terms-of-service and policy documents. Entries describe detected changes in neutral, plain English. Not legal advice; not affiliated with any monitored service.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Aug 2026 10:50:03 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 14:57:47 GMT</lastBuildDate>
     <atom:link href="https://dliamkin.com/tos-watch/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>UF Medical Physiology Online · Privacy, Terms &amp; Cookies Policies — change detected 2026-09-01</title>
+      <link>https://dliamkin.com/projects/tos-watch</link>
+      <guid isPermaLink="false">uf-med-physiology/privacy-terms-cookies-policies/2026-09-01</guid>
+      <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
+      <description>All detected changes involve reordering of section labels/headings and navigation or page layout elements (e.g., menu labels, contact section headings, form-related text), with no changes to the substantive terms, rights, or obligations described in the policies.</description>
+    </item>
     <item>
       <title>UF Career Hub · Privacy Policy — change detected 2026-08-18</title>
       <link>https://dliamkin.com/projects/tos-watch</link>
