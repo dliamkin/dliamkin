@@ -5,8 +5,15 @@
     <link>https://dliamkin.com/projects/tos-watch</link>
     <description>Automated nightly monitoring of terms-of-service and policy documents. Entries describe detected changes in neutral, plain English. Not legal advice; not affiliated with any monitored service.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Sep 2026 14:57:47 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2026 13:38:16 GMT</lastBuildDate>
     <atom:link href="https://dliamkin.com/tos-watch/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Anthropic · Privacy Policy — change detected 2026-09-12</title>
+      <link>https://dliamkin.com/projects/tos-watch</link>
+      <guid isPermaLink="false">anthropic/privacy-policy/2026-09-12</guid>
+      <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Anthropic added a new Korea-specific PIPA addendum to its Privacy Policy detailing collection of identity-verification data, delegation of processing to third parties (Korea Credit Bureau, Kim &amp; Chang), and overseas transfer of identity data to a US-based verification vendor (Persona), along with a user right to object to such transfers. The domestic representative in South Korea also changed from Bae, Kim &amp; Lee LLC to Kim &amp; Chang, with updated contact details.&quot; (6 changes detected by automated comparison — see the full entry for excerpts and details.)</description>
+    </item>
     <item>
       <title>UF Medical Physiology Online · Privacy, Terms &amp; Cookies Policies — change detected 2026-09-01</title>
       <link>https://dliamkin.com/projects/tos-watch</link>

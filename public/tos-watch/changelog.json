@@ -1,5 +1,82 @@
 [
   {
+    "id": "anthropic/privacy-policy/2026-09-12",
+    "service_id": "anthropic",
+    "service_name": "Anthropic",
+    "document_label": "Privacy Policy",
+    "document_url": "https://www.anthropic.com/legal/privacy",
+    "detected_at": "2026-09-12",
+    "report": {
+      "substantive": true,
+      "cosmetic_note": null,
+      "changes": [
+        {
+          "title": "New Korea-specific PIPA addendum added",
+          "category": "privacy_and_data",
+          "new_excerpt": "This section applies to the extent that Anthropic is subject to the Personal Information Protection Act (\"PIPA\")",
+          "old_excerpt": null,
+          "explanation": "A new addendum has been added specifically for users in the Republic of Korea, supplementing the main Privacy Policy under Korea's Personal Information Protection Act. It states this addendum controls over the main policy in case of inconsistency for Korean users.",
+          "practical_effect": "Users in South Korea now have an additional, more detailed set of disclosures governing how their personal data is collected, used, and transferred, which takes precedence over the general policy where the two conflict.",
+          "impact": "neutral",
+          "severity": "medium"
+        },
+        {
+          "title": "New disclosure of identity verification data collection",
+          "category": "privacy_and_data",
+          "new_excerpt": "Purpose: Identity verification, Fraud and abuse monitoring",
+          "old_excerpt": null,
+          "explanation": "The addendum newly discloses that Anthropic collects name, birthdate, sex, a native-foreigner code, and duplication information (DI) for identity verification and fraud/abuse monitoring purposes, retained until account deletion.",
+          "practical_effect": "Korean users are now informed that additional identity-related data is being collected and retained specifically for verification and fraud prevention until they delete their account.",
+          "impact": "neutral",
+          "severity": "medium"
+        },
+        {
+          "title": "New disclosure of delegated data processing to third parties",
+          "category": "privacy_and_data",
+          "new_excerpt": "Anthropic delegates the processing of personal data as described here and below, and the delegatees may process personal data according to the purpose of the…",
+          "old_excerpt": null,
+          "explanation": "The addendum discloses that Anthropic delegates certain personal data processing tasks to named third parties: Korea Credit Bureau for fraud/identity verification and Kim & Chang for domestic representative duties.",
+          "practical_effect": "Users' data may be processed by these named third-party organizations for the stated purposes, in addition to Anthropic itself.",
+          "impact": "neutral",
+          "severity": "medium"
+        },
+        {
+          "title": "New disclosure of overseas transfer of identity data to Persona (US)",
+          "category": "privacy_and_data",
+          "new_excerpt": "Anthropic delegates the processing of personal data to affiliates and third parties, all of whom are located overseas.",
+          "old_excerpt": null,
+          "explanation": "The addendum discloses that identity-verification data (name, birthdate, sex, native-foreigner code, DI) is transferred to Persona, a company located in the United States, for fraud detection and identity verification, retained for 3 years under a specific PIPA legal basis.",
+          "practical_effect": "Korean users' identity data may be sent to and stored by a US-based company for up to three years as part of identity verification processing.",
+          "impact": "neutral",
+          "severity": "medium"
+        },
+        {
+          "title": "New right to object to overseas data transfer",
+          "category": "privacy_and_data",
+          "new_excerpt": "You may have the right to request that your personal data not be transferred overseas as described above.",
+          "old_excerpt": null,
+          "explanation": "The addendum newly informs users they may request that their data not be transferred overseas by contacting Anthropic's privacy email or Data Protection Officer, but warns this may limit Anthropic's ability to provide services.",
+          "practical_effect": "Users can attempt to opt out of overseas data transfer, but doing so may result in reduced or unavailable service functionality.",
+          "impact": "favors_user",
+          "severity": "low"
+        },
+        {
+          "title": "Change of Korea domestic representative and contact details",
+          "category": "privacy_and_data",
+          "new_excerpt": "Email: anthropic_privacy@kimchang.com",
+          "old_excerpt": "Email: [anthropicprivacy@bkl.co.kr]",
+          "explanation": "The domestic representative contact information for South Korea has changed from Bae, Kim & Lee LLC to Kim & Chang, including new phone number and email address.",
+          "practical_effect": "Users in South Korea seeking to contact the domestic representative about privacy matters must now use the new Kim & Chang contact details instead of the previous firm's contact information.",
+          "impact": "neutral",
+          "severity": "low"
+        }
+      ],
+      "summary": "Anthropic added a new Korea-specific PIPA addendum to its Privacy Policy detailing collection of identity-verification data, delegation of processing to third parties (Korea Credit Bureau, Kim & Chang), and overseas transfer of identity data to a US-based verification vendor (Persona), along with a user right to object to such transfers. The domestic representative in South Korea also changed from Bae, Kim & Lee LLC to Kim & Chang, with updated contact details.\""
+    },
+    "model": "claude-sonnet-5",
+    "pipeline_version": "1.1.1"
+  },
+  {
     "id": "uf-med-physiology/privacy-terms-cookies-policies/2026-09-01",
     "service_id": "uf-med-physiology",
     "service_name": "UF Medical Physiology Online",
