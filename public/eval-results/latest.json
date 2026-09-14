@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-13T14:01:12.397Z",
+  "run_at": "2026-09-14T16:00:16.447Z",
   "trigger": "schedule",
   "suites": [
     {
@@ -11,329 +11,85 @@
         {
           "case_id": "note-followup-htn",
           "description": "Bundled follow-up sample: two active meds extracted exactly, no invented allergies, vitals and the lipid-panel follow-up captured",
-          "passed": true,
-          "checks": [
-            {
-              "name": "extracts lisinopril 20 mg daily, active",
-              "passed": true,
-              "expected": "lisinopril 20 mg daily [active]",
-              "actual": "lisinopril 20mg daily [active]"
-            },
-            {
-              "name": "extracts metformin 500 mg BID, active",
-              "passed": true,
-              "expected": "metformin 500 mg BID [active]",
-              "actual": "metformin 500mg BID [active]"
-            },
-            {
-              "name": "allergies is empty (none mentioned in the note)",
-              "passed": true,
-              "expected": "empty array",
-              "actual": "empty array"
-            },
-            {
-              "name": "blood pressure 128/82 captured",
-              "passed": true,
-              "expected": "contains \"128/82\"",
-              "actual": "\"128/82\""
-            },
-            {
-              "name": "lipid panel action captured (plan or follow-ups)",
-              "passed": true,
-              "expected": "contains \"lipid\"",
-              "actual": "\"Continue current medications ; Order monofilament test ; Discussed diet improvements ; Patient to schedule lipid panel within 2 weeks ; Return to clinic in 3 months, sooner if foot symptoms worsen ; Return to clinic ; Schedule lipid panel\""
-            }
-          ],
-          "duration_ms": 31344,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 302,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLQDVSiRx8U7Z5xjsf\"}"
         },
         {
           "case_id": "note-newpatient-headache",
           "description": "Bundled new-patient sample: both allergies with reactions, vitals transcribed exactly, explicitly-educated red flags surfaced",
-          "passed": true,
-          "checks": [
-            {
-              "name": "penicillin allergy captured",
-              "passed": true,
-              "expected": "contains \"penicillin\"",
-              "actual": "\"Penicillin (hives) ; Sulfa (unknown reaction per patient)\""
-            },
-            {
-              "name": "sulfa allergy captured",
-              "passed": true,
-              "expected": "contains \"sulfa\"",
-              "actual": "\"Penicillin (hives) ; Sulfa (unknown reaction per patient)\""
-            },
-            {
-              "name": "blood pressure 118/74 captured",
-              "passed": true,
-              "expected": "contains \"118/74\"",
-              "actual": "\"118/74\""
-            },
-            {
-              "name": "temperature 98.2 captured",
-              "passed": true,
-              "expected": "contains \"98.2\"",
-              "actual": "\"98.2°F\""
-            },
-            {
-              "name": "red flags present (note explicitly educates on them)",
-              "passed": true,
-              "expected": "at least one entry",
-              "actual": "[\"Worst headache of life\",\"Focal neurological deficits\",\"Fever with stiff neck\"]"
-            }
-          ],
-          "duration_ms": 31328,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 227,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLQ4omMq2SywrkRzCH\"}"
         },
         {
           "case_id": "note-urgentcare-ankle",
           "description": "Bundled urgent-care sample: new ibuprofen prescription with dose, return precautions not lost in extraction",
-          "passed": true,
-          "checks": [
-            {
-              "name": "extracts ibuprofen 600 mg, new or active",
-              "passed": true,
-              "expected": "ibuprofen 600 mg TID [new]",
-              "actual": "Ibuprofen 600mg three times daily [new]"
-            },
-            {
-              "name": "heart rate 80 captured",
-              "passed": true,
-              "expected": "contains \"80\"",
-              "actual": "\"80\""
-            },
-            {
-              "name": "return precautions captured (red flags or plan)",
-              "passed": true,
-              "expected": "contains \"bear weight\"",
-              "actual": "\"Inability to bear weight ; Numbness ; Worsening swelling ; RICE protocol ; Air stirrup brace dispensed ; Ibuprofen 600mg three times daily with food for 5 days ; Crutches as needed for first 48 hours ; Work note provided for 2 days ; Follow up with PCP if not improving\""
-            },
-            {
-              "name": "PCP follow-up captured",
-              "passed": true,
-              "expected": "a follow-up mentioning the PCP or 1 week",
-              "actual": "Follow up with PCP if not improving (1 week)"
-            }
-          ],
-          "duration_ms": 11215,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 106,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLStiv8TRDH6mwsYpW\"}"
         },
         {
           "case_id": "note-dose-change",
           "description": "Dose change mid-note: atorvastatin increased 20→40 mg — the extracted dose must be the new one, not the old",
-          "passed": true,
-          "checks": [
-            {
-              "name": "atorvastatin extracted at the NEW dose (40 mg nightly)",
-              "passed": true,
-              "expected": "atorvastatin 40 mg nightly",
-              "actual": "atorvastatin 40 mg nightly [new]"
-            },
-            {
-              "name": "no active atorvastatin left at the old 20 mg dose",
-              "passed": true,
-              "expected": "no entry atorvastatin 20 mg still marked active/new",
-              "actual": "none found"
-            },
-            {
-              "name": "amlodipine 5 mg daily unchanged, active",
-              "passed": true,
-              "expected": "amlodipine 5 mg daily [active]",
-              "actual": "amlodipine 5 mg daily [active]"
-            },
-            {
-              "name": "blood pressure 126/78 captured",
-              "passed": true,
-              "expected": "contains \"126/78\"",
-              "actual": "\"126/78\""
-            }
-          ],
-          "duration_ms": 11507,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 169,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLTEJrtJ3Hn6Scqyad\"}"
         },
         {
           "case_id": "note-discontinued-med",
           "description": "Discontinued medication: HCTZ stopped for hyponatremia — status must be discontinued, not active",
-          "passed": true,
-          "checks": [
-            {
-              "name": "hydrochlorothiazide status is discontinued",
-              "passed": true,
-              "expected": "hydrochlorothiazide 25 mg [discontinued]",
-              "actual": "Hydrochlorothiazide 25mg daily [discontinued]"
-            },
-            {
-              "name": "no active/new hydrochlorothiazide entry remains",
-              "passed": true,
-              "expected": "no entry hydrochlorothiazide marked active or new",
-              "actual": "none found"
-            },
-            {
-              "name": "losartan 50 mg daily remains active",
-              "passed": true,
-              "expected": "losartan 50 mg daily [active]",
-              "actual": "Losartan 50mg daily [active]"
-            }
-          ],
-          "duration_ms": 11507,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 169,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLVawr6scpG2XUjxvP\"}"
         },
         {
           "case_id": "note-no-allergies",
           "description": "Allergies never mentioned: the allergies array must stay empty — not populated with NKDA or invented entries",
-          "passed": true,
-          "checks": [
-            {
-              "name": "allergies is an empty array (note never mentions allergies)",
-              "passed": true,
-              "expected": "empty array",
-              "actual": "empty array"
-            },
-            {
-              "name": "omeprazole 20 mg daily extracted, active",
-              "passed": true,
-              "expected": "omeprazole 20 mg daily [active]",
-              "actual": "omeprazole 20mg daily [active]"
-            }
-          ],
-          "duration_ms": 5652,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 172,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLW7SpUqfrApkRws7Z\"}"
         },
         {
           "case_id": "note-explicit-redflags",
           "description": "Explicit urgency in the note: ED precautions for possible unstable angina must appear in red_flags",
-          "passed": true,
-          "checks": [
-            {
-              "name": "red flags present (note explicitly flags urgent ED precautions)",
-              "passed": true,
-              "expected": "at least one entry",
-              "actual": "[\"Exertional chest tightness x 2 weeks\",\"Concern for possible unstable angina\",\"Patient instructed to go to ED immediately if pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\"]"
-            },
-            {
-              "name": "red flags reference the cardiac concern",
-              "passed": true,
-              "expected": "mentions the chest pain / angina concern (matches \"chest\", \"angina\", or \"cardi…\")",
-              "actual": "\"Exertional chest tightness x 2 weeks ; Concern for possible unstable angina ; Patient instructed to go to ED immediately if pain occurs at rest, lasts more than 10 minutes, or radiates to arm or jaw\""
-            },
-            {
-              "name": "aspirin 81 mg captured as newly started",
-              "passed": true,
-              "expected": "aspirin 81 mg daily [new]",
-              "actual": "Aspirin 81mg daily [new]"
-            }
-          ],
-          "duration_ms": 3484,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 158,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLYRMKsB1f2tTrpGVw\"}"
         },
         {
           "case_id": "note-benign-complex-meds",
           "description": "Nothing urgent but four chronic meds: all extracted with doses, and red_flags stays empty — no false alarms",
-          "passed": true,
-          "checks": [
-            {
-              "name": "red_flags is empty (nothing urgent in the note)",
-              "passed": true,
-              "expected": "empty array",
-              "actual": "empty array"
-            },
-            {
-              "name": "metformin 1000 mg BID extracted",
-              "passed": true,
-              "expected": "metformin 1000 mg BID [active]",
-              "actual": "metformin 1000mg BID [active]"
-            },
-            {
-              "name": "glipizide 5 mg daily extracted",
-              "passed": true,
-              "expected": "glipizide 5 mg daily [active]",
-              "actual": "glipizide 5mg daily before breakfast [active]"
-            },
-            {
-              "name": "lisinopril 10 mg daily extracted",
-              "passed": true,
-              "expected": "lisinopril 10 mg daily [active]",
-              "actual": "lisinopril 10mg daily [active]"
-            },
-            {
-              "name": "levothyroxine 88 mcg daily extracted",
-              "passed": true,
-              "expected": "levothyroxine 88 mcg daily [active]",
-              "actual": "levothyroxine 88mcg daily on empty stomach [active]"
-            }
-          ],
-          "duration_ms": 11959,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 178,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLZ34SECzi4URWSCQh\"}"
         },
         {
           "case_id": "note-sparse-vitals",
           "description": "Telehealth visit with only a reported home BP: every unmeasured vital must be null, not invented",
-          "passed": true,
-          "checks": [
-            {
-              "name": "reported home BP 119/75 captured",
-              "passed": true,
-              "expected": "contains \"119/75\"",
-              "actual": "\"119/75\""
-            },
-            {
-              "name": "heart rate is null (never measured)",
-              "passed": true,
-              "expected": "null (absent — not invented)",
-              "actual": "null"
-            },
-            {
-              "name": "temperature is null (never measured)",
-              "passed": true,
-              "expected": "null (absent — not invented)",
-              "actual": "null"
-            },
-            {
-              "name": "oxygen saturation is null (never measured)",
-              "passed": true,
-              "expected": "null (absent — not invented)",
-              "actual": "null"
-            },
-            {
-              "name": "weight is null (never measured)",
-              "passed": true,
-              "expected": "null (absent — not invented)",
-              "actual": "null"
-            }
-          ],
-          "duration_ms": 3344,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 112,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLbFGCs3uviB9B21f7\"}"
         },
         {
           "case_id": "note-ambiguous-dose",
           "description": "Ambiguous dose (25 vs 50 mg, records pending): must land in extraction_notes and must not be resolved by guessing",
-          "passed": true,
-          "checks": [
-            {
-              "name": "metoprolol dose is not silently guessed as exactly 25 or exactly 50",
-              "passed": true,
-              "expected": "metoprolol present with dose null or explicitly uncertain (not a single guessed value)",
-              "actual": "metoprolol 25mg or 50mg twice daily [unknown]"
-            },
-            {
-              "name": "the dose ambiguity lands in extraction_notes",
-              "passed": true,
-              "expected": "contains \"metoprolol\"",
-              "actual": "\"Patient is uncertain of metoprolol dose: states 'either 25mg or 50mg twice daily' — exact dose unconfirmed, awaiting pharmacy records ; Diuretic medication type not specified by patient (referred to only as 'a water pill') ; Atorvastatin dose confirmed by physical bottle inspection ; Pharmacy records requested and pending — medication reconciliation incomplete at time of visit ; Heart rate 58 noted; clinical significance not explicitly commented upon in note\""
-            },
-            {
-              "name": "confirmed atorvastatin 20 mg nightly extracted normally",
-              "passed": true,
-              "expected": "atorvastatin 20 mg nightly [active]",
-              "actual": "atorvastatin 20mg nightly [active]"
-            }
-          ],
-          "duration_ms": 12713,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 85,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLbkGkx23RjWKqUFzR\"}"
         }
       ],
-      "pass_count": 10,
+      "pass_count": 0,
       "total": 10
     },
     {
@@ -345,158 +101,29 @@
         {
           "case_id": "lease-residential-renewal",
           "description": "Bundled renewal pair — 8 planted landlord-favoring changes: rent +$145, auto-renewal added, water shifted to tenant, lawn care shifted to tenant, guest limit halved, notice 30→60 days, new pet fee, new early-termination fee",
-          "passed": true,
-          "checks": [
-            {
-              "name": "finds the rent increase to $1,595 (rent_and_deposits, favors landlord)",
-              "passed": true,
-              "expected": "rent increase to $1,595",
-              "actual": "\"Rent Increased from $1,450 to $1,595 per Month\" [rent_and_deposits, favors_landlord, high]"
-            },
-            {
-              "name": "finds the new automatic-renewal clause (term_and_renewal, favors landlord)",
-              "passed": true,
-              "expected": "automatic renewal added",
-              "actual": "\"New Automatic Renewal Clause with Landlord-Set Rent Increases\" [term_and_renewal, favors_landlord, high]"
-            },
-            {
-              "name": "finds water shifted from landlord to tenant (utilities, favors landlord)",
-              "passed": true,
-              "expected": "water responsibility shifted to tenant",
-              "actual": "\"Tenant Now Responsible for Water Bill\" [utilities, favors_landlord, medium]"
-            },
-            {
-              "name": "finds lawn care shifted to tenant (maintenance, favors landlord)",
-              "passed": true,
-              "expected": "lawn care shifted to tenant",
-              "actual": "\"Tenant Now Responsible for Lawn Care\" [maintenance_and_repairs, favors_landlord, medium]"
-            },
-            {
-              "name": "finds the guest limit cut from 14 to 7 days (rules_and_use, favors landlord)",
-              "passed": true,
-              "expected": "guest stay limit halved",
-              "actual": "\"Guest Stay Limit Cut in Half (14 to 7 Days)\" [rules_and_use, favors_landlord, medium]"
-            },
-            {
-              "name": "finds notice to vacate extended 30→60 days (favors landlord)",
-              "passed": true,
-              "expected": "notice to vacate 30 → 60 days",
-              "actual": "\"New Automatic Renewal Clause with Landlord-Set Rent Increases\" [term_and_renewal, favors_landlord, high]"
-            },
-            {
-              "name": "finds the new monthly pet fee (fees)",
-              "passed": true,
-              "expected": "new $35/month pet fee",
-              "actual": "\"New Pet Fee\" [fees, unclear, medium]"
-            },
-            {
-              "name": "finds the new early-termination fee (favors landlord)",
-              "passed": true,
-              "expected": "new early-termination fee of two months' rent",
-              "actual": "\"New Early Termination Fee\" [termination, favors_landlord, high]"
-            },
-            {
-              "name": "no invented changes (8 planted, ≤ 9 reported)",
-              "passed": true,
-              "expected": "at most 9 reported changes",
-              "actual": "9 reported changes"
-            }
-          ],
-          "duration_ms": 64676,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 256,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLembHAsxuNsuwqq9N\"}"
         },
         {
           "case_id": "lease-month-to-month",
           "description": "Bundled month-to-month pair — 7 planted concepts including two tenant-favorable changes that must not be mislabeled: term conversion, +$50 premium, late grace 3→5 days (favors tenant), deposit return 21→14 days (favors tenant), termination rework, entry notice 48→24h, new insurance requirement",
-          "passed": true,
-          "checks": [
-            {
-              "name": "finds the fixed-term → month-to-month conversion (term_and_renewal)",
-              "passed": true,
-              "expected": "conversion to month-to-month",
-              "actual": "\"Fixed 12-month term replaced with month-to-month tenancy\" [term_and_renewal, unclear, high]"
-            },
-            {
-              "name": "finds the $50 month-to-month premium (favors landlord)",
-              "passed": true,
-              "expected": "new $50/month premium",
-              "actual": "\"New month-to-month rent premium of $50/month\" [rent_and_deposits, favors_landlord, high]"
-            },
-            {
-              "name": "BIAS CHECK: late-fee grace 3→5 days is favors_tenant",
-              "passed": true,
-              "expected": "late-fee grace period lengthened, judged favors_tenant",
-              "actual": "\"Late fee grace period extended\" [fees, favors_tenant, low]"
-            },
-            {
-              "name": "BIAS CHECK: deposit return 21→14 days is favors_tenant",
-              "passed": true,
-              "expected": "deposit return window shortened, judged favors_tenant",
-              "actual": "\"Security deposit return window shortened\" [rent_and_deposits, favors_tenant, medium]"
-            },
-            {
-              "name": "finds the lease-break penalty removal (favors_tenant, or unclear when merged with the landlord's new termination right)",
-              "passed": true,
-              "expected": "lease-break penalty removed (favors_tenant alone, or unclear when merged)",
-              "actual": "\"Lease-break penalty and fixed-term termination restrictions removed\" [termination, unclear, high]"
-            },
-            {
-              "name": "finds the landlord's new right to terminate at will (favors landlord)",
-              "passed": true,
-              "expected": "landlord can now terminate with 30 days' notice",
-              "actual": "\"Fixed 12-month term replaced with month-to-month tenancy\" [term_and_renewal, unclear, high]"
-            },
-            {
-              "name": "finds entry notice cut 48→24 hours (entry_and_privacy, favors landlord)",
-              "passed": true,
-              "expected": "entry notice halved to 24 hours",
-              "actual": "\"Landlord entry notice period shortened\" [entry_and_privacy, favors_landlord, medium]"
-            },
-            {
-              "name": "finds the new renter's-insurance requirement (favors landlord)",
-              "passed": true,
-              "expected": "renter's insurance now required",
-              "actual": "\"New renter's insurance requirement\" [liability_and_insurance, favors_landlord, medium]"
-            },
-            {
-              "name": "no invented changes (8 planted counting the termination rework as two, ≤ 9 reported)",
-              "passed": true,
-              "expected": "at most 9 reported changes",
-              "actual": "7 reported changes"
-            }
-          ],
-          "duration_ms": 78880,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 239,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLeicy5yBpR1fhvLnv\"}"
         },
         {
           "case_id": "lease-late-fee-rewording",
           "description": "False-positive restraint pair — the maintenance clause is reworded with identical meaning (must NOT be reported); the late fee quietly rises $50→$75 inside similar rewording (must be reported)",
-          "passed": true,
-          "checks": [
-            {
-              "name": "finds the late fee increase to $75 buried in the rewording (favors landlord)",
-              "passed": true,
-              "expected": "late fee $50 → $75",
-              "actual": "\"Late Fee Increase\" [fees, favors_landlord, high]"
-            },
-            {
-              "name": "does not report the identically-meaning maintenance rewording as substantive",
-              "passed": true,
-              "expected": "no entry treating the reworded maintenance/cleanliness clause as a substantive change",
-              "actual": "none found"
-            },
-            {
-              "name": "no invented changes (1 planted, ≤ 2 reported)",
-              "passed": true,
-              "expected": "at most 2 reported changes",
-              "actual": "2 reported changes"
-            }
-          ],
-          "duration_ms": 8604,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 85,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLhP71DENW8EMGHLuH\"}"
         }
       ],
-      "pass_count": 3,
+      "pass_count": 0,
       "total": 3
     },
     {
@@ -508,182 +135,45 @@
         {
           "case_id": "shot-login",
           "description": "Generated login mock: recognized as UI; the form maps to input + button components and the scaffold uses them",
-          "passed": true,
-          "checks": [
-            {
-              "name": "is_ui_screenshot is true",
-              "passed": true,
-              "expected": "true",
-              "actual": "true"
-            },
-            {
-              "name": "maps the credential fields to InputText/Password",
-              "passed": true,
-              "expected": "a mapping to InputText or Password",
-              "actual": "Email address input field with placeholder → InputText"
-            },
-            {
-              "name": "maps the sign-in action to Button",
-              "passed": true,
-              "expected": "a mapping to Button",
-              "actual": "Forgot password link in blue → Button"
-            },
-            {
-              "name": "scaffold uses an input component",
-              "passed": true,
-              "expected": "<InputText> or <Password> in scaffold",
-              "actual": "tag present in scaffold"
-            },
-            {
-              "name": "scaffold uses Button",
-              "passed": true,
-              "expected": "<Button> in scaffold",
-              "actual": "tag present in scaffold"
-            }
-          ],
-          "duration_ms": 65642,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 113,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLk1rkcbCucNX3aUUL\"}"
         },
         {
           "case_id": "shot-dashboard",
           "description": "Generated analytics-dashboard mock: recognized as UI; the table and chart map to DataTable and Chart",
-          "passed": true,
-          "checks": [
-            {
-              "name": "is_ui_screenshot is true",
-              "passed": true,
-              "expected": "true",
-              "actual": "true"
-            },
-            {
-              "name": "maps the data table to DataTable",
-              "passed": true,
-              "expected": "a mapping to DataTable",
-              "actual": "Top pages data table with columns for Page, Views, and Status → DataTable"
-            },
-            {
-              "name": "maps the chart to Chart",
-              "passed": true,
-              "expected": "a mapping to Chart",
-              "actual": "Weekly sessions bar chart with Monday through Sunday bars → Chart"
-            },
-            {
-              "name": "scaffold uses DataTable",
-              "passed": true,
-              "expected": "<DataTable> in scaffold",
-              "actual": "tag present in scaffold"
-            }
-          ],
-          "duration_ms": 67118,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 197,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLkCmZLm1Py6ZAon7x\"}"
         },
         {
           "case_id": "shot-pricing",
           "description": "Generated pricing-page mock: recognized as UI; plan cards map to Card, CTAs to Button, the top nav to Menubar/Toolbar",
-          "passed": true,
-          "checks": [
-            {
-              "name": "is_ui_screenshot is true",
-              "passed": true,
-              "expected": "true",
-              "actual": "true"
-            },
-            {
-              "name": "maps the plan tiers to Card",
-              "passed": true,
-              "expected": "a mapping to Card",
-              "actual": "Pricing Card (Starter) → Card"
-            },
-            {
-              "name": "maps the CTAs to Button",
-              "passed": true,
-              "expected": "a mapping to Button",
-              "actual": "Logo / Brand → Button"
-            },
-            {
-              "name": "maps the top navigation to Menubar or Toolbar",
-              "passed": true,
-              "expected": "a mapping to Menubar or Toolbar",
-              "actual": "Header Navigation Bar → Menubar"
-            },
-            {
-              "name": "scaffold uses Card",
-              "passed": true,
-              "expected": "<Card> in scaffold",
-              "actual": "tag present in scaffold"
-            }
-          ],
-          "duration_ms": 49604,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 95,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLnXuyccvrPT1fbtEg\"}"
         },
         {
           "case_id": "shot-landscape-rejected",
           "description": "Generated SVG landscape (no UI elements at all): must be rejected, with no mappings and no scaffold",
-          "passed": true,
-          "checks": [
-            {
-              "name": "is_ui_screenshot is false",
-              "passed": true,
-              "expected": "false",
-              "actual": "false"
-            },
-            {
-              "name": "a polite reason is given",
-              "passed": true,
-              "expected": "non-null reason explaining the rejection",
-              "actual": "\"This image is an abstract landscape illustration featuring mountains and a lake, not a software user interface.\""
-            },
-            {
-              "name": "no component mappings are forced",
-              "passed": true,
-              "expected": "empty mappings array",
-              "actual": "empty mappings array"
-            },
-            {
-              "name": "no scaffold code is generated",
-              "passed": true,
-              "expected": "null (absent — not invented)",
-              "actual": "null"
-            }
-          ],
-          "duration_ms": 1862,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 160,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLo1gxgTchtTQwKbEb\"}"
         },
         {
           "case_id": "shot-text-document-rejected",
           "description": "Generated plain prose document (text but no interface): must be rejected, with no mappings and no scaffold",
-          "passed": true,
-          "checks": [
-            {
-              "name": "is_ui_screenshot is false",
-              "passed": true,
-              "expected": "false",
-              "actual": "false"
-            },
-            {
-              "name": "a polite reason is given",
-              "passed": true,
-              "expected": "non-null reason explaining the rejection",
-              "actual": "\"This image is a document page containing editorial text (a draft manuscript) rather than a software user interface screenshot.\""
-            },
-            {
-              "name": "no component mappings are forced",
-              "passed": true,
-              "expected": "empty mappings array",
-              "actual": "empty mappings array"
-            },
-            {
-              "name": "no scaffold code is generated",
-              "passed": true,
-              "expected": "null (absent — not invented)",
-              "actual": "null"
-            }
-          ],
-          "duration_ms": 5930,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 166,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLqF8oGzsi56WNUekm\"}"
         }
       ],
-      "pass_count": 5,
+      "pass_count": 0,
       "total": 5
     },
     {
@@ -695,275 +185,69 @@
         {
           "case_id": "paperwork-lease",
           "description": "Bundled lease sample — stated end date, computed 60-day non-renewal deadline (month-boundary arithmetic), recurring rent, stated inspection date, and a deliberately unresolvable renewal-offer date (anniversary never defined)",
-          "passed": true,
-          "checks": [
-            {
-              "name": "HEADLINE: non-renewal notice deadline computed to the day (2027-08-31 minus 60 days = 2027-07-02)",
-              "passed": true,
-              "expected": "non-renewal notice deadline on 2027-07-02, basis computed",
-              "actual": "\"Lease non-renewal notice deadline\" [notice_window_closes, 2027-07-02, computed]"
-            },
-            {
-              "name": "move-out inspection extracted as stated 2027-09-01",
-              "passed": true,
-              "expected": "move-out inspection on 2027-09-01, basis stated",
-              "actual": "\"Move-out inspection\" [deadline, 2027-09-01, stated]"
-            },
-            {
-              "name": "rent is one recurring monthly event on the 1st, not expanded",
-              "passed": true,
-              "expected": "1-2 rent events, at least one carrying a recurrence rule (not expanded instances)",
-              "actual": "\"Monthly rent payment due\" [payment, 2026-09-01, computed]"
-            },
-            {
-              "name": "FABRICATION GUARD: the anniversary-based renewal offer is unresolved with date null",
-              "passed": true,
-              "expected": "renewal-offer event with date null and basis unresolved",
-              "actual": "\"Landlord renewal offer delivery window\" [notice_window_closes, null, unresolved]"
-            },
-            {
-              "name": "FABRICATION GUARD: no unresolved event carries a date",
-              "passed": true,
-              "expected": "no entry with date_basis unresolved but a non-null date (a fabricated date)",
-              "actual": "none found"
-            },
-            {
-              "name": "every source excerpt appears verbatim in the lease",
-              "passed": true,
-              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
-              "actual": "none found"
-            }
-          ],
-          "duration_ms": 81450,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 185,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLt9kynepDm2NA3Nd7\"}"
         },
         {
           "case_id": "paperwork-scholarship",
           "description": "Bundled scholarship sample — stated acceptance deadline, enrollment verification computed from the stated semester start, yearly GPA report recurrence, and one already-passed date",
-          "passed": true,
-          "checks": [
-            {
-              "name": "acceptance deadline extracted as stated 2026-08-15",
-              "passed": true,
-              "expected": "acceptance deadline on 2026-08-15, basis stated",
-              "actual": "\"Scholarship acceptance form due\" [deadline, 2026-08-15, stated]"
-            },
-            {
-              "name": "enrollment verification computed (2026-09-08 plus 14 days = 2026-09-22)",
-              "passed": true,
-              "expected": "enrollment verification on 2026-09-22, basis computed",
-              "actual": "\"Proof of full-time enrollment due\" [deadline, 2026-09-22, computed]"
-            },
-            {
-              "name": "annual GPA report is a yearly recurrence",
-              "passed": true,
-              "expected": "GPA report with yearly recurrence",
-              "actual": "\"Annual GPA transcript due\" [renewal_or_expiration, 2027-06-30, computed]"
-            },
-            {
-              "name": "the closed housing-grant date (2026-06-01) is flagged in_past",
-              "passed": true,
-              "expected": "housing grant deadline flagged as already passed",
-              "actual": "\"Priority housing grant application (closed)\" [informational, 2026-06-01, stated]"
-            },
-            {
-              "name": "every source excerpt appears verbatim in the letter",
-              "passed": true,
-              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
-              "actual": "none found"
-            }
-          ],
-          "duration_ms": 76883,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 172,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLt3oQojsyyFaGThTe\"}"
         },
         {
           "case_id": "paperwork-insurance",
           "description": "Bundled insurance sample — stated policy expiration, cancellation notice computed across a YEAR boundary (2027-01-14 minus 30 days), monthly premium recurrence on the 15th",
-          "passed": true,
-          "checks": [
-            {
-              "name": "policy expiration extracted as stated 2027-01-14",
-              "passed": true,
-              "expected": "policy expiration on 2027-01-14, basis stated",
-              "actual": "\"Policy expiration / renewal effective date\" [renewal_or_expiration, 2027-01-14, stated]"
-            },
-            {
-              "name": "HEADLINE: cancellation notice computed across the year boundary (2027-01-14 minus 30 days = 2026-12-15)",
-              "passed": true,
-              "expected": "cancellation notice deadline on 2026-12-15, basis computed",
-              "actual": "\"Deadline for policyholder cancellation notice to avoid short-rate penalty\" [notice_window_closes, 2026-12-15, computed]"
-            },
-            {
-              "name": "premium is one recurring monthly event on the 15th, not expanded",
-              "passed": true,
-              "expected": "1-2 premium events, at least one carrying a recurrence rule (not expanded instances)",
-              "actual": "\"Monthly premium installment due\" [payment, 2026-07-15, computed]"
-            },
-            {
-              "name": "renewal offer mail date extracted as stated 2026-12-01",
-              "passed": true,
-              "expected": "renewal offer mailed on 2026-12-01, basis stated",
-              "actual": "\"Renewal offer must be mailed by insurer\" [deadline, 2026-12-01, stated]"
-            },
-            {
-              "name": "every source excerpt appears verbatim in the summary",
-              "passed": true,
-              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
-              "actual": "none found"
-            }
-          ],
-          "duration_ms": 69783,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 1411,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLyyk51FyxK4AjouyN\"}"
         },
         {
           "case_id": "paperwork-gym-contract",
           "description": "Gym contract — cancellation deadline computed 45 days before term end across February (2027-03-01 minus 45 days = 2027-01-15), monthly dues on the 5th, yearly maintenance fee",
-          "passed": true,
-          "checks": [
-            {
-              "name": "HEADLINE: cancellation notice computed across short-February (2027-03-01 minus 45 days = 2027-01-15)",
-              "passed": true,
-              "expected": "cancellation notice deadline on 2027-01-15, basis computed",
-              "actual": "\"Deadline to submit written cancellation notice for end-of-term effect\" [notice_window_closes, 2027-01-15, computed]"
-            },
-            {
-              "name": "monthly dues recur on the 5th",
-              "passed": true,
-              "expected": "dues with monthly recurrence on day 5",
-              "actual": "\"Monthly membership dues draft\" [payment, 2026-07-05, computed]"
-            },
-            {
-              "name": "annual maintenance fee is a yearly recurrence",
-              "passed": true,
-              "expected": "maintenance fee with yearly recurrence",
-              "actual": "\"Annual facility maintenance fee draft\" [payment, 2026-10-01, computed]"
-            },
-            {
-              "name": "every source excerpt appears verbatim in the contract",
-              "passed": true,
-              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
-              "actual": "none found"
-            }
-          ],
-          "duration_ms": 14663,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 186,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLw4NijmH3ZXp62wDz\"}"
         },
         {
           "case_id": "paperwork-invoice-net30",
           "description": "Invoice with net-30 terms from January 31, 2028 — leap-year arithmetic (2028-01-31 plus 30 days = 2028-03-01) plus an early-payment discount window",
-          "passed": true,
-          "checks": [
-            {
-              "name": "HEADLINE: payment due computed across leap-February (2028-01-31 plus 30 days = 2028-03-01)",
-              "passed": true,
-              "expected": "payment due on 2028-03-01, basis computed",
-              "actual": "\"Invoice payment due\" [payment, 2028-03-01, computed]"
-            },
-            {
-              "name": "early-payment discount window computed (2028-01-31 plus 10 days = 2028-02-10)",
-              "passed": true,
-              "expected": "discount deadline on 2028-02-10, basis computed",
-              "actual": "\"Early payment discount window closes\" [notice_window_closes, 2028-02-10, computed]"
-            },
-            {
-              "name": "every source excerpt appears verbatim in the invoice",
-              "passed": true,
-              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
-              "actual": "none found"
-            }
-          ],
-          "duration_ms": 8547,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 181,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cLyxG4zFuraQ6CzSC5\"}"
         },
         {
           "case_id": "paperwork-benefits-unresolvable",
           "description": "Benefits notice whose deadlines all hinge on a hire date the document never states — everything datable must come back unresolved, never guessed",
-          "passed": true,
-          "checks": [
-            {
-              "name": "health enrollment (60 days after hire) is unresolved with date null",
-              "passed": true,
-              "expected": "health enrollment deadline unresolved, date null",
-              "actual": "\"Health plan enrollment deadline\" [deadline, null, unresolved]"
-            },
-            {
-              "name": "the unresolved event carries a structured resolution (anchor + offset) for the client-side resolve flow",
-              "passed": true,
-              "expected": "an unresolved event with resolution naming the hire date and a 60- or 90-day offset",
-              "actual": "\"Health plan enrollment deadline\" [deadline, null, unresolved]"
-            },
-            {
-              "name": "FABRICATION GUARD: no unresolved event carries a date",
-              "passed": true,
-              "expected": "no entry with date_basis unresolved but a non-null date (a fabricated date)",
-              "actual": "none found"
-            },
-            {
-              "name": "every source excerpt appears verbatim in the notice",
-              "passed": true,
-              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
-              "actual": "none found"
-            }
-          ],
-          "duration_ms": 7915,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 224,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cM32oDNZWpdXymDsY5\"}"
         },
         {
           "case_id": "paperwork-jury-summons",
           "description": "Jury summons with only stated dates — extraction restraint: both dates exact, nothing invented",
-          "passed": true,
-          "checks": [
-            {
-              "name": "report date extracted as stated 2026-09-14",
-              "passed": true,
-              "expected": "jury report date on 2026-09-14, basis stated",
-              "actual": "\"Report for jury service\" [required_action, 2026-09-14, stated]"
-            },
-            {
-              "name": "confirmation deadline extracted as stated 2026-09-07",
-              "passed": true,
-              "expected": "confirmation deadline on 2026-09-07, basis stated",
-              "actual": "\"Confirm jury service attendance\" [deadline, 2026-09-07, stated]"
-            },
-            {
-              "name": "no invented dated events (2 planted dates, ≤ 3 events)",
-              "passed": true,
-              "expected": "at most 3 events",
-              "actual": "3 events: \"Confirm jury service attendance\" [deadline, 2026-09-07, stated] | \"Deadline to request jury service postponement\" [notice_window_closes, 2026-09-07, stated] | \"Report for jury service\" [required_action, 2026-09-14, stated]"
-            },
-            {
-              "name": "every source excerpt appears verbatim in the summons",
-              "passed": true,
-              "expected": "no entry whose source_excerpt does not appear verbatim in the document",
-              "actual": "none found"
-            }
-          ],
-          "duration_ms": 7462,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 180,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cM56aJEfZmbhpughJU\"}"
         },
         {
           "case_id": "paperwork-not-a-document",
           "description": "A soup recipe — must be rejected as not an obligation document, with no events",
-          "passed": true,
-          "checks": [
-            {
-              "name": "is_obligation_document is false",
-              "passed": true,
-              "expected": "false",
-              "actual": "false"
-            },
-            {
-              "name": "no events extracted",
-              "passed": true,
-              "expected": "0 events",
-              "actual": "0 events"
-            }
-          ],
-          "duration_ms": 2856,
-          "error": null
+          "passed": false,
+          "checks": [],
+          "duration_ms": 1464,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cM7LWdxbt5EdtiKxw8\"}"
         }
       ],
-      "pass_count": 8,
+      "pass_count": 0,
       "total": 8
     },
     {
@@ -977,48 +261,48 @@
           "description": "A Vue 2-era stack — deprecated request, 2-majors-behind vue-router, patch-behind lodash, and peer conflicts pointing at vue: tiers, alerts, and sequencing all at once",
           "passed": false,
           "checks": [],
-          "duration_ms": 256,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZThm1tSGLBnyfUf1oo\"}"
+          "duration_ms": 111,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMEEFKLdC1KxKTMcg6\"}"
         },
         {
           "case_id": "planner-coupled-ecosystem",
           "description": "vue + vue-router + vuex all major-behind — the tightly coupled framework stack must migrate as one wave",
           "passed": false,
           "checks": [],
-          "duration_ms": 237,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTheKYGujfAPZwTcfV\"}"
+          "duration_ms": 279,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMEmVGu2bcRGzVToHh\"}"
         },
         {
           "case_id": "planner-quiet-current",
           "description": "A fully current manifest — the honest quiet case: zero waves, zero plans, everything in already_current, no padding",
           "passed": false,
           "checks": [],
-          "duration_ms": 90,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTkftRtLKtpy2Z1j8U\"}"
+          "duration_ms": 60,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMGmo1NsYTbsPF7W2b\"}"
         },
         {
           "case_id": "planner-patch-utilities",
           "description": "Two small bumps — both safe_now, groupable in one quick wave",
           "passed": false,
           "checks": [],
-          "duration_ms": 150,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTksYJTwp9XfDsxpM1\"}"
+          "duration_ms": 92,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMHWguKhogi12oFKPd\"}"
         },
         {
           "case_id": "planner-deprecated-package",
           "description": "A deprecated (but nearly current) moment — deprecation must dominate the tier and produce an alert",
           "passed": false,
           "checks": [],
-          "duration_ms": 231,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZToRq6AUoMgTZ7RDNg\"}"
+          "duration_ms": 183,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMKM4zv2VwmgKG2dV4\"}"
         },
         {
           "case_id": "planner-react-majors",
           "description": "react + react-dom three majors behind with a lockstep peer requirement, plus an unrelated patch bump",
           "passed": false,
           "checks": [],
-          "duration_ms": 176,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTogxP7ZedvkHhLfSz\"}"
+          "duration_ms": 157,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cML9h5KYEqxPsHt58F\"}"
         }
       ],
       "pass_count": 0,
@@ -1035,40 +319,40 @@
           "description": "Dispute-resolution section replaced: courts → binding individual arbitration with class-action waiver. Must be found as substantive, arbitration_and_disputes, favors_provider.",
           "passed": false,
           "checks": [],
-          "duration_ms": 156,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTrXcQXxEfcah9d1zn\"}"
+          "duration_ms": 216,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMPCFJuFRvYkpQkGRj\"}"
         },
         {
           "case_id": "tos-data-sharing-expanded",
           "description": "Data sharing expanded from processors-only to affiliates + advertising/analytics partners. Must be privacy_and_data, favors_provider.",
           "passed": false,
           "checks": [],
-          "duration_ms": 159,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTre4YgpfHTK4Za8EB\"}"
+          "duration_ms": 164,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMNzquPrq5LoT8igMC\"}"
         },
         {
           "case_id": "tos-refund-window-extended",
           "description": "BIAS CHECK: refund window extended 14 → 30 days — a user-favorable change that must be judged favors_user, not reflexively favors_provider.",
           "passed": false,
           "checks": [],
-          "duration_ms": 85,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTuF5bSm8x9ZgGPtTc\"}"
+          "duration_ms": 168,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMRpWMGP8586jPG7oM\"}"
         },
         {
           "case_id": "tos-liability-cap-lowered",
           "description": "Liability cap changed from 12 months of fees to a flat $100. Must be liability, favors_provider.",
           "passed": false,
           "checks": [],
-          "duration_ms": 188,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTuTiyQC2bfwLoZL9P\"}"
+          "duration_ms": 112,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMRwCdN7P51GumeTai\"}"
         },
         {
           "case_id": "tos-cosmetic-only",
           "description": "False-positive restraint: section renumbering plus three identically-meaning rewordings. Must gate substantive: false with zero changes.",
           "passed": false,
           "checks": [],
-          "duration_ms": 93,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTwndCusuVZD2Dg77m\"}"
+          "duration_ms": 81,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMUXUZQyZdfYS48wAc\"}"
         }
       ],
       "pass_count": 0,
@@ -1085,24 +369,24 @@
           "description": "An unbounded \"fix tests until green\" step must read as the risky one: elevated risk level, high loop risk, and a concrete fix.",
           "passed": false,
           "checks": [],
-          "duration_ms": 155,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTzPdtA9UmqJgL5UWX\"}"
+          "duration_ms": 196,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMXFvvvcH9gZ1jxQFv\"}"
         },
         {
           "case_id": "oracle-bounded-single-step",
           "description": "A small, bounded single-step task must not be dramatized: calm overall risk, no abort, low loop risk.",
           "passed": false,
           "checks": [],
-          "duration_ms": 146,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZTzMesAWrG1zxLLhXD\"}"
+          "duration_ms": 103,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMX1oAiNEXnDss1MYn\"}"
         },
         {
           "case_id": "oracle-freeform-structuring",
           "description": "A freeform prose plan must come back structured: at least 3 inferred steps with unique ids matching the assessments 1:1.",
           "passed": false,
           "checks": [],
-          "duration_ms": 181,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZU3A5R9mzdFAjBt73z\"}"
+          "duration_ms": 173,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMZiX4LsavdD7wd9H4\"}"
         }
       ],
       "pass_count": 0,
@@ -1119,39 +403,39 @@
           "description": "Synthesized 2.0 Hz thump train over a low noise bed (dryer preset): thump/knock-family characterization, dryer-appropriate questions, measured rate quoted intact.",
           "passed": false,
           "checks": [],
-          "duration_ms": 109,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZU61yQsNUvRGSQ3PSD\"}"
+          "duration_ms": 175,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMcdtGumMahHjFaBnB\"}"
         },
         {
           "case_id": "noise-car-whine",
           "description": "Synthesized steady 3.8 kHz whine over faint rumble (car preset): best characterization is in the whine/tone family — never low rumbling — with car-appropriate questions.",
           "passed": false,
           "checks": [],
-          "duration_ms": 108,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZU63TgVcSBDeivnk7U\"}"
+          "duration_ms": 141,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMcYvbZ7cpXYnSijtY\"}"
         },
         {
           "case_id": "noise-furnace-rattle",
           "description": "Synthesized Poisson-timed mid-band transients (furnace preset, startup only): rattle/click-family characterization that does not claim regularity, furnace-appropriate questions.",
           "passed": false,
           "checks": [],
-          "duration_ms": 176,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZU8mfjUAqkfkFPueYZ\"}"
+          "duration_ms": 279,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMfoswrGjtW2bEsS23\"}"
         },
         {
           "case_id": "noise-clipped-recording",
           "description": "Hard-clipped tone fixture (63% of samples at full scale): the model must flag recording quality via a non-null recording_notes instead of describing with false precision.",
           "passed": false,
           "checks": [],
-          "duration_ms": 196,
-          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf1ZU8kS1wFrN7buAyTp3\"}"
+          "duration_ms": 82,
+          "error": "Error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3cMfKrmD8R5VxFGDhSm\"}"
         }
       ],
       "pass_count": 0,
       "total": 4
     }
   ],
-  "overall_pass_rate": 0.5909,
+  "overall_pass_rate": 0,
   "regression_from_previous": true,
-  "regression_detail": "upgrade-planner: 6/6 → 0/6; tos-watch: 5/5 → 0/5; dry-run-oracle: 3/3 → 0/3; noise-translator: 4/4 → 0/4"
+  "regression_detail": "note-structurer: 10/10 → 0/10; lease-diff: 3/3 → 0/3; screenshot-to-primevue: 5/5 → 0/5; paperwork-to-calendar: 8/8 → 0/8"
 }
