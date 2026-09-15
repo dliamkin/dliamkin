@@ -1,21 +1,21 @@
 {
-  "audited_at": "2026-09-14T15:01:27.323Z",
-  "status": "audit_error",
-  "summary": "Tonight's automated audit could not complete; no findings were recorded.",
+  "audited_at": "2026-09-15T13:33:46.982Z",
+  "status": "warnings",
+  "summary": "All pages are visually intact across desktop and mobile with perfect accessibility, best-practices, and SEO scores. The home page performance has slipped to 80 (below the 85 threshold) driven by a 4.1 s LCP, warranting attention.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 84,
+        "performance": 80,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3525.88,
+        "lcp_ms": 4124.178,
         "cls": 0.015,
-        "tbt_ms": 210.5
+        "tbt_ms": 237.53
       },
       "visual_findings": [],
-      "visual_fingerprint": ""
+      "visual_fingerprint": "Dark-themed single-page portfolio with a hero 'App Design' headline and floating device mockups, followed by four-pillars, timeline, case-studies, skills, conferences, and a contact form section, all rendering cleanly on desktop and mobile."
     },
     {
       "path": "/about",
@@ -24,26 +24,26 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3443.702,
+        "lcp_ms": 3309.742,
         "cls": 0,
-        "tbt_ms": 89.325
+        "tbt_ms": 140
       },
       "visual_findings": [],
-      "visual_fingerprint": ""
+      "visual_fingerprint": "About page with dark header, 'About Me' hero, an animated code-block panel showing the developer object, stat counters (12+, 16+, 2, 7), an Engineering Culture section with particle animation, and a full-width contact form at the footer."
     },
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 87,
+        "performance": 90,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3456.719,
+        "lcp_ms": 3292.055,
         "cls": 0,
-        "tbt_ms": 180.5
+        "tbt_ms": 98
       },
       "visual_findings": [],
-      "visual_fingerprint": ""
+      "visual_fingerprint": "Projects index with a teal 'Fuel the projects' CTA banner, three featured Latest Builds (Token Field, Noise Translator, Tail Risk Lab) with waveform/bar-chart visuals, and a 3-column all-projects grid (7 cards) followed by a contact form."
     },
     {
       "path": "/projects/note-structurer",
@@ -52,12 +52,12 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4298.668,
+        "lcp_ms": 4310.396,
         "cls": 0,
-        "tbt_ms": 177.981
+        "tbt_ms": 204
       },
       "visual_findings": [],
-      "visual_fingerprint": ""
+      "visual_fingerprint": "Clinical Note Structurer project page with a green 'Evals: 10/10 passing' badge, a two-column visit-note / structured-result demo panel, synthetic-sample buttons, a disclaimer banner, and expandable JSON / architecture accordion sections."
     },
     {
       "path": "/projects/screenshot-to-primevue",
@@ -66,19 +66,29 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4805.451,
+        "lcp_ms": 4747.84,
         "cls": 0,
-        "tbt_ms": 218
+        "tbt_ms": 230
       },
       "visual_findings": [],
-      "visual_fingerprint": ""
+      "visual_fingerprint": "Screenshot → PrimeVue project page with a green 'Evals: 5/5 passing' badge, a dashed drag-and-drop upload zone, three sample screenshot thumbnails (Login form, Analytics dashboard, Pricing page), and a scaffold-output placeholder below."
     }
   ],
-  "score_deltas": [],
-  "top_fix": null,
-  "should_file_issue": false,
-  "issue_title": null,
-  "issue_body": null,
-  "issue_fingerprint": null,
-  "error_reason": "400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011Cf3XsZ2M3kQ54Cu526tbG\"}"
+  "score_deltas": [
+    "/ performance 84 → 80 (below 85 threshold — actionable)",
+    "/ LCP 3526 ms → 4124 ms (+598 ms)",
+    "/ TBT 211 ms → 238 ms (within jitter)",
+    "/about performance 89 → 89 (no change)",
+    "/about TBT 89 ms → 140 ms (slight uptick, within jitter)",
+    "/projects performance 87 → 90 (+3, improvement)",
+    "/projects TBT 181 ms → 98 ms (improvement)",
+    "/projects/note-structurer performance 79 → 79 (no change)",
+    "/projects/screenshot-to-primevue performance 75 → 75 (no change)"
+  ],
+  "top_fix": "Improve home page LCP (currently 4.1 s, score 80): preload or convert the hero device-mockup image(s) to WebP/AVIF, add explicit width/height to avoid layout recalculation, and consider lazy-loading below-fold sections to cut TBT.",
+  "should_file_issue": true,
+  "issue_title": "Home page performance below threshold: score 80, LCP 4.1 s",
+  "issue_body": "# Home page (/) performance regression\n\n## Summary\nThe home page mobile Lighthouse performance score has dropped to **80** (previous: 84), falling below the 85-point watch threshold. The primary driver is a slow **LCP of 4 124 ms** (up from 3 526 ms in the last successful audit).\n\n## Metrics\n| Metric | Previous | Current | Delta |\n|---|---|---|---|\n| Performance | 84 | **80** | −4 |\n| LCP | 3 526 ms | **4 124 ms** | +598 ms |\n| TBT | 211 ms | 238 ms | +27 ms |\n| CLS | 0.015 | 0.015 | — |\n\n## Likely causes\n- Hero section device-mockup images are not preloaded and/or not in a next-gen format (WebP/AVIF).\n- No explicit `width`/`height` on hero images may cause the browser to delay rendering.\n- TBT nudging upward suggests heavier JS execution on the critical path.\n\n## Recommended fixes\n1. Identify the LCP element (likely the hero image/canvas) and add `<link rel=\"preload\">` for it.\n2. Convert hero images to WebP/AVIF and serve via `<picture>` or `srcset`.\n3. Add explicit `width` and `height` attributes to all above-the-fold images.\n4. Audit third-party scripts loading during page initialisation that contribute to TBT.\n\n## Context\n- All other quality dimensions (accessibility 100, best-practices 100, SEO 100) remain perfect.\n- /projects/screenshot-to-primevue performance (75) and /projects/note-structurer (79) remain below 85 but are unchanged from prior audits and tracked separately.\n",
+  "issue_fingerprint": "home-performance-lcp-regression",
+  "error_reason": null
 }
