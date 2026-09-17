@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-09-16T13:32:21.453Z",
+  "audited_at": "2026-09-17T13:27:56.336Z",
   "status": "warnings",
-  "summary": "All pages are visually intact across desktop and mobile with perfect accessibility, best-practices, and SEO scores. Home page performance remains at 80 (below the 85 threshold) with LCP improving slightly to 3.9 s; /projects/screenshot-to-primevue (76) and /projects/note-structurer (79) also remain below threshold and are unchanged from prior audits.",
+  "summary": "All pages are visually intact across desktop and mobile with perfect accessibility, best-practices, and SEO scores. Home (81), /projects/note-structurer (79), and /projects/screenshot-to-primevue (77) remain below the 85 performance threshold; /about dipped from 90 to 86 but stays well above threshold and within expected jitter.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 80,
+        "performance": 81,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3883.466,
+        "lcp_ms": 3829.118,
         "cls": 0.015,
-        "tbt_ms": 280
+        "tbt_ms": 269
       },
       "visual_findings": [],
       "visual_fingerprint": "Dark-themed single-page portfolio with a hero 'App Design' headline and floating device mockups, followed by four-pillars, timeline, case-studies, skills, conferences, and a contact form section, all rendering cleanly on desktop and mobile."
@@ -20,13 +20,13 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 90,
+        "performance": 86,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3300.054,
+        "lcp_ms": 3508.299,
         "cls": 0,
-        "tbt_ms": 104
+        "tbt_ms": 166.74
       },
       "visual_findings": [],
       "visual_fingerprint": "About page with dark header, 'About Me' hero, an animated code-block panel showing the developer object, stat counters (12+, 16+, 2, 7), an Engineering Culture section with particle animation, and a full-width contact form at the footer."
@@ -38,9 +38,9 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3308.908,
+        "lcp_ms": 3345.985,
         "cls": 0,
-        "tbt_ms": 179.5
+        "tbt_ms": 167.627
       },
       "visual_findings": [],
       "visual_fingerprint": "Projects index with a teal 'Fuel the projects' CTA banner, three featured Latest Builds (Token Field, Noise Translator, Tail Risk Lab) with waveform/bar-chart visuals, and a 3-column all-projects grid (7 cards) followed by a contact form."
@@ -52,9 +52,9 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4289.425,
+        "lcp_ms": 4274.027,
         "cls": 0,
-        "tbt_ms": 191
+        "tbt_ms": 214.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer project page with a green 'Evals: 10/10 passing' badge, a two-column visit-note / structured-result demo panel, synthetic-sample buttons, a disclaimer banner, and expandable JSON / architecture accordion sections."
@@ -62,34 +62,37 @@
     {
       "path": "/projects/screenshot-to-primevue",
       "lighthouse": {
-        "performance": 76,
+        "performance": 77,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4738.065,
+        "lcp_ms": 4619.78,
         "cls": 0,
-        "tbt_ms": 200
+        "tbt_ms": 169.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Screenshot → PrimeVue project page with a green 'Evals: 5/5 passing' badge, a dashed drag-and-drop upload zone, three sample screenshot thumbnails (Login form, Analytics dashboard, Pricing page), and a scaffold-output placeholder below."
     }
   ],
   "score_deltas": [
-    "/ performance 80 → 80 (no change, remains below 85 threshold)",
-    "/ LCP 4124 ms → 3883 ms (−241 ms, slight improvement)",
-    "/ TBT 238 ms → 280 ms (+42 ms, within jitter)",
+    "/ performance 80 → 81 (+1, within jitter, remains below 85 threshold)",
+    "/ LCP 3883 ms → 3829 ms (−54 ms, marginal improvement)",
+    "/ TBT 280 ms → 269 ms (−11 ms, within jitter)",
     "/ CLS 0.015 → 0.015 (no change)",
-    "/about performance 89 → 90 (+1, within jitter)",
-    "/about LCP 3310 ms → 3300 ms (no change)",
-    "/about TBT 140 ms → 104 ms (improvement)",
-    "/projects performance 90 → 88 (−2, within jitter)",
-    "/projects TBT 98 ms → 180 ms (+82 ms, within jitter)",
+    "/about performance 90 → 86 (−4, within jitter, still above 85 threshold)",
+    "/about LCP 3300 ms → 3508 ms (+208 ms, within jitter)",
+    "/about TBT 104 ms → 167 ms (+63 ms, within jitter)",
+    "/projects performance 88 → 88 (no change)",
+    "/projects LCP 3309 ms → 3346 ms (+37 ms, no material change)",
+    "/projects TBT 180 ms → 168 ms (−12 ms, within jitter)",
     "/projects/note-structurer performance 79 → 79 (no change)",
-    "/projects/note-structurer LCP 4310 ms → 4289 ms (no change)",
-    "/projects/screenshot-to-primevue performance 75 → 76 (+1, within jitter)",
-    "/projects/screenshot-to-primevue LCP 4748 ms → 4738 ms (no change)"
+    "/projects/note-structurer LCP 4289 ms → 4274 ms (−15 ms, no material change)",
+    "/projects/note-structurer TBT 191 ms → 215 ms (+24 ms, within jitter)",
+    "/projects/screenshot-to-primevue performance 76 → 77 (+1, within jitter, remains below 85 threshold)",
+    "/projects/screenshot-to-primevue LCP 4738 ms → 4620 ms (−118 ms, marginal improvement)",
+    "/projects/screenshot-to-primevue TBT 200 ms → 170 ms (−30 ms, within jitter)"
   ],
-  "top_fix": "Improve home page LCP (currently 3.9 s, score 80): preload or convert the hero device-mockup image(s) to WebP/AVIF, add explicit width/height to avoid layout recalculation, and consider lazy-loading below-fold sections to cut TBT.",
+  "top_fix": "Improve home page LCP (currently 3.8 s, score 81): preload or convert the hero device-mockup image(s) to WebP/AVIF, add explicit width/height to avoid layout recalculation, and consider lazy-loading below-fold sections to cut TBT.",
   "should_file_issue": false,
   "issue_title": null,
   "issue_body": null,
