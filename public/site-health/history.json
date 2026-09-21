@@ -808,5 +808,15 @@
       "best_practices": 100,
       "seo": 100
     }
+  },
+  {
+    "audited_at": "2026-09-21T15:07:56.874Z",
+    "status": "warnings",
+    "scores": {
+      "performance": 82,
+      "accessibility": 100,
+      "best_practices": 100,
+      "seo": 100
+    }
   }
 ]
