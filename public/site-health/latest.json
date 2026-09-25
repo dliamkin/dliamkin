@@ -1,18 +1,18 @@
 {
-  "audited_at": "2026-09-24T13:34:56.146Z",
+  "audited_at": "2026-09-25T13:46:26.216Z",
   "status": "warnings",
-  "summary": "All pages remain visually intact across desktop and mobile with perfect accessibility, best-practices, and SEO scores. Home performance dipped to 83 (below the 85 threshold) while /projects/screenshot-to-primevue (80) and /projects/note-structurer (84) continue near or below it — LCP on screenshot-to-primevue improved meaningfully from ~4.6 s to ~4.4 s.",
+  "summary": "All pages are visually intact across desktop and mobile with perfect accessibility, best-practices, and SEO scores. Home performance recovered to 85 (up from 83) with TBT improving sharply from 198 ms to 130 ms; /projects/screenshot-to-primevue (80) and /projects/note-structurer (83) remain below the 85 threshold and are the outstanding performance concerns.",
   "pages": [
     {
       "path": "/",
       "lighthouse": {
-        "performance": 83,
+        "performance": 85,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3807.947,
+        "lcp_ms": 3867.173,
         "cls": 0.015,
-        "tbt_ms": 198
+        "tbt_ms": 130
       },
       "visual_findings": [],
       "visual_fingerprint": "Dark-themed portfolio with a hero 'App Design' headline and floating device mockups, followed by four-pillars, timeline, case-studies, skills, conferences, and a contact form section, all rendering cleanly on desktop and mobile."
@@ -20,27 +20,27 @@
     {
       "path": "/about",
       "lighthouse": {
-        "performance": 91,
+        "performance": 88,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3329.22,
+        "lcp_ms": 3630.793,
         "cls": 0,
-        "tbt_ms": 36
+        "tbt_ms": 70
       },
       "visual_findings": [],
-      "visual_fingerprint": "About page with dark header, 'About Me' hero, animated code-block panel showing the developer object, stat counters (12+, 16+, 2, 7), an Engineering Culture section with particle animation (body appears intentionally empty/animated), and a full-width contact form at the footer — all rendering cleanly on desktop and mobile."
+      "visual_fingerprint": "About page with dark header, 'About Me' hero, animated code-block panel showing the developer object, stat counters (12+, 16+, 2, 7), an Engineering Culture section with particle animation (body intentionally empty/animated), and a full-width contact form at the footer — all rendering cleanly on desktop and mobile."
     },
     {
       "path": "/projects",
       "lighthouse": {
-        "performance": 90,
+        "performance": 89,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3326.145,
+        "lcp_ms": 3328.47,
         "cls": 0,
-        "tbt_ms": 87
+        "tbt_ms": 135
       },
       "visual_findings": [],
       "visual_fingerprint": "Projects index with a teal 'Fuel the projects' CTA banner, three featured Latest Builds (Token Field, Noise Translator, Tail Risk Lab) with waveform/bar-chart visuals, and a 3-column all-projects grid (7 cards including ToS Watchdog) followed by a contact form, all rendering correctly on desktop and mobile."
@@ -48,13 +48,13 @@
     {
       "path": "/projects/note-structurer",
       "lighthouse": {
-        "performance": 84,
+        "performance": 83,
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 3938.993,
+        "lcp_ms": 3963.283,
         "cls": 0,
-        "tbt_ms": 123
+        "tbt_ms": 160.5
       },
       "visual_findings": [],
       "visual_fingerprint": "Clinical Note Structurer project page with a green 'Evals: 10/10 passing' badge, two-column visit-note / structured-result demo panel, synthetic-sample buttons, an amber disclaimer banner, and expandable JSON / architecture accordion sections, all clean on desktop and mobile."
@@ -66,33 +66,36 @@
         "accessibility": 100,
         "best_practices": 100,
         "seo": 100,
-        "lcp_ms": 4355.364,
+        "lcp_ms": 4350.04,
         "cls": 0,
-        "tbt_ms": 110
+        "tbt_ms": 153.5
       },
       "visual_findings": [],
-      "visual_fingerprint": "Screenshot → PrimeVue project page with a green 'Evals: 5/5 passing' badge, a dashed drag-and-drop upload zone, three sample screenshot thumbnails (Login form, Analytics dashboard, Pricing page), and a scaffold-output placeholder below, rendering correctly on desktop and mobile."
+      "visual_fingerprint": "Screenshot → PrimeVue project page with a green 'Evals: 5/5 passing' badge, a dashed drag-and-drop upload zone, three sample screenshot thumbnails (Login form, Analytics dashboard, Pricing page) stacking cleanly on mobile, and a scaffold-output placeholder below, rendering correctly on desktop and mobile."
     }
   ],
   "score_deltas": [
-    "/ performance 88 → 83 (−5, at regression threshold; LCP 3574 ms → 3808 ms +234 ms, TBT 90 ms → 198 ms +108 ms — TBT spike is the primary driver)",
-    "/about performance 90 → 91 (+1, within jitter, stable above 85)",
-    "/about LCP 3387 ms → 3329 ms (−58 ms, slight improvement)",
-    "/about TBT 42 ms → 36 ms (−6 ms, slight improvement)",
-    "/projects performance 89 → 90 (+1, within jitter, stable above 85)",
-    "/projects LCP 3359 ms → 3326 ms (−33 ms, flat)",
-    "/projects TBT 121 ms → 87 ms (−34 ms, improvement)",
-    "/projects/note-structurer performance 83 → 84 (+1, within jitter, just below 85)",
-    "/projects/note-structurer LCP 4031 ms → 3939 ms (−92 ms, modest improvement)",
-    "/projects/note-structurer TBT 107 ms → 123 ms (+16 ms, within jitter)",
-    "/projects/screenshot-to-primevue performance 79 → 80 (+1, within jitter, still below 85)",
-    "/projects/screenshot-to-primevue LCP 4646 ms → 4355 ms (−291 ms, meaningful improvement)",
-    "/projects/screenshot-to-primevue TBT 116 ms → 110 ms (−6 ms, flat)"
+    "/ performance 83 → 85 (+2, recovered above 85 threshold; within jitter but directionally positive)",
+    "/ LCP 3808 ms → 3867 ms (+59 ms, flat/within jitter)",
+    "/ TBT 198 ms → 130 ms (−68 ms, meaningful improvement — primary driver of recovery)",
+    "/ CLS 0.015 → 0.015 (unchanged)",
+    "/about performance 91 → 88 (−3, within normal jitter, stable above 85)",
+    "/about LCP 3329 ms → 3631 ms (+302 ms, notable creep but score still healthy)",
+    "/about TBT 36 ms → 70 ms (+34 ms, within jitter)",
+    "/projects performance 90 → 89 (−1, within jitter, stable above 85)",
+    "/projects LCP 3326 ms → 3328 ms (flat)",
+    "/projects TBT 87 ms → 135 ms (+48 ms, within jitter)",
+    "/projects/note-structurer performance 84 → 83 (−1, within jitter, still just below 85)",
+    "/projects/note-structurer LCP 3939 ms → 3963 ms (+24 ms, flat)",
+    "/projects/note-structurer TBT 123 ms → 161 ms (+38 ms, within jitter)",
+    "/projects/screenshot-to-primevue performance 80 → 80 (unchanged, still below 85)",
+    "/projects/screenshot-to-primevue LCP 4355 ms → 4350 ms (flat, still elevated)",
+    "/projects/screenshot-to-primevue TBT 110 ms → 154 ms (+44 ms, within jitter)"
   ],
-  "top_fix": "Convert the hero images on / to WebP/AVIF and defer non-critical scripts to reduce the TBT spike (90 ms → 198 ms) and bring home performance back above 85; the same image-format optimisation on /projects/screenshot-to-primevue would further cut its still-elevated ~4.4 s LCP.",
-  "should_file_issue": true,
-  "issue_title": "Home page performance dropped to 83 (below 85 threshold) — TBT spike to 198 ms",
-  "issue_body": "## Performance regression: `/` performance 88 → 83\n\n**Audited:** 2026-09-24T13:33:35.559Z\n\n### What changed\n| Metric | Previous | Current | Δ |\n|--------|----------|---------|---|\n| Performance | 88 | **83** | −5 |\n| LCP | 3574 ms | 3808 ms | +234 ms |\n| TBT | 90 ms | **198 ms** | +108 ms ⚠️ |\n| CLS | 0.015 | 0.015 | — |\n\nThe home page performance score crossed below the 85 threshold. The primary driver is a **TBT spike from 90 ms to 198 ms**, suggesting a main-thread blocking script that wasn't present (or was deferred) in the previous run. LCP also crept up by ~234 ms.\n\n### Likely causes\n- A third-party or first-party script (animation library, analytics, etc.) may have been loaded synchronously or earlier in the critical path.\n- Hero images may not be served as next-gen formats (WebP/AVIF), contributing to LCP.\n\n### Recommended fixes\n1. **Audit blocking scripts** on `/` — defer or async-load any non-critical JS (particle animations, analytics, tracking).\n2. **Convert hero device-mockup images to WebP/AVIF** to reduce LCP.\n3. Re-run Lighthouse after each change to confirm improvement (scores jitter ±3 pts, so target ≥88 to have a safe buffer above 85).\n\n### Also still below 85\n- `/projects/screenshot-to-primevue`: 80 (LCP 4355 ms — image format optimisation is the top fix)\n- `/projects/note-structurer`: 84 (LCP 3939 ms — marginal, likely resolves with same image fix)\n\n### Visuals\nNo visual breakage detected on any page across desktop or mobile.",
-  "issue_fingerprint": "home-performance-below-85-tbt-spike",
+  "top_fix": "Convert hero and project-demo images to WebP/AVIF on /projects/screenshot-to-primevue and /projects/note-structurer to cut their ~4.4 s and ~4.0 s LCPs respectively and push both pages above the 85 performance threshold.",
+  "should_file_issue": false,
+  "issue_title": null,
+  "issue_body": null,
+  "issue_fingerprint": null,
   "error_reason": null
 }
